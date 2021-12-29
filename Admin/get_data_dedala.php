@@ -27,7 +27,7 @@ try
         if ($result->num_rows > 0) 
             {
                 $row = $result->fetch_assoc();
-                $czas = $row['wartosc1'].'.'.$row['wartosc2'].'.'.$row['wartosc3'];
+                $czas = $row['wartosc1'].'-'.$row['wartosc2'].'-'.$row['wartosc3'];
                 $row = $result->fetch_assoc();
                 $czas =   $czas.' '.$row['wartosc1'].':'.$row['wartosc2'].':'.$row['wartosc3'];
                 print json_encode($czas);
