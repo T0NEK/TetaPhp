@@ -29,36 +29,36 @@ try
         $result = $conn->query($sql); 
         if ($result->num_rows > 0) 
         {
-        $row = $result->fetch_assoc();
-        $sql = "UPDATE 
-        ustawienia 
-        SET
-        wartosc1='".$row['wartosc1']."',
-        wartosc2='".$row['wartosc2']."',
-        wartosc3='".$row['wartosc3']."'
-        WHERE
-        id=3
-        ";
-        if ($conn->query($sql) === TRUE) { $sukces++;}
             $row = $result->fetch_assoc();
             $sql = "UPDATE 
-                ustawienia 
-                SET
-                wartosc1='".$row['wartosc1']."',
-                wartosc2='".$row['wartosc2']."',
-                wartosc3='".$row['wartosc3']."'
-                WHERE
-                id=4
-                ";
-        if ($conn->query($sql) === TRUE) { $sukces++;}
-        $conn->close();    
-        if ($sukces = 2) { echo "true";}
-        else { echo "false";}
+            ustawienia 
+            SET
+            wartosc1='".$row['wartosc1']."',
+            wartosc2='".$row['wartosc2']."',
+            wartosc3='".$row['wartosc3']."'
+            WHERE
+            id=3
+            ";
+            if ($conn->query($sql) === TRUE) { $sukces++;}
+                $row = $result->fetch_assoc();
+                $sql = "UPDATE 
+                    ustawienia 
+                    SET
+                    wartosc1='".$row['wartosc1']."',
+                    wartosc2='".$row['wartosc2']."',
+                    wartosc3='".$row['wartosc3']."'
+                    WHERE
+                    id=4
+                    ";
+            if ($conn->query($sql) === TRUE) { $sukces++;}
+            $conn->close();    
+            if ($sukces = 2) { echo "true";}
+            else { echo "false";}
         } 
         else 
-            {
-                echo ("false");
-            }
+        {
+            echo ("false");
+        }
     }    
 }
 catch(Exception $e)    
