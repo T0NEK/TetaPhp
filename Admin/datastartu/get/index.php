@@ -1,8 +1,6 @@
 <?php
 
-require_once "../connect.php";
-
-mysqli_report(MYSQLI_REPORT_STRICT | MYSQLI_REPORT_ALL);
+require_once "../../../connect.php";
 
 try
 {
@@ -30,17 +28,19 @@ try
                 $czas = $row['wartosc1'].'-'.$row['wartosc2'].'-'.$row['wartosc3'];
                 $row = $result->fetch_assoc();
                 $czas =   $czas.' '.$row['wartosc1'].':'.$row['wartosc2'].':'.$row['wartosc3'];
-                print json_encode($czas);
+                
+                $result = array ("wynik"=>true, "stan"=>$czas);
             } 
         else 
             {
-                print json_encode('false');
+                $result = array ("wynik"=>false, "stan"=>"0 wyników");
             }
         $conn->close();            
     }    
     }
     catch(Exception $e)    
     {
-        print json_encode('Error: '.$e);
+        $result = array("wynik"=>false, "stan"=>"error", "error"=>$e);
     }
+echo json_encode($result);    
 ?>

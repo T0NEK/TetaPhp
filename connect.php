@@ -11,5 +11,6 @@ $username   = "komunikator";
 $password   = "komunikator";
 $dbname     = "teta";
 
+mysqli_report(MYSQLI_REPORT_STRICT | MYSQLI_REPORT_ALL);
 
 ?>

@@ -1,11 +1,9 @@
 <?php
 
-require_once "../connect.php";
-
-mysqli_report(MYSQLI_REPORT_STRICT | MYSQLI_REPORT_ALL);
+require_once "../../../connect.php";
 
 $body = json_decode(file_get_contents("php://input"));
-
+//echo json_encode(getallheaders());
 try
 {
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -23,12 +21,20 @@ try
                 WHERE
                 id=9
                 ";
-        if ($conn->query($sql) === TRUE) { echo "true";} else { echo "false";}
+        if ($conn->query($sql) === TRUE) 
+            { 
+                $result = array ("wynik"=>true, "stan"=>$body->stan);
+            }
+            else 
+            { 
+                $result = array ("wynik"=>false, "stan"=>$body->stan);
+            }
         $conn->close();    
     }    
 }
 catch(Exception $e)    
 {
-    print json_encode('Error: '.$e);
+    $result = array ("wynik"=>false, "stan"=>$body->stan, "error"=>$e);
 }
+echo json_encode($result);
 ?>

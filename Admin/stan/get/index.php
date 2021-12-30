@@ -1,8 +1,6 @@
 <?php
 
-require_once "../connect.php";
-
-mysqli_report(MYSQLI_REPORT_STRICT | MYSQLI_REPORT_ALL);
+require_once "../../../connect.php";
 
 try
 {
@@ -15,7 +13,7 @@ try
     else
     {
         $sql = "SELECT 
-                wartosc1 
+                wartosc1
                 FROM 
                 ustawienia 
                 WHERE 
@@ -26,17 +24,18 @@ try
             {
                 $row = $result->fetch_assoc();
                 $stan = $row['wartosc1'];
-                print json_encode($stan);
+                $result = array ("wynik"=>true, "stan"=>$stan);
             } 
         else 
             {
-                print json_encode('false');
+                $result = array ("wynik"=>true, "stan"=>$stan);
             }
         $conn->close();            
     }    
     }
     catch(Exception $e)    
     {
-        print json_encode('Error: '.$e);
+        $result = array("wynik"=>false, "stan"=>"error", "error"=>$e);
     }
+echo json_encode($result);
 ?>
