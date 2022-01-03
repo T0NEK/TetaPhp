@@ -20,26 +20,43 @@ try
                 id=4
                 ";
                 if ($conn->query($sql) === TRUE)
-                { $result = array ("wynik"=>true, "stan"=>$body->czas);}
+                { $result = array ("wynik"=>true, "stan"=>"", "czas"=>$body->czas);}
                 else 
-                { $result = array ("wynik"=>false, "stan"=>$body->czas, "error"=>"nie zapisano");}
+                { $result = array ("wynik"=>false, "stan"=>"", "czas"=>$body->czas, "error"=>"nie zapisano");}
                 $conn->close();    
             }
             else
             { //get
-                $sql = "SELECT 
-                * 
+                $sql = "SELECT
+                *
+                FROM
+                (SELECT 
+                wartosc as stan
                 FROM 
                 ustawienia 
                 WHERE 
-                id=3 
+                id=5) t1 
+                JOIN
+                (SELECT 
+                wartosc as czasorg
+                FROM 
+                ustawienia 
+                WHERE 
+                id=3) t2
+                JOIN
+                (SELECT 
+                wartosc as czasnew
+                FROM 
+                ustawienia 
+                WHERE 
+                id=4) t3
+                ON true
                 ";
                 $result = $conn->query($sql); 
                 if ($result->num_rows > 0) 
                 {
                 $row = $result->fetch_assoc();
-                $czas = $row['wartosc'];
-                $result = array ("wynik"=>true, "stan"=>$czas);
+                $result = array ("wynik"=>true, "stan"=>$row['stan'], "czasorg"=>$row['czasorg'], "czasnew"=>$row['czasnew']);
                 $conn->close();   
                 }
                 else
