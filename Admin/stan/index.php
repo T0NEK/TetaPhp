@@ -11,39 +11,59 @@ try
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         { //set   
-             $sql = "UPDATE 
+            $conn->autocommit(false);
+            $sql = "UPDATE 
                     ustawienia 
                     SET
                     wartosc = UPPER ('".$body->stan."')
                     WHERE
                     id=5
                     ";
-            if ($conn->query($sql) === TRUE) 
-            { $result = array ("wynik"=>true, "stan"=>$body->stan); }
+            $conn->query($sql);
+            $sql = "UPDATE 
+                    ustawienia 
+                    SET
+                    wartosc = '".$body->czas."'
+                    WHERE
+                    id=6
+                    ";
+            $conn->query($sql);
+
+            if ($conn->commit() === TRUE) 
+            { $result = array ("wynik"=>true, "stan"=>$body->stan, "czas"=>$body->czas); }
             else 
-            { $result = array ("wynik"=>false, "stan"=>$body->stan, "error"=>'nie zapisano'); }
+            { $result = array ("wynik"=>false, "stan"=>$body->stan, "czas"=>$body->czas, "error"=>'nie zapisano'); }
             $conn->close();    
         }    
         else
         { //get
-           $sql = "SELECT 
-                    wartosc
+           $sql = "SELECT
+                    *
+                    FROM
+                    (SELECT 
+                    wartosc as stan
                     FROM 
                     ustawienia 
                     WHERE 
-                    id=5
-                    ";
-            
+                    id=5) t1 
+                    JOIN
+                    (SELECT 
+                    wartosc as czas
+                    FROM 
+                    ustawienia 
+                    WHERE 
+                    id=6) t2
+                    ON true
+                    ";          
                 $result = $conn->query($sql); 
                 if ($result->num_rows > 0) 
                 {
                     $row = $result->fetch_assoc();
-                    $stan = $row['wartosc'];
-                    $result = array ("wynik"=>true, "stan"=>$stan);
+                    $result = array ("wynik"=>true, "stan"=>$row['stan'], "czas"=>$row['czas']);
                 } 
                 else 
                 {
-                    $result = array ("wynik"=>true, "stan"=>"","error"=>"0 wyników");
+                    $result = array ("wynik"=>true, "stan"=>"", "czas"=>"", "error"=>"0 wyników");
                 }
             $conn->close();            
         } 
