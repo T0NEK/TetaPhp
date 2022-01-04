@@ -15,6 +15,16 @@ try
             $sql = "UPDATE 
                     ustawienia 
                     SET
+                    zmiana = '".$body->zmiana."',
+                    wartosc = UPPER ('".$body->czasD."')
+                    WHERE
+                    id=4
+                    ";
+            $conn->query($sql);
+            $sql = "UPDATE 
+                    ustawienia 
+                    SET
+                    zmiana = '".$body->zmiana."',
                     wartosc = UPPER ('".$body->stan."')
                     WHERE
                     id=5
@@ -23,6 +33,7 @@ try
             $sql = "UPDATE 
                     ustawienia 
                     SET
+                    zmiana = '".$body->zmiana."',
                     wartosc = '".$body->czas."'
                     WHERE
                     id=6
@@ -40,19 +51,9 @@ try
            $sql = "SELECT
                     *
                     FROM
-                    (SELECT 
-                    wartosc as stan
-                    FROM 
-                    ustawienia 
-                    WHERE 
-                    id=5) t1 
+                    (SELECT wartosc as stan FROM ustawienia WHERE id=5) t1 
                     JOIN
-                    (SELECT 
-                    wartosc as czas
-                    FROM 
-                    ustawienia 
-                    WHERE 
-                    id=6) t2
+                    (SELECT wartosc as czas FROM ustawienia WHERE id=6) t2
                     ON true
                     ";          
                 $result = $conn->query($sql); 

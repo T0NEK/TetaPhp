@@ -15,6 +15,7 @@ try
                 $sql = "UPDATE 
                 ustawienia 
                 SET
+                zmiana = '".$body->zmiana."',
                 wartosc='".$body->czas."'
                 WHERE
                 id=2

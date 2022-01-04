@@ -15,6 +15,7 @@ try
                 $sql = "UPDATE 
                 ustawienia 
                 SET
+                zmiana = '".$body->zmiana."',
                 wartosc='".$body->czas."'
                 WHERE
                 id=4
@@ -30,33 +31,18 @@ try
                 $sql = "SELECT
                 *
                 FROM
-                (SELECT 
-                wartosc as stan
-                FROM 
-                ustawienia 
-                WHERE 
-                id=5) t1 
+                (SELECT wartosc as stan FROM ustawienia WHERE id=5) t1 
                 JOIN
-                (SELECT 
-                wartosc as czasorg
-                FROM 
-                ustawienia 
-                WHERE 
-                id=3) t2
+                (SELECT wartosc as czasorg FROM ustawienia WHERE id=3) t2
                 JOIN
-                (SELECT 
-                wartosc as czasnew
-                FROM 
-                ustawienia 
-                WHERE 
-                id=4) t3
+                (SELECT wartosc as czasnew, zmiana as czasnewzmiana FROM ustawienia WHERE id=4) t3
                 ON true
                 ";
                 $result = $conn->query($sql); 
                 if ($result->num_rows > 0) 
                 {
                 $row = $result->fetch_assoc();
-                $result = array ("wynik"=>true, "stan"=>$row['stan'], "czasorg"=>$row['czasorg'], "czasnew"=>$row['czasnew']);
+                $result = array ("wynik"=>true, "stan"=>$row['stan'], "czasorg"=>$row['czasorg'], "czasnew"=>$row['czasnew'], "czasnewzmiana"=>$row['czasnewzmiana']);
                 $conn->close();   
                 }
                 else
