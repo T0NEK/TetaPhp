@@ -56,10 +56,10 @@ try
                     (SELECT wartosc as czas FROM ustawienia WHERE id=6) t2
                     ON true
                     ";          
-                $result = $conn->query($sql); 
-                if ($result->num_rows > 0) 
+                $wynik = $conn->query($sql); 
+                if ($wynik->num_rows > 0) 
                 {
-                    $row = $result->fetch_assoc();
+                    $row = $wynik->fetch_assoc();
                     $result = array ("wynik"=>true, "stan"=>$row['stan'], "czas"=>$row['czas']);
                 } 
                 else 

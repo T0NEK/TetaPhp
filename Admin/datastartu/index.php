@@ -28,19 +28,21 @@ try
             }
             else
             { //get
-                $sql = "SELECT 
-                * 
-                FROM 
-                ustawienia 
-                WHERE 
-                id=1 
+                $sql = "SELECT
+                *
+                FROM
+                (SELECT wartosc as stan FROM ustawienia WHERE id=5) t1 
+                JOIN
+                (SELECT wartosc as czasorg FROM ustawienia WHERE id=1) t2
+                JOIN
+                (SELECT wartosc as czasnew, zmiana as czasnewzmiana FROM ustawienia WHERE id=2) t3
+                ON true
                 ";
-                $result = $conn->query($sql); 
-                if ($result->num_rows > 0) 
+                $wynik = $conn->query($sql); 
+                if ($wynik->num_rows > 0) 
                 {
-                $row = $result->fetch_assoc();
-                $czas = $row['wartosc'];
-                $result = array ("wynik"=>true, "stan"=>$czas);
+                $row = $wynik->fetch_assoc();
+                $result = array ("wynik"=>true, "stan"=>$row['stan'], "czasorg"=>$row['czasorg'], "czasnew"=>$row['czasnew'], "czasnewzmiana"=>$row['czasnewzmiana']);
                 $conn->close();   
                 }
                 else
