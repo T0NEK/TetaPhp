@@ -48,7 +48,7 @@ try
                      FROM
                      osoby
                      where
-                     user = 1
+                     user <> 1
                      ORDER BY
                      kolejnosc
                     ";
