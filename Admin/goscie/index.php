@@ -9,24 +9,46 @@ try
     { throw new Exception( $conn->connect_error); } 
     else
     {
-        $body = json_decode(file_get_contents("php://input"));    
+        $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
-            { //set
-                $sql = "UPDATE 
-                osoby 
-                SET
-                zalogowanynew = '".$body->zalogowany."',
-                blokadanew='".$body->blokada."',
-                hannahnew'".$body->hannah."'
-                WHERE
-                id='".$body->id."'
-                ";
-                if ($conn->query($sql) === TRUE)
-                { $result = array ("wynik"=>true, "stan"=>$body->czas);}
-                else 
-                { $result = array ("wynik"=>false, "stan"=>$body->czas, "error"=>"nie zapisano");}
-                $conn->close();    
-            }
+        {
+        switch (strtoupper($body->zmiana)) 
+                        {
+                        case 'LOGOWANIE':
+                            $wiersz = 'zalogowanynew = '.($body->stan ? 1:0);
+                            break;
+                        case 'BLOKOWANIE':
+                            $wiersz = 'blokadanew = '.($body->stan ? 1:0);
+                            break;
+                        case 'HANNAH':
+                            $wiersz = 'hannahnew = '.($body->stan ? 1:0);
+                            break;          
+                        }
+        switch ($body->id) {
+                        case 0: //all
+                            $id = 'user=2';
+                            break;
+                        default: //id osoby
+                            $id = 'id='.$body->id;
+                            break;
+                        }               
+                    $sql = "UPDATE 
+                    osoby 
+                    SET
+                    ".$wiersz."
+                    WHERE
+                    ".$id."
+                    ";
+                    if ($conn->query($sql) === TRUE)
+                    { $result = array ("wynik"=>true);}
+                    else 
+                    { $result = array ("wynik"=>false, "error"=>"nie zapisano");}
+                    $conn->close();                    
+/*                
+                $tabela = $body->dane;
+                $result = array ("wynik"=>true, "id"=>$body->id, "zmiana"=>$body->zmiana, 'dane'=>$tabela[1]->nazwisko);    
+*/                
+        }
             else
             { //get
                 $sql = "SELECT wartosc from ustawienia WHERE id=5"; 
@@ -35,7 +57,7 @@ try
                 {
                     $row = $wynik->fetch_assoc();
                     $start = $row['wartosc'];
-                    if ($start == 'START') {$warunek = TRUE;} else {$warunek = FALSE;}   
+                    if ($start == 'START') {$warunek = 'TRUE';} else {$warunek = 'FALSE';}   
                     $sql = 
                     "SELECT
                      id,
@@ -48,7 +70,7 @@ try
                      FROM
                      osoby
                      where
-                     user <> 1
+                     user = 2 
                      ORDER BY
                      kolejnosc
                     ";
