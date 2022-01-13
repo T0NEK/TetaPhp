@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 09 Sty 2022, 22:45
+-- Czas generowania: 13 Sty 2022, 22:35
 -- Wersja serwera: 10.1.21-MariaDB
 -- Wersja PHP: 5.6.30
 
@@ -19,6 +19,30 @@ SET time_zone = "+00:00";
 --
 -- Baza danych: `teta`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `komputery`
+--
+
+CREATE TABLE `komputery` (
+  `id` int(11) NOT NULL,
+  `nazwa` text COLLATE utf8_polish_ci NOT NULL,
+  `token` text COLLATE utf8_polish_ci NOT NULL,
+  `czaslogowania` text COLLATE utf8_polish_ci NOT NULL,
+  `czaszmiana` text COLLATE utf8_polish_ci NOT NULL,
+  `czasserwera` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ustawienia_1` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `komputery`
+--
+
+INSERT INTO `komputery` (`id`, `nazwa`, `token`, `czaslogowania`, `czaszmiana`, `czasserwera`, `ustawienia_1`) VALUES
+(1, '0', 'XE361642109487LB22141221415882MF', '2022-01-13 22:33', '2022-01-13 22:33', '2022-01-13 22:31:27', 0),
+(2, 'DESKTOP-2KPJSHU', 'FJ721642109601PH3290316028055GS', '2022-01-13 22:33', '2022-01-13 22:33', '2022-01-13 22:33:21', 0);
 
 -- --------------------------------------------------------
 
@@ -110,13 +134,19 @@ INSERT INTO `ustawienia` (`id`, `zmiana`, `nazwa`, `wartosc`) VALUES
 (1, '', 'Oryginalna data startu Dedala', '2043-03-11 12:01:02'),
 (2, '2022-01-09 00:36:25', 'Obecna data startu Dedala', '2043-03-11 12:01:02'),
 (3, '', 'Oryginalna data startu akcji na Dedalu', '2045-04-18 21:35:00'),
-(4, '2022-01-09 17:32:21', 'Obecna data akcji na Dedalu', '2045-04-18 21:35:00'),
+(4, '', 'Obecna data akcji na Dedalu', '2022-01-13 22:33'),
 (5, '2022-01-09 10:20:07', 'Stan larpa', 'START'),
 (6, '2022-01-09 10:20:07', 'Data startu larpa ', '2022-01-09 10:20:07');
 
 --
 -- Indeksy dla zrzutów tabel
 --
+
+--
+-- Indexes for table `komputery`
+--
+ALTER TABLE `komputery`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `osoby`
@@ -141,6 +171,11 @@ ALTER TABLE `ustawienia`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT dla tabeli `komputery`
+--
+ALTER TABLE `komputery`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT dla tabeli `osoby`
 --
