@@ -3,7 +3,7 @@
 require_once "../../connect.php";
 
 //echo json_encode(getallheaders());
-$host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+//$host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 try
 {
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -14,7 +14,7 @@ try
     } 
     else
     {
-        $result = array ("wynik"=>true, "stan"=>"ok", "host"=>$host);  
+        $result = array ("wynik"=>true, "stan"=>"ok");  
     }
     $conn->close();            
 }    
