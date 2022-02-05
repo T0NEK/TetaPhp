@@ -29,13 +29,15 @@ try
                     dzialania.czas,
                     dzialania.dzialanie,
                     dzialania.komunikat,
-                    dzialania.nastepny
+                    dzialania.nastepnyTrue,
+                    dzialania.nastepnyFalse,
+                    polecenia.autoryzacja
                     FROM
                     dzialania,
                     polecenia
                     where
                     ".$wiersz."
-                    AND dzialania.polecenia = polecenia.nazwa
+                    AND polecenia.nazwa = dzialania.polecenia
                 ";
                 $wynik = $conn->query($sql); 
                 if ($wynik->num_rows > 0) 
@@ -43,7 +45,7 @@ try
                 $polecenia = array ();    
                 while ($row = $wynik->fetch_assoc())
                 {
-                $polecenie = array ("nazwa"=>$row['nazwa'], "czas"=>$row['czas'], "dzialanie"=>$row['dzialanie'], "komunikat"=>$row['komunikat'], "nastepny"=>$row['nastepny']);
+                $polecenie = array ("nazwa"=>$row['nazwa'], "czas"=>$row['czas'], "dzialanie"=>$row['dzialanie'], "autoryzacja"=>$row['autoryzacja'], "komunikat"=>$row['komunikat'], "nastepnyTrue"=>$row['nastepnyTrue'], "nastepnyFalse"=>$row['nastepnyFalse']);
                 array_push($polecenia,$polecenie);
                 }
                 $result = array ("wynik"=>true, "stan"=>"ok", "polecenia"=>$polecenia);

@@ -10,43 +10,36 @@ try
     { throw new Exception( $conn->connect_error); } 
     else
     {
+        //$body = (object) array ('stan' => 2);
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {
-        switch (strtoupper($body->stan)) 
-                    {
-                        case '0':
-                            $wiersz = 'wylogowany = 1 ';
-                            break;   
-                        default:
-                            $wiersz = 'zalogowany = 1';
-                            break;
-                    }
          //get
                 $sql = 
                 "SELECT
+                    id,
                     nazwa,
-                    czas,
-                    dzialania,
-                    autoryzacja,
-                    komunikat
+                    symbol,
+                    producent,
+                    opis,
+                    czas
                     FROM
-                    polecenia
+                    moduly
                     where
-                    ".$wiersz."
+                    substring(uprawnienia,".$body->stan.",1) = '1' 
                     ORDER BY
                     nazwa
                 ";
                 $wynik = $conn->query($sql); 
                 if ($wynik->num_rows > 0) 
                 {
-                $polecenia = array ();    
+                $moduly = array ();    
                 while ($row = $wynik->fetch_assoc())
                 {
-                $polecenie = array ("nazwa"=>$row['nazwa'], "czas"=>$row['czas'], "dzialanie"=>$row['dzialania'], "autoryzacja"=>$row['autoryzacja'], "komunikat"=>$row['komunikat'], "nastepnyTrue"=>"brak", "nastepnyFalse"=>"brak");
-                array_push($polecenia,$polecenie);
+                $modul = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "producent"=>$row['producent'], "autoryzacja"=>0, "opis"=>$row['opis'], "czas"=>$row['czas']);
+                array_push($moduly,$modul);
                 }
-                $result = array ("wynik"=>true, "stan"=>"ok", "polecenia"=>$polecenia);
+                $result = array ("wynik"=>true, "stan"=>"ok", "moduly"=>$moduly);
                 $conn->close();   
                 }
                 else

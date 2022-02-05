@@ -13,11 +13,12 @@ try
         if (isset($body))
         { //set   
         if ($body->zalogowany == 0)    
-        {
+        {//logowanie
             $sql ="SELECT
                    id,
                    imie,
                    nazwisko, 
+                   autoryzacja,
                    funkcja,
                    rodzaj,
                    blokadanew,
@@ -36,6 +37,7 @@ try
                 $id = $row['id'];
                 $imie = $row['imie'];
                 $nazwisko = $row['nazwisko'];
+                $autoryzacja = $row['autoryzacja'];
                 $funkcja = $row['funkcja'];
                 $rodzaj = $row['rodzaj'];
                 $blokada = $row['blokadanew'];
@@ -57,7 +59,7 @@ try
                                 ";
                         if ($conn->query($sql) === TRUE) 
                             { 
-                                $result = array ("wynik"=>true, "stan"=>true, "zalogowany"=>$id, "imie"=>$imie, "nazwisko"=>$nazwisko, "funkcja"=>$funkcja, "rodzaj"=>$rodzaj, "error"=>"zostałeś zalogowany");
+                                $result = array ("wynik"=>true, "stan"=>true, "zalogowany"=>$id, "imie"=>$imie, "nazwisko"=>$nazwisko, "autoryzacja"=>($autoryzacja==1), "funkcja"=>$funkcja, "rodzaj"=>$rodzaj, "error"=>" - zostałeś zalogowany");
                             }
                             else 
                             { 
@@ -81,7 +83,29 @@ try
         $conn->close();                        
         }  
         else
-        {
+        {//wylogowanie
+
+            $sql ="SELECT
+            id,
+            imie,
+            nazwisko, 
+            zalogowanynew
+            FROM
+            osoby 
+            WHERE
+            user=1 AND
+            id = ".$body->zalogowany."
+            ";
+     $wynik = $conn->query($sql); 
+     if ($wynik->num_rows == 1) 
+         {
+         $row = $wynik->fetch_assoc();
+         $id = $row['id'];
+         $imie = $row['imie'];
+         $nazwisko = $row['nazwisko'];
+         $zalogowany = $row['zalogowanynew'];
+            if ($zalogowany == 1)
+            {
             $time = date("Y-m-d H:i:s",time());
             $sql = "UPDATE 
                     osoby
@@ -94,12 +118,22 @@ try
                     ";
             if ($conn->query($sql) === TRUE) 
             {
-                $result = array ("wynik"=>true, "stan"=>true, "zalogowany"=>0, "imie"=>'', "nazwisko"=>'', "funkcja"=>'', "rodzaj"=>'', "error"=>"zostałeś wylogowany"); 
+                $result = array ("wynik"=>true, "stan"=>true, "zalogowany"=>0, "imie"=>"", "nazwisko"=>"", "autoryzacja"=>false, "funkcja"=>"", "rodzaj"=>"", "error"=>$imie." ".$nazwisko." - zostałeś wylogowany");
             }
             else
             {
                 $result = array ("wynik"=>false, "stan"=>false, "error"=>"nieokreślony błąd podczas wylogowywania");  
             }
+            }
+            else
+            {
+                $result = array ("wynik"=>false, "stan"=>false, "error"=>$imie." ".$nazwisko." - nie jesteś zalogowany");  
+            }
+        }
+        else
+        {
+            $result = array ("wynik"=>false, "stan"=>false, "error"=>"błąd nie znaleziono osoby");  
+        }
         }
         }  
         else
@@ -111,7 +145,7 @@ try
 catch(Exception $e)    
 {
     $result = array("wynik"=>false, "stan"=>"error", "error"=>$e);
-    echo $e;
+    //echo $e;
 }
 echo json_encode($result);
 ?>
