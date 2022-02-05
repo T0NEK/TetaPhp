@@ -11,6 +11,7 @@ try
     else
     {
         $body = json_decode(file_get_contents("php://input"));
+        //$body = (object) array ('stan' => 2);
         if (isset($body))
         {
         switch (strtoupper($body->stan)) 
@@ -29,11 +30,13 @@ try
                     czas,
                     dzialania,
                     autoryzacja,
+                    polecenie,
                     komunikat
                     FROM
                     polecenia
                     where
                     ".$wiersz."
+                    AND substring(uprawnienia,".$body->stan.",1) = '1' 
                     ORDER BY
                     nazwa
                 ";
@@ -43,7 +46,7 @@ try
                 $polecenia = array ();    
                 while ($row = $wynik->fetch_assoc())
                 {
-                $polecenie = array ("nazwa"=>$row['nazwa'], "czas"=>$row['czas'], "dzialanie"=>$row['dzialania'], "autoryzacja"=>$row['autoryzacja'], "komunikat"=>$row['komunikat'], "nastepnyTrue"=>"brak", "nastepnyFalse"=>"brak");
+                $polecenie = array ("nazwa"=>$row['nazwa'], "czas"=>$row['czas'], "dzialanie"=>$row['dzialania'], "autoryzacja"=>($row['autoryzacja']==1), "polecenie"=>($row['polecenie']==1), "komunikat"=>$row['komunikat'], "nastepnyTrue"=>"brak", "nastepnyFalse"=>"brak");
                 array_push($polecenia,$polecenie);
                 }
                 $result = array ("wynik"=>true, "stan"=>"ok", "polecenia"=>$polecenia);
