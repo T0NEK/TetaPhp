@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 05 Lut 2022, 11:28
+-- Czas generowania: 06 Lut 2022, 22:41
 -- Wersja serwera: 10.1.21-MariaDB
 -- Wersja PHP: 5.6.30
 
@@ -43,33 +43,39 @@ CREATE TABLE `dzialania` (
 --
 
 INSERT INTO `dzialania` (`id`, `polecenia`, `nazwa`, `czas`, `dzialanie`, `komunikat`, `nastepnyTrue`, `nastepnyFalse`, `opis`) VALUES
-(1, 'pomoc', 'pomoc1', '500', 'komunikat', 'dostępne polecenia:', 'pomoc2', 'pomoc2', ''),
-(2, 'pomoc', 'pomoc2', '250', 'linie', 'polecenia', 'pomoc3', 'pomoc3', 'wyświetlenie listy poleceń'),
-(3, 'pomoc', 'pomoc3', '500', 'komunikat', 'koniec dostępnych poleceń', 'end', 'end', ''),
-(4, 'zaloguj', 'zaloguj1', '500', 'komunikat', 'procedura: logowanie do terminala', 'zaloguj2', 'zaloguj2', ''),
-(5, 'zaloguj', 'zaloguj2', '500', 'dane', 'podaj login ?', 'zaloguj3', 'zaloguj3', ''),
-(6, 'zaloguj', 'zaloguj3', '500', 'zapiszdane', 'login', 'zaloguj4', 'zaloguj4', ''),
-(7, 'zaloguj', 'zaloguj4', '500', 'password', 'on', 'zaloguj5', 'zaloguj5', 'załączenie ***'),
-(8, 'zaloguj', 'zaloguj5', '500', 'dane', 'podaj hasło ?', 'zaloguj6', 'zaloguj6', ''),
-(9, 'zaloguj', 'zaloguj6', '500', 'dodajdane', 'password', 'zaloguj7', 'zaloguj7', ''),
-(10, 'zaloguj', 'zaloguj7', '500', 'password', 'off', 'zaloguj8', 'zaloguj8', 'wyłączenie ***'),
-(11, 'zaloguj', 'zaloguj8', '500', 'komunikat', 'loguję', 'zaloguj9', 'zaloguj9', ''),
-(12, 'zaloguj', 'zaloguj9', '500', 'logowanie', '', 'end', 'end', ''),
-(13, 'wyloguj', 'wyloguj1', '500', 'komunikat', 'procedura: wylogowanie z terminala', 'wyloguj2', 'wyloguj2', ''),
-(14, 'wyloguj', 'wyloguj2', '500', 'wylogowanie', '', 'end', 'end', ''),
-(15, 'moduły', 'moduly1', '500', 'komunikat', 'wczytuję dostępne moduły', 'moduly2', 'moduly2', ''),
-(16, 'moduły', 'moduly2', '250', 'wczytaj', 'moduly', 'moduly4', 'moduly3', 'wyswietla listę modułów'),
-(17, 'moduły', 'moduly4', '500', 'linie', 'moduly', 'moduly5', 'moduly5', ''),
-(18, 'polecenia', 'polecenia1', '500', 'komunikat', 'polecenie serwisowe', 'polecenia2', 'polecenia2', ''),
-(19, 'polecenia', 'polecenia2', '500', 'komunikat', 'wymagana autoryzacja', 'polecenia3', 'polecenia3', ''),
-(20, 'polecenia', 'polecenia3', '500', 'warunek', 'autoryzacja', 'polecenia4', 'polecenia5', ''),
-(21, 'polecenia', 'polecenia4', '500', 'komunikat', 'autoryzacja poprawna', 'polecenia6', 'polecenia6', ''),
-(22, 'polecenia', 'polecenia5', '500', 'komunikat', 'odmowa wykonania', 'end', 'end', ''),
-(23, 'polecenia', 'polecenia6', '500', 'komunikat', 'wczytuję polecenia', 'polecenia7', 'polecenia7', ''),
-(24, 'polecenia', 'polecenia7', '500', 'wczytaj', 'polecenia', 'polecenia8', 'polecenia8', ''),
-(25, 'polecenia', 'polecenia8', '500', 'wczytaj', 'dzialania', 'end', 'end', ''),
-(26, 'moduły', 'moduly3', '250', 'komunikat', 'problem z dostępem do modułów', 'end', 'end', 'wyswietla listę modułów'),
-(27, 'moduły', 'moduly5', '500', 'komunikat', 'koniec dostępnych modułów', 'end', 'end', '');
+(1, 'pomoc', 'pomoc_1', '500', 'komunikat', 'dostępne polecenia:', 'pomoc_2', 'pomoc_2', ''),
+(2, 'pomoc', 'pomoc_2', '250', 'linie', 'polecenia', 'pomoc_3', 'pomoc_3', 'wyświetlenie listy poleceń'),
+(3, 'pomoc', 'pomoc_3', '500', 'komunikat', 'koniec dostępnych poleceń', 'end', 'end', ''),
+(4, 'zaloguj', 'zaloguj_1', '500', 'komunikat', 'procedura: logowanie do terminala', 'zaloguj_2', 'zaloguj_2', ''),
+(5, 'zaloguj', 'zaloguj_2', '500', 'dane', 'podaj login ?', 'zaloguj_3', 'zaloguj_3', ''),
+(6, 'zaloguj', 'zaloguj_3', '500', 'zapiszdane', 'login', 'zaloguj_4', 'zaloguj_4', ''),
+(7, 'zaloguj', 'zaloguj_4', '500', 'password', 'on', 'zaloguj_5', 'zaloguj_5', 'załączenie ***'),
+(8, 'zaloguj', 'zaloguj_5', '500', 'dane', 'podaj hasło ?', 'zaloguj_6', 'zaloguj_6', ''),
+(9, 'zaloguj', 'zaloguj_6', '500', 'dodajdane', 'password', 'zaloguj_7', 'zaloguj_7', ''),
+(10, 'zaloguj', 'zaloguj_7', '500', 'password', 'off', 'zaloguj_8', 'zaloguj_8', 'wyłączenie ***'),
+(11, 'zaloguj', 'zaloguj_8', '500', 'komunikat', 'loguję', 'zaloguj_9', 'zaloguj_9', ''),
+(12, 'zaloguj', 'zaloguj_9', '500', 'logowanie', '', 'end', 'end', ''),
+(13, 'wyloguj', 'wyloguj_1', '500', 'komunikat', 'procedura: wylogowanie z terminala', 'wyloguj_2', 'wyloguj_2', ''),
+(14, 'wyloguj', 'wyloguj_2', '500', 'wylogowanie', '', 'end', 'end', ''),
+(15, 'moduły', 'moduly_1', '500', 'komunikat', 'wczytuję dostępne moduły', 'moduly_2', 'moduly_2', ''),
+(16, 'moduły', 'moduly_2', '250', 'wczytaj', 'moduly', 'moduly_4', 'moduly_3', 'wczytuje moduły'),
+(17, 'moduły', 'moduly_4', '500', 'linie', 'moduly', 'moduly_5', 'moduly_5', 'wyswietla listę modułów'),
+(26, 'moduły', 'moduly_3', '250', 'komunikat', 'problem z dostępem do modułów', 'end', 'end', ''),
+(27, 'moduły', 'moduly_5', '500', 'komunikat', 'koniec dostępnych modułów', 'end', 'end', ''),
+(28, 'pomoc cała', 'pomoc_cala_1', '500', 'komunikat', 'wszystkie dostępne polecenia:', 'pomoc_cala_2', 'pomoc_cala_2', ''),
+(29, 'pomoc cała', 'pomoc_cala_2', '250', 'linie', 'polecenia_all', 'pomoc_cala_3', 'pomoc_cala_3', 'wyświetlenie listy poleceń'),
+(30, 'pomoc cała', 'pomoc_cala_3', '500', 'komunikat', 'koniec dostępnych poleceń', 'end', 'end', ''),
+(31, 'pomoc', 'pomoc_0', '1000', 'komunikat', 'wykonuję: [ pomoc ]', 'pomoc_1', 'pomoc_1', 'alternatywa'),
+(32, 'moduły', 'moduly_0', '500', 'komunikat', 'wykonuję: [ moduły ]', 'moduly_1', 'moduly_1', 'alternatywa'),
+(34, 'pomoc cała', 'pomoc_cala_0', '1000', 'komunikat', 'wykonuję: [ pomoc cała ]', 'pomoc_cala_1', 'pomoc_cala_1', 'alternatywa'),
+(35, 'zaloguj', 'zaloguj_0', '1000', 'komunikat', 'wykonuję: [ zaloguj ]', 'zaloguj_1', 'zaloguj_1', 'alternatywa'),
+(36, 'wyloguj', 'wyloguj_0', '1000', 'komunikat', 'wykonuję: [ wyloguj ]', 'wyloguj_1', 'wyloguj_1', 'alternatywa'),
+(37, 'notatki', 'notatki_1', '500', 'komunikat', 'wczytuję dostępne notatki', 'notatki_2', 'notatki_2', ''),
+(38, 'notatki', 'notatki_2', '500', 'wczytaj', 'notatki', 'notatki_4', 'notatki_3', 'wczytuje notatki'),
+(39, 'notatki', 'notatki_3', '500', 'komunikat', 'problem z dostępem do notatek', 'end', 'end', ''),
+(40, 'notatki', 'notatki_4', '500', 'linie', 'notatki', 'notatki_5', 'notatki_5', 'wyświetla listę tytułów notatek'),
+(41, 'notatki', 'notatki_5', '500', 'komunikat', 'koniec dostępnych notatek', 'end', 'end', ''),
+(42, 'notatki', 'notatki_0', '500', 'komunikat', 'wykonuję: [ notatki ]', 'notatki_1', 'notatki_1', 'alternatywa');
 
 -- --------------------------------------------------------
 
@@ -1066,7 +1072,114 @@ INSERT INTO `komputery` (`id`, `nazwa`, `hostid`, `czaslogowania`, `czaszmiana`,
 (972, 'DESKTOP-2KPJSHU', 'BV371644055572XM81124948223472AE', '2022-02-05 11:06:12', '2022-02-05 11:06:12', 0),
 (973, 'DESKTOP-2KPJSHU', 'ZO191644055662HX75138100675608WB', '2022-02-05 11:07:42', '2022-02-05 11:07:42', 0),
 (974, 'DESKTOP-2KPJSHU', 'ZZ891644056225LC8372338473900FU', '2022-02-05 11:17:05', '2022-02-05 11:17:05', 0),
-(975, 'DESKTOP-2KPJSHU', 'BC491644056642ET6482202832100PG', '2022-02-05 11:24:02', '2022-02-05 11:24:02', 0);
+(975, 'DESKTOP-2KPJSHU', 'BC491644056642ET6482202832100PG', '2022-02-05 11:24:02', '2022-02-05 11:24:02', 0),
+(976, 'DESKTOP-2KPJSHU', 'ZF921644057488XX9185490989376VA', '2022-02-05 11:38:08', '2022-02-05 11:38:08', 0),
+(977, 'DESKTOP-2KPJSHU', 'CO101644057591DM74133168664871UK', '2022-02-05 11:39:51', '2022-02-05 11:39:51', 0),
+(978, 'DESKTOP-2KPJSHU', 'XR91644057920QL96139744923200LV', '2022-02-05 11:45:20', '2022-02-05 11:45:20', 0),
+(979, 'DESKTOP-2KPJSHU', 'SD961644058072ME84164405807200HY', '2022-02-05 11:47:52', '2022-02-05 11:47:52', 0),
+(980, 'DESKTOP-2KPJSHU', 'IJ241644061771AQ89111796200428CB', '2022-02-05 12:49:31', '2022-02-05 12:49:31', 0),
+(981, 'DESKTOP-2KPJSHU', 'OW321644063131TO4421372820703VN', '2022-02-05 13:12:11', '2022-02-05 13:12:11', 0),
+(982, 'DESKTOP-2KPJSHU', 'DW941644063486WL3146321650254VU', '2022-02-05 13:18:06', '2022-02-05 13:18:06', 0),
+(983, 'DESKTOP-2KPJSHU', 'CU21644063633LP79110152263411HL', '2022-02-05 13:20:33', '2022-02-05 13:20:33', 0),
+(984, 'DESKTOP-2KPJSHU', 'ZC161644063745UM48115084462150ND', '2022-02-05 13:22:25', '2022-02-05 13:22:25', 0),
+(985, 'DESKTOP-2KPJSHU', 'WG911644064006HU7954254112198PB', '2022-02-05 13:26:46', '2022-02-05 13:26:46', 0),
+(986, 'DESKTOP-2KPJSHU', 'AU481644064156UQ7785491336112AI', '2022-02-05 13:29:16', '2022-02-05 13:29:16', 0),
+(987, 'DESKTOP-2KPJSHU', 'QH381644064748HG7377271043156FZ', '2022-02-05 13:39:08', '2022-02-05 13:39:08', 0),
+(988, 'DESKTOP-2KPJSHU', 'VC781644064839PG70126592992603WS', '2022-02-05 13:40:39', '2022-02-05 13:40:39', 0),
+(989, 'DESKTOP-2KPJSHU', 'DL121644064896QS6114796584064PY', '2022-02-05 13:41:36', '2022-02-05 13:41:36', 0),
+(990, 'DESKTOP-2KPJSHU', 'LR511644066193MR7044389787211GA', '2022-02-05 14:03:13', '2022-02-05 14:03:13', 0),
+(991, 'DESKTOP-2KPJSHU', 'IA781644066875OI5773983009375SY', '2022-02-05 14:14:35', '2022-02-05 14:14:35', 0),
+(992, 'DESKTOP-2KPJSHU', 'YJ311644066924RN6775627078504GP', '2022-02-05 14:15:24', '2022-02-05 14:15:24', 0),
+(993, 'DESKTOP-2KPJSHU', 'AU381644067379VN1950966088749IY', '2022-02-05 14:22:59', '2022-02-05 14:22:59', 0),
+(994, 'DESKTOP-2KPJSHU', 'XS411644067531MO63151254212852AD', '2022-02-05 14:25:31', '2022-02-05 14:25:31', 0),
+(995, 'DESKTOP-2KPJSHU', 'JE921644068811NK7377271234117NI', '2022-02-05 14:46:51', '2022-02-05 14:46:51', 0),
+(996, 'DESKTOP-2KPJSHU', 'RH961644069196EH3323016968744IJ', '2022-02-05 14:53:16', '2022-02-05 14:53:16', 0);
+INSERT INTO `komputery` (`id`, `nazwa`, `hostid`, `czaslogowania`, `czaszmiana`, `ustawienia_1`) VALUES
+(997, 'DESKTOP-2KPJSHU', 'UB471644069206RF4241101730150QD', '2022-02-05 14:53:26', '2022-02-05 14:53:26', 0),
+(998, 'DESKTOP-2KPJSHU', 'TT941644069813VI7939457675512EC', '2022-02-05 15:03:33', '2022-02-05 15:03:33', 0),
+(999, 'DESKTOP-2KPJSHU', 'TT441644069892MF86124949311792ZN', '2022-02-05 15:04:51', '2022-02-05 15:04:51', 0),
+(1000, 'DESKTOP-2KPJSHU', 'XJ951644072798PN5331237383162IX', '2022-02-05 15:53:18', '2022-02-05 15:53:18', 0),
+(1001, 'DESKTOP-2KPJSHU', 'IF761644080677LO3813152645416RR', '2022-02-05 18:04:37', '2022-02-05 18:04:37', 0),
+(1002, 'DESKTOP-2KPJSHU', 'OO81644081299AB50116729772229CG', '2022-02-05 18:14:59', '2022-02-05 18:14:59', 0),
+(1003, 'DESKTOP-2KPJSHU', 'NR761644081338ZG3134814669716UK', '2022-02-05 18:15:38', '2022-02-05 18:15:38', 0),
+(1004, 'DESKTOP-2KPJSHU', 'NO411644081912KM77136458798696RG', '2022-02-05 18:25:12', '2022-02-05 18:25:12', 0),
+(1005, 'DESKTOP-2KPJSHU', 'ZR61644082530QZ8354254723490ZI', '2022-02-05 18:35:30', '2022-02-05 18:35:30', 0),
+(1006, 'DESKTOP-2KPJSHU', 'MS321644082659QX28133170695379ZX', '2022-02-05 18:37:39', '2022-02-05 18:37:39', 0),
+(1007, 'DESKTOP-2KPJSHU', 'DK501644083438VJ59152899759734GE', '2022-02-05 18:50:37', '2022-02-05 18:50:37', 0),
+(1008, 'DESKTOP-2KPJSHU', 'HO361644094281OS261644094281QU', '2022-02-05 21:51:21', '2022-02-05 21:51:21', 0),
+(1009, 'DESKTOP-2KPJSHU', 'CN891644094735HN65157833094560XM', '2022-02-05 21:58:55', '2022-02-05 21:58:55', 0),
+(1010, 'DESKTOP-2KPJSHU', 'KS961644094773ZP924932284319JJ', '2022-02-05 21:59:33', '2022-02-05 21:59:33', 0),
+(1011, 'DESKTOP-2KPJSHU', 'NP331644095807XN7113152766456LQ', '2022-02-05 22:16:46', '2022-02-05 22:16:46', 0),
+(1012, 'DESKTOP-2KPJSHU', 'AA1001644096484ZH5595357596072CG', '2022-02-05 22:28:04', '2022-02-05 22:28:04', 0),
+(1013, 'DESKTOP-2KPJSHU', 'GJ101644096548ME1455899282632GC', '2022-02-05 22:29:08', '2022-02-05 22:29:08', 0),
+(1014, 'DESKTOP-2KPJSHU', 'EG191644096845FZ73111798585460KI', '2022-02-05 22:34:05', '2022-02-05 22:34:05', 0),
+(1015, 'DESKTOP-2KPJSHU', 'PK991644096879PK8857543390765TF', '2022-02-05 22:34:39', '2022-02-05 22:34:39', 0),
+(1016, 'DESKTOP-2KPJSHU', 'WM341644096896CP22110154492032RL', '2022-02-05 22:34:56', '2022-02-05 22:34:56', 0),
+(1017, 'DESKTOP-2KPJSHU', 'BC191644097145LB7367407982945EP', '2022-02-05 22:39:05', '2022-02-05 22:39:05', 0),
+(1018, 'DESKTOP-2KPJSHU', 'AE961644097251DU39120019099323EJ', '2022-02-05 22:40:51', '2022-02-05 22:40:51', 0),
+(1019, 'DESKTOP-2KPJSHU', 'QJ311644097804HK1931237858276LE', '2022-02-05 22:50:04', '2022-02-05 22:50:04', 0),
+(1020, 'DESKTOP-2KPJSHU', 'BS421644098141KF8292069495896HD', '2022-02-05 22:55:41', '2022-02-05 22:55:41', 0),
+(1021, 'DESKTOP-2KPJSHU', 'SC751644098752WS83100290023872NA', '2022-02-05 23:05:52', '2022-02-05 23:05:52', 0),
+(1022, 'DESKTOP-2KPJSHU', 'QN311644098957JG46138104312388US', '2022-02-05 23:09:17', '2022-02-05 23:09:17', 0),
+(1023, 'DESKTOP-2KPJSHU', 'ZD771644098960JG6139748411600MD', '2022-02-05 23:09:20', '2022-02-05 23:09:20', 0),
+(1024, 'DESKTOP-2KPJSHU', 'BL561644099060EW9272340358640GD', '2022-02-05 23:10:59', '2022-02-05 23:10:59', 0),
+(1025, 'DESKTOP-2KPJSHU', 'SP91644137128AQ31131530970240BM', '2022-02-06 09:45:28', '2022-02-06 09:45:28', 0),
+(1026, 'DESKTOP-2KPJSHU', 'FG381644138808PV299864832848VL', '2022-02-06 10:13:28', '2022-02-06 10:13:28', 0),
+(1027, 'DESKTOP-2KPJSHU', 'HO871644138879LF7988783499466VA', '2022-02-06 10:14:39', '2022-02-06 10:14:39', 0),
+(1028, 'DESKTOP-2KPJSHU', 'EU261644138894RQ5124954555944TV', '2022-02-06 10:14:54', '2022-02-06 10:14:54', 0),
+(1029, 'DESKTOP-2KPJSHU', 'FX791644138908BZ64103580751204OF', '2022-02-06 10:15:07', '2022-02-06 10:15:07', 0),
+(1030, 'DESKTOP-2KPJSHU', 'NP631644139163PG100118378019736DB', '2022-02-06 10:19:22', '2022-02-06 10:19:22', 0),
+(1031, 'DESKTOP-2KPJSHU', 'SF201644139190BW9054256593270AM', '2022-02-06 10:19:50', '2022-02-06 10:19:50', 0),
+(1032, 'DESKTOP-2KPJSHU', 'JK651644139224QG68157837365504ZA', '2022-02-06 10:20:24', '2022-02-06 10:20:24', 0),
+(1033, 'DESKTOP-2KPJSHU', 'MF441644139278ZT3098648356680JR', '2022-02-06 10:21:18', '2022-02-06 10:21:18', 0),
+(1034, 'DESKTOP-2KPJSHU', 'VK911644140184JQ6159481597848YO', '2022-02-06 10:36:24', '2022-02-06 10:36:24', 0),
+(1035, 'DESKTOP-2KPJSHU', 'KD571644140255ZP9152905043715CK', '2022-02-06 10:37:35', '2022-02-06 10:37:35', 0),
+(1036, 'DESKTOP-2KPJSHU', 'BW791644140753CJ8388783600662PA', '2022-02-06 10:45:53', '2022-02-06 10:45:53', 0),
+(1037, 'DESKTOP-2KPJSHU', 'GC761644140775UO61116733995025VK', '2022-02-06 10:46:14', '2022-02-06 10:46:14', 0),
+(1038, 'DESKTOP-2KPJSHU', 'VP611644140827JB2578918759696GP', '2022-02-06 10:47:07', '2022-02-06 10:47:07', 0),
+(1039, 'DESKTOP-2KPJSHU', 'CO411644154375CT10149618048125OV', '2022-02-06 14:32:55', '2022-02-06 14:32:55', 0),
+(1040, 'DESKTOP-2KPJSHU', 'LS341644154505LU9652612944160CP', '2022-02-06 14:35:05', '2022-02-06 14:35:05', 0),
+(1041, 'DESKTOP-2KPJSHU', 'IX311644154579XA9742748019054TR', '2022-02-06 14:36:19', '2022-02-06 14:36:19', 0),
+(1042, 'DESKTOP-2KPJSHU', 'DS361644155367YN783288310734BC', '2022-02-06 14:49:27', '2022-02-06 14:49:27', 0),
+(1043, 'DESKTOP-2KPJSHU', 'PQ981644155431TE7673986994395UZ', '2022-02-06 14:50:31', '2022-02-06 14:50:31', 0),
+(1044, 'DESKTOP-2KPJSHU', 'UF831644155491BQ2729594798838HC', '2022-02-06 14:51:31', '2022-02-06 14:51:31', 0),
+(1045, 'DESKTOP-2KPJSHU', 'KS561644155600GV42118379203200GI', '2022-02-06 14:53:20', '2022-02-06 14:53:20', 0),
+(1046, 'DESKTOP-2KPJSHU', 'OB621644156285LX91136464971655JP', '2022-02-06 15:04:45', '2022-02-06 15:04:45', 0),
+(1047, 'DESKTOP-2KPJSHU', 'EO951644157901RT5098649474060DT', '2022-02-06 15:31:41', '2022-02-06 15:31:41', 0),
+(1048, 'DESKTOP-2KPJSHU', 'JH1001644167559MY8357545864565KN', '2022-02-06 18:12:39', '2022-02-06 18:12:39', 0),
+(1049, 'DESKTOP-2KPJSHU', 'TA671644167584PL58111803395712AY', '2022-02-06 18:13:04', '2022-02-06 18:13:04', 0),
+(1050, 'DESKTOP-2KPJSHU', 'LL791644167701PL20129889248379DC', '2022-02-06 18:15:01', '2022-02-06 18:15:01', 0),
+(1051, 'DESKTOP-2KPJSHU', 'PX31644167757JJ22156195936915FD', '2022-02-06 18:15:57', '2022-02-06 18:15:57', 0),
+(1052, 'DESKTOP-2KPJSHU', 'RO201644169278MC5011509184946UN', '2022-02-06 18:41:18', '2022-02-06 18:41:18', 0),
+(1053, 'DESKTOP-2KPJSHU', 'JX991644169348TE1624662540220OM', '2022-02-06 18:42:28', '2022-02-06 18:42:28', 0),
+(1054, 'DESKTOP-2KPJSHU', 'JT221644169432RZ81149619418312UL', '2022-02-06 18:43:51', '2022-02-06 18:43:51', 0),
+(1055, 'DESKTOP-2KPJSHU', 'LV671644169485WY7750969254035UZ', '2022-02-06 18:44:45', '2022-02-06 18:44:45', 0),
+(1056, 'DESKTOP-2KPJSHU', 'JJ31644169556VX65129889394924QG', '2022-02-06 18:45:56', '2022-02-06 18:45:56', 0),
+(1057, 'DESKTOP-2KPJSHU', 'SO881644169684IG68157840289664PI', '2022-02-06 18:48:04', '2022-02-06 18:48:04', 0),
+(1058, 'DESKTOP-2KPJSHU', 'IE351644169845GR3649325095350CV', '2022-02-06 18:50:45', '2022-02-06 18:50:45', 0),
+(1059, 'DESKTOP-2KPJSHU', 'XI31644169857MF3670699303851WQ', '2022-02-06 18:50:57', '2022-02-06 18:50:57', 0),
+(1060, 'DESKTOP-2KPJSHU', 'TE71644169969KB34103582708047MM', '2022-02-06 18:52:49', '2022-02-06 18:52:49', 0),
+(1061, 'DESKTOP-2KPJSHU', 'VN581644170146AC438220850730AW', '2022-02-06 18:55:46', '2022-02-06 18:55:46', 0),
+(1062, 'DESKTOP-2KPJSHU', 'TO731644170608WN44123312795600YQ', '2022-02-06 19:03:27', '2022-02-06 19:03:27', 0),
+(1063, 'DESKTOP-2KPJSHU', 'PT651644170800UI911644170800EJ', '2022-02-06 19:06:40', '2022-02-06 19:06:40', 0),
+(1064, 'DESKTOP-2KPJSHU', 'VT981644170910TM1167411007310XO', '2022-02-06 19:08:30', '2022-02-06 19:08:30', 0),
+(1065, 'DESKTOP-2KPJSHU', 'SL211644171024RU30146331221136NA', '2022-02-06 19:10:24', '2022-02-06 19:10:24', 0),
+(1066, 'DESKTOP-2KPJSHU', 'HF201644173035AR30143043054045AC', '2022-02-06 19:43:55', '2022-02-06 19:43:55', 0),
+(1067, 'DESKTOP-2KPJSHU', 'KL721644173079QV7516441730790XE', '2022-02-06 19:44:39', '2022-02-06 19:44:39', 0),
+(1068, 'DESKTOP-2KPJSHU', 'CZ211644173122NP8331239289318SA', '2022-02-06 19:45:22', '2022-02-06 19:45:22', 0),
+(1069, 'DESKTOP-2KPJSHU', 'VP701644173297NG1629595119346WH', '2022-02-06 19:48:17', '2022-02-06 19:48:17', 0),
+(1070, 'DESKTOP-2KPJSHU', 'XN921644173340HE89133178040540WW', '2022-02-06 19:49:00', '2022-02-06 19:49:00', 0),
+(1071, 'DESKTOP-2KPJSHU', 'YL161644173380ET46162773164620OZ', '2022-02-06 19:49:40', '2022-02-06 19:49:40', 0),
+(1072, 'DESKTOP-2KPJSHU', 'DT971644181599WB5136171995178QY', '2022-02-06 22:06:39', '2022-02-06 22:06:39', 0),
+(1073, 'DESKTOP-2KPJSHU', 'YX391644182794AA2883853322494IA', '2022-02-06 22:26:34', '2022-02-06 22:26:34', 0),
+(1074, 'DESKTOP-2KPJSHU', 'ID651644183040XK65154553205760UG', '2022-02-06 22:30:40', '2022-02-06 22:30:40', 0),
+(1075, 'DESKTOP-2KPJSHU', 'XS731644183211GS6787141710183XG', '2022-02-06 22:33:31', '2022-02-06 22:33:31', 0),
+(1076, 'DESKTOP-2KPJSHU', 'DK401644183291VI3842748765566WN', '2022-02-06 22:34:51', '2022-02-06 22:34:51', 0),
+(1077, 'DESKTOP-2KPJSHU', 'QC91644183387LT55121669570638MV', '2022-02-06 22:36:27', '2022-02-06 22:36:27', 0),
+(1078, 'DESKTOP-2KPJSHU', 'MK951644183475HO78113448659775RQ', '2022-02-06 22:37:55', '2022-02-06 22:37:55', 0),
+(1079, 'DESKTOP-2KPJSHU', 'HJ381644183505AG6069055707210HY', '2022-02-06 22:38:25', '2022-02-06 22:38:25', 0),
+(1080, 'DESKTOP-2KPJSHU', 'FI711644183511IT2514797651599ES', '2022-02-06 22:38:31', '2022-02-06 22:38:31', 0),
+(1081, 'DESKTOP-2KPJSHU', 'DQ801644183552OS6103583563776TG', '2022-02-06 22:39:12', '2022-02-06 22:39:12', 0);
 
 -- --------------------------------------------------------
 
@@ -1077,20 +1190,45 @@ INSERT INTO `komputery` (`id`, `nazwa`, `hostid`, `czaslogowania`, `czaszmiana`,
 CREATE TABLE `moduly` (
   `id` int(11) NOT NULL,
   `nazwa` text COLLATE utf8_polish_ci NOT NULL,
-  `symbol` text COLLATE utf8_polish_ci NOT NULL,
+  `symbol` varchar(25) COLLATE utf8_polish_ci NOT NULL,
   `producent` text COLLATE utf8_polish_ci NOT NULL,
   `uprawnienia` text COLLATE utf8_polish_ci NOT NULL,
-  `opis` text COLLATE utf8_polish_ci NOT NULL,
-  `czas` int(11) NOT NULL
+  `opis` text COLLATE utf8_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
 -- Zrzut danych tabeli `moduly`
 --
 
-INSERT INTO `moduly` (`id`, `nazwa`, `symbol`, `producent`, `uprawnienia`, `opis`, `czas`) VALUES
-(1, 'MODUŁ GRACE', 'M-GRACE', 'USA', '10000000000', 'Serwerownia zespołu AI', 500),
-(2, 'MODUŁ MOSTEK DOWODZENIA', 'M-MD', 'USA', '11000000000', 'Mostek kapitański - dowodzenia', 500);
+INSERT INTO `moduly` (`id`, `nazwa`, `symbol`, `producent`, `uprawnienia`, `opis`) VALUES
+(1, 'Serwerownia GRACE', 'M-GRACE', 'USA', '10000000000', 'Serwerownia zespołu AI'),
+(2, 'Mostek Dowodzenia', 'M-MD', 'USA', '11000000000', 'Mostek kapitański - dowodzenia');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `notatki_ng`
+--
+
+CREATE TABLE `notatki_ng` (
+  `id` int(11) NOT NULL,
+  `tytul` text COLLATE utf8_polish_ci NOT NULL,
+  `wlasciciel` int(11) NOT NULL,
+  `czasU` text COLLATE utf8_polish_ci NOT NULL,
+  `czasA` text COLLATE utf8_polish_ci NOT NULL,
+  `stan` tinyint(1) NOT NULL,
+  `udostepnienie` text COLLATE utf8_polish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `notatki_ng`
+--
+
+INSERT INTO `notatki_ng` (`id`, `tytul`, `wlasciciel`, `czasU`, `czasA`, `stan`, `udostepnienie`) VALUES
+(1, 'testowa', 2, '2022-02-06 09:00', '2022-02-06 09:00', 0, '00000000000'),
+(2, 'testowa 3', 3, '2022-02-06 09:00', '2022-02-06 09:00', 0, '00000000000'),
+(3, 'testowa 4', 4, '2022-02-06 09:00', '2022-02-06 09:00', 0, '01000000000'),
+(4, 'testowa 5', 2, '2022-02-06 09:00', '2022-02-06 09:00', 2, '00000000000');
 
 -- --------------------------------------------------------
 
@@ -1133,11 +1271,11 @@ CREATE TABLE `osoby` (
 INSERT INTO `osoby` (`id`, `czaszmiana`, `kolejnosc`, `imie`, `nazwisko`, `funkcja`, `specjalnosc`, `narodowosc`, `userlogin`, `rodzaj`, `user`, `hasloorg`, `autoryzacja`, `zalogowanyorg`, `blokadaorg`, `hannahorg`, `uzytkownik`, `czaslogowania`, `czaswylogowania`, `odpowiedz`, `reakcja`, `haslonew`, `zalogowanynew`, `blokadanew`, `hannahnew`) VALUES
 (0, '', '0', '', '', '', '', '', '', '', 0, '', 0, 0, 0, 0, '', '', '', '', 0, '', 0, 0, 0),
 (1, '', '0', 'Dedal', '', 'statek', '', '', '', 'M', 2, '!@#', 0, 1, 0, 1, '', '2022-01-30 13:39:18', '', 'Dedal jest tylko jeden', 0, '!@#', 1, 0, 1),
-(2, '2022-02-05 11:25:14', '1', 'John', 'Spow', 'Kapitan', 'nawigator, pilot', 'USA', 'john', 'M', 1, '123', 2, 0, 0, 0, 'DESKTOP-2KPJSHU', '2022-02-04 19:08:02', '2022-02-05 11:25:14', 'Witaj John Spow', 200, '123', 0, 0, 0),
+(2, '2022-02-05 22:17:54', '1', 'John', 'Spow', 'Kapitan', 'nawigator, pilot', 'USA', 'john', 'M', 1, '123', 1, 0, 0, 0, 'DESKTOP-2KPJSHU', '2022-02-05 11:34:36', '2022-02-05 22:17:54', 'Witaj John Spow', 200, '123', 1, 0, 0),
 (3, '', '2', 'Wang', 'Yaping', 'I oficer', 'astrofizyk, dyplomata', 'Chiny', 'wang', 'K', 1, '123', 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '', '', 'Witaj Louise Banks', 400, '123', 0, 0, 0),
 (4, '2022-01-30 23:07:50', '3', 'William', 'Weir', 'II oficer', 'matematyk, inżynier napędu', 'Unia Europejska', 'william', 'M', 1, '123', 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '2022-01-30 23:07:50', '', 'Witaj Dave Bowman', 400, '123', 0, 0, 0),
 (5, '', '4', 'Fatima', 'Punjabi', 'III oficer', 'elektronik, nawigator', 'Indie', 'fatima', 'K', 1, '123', 0, 0, 0, 0, '', '', '', 'Witaj Dwayne Hicks', 400, '123', 0, 0, 0),
-(6, '2022-02-05 11:26:00', '5', 'Borys', 'Gulkov', 'IV oficer', 'pilot, nawigator', 'Rosja', 'borys', 'M', 1, '123', 1, 0, 0, 0, 'DESKTOP-2KPJSHU', '2022-02-05 11:26:00', '', 'Witaj Anna Lee Dwell', 400, '123', 1, 0, 0),
+(6, '2022-02-05 11:34:18', '5', 'Borys', 'Gulkov', 'IV oficer', 'pilot, nawigator', 'Rosja', 'borys', 'M', 1, '123', 1, 0, 0, 0, 'DESKTOP-2KPJSHU', '2022-02-05 11:26:00', '2022-02-05 11:34:18', 'Witaj Anna Lee Dwell', 400, '123', 0, 0, 0),
 (7, '2022-01-30 23:03:13', '6', 'Fiona', 'Zaharova', 'Lekarz', 'psychiatra, programista', 'Chiny', 'fiona', 'K', 1, '123', 0, 0, 0, 0, 'Komputer-Tomka', '2022-01-30 23:03:13', '', 'Witaj William Weir', 400, '123', 0, 0, 0),
 (8, '', '7', 'Liu', 'Yang', 'Naukowiec', 'lekarz, biolog', 'Chiny', 'liu', 'K', 1, '123', 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '', '', 'Witaj Elizabeth Halperin', 400, '123', 0, 0, 0),
 (9, '', '8', 'Hannah', 'Stevens', 'Informatyk', 'programista, łącznościowiec', 'Unia Europejska', 'hannah', 'K', 1, '123', 0, 0, 0, 0, 'Komputer-Tomka', '', '', 'Witaj Hannah Stevens', 0, '!@#', 0, 0, 0),
@@ -1156,7 +1294,9 @@ CREATE TABLE `polecenia` (
   `nazwa` text COLLATE utf8_polish_ci NOT NULL,
   `zalogowany` tinyint(1) NOT NULL,
   `wylogowany` tinyint(1) NOT NULL,
-  `autoryzacja` int(11) NOT NULL,
+  `autoryzacja` tinyint(1) NOT NULL,
+  `polecenie` tinyint(1) NOT NULL,
+  `uprawnienia` text COLLATE utf8_polish_ci NOT NULL,
   `czas` text COLLATE utf8_polish_ci NOT NULL,
   `dzialania` text COLLATE utf8_polish_ci NOT NULL,
   `komunikat` text COLLATE utf8_polish_ci NOT NULL
@@ -1166,12 +1306,19 @@ CREATE TABLE `polecenia` (
 -- Zrzut danych tabeli `polecenia`
 --
 
-INSERT INTO `polecenia` (`id`, `nazwa`, `zalogowany`, `wylogowany`, `autoryzacja`, `czas`, `dzialania`, `komunikat`) VALUES
-(1, 'pomoc', 1, 1, 0, '500', 'pomoc1', 'Dostepne polecenia w zależności od logowania'),
-(2, 'zaloguj', 0, 1, 0, '500', 'zaloguj1', 'Logowanie do terminala'),
-(3, 'wyloguj', 1, 0, 0, '500', 'wyloguj1', 'Wylogowanie z terminala'),
-(4, 'moduły', 1, 0, 0, '1000', 'moduly1', 'Lista modułów Dedala'),
-(5, 'polecenia', 1, 1, 2, '250', 'polecenia1', 'Wczytuje polecenia');
+INSERT INTO `polecenia` (`id`, `nazwa`, `zalogowany`, `wylogowany`, `autoryzacja`, `polecenie`, `uprawnienia`, `czas`, `dzialania`, `komunikat`) VALUES
+(1, 'pomoc', 1, 1, 0, 1, '11111111111', '500', 'pomoc_1', 'Dostepne polecenia w zależności od logowania i autoryzacji'),
+(2, 'zaloguj', 0, 1, 0, 2, '11111111111', '500', 'zaloguj_1', 'Logowanie do terminala'),
+(3, 'wyloguj', 1, 0, 0, 3, '11111111111', '500', 'wyloguj_1', 'Wylogowanie z terminala'),
+(4, 'moduły', 1, 0, 0, 4, '11111111111', '1000', 'moduly_1', 'Lista modułów Dedala'),
+(5, 'login', 0, 1, 0, 2, '', '250', 'zaloguj_0', 'Logowanie do terminala'),
+(6, 'pomoc cała', 1, 1, 1, 6, '11111111111', '500', 'pomoc_cala_1', 'Wszystkie polecenia w zależności od logowania'),
+(7, 'pomoc cala', 1, 1, 1, 6, '', '500', 'pomoc_cala_0', 'Wszystkie polecenia w zależności od logowania'),
+(8, 'pomoc all', 1, 1, 1, 6, '', '500', 'pomoc_cala_0', 'Wszystkie polecenia w zależności od logowania'),
+(9, 'help', 1, 1, 0, 1, '', '500', 'pomoc_0', 'Dostepne polecenia w zależności od logowania i autoryzacji'),
+(10, 'moduly', 1, 0, 0, 4, '', '1000', 'moduly_0', 'Lista modułów Dedala'),
+(11, 'notatki', 1, 0, 0, 11, '11111111111', '500', 'notatki_1', 'Lista tytułów notatek'),
+(12, '?', 1, 1, 0, 1, '', '500', 'pomoc_0', 'Dostepne polecenia w zależności od logowania i autoryzacji');
 
 -- --------------------------------------------------------
 
@@ -1218,6 +1365,13 @@ ALTER TABLE `komputery`
 -- Indexes for table `moduly`
 --
 ALTER TABLE `moduly`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `symbol` (`symbol`);
+
+--
+-- Indexes for table `notatki_ng`
+--
+ALTER TABLE `notatki_ng`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1247,17 +1401,22 @@ ALTER TABLE `ustawienia`
 -- AUTO_INCREMENT dla tabeli `dzialania`
 --
 ALTER TABLE `dzialania`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT dla tabeli `komputery`
 --
 ALTER TABLE `komputery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=976;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1082;
 --
 -- AUTO_INCREMENT dla tabeli `moduly`
 --
 ALTER TABLE `moduly`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT dla tabeli `notatki_ng`
+--
+ALTER TABLE `notatki_ng`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT dla tabeli `osoby`
 --
@@ -1267,7 +1426,7 @@ ALTER TABLE `osoby`
 -- AUTO_INCREMENT dla tabeli `polecenia`
 --
 ALTER TABLE `polecenia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT dla tabeli `ustawienia`
 --

@@ -11,32 +11,35 @@ try
     else
     {
         $body = json_decode(file_get_contents("php://input"));
-        //$body = (object) array ('stan' => 2);
+        //$body = (object) array ('stan' => 3);
         if (isset($body))
         {
         switch (strtoupper($body->stan)) 
                     {
                         case '0':
-                            $wiersz = 'wylogowany = 1 ';
+                            $wiersz = 'polecenia.wylogowany = 1 ';
                             break;   
                         default:
-                            $wiersz = 'zalogowany = 1';
+                            $wiersz = 'polecenia.zalogowany = 1';
                             break;
                     }
          //get
                 $sql = 
                 "SELECT
-                    nazwa,
-                    czas,
-                    dzialania,
-                    autoryzacja,
-                    polecenie,
-                    komunikat
+                    polecenia.id,
+                    polecenia.nazwa,
+                    polecenia.czas,
+                    polecenia.dzialania,
+                    polecenia.autoryzacja,
+                    polecenia.polecenie,
+                    polecenia.komunikat
                     FROM
-                    polecenia
+                    polecenia,
+                    polecenia poleceniaorg
                     where
                     ".$wiersz."
-                    AND substring(uprawnienia,".$body->stan.",1) = '1' 
+                    AND poleceniaorg.id = polecenia.polecenie
+                    AND substring(poleceniaorg.uprawnienia,".$body->stan.",1) = '1' 
                     ORDER BY
                     nazwa
                 ";
@@ -46,7 +49,7 @@ try
                 $polecenia = array ();    
                 while ($row = $wynik->fetch_assoc())
                 {
-                $polecenie = array ("nazwa"=>$row['nazwa'], "czas"=>$row['czas'], "dzialanie"=>$row['dzialania'], "autoryzacja"=>($row['autoryzacja']==1), "polecenie"=>($row['polecenie']==1), "komunikat"=>$row['komunikat'], "nastepnyTrue"=>"brak", "nastepnyFalse"=>"brak");
+                $polecenie = array ("nazwa"=>$row['nazwa'], "czas"=>$row['czas'], "dzialanie"=>$row['dzialania'], "autoryzacja"=>($row['autoryzacja']==1), "polecenie"=>($row['polecenie']==$row['id']), "komunikat"=>$row['komunikat'], "nastepnyTrue"=>"brak", "nastepnyFalse"=>"brak");
                 array_push($polecenia,$polecenie);
                 }
                 $result = array ("wynik"=>true, "stan"=>"ok", "polecenia"=>$polecenia);

@@ -21,8 +21,7 @@ try
                     nazwa,
                     symbol,
                     producent,
-                    opis,
-                    czas
+                    opis
                     FROM
                     moduly
                     where
@@ -36,7 +35,7 @@ try
                 $moduly = array ();    
                 while ($row = $wynik->fetch_assoc())
                 {
-                $modul = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "producent"=>$row['producent'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "czas"=>$row['czas']);
+                $modul = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "producent"=>$row['producent'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis']);
                 array_push($moduly,$modul);
                 }
                 $result = array ("wynik"=>true, "stan"=>"ok", "moduly"=>$moduly);
