@@ -31,33 +31,33 @@ try
                 ";
                 $wynik = $conn->query($sql); 
                 if ($wynik->num_rows > 0) 
-                {
+                {    
                 $moduly = array ();    
                 while ($row = $wynik->fetch_assoc())
                 {
                 $modul = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "producent"=>$row['producent'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis']);
                 array_push($moduly,$modul);
                 }
-                $result = array ("wynik"=>true, "stan"=>"ok", "moduly"=>$moduly);
+                $result = array ("wynik"=>true, "stan"=>true, "moduly"=>$moduly, "error"=>"wczytano: ".$wynik->num_rows." pozycje");
                 $conn->close();   
                 }
                 else
                 {
-                    $result = array ("wynik"=>false, "stan"=>"0 wyników");      
+                    $result = array ("wynik"=>false, "stan"=>false, "error"=>"brak dostępnych modułów");      
                 }
             
         }
         else
         {
-            $result = array ("wynik"=>false, "stan"=>"error", "error"=>"brak danych");      
+            $result = array ("wynik"=>false, "stan"=>false, "error"=>"brak danych");      
         }
     }    
     
 }
 catch(Exception $e)    
 {
-    $result = array("wynik"=>false, "stan"=>"error", "error"=>$e);
-    echo ($e);
+    $result = array("wynik"=>false, "stan"=>false, "error"=>"problem z odczytem");
+    //echo ($e);
 }
 echo json_encode($result);     
 ?>
