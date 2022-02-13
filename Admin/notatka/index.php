@@ -10,11 +10,12 @@ try
     { throw new Exception( $conn->connect_error); } 
     else
     {
-        $body = (object) array ('stan' => 2,'notatka' => 1);
-        //$body = json_decode(file_get_contents("php://input"));
+        //$body = (object) array ('kierunek'=>'get', 'stan' => 2, 'notatka' => '1644743790H8C52631801280');
+        $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {
-         //get
+        if ($body->kierunek == 'get')    
+            {//get
                 $sql = 
                 "SELECT
                     notatki_tr.id,
@@ -22,6 +23,7 @@ try
                     notatki_tr.czas,
                     notatki_tr.tresc,
                     notatki_ng.tytul,
+                    notatki_ng.identyfikator,
                     notatki_ng.wlasciciel,
                     CASE notatki_ng.wlasciciel WHEN ".$body->stan." THEN 'własna'
                                                ELSE concat(osoby.imie,' ',osoby.nazwisko)
@@ -35,14 +37,14 @@ try
                     notatki_tr,
                     notatki_ng,
                     osoby
-                    where
-                    (
-                    notatki_ng.wlasciciel = ".$body->stan."
-                    OR substring(notatki_ng.udostepnienie,".$body->stan.",1) = '1' 
-                    )
+                    WHERE
+                    notatki_ng.identyfikator = '".$body->notatka."'
+                    AND notatki_tr.notatki_ng = notatki_ng.id
+                    AND (
+                        notatki_ng.wlasciciel = ".$body->stan."
+                        OR substring(notatki_ng.udostepnienie,".$body->stan.",1) = '1' 
+                        )
                     AND osoby.id = notatki_ng.wlasciciel
-                    AND notatki_tr.id = ".$body->notatka."
-                    AND notatki_ng.id = notatki_tr.id 
                     ORDER BY
                     notatki_tr.wersja desc
                 ";
@@ -52,7 +54,7 @@ try
                 $notatki = array ();    
                 while ($row = $wynik->fetch_assoc())
                 {
-                $notatka = array ("id"=>$row['id'], "tytul"=>$row['tytul'], "wlasciciel"=>($row['wlasciciel']==$body->stan), "wlascicielText"=>$row['wlascicielText'], "stan"=>($row['stan']==0), "stanText"=>$row['stanText'], "czas"=>$row['czas'], "tresc"=>$row['tresc']);
+                $notatka = array ("id"=>$row['id'],"identyfikator"=>$row['identyfikator'], "wersja"=>$row['wersja'], "tytul"=>$row['tytul'], "edycja"=>($row['wlasciciel']==$body->stan), "wlascicielText"=>$row['wlascicielText'], "stan"=>($row['stan']==0), "stanText"=>$row['stanText'], "czas"=>$row['czas'], "tresc"=>$row['tresc']);
                 array_push($notatki,$notatka);
                 }
                 $result = array ("wynik"=>true, "stan"=>true, "notatki"=>$notatki, "error"=>"wczytano: ".$wynik->num_rows." pozycje");
@@ -62,7 +64,12 @@ try
                 {
                     $result = array ("wynik"=>true, "stan"=>false, "error"=>"brak dostepnych notatek");      
                 }
-            
+            }  
+            else
+            {//set
+
+
+            }  
         }
         else
         {

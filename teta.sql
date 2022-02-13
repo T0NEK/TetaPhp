@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 11 Lut 2022, 14:27
--- Wersja serwera: 10.1.28-MariaDB
--- Wersja PHP: 7.1.10
+-- Czas generowania: 13 Lut 2022, 22:40
+-- Wersja serwera: 10.1.21-MariaDB
+-- Wersja PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -34,7 +32,9 @@ CREATE TABLE `dzialania` (
   `nazwa` text COLLATE utf8_polish_ci NOT NULL,
   `czas` text COLLATE utf8_polish_ci NOT NULL,
   `dzialanie` text COLLATE utf8_polish_ci NOT NULL,
+  `prefix` text COLLATE utf8_polish_ci NOT NULL,
   `komunikat` text COLLATE utf8_polish_ci NOT NULL,
+  `sufix` text COLLATE utf8_polish_ci NOT NULL,
   `nastepnyTrue` text COLLATE utf8_polish_ci NOT NULL,
   `nastepnyFalse` text COLLATE utf8_polish_ci NOT NULL,
   `opis` text COLLATE utf8_polish_ci NOT NULL
@@ -44,42 +44,75 @@ CREATE TABLE `dzialania` (
 -- Zrzut danych tabeli `dzialania`
 --
 
-INSERT INTO `dzialania` (`id`, `polecenia`, `nazwa`, `czas`, `dzialanie`, `komunikat`, `nastepnyTrue`, `nastepnyFalse`, `opis`) VALUES
-(1, 'pomoc', 'pomoc_1', '500', 'komunikat', 'dostępne polecenia:', 'pomoc_2', 'pomoc_2', ''),
-(2, 'pomoc', 'pomoc_2', '250', 'linie', 'polecenia', 'pomoc_3', 'pomoc_3', 'wyświetlenie listy poleceń'),
-(3, 'pomoc', 'pomoc_3', '500', 'komunikat', 'koniec dostępnych poleceń', 'end', 'end', ''),
-(4, 'zaloguj', 'zaloguj_1', '500', 'komunikat', 'procedura: logowanie do terminala', 'zaloguj_2', 'zaloguj_2', ''),
-(5, 'zaloguj', 'zaloguj_2', '500', 'dane', 'podaj login ?', 'zaloguj_3', 'zaloguj_3', ''),
-(6, 'zaloguj', 'zaloguj_3', '500', 'zapiszdane', 'login', 'zaloguj_4', 'zaloguj_4', ''),
-(7, 'zaloguj', 'zaloguj_4', '500', 'password', 'on', 'zaloguj_5', 'zaloguj_5', 'załączenie ***'),
-(8, 'zaloguj', 'zaloguj_5', '500', 'dane', 'podaj hasło ?', 'zaloguj_6', 'zaloguj_6', ''),
-(9, 'zaloguj', 'zaloguj_6', '500', 'dodajdane', 'password', 'zaloguj_7', 'zaloguj_7', ''),
-(10, 'zaloguj', 'zaloguj_7', '500', 'password', 'off', 'zaloguj_8', 'zaloguj_8', 'wyłączenie ***'),
-(11, 'zaloguj', 'zaloguj_8', '500', 'komunikat', 'loguję', 'zaloguj_9', 'zaloguj_9', ''),
-(12, 'zaloguj', 'zaloguj_9', '500', 'logowanie', '', 'end', 'end', ''),
-(13, 'wyloguj', 'wyloguj_1', '500', 'komunikat', 'procedura: wylogowanie z terminala', 'wyloguj_2', 'wyloguj_2', ''),
-(14, 'wyloguj', 'wyloguj_2', '500', 'wylogowanie', '', 'end', 'end', ''),
-(15, 'moduły', 'moduly_1', '500', 'komunikat', 'wczytuję dostępne moduły', 'moduly_2', 'moduly_2', ''),
-(16, 'moduły', 'moduly_2', '250', 'wczytaj', 'moduly', 'moduly_4', 'moduly_3', 'wczytuje moduły'),
-(17, 'moduły', 'moduly_4', '500', 'linie', 'moduly', 'moduly_5', 'moduly_5', 'wyswietla listę modułów'),
-(26, 'moduły', 'moduly_3', '250', 'komunikat', 'problem z dostępem do modułów', 'moduly_5', 'moduly_5', ''),
-(28, 'pomoc cała', 'pomoc_cala_1', '500', 'komunikat', 'wszystkie dostępne polecenia:', 'pomoc_cala_2', 'pomoc_cala_2', ''),
-(29, 'pomoc cała', 'pomoc_cala_2', '250', 'linie', 'polecenia_all', 'pomoc_cala_3', 'pomoc_cala_3', 'wyświetlenie listy poleceń'),
-(30, 'pomoc cała', 'pomoc_cala_3', '500', 'komunikat', 'koniec dostępnych poleceń', 'end', 'end', ''),
-(31, 'pomoc', 'pomoc_0', '1000', 'komunikat', 'wykonuję: [ pomoc ]', 'pomoc_1', 'pomoc_1', 'alternatywa'),
-(32, 'moduły', 'moduly_0', '500', 'komunikat', 'wykonuję: [ moduły ]', 'moduly_1', 'moduly_1', 'alternatywa'),
-(34, 'pomoc cała', 'pomoc_cala_0', '1000', 'komunikat', 'wykonuję: [ pomoc cała ]', 'pomoc_cala_1', 'pomoc_cala_1', 'alternatywa'),
-(35, 'zaloguj', 'zaloguj_0', '1000', 'komunikat', 'wykonuję: [ zaloguj ]', 'zaloguj_1', 'zaloguj_1', 'alternatywa'),
-(36, 'wyloguj', 'wyloguj_0', '1000', 'komunikat', 'wykonuję: [ wyloguj ]', 'wyloguj_1', 'wyloguj_1', 'alternatywa'),
-(37, 'notatki', 'notatki_1', '500', 'komunikat', 'wczytuję dostępne notatki', 'notatki_2', 'notatki_2', ''),
-(38, 'notatki', 'notatki_2', '500', 'wczytaj', 'notatki', 'notatki_4', 'notatki_3', 'wczytuje notatki'),
-(39, 'notatki', 'notatki_3', '500', 'komunikat', 'problem z dostępem do notatek', 'notatki_5', 'notatki_5', ''),
-(40, 'notatki', 'notatki_4', '500', 'linie', 'notatki', 'notatki_5', 'notatki_5', 'wyświetla listę tytułów notatek'),
-(42, 'notatki', 'notatki_0', '500', 'komunikat', 'wykonuję: [ notatki ]', 'notatki_1', 'notatki_1', 'alternatywa'),
-(43, 'notatka', 'notatka_0', '500', 'komunikat', 'wykonuję: [ notatka wczytaj ]', 'notatki_1', 'notatki_1', 'alternatywa'),
-(44, 'notatka', 'notatka_1', '500', 'komunikat', 'wczytuję notatkę', 'notatka_2', 'notatka_2', ''),
-(45, 'notatki', 'notatki_5', '500', 'informacja', '', 'end', 'end', 'informacja z error'),
-(46, 'moduly', 'moduly_5', '500', 'informacja', '', 'end', 'end', 'informacja z error');
+INSERT INTO `dzialania` (`id`, `polecenia`, `nazwa`, `czas`, `dzialanie`, `prefix`, `komunikat`, `sufix`, `nastepnyTrue`, `nastepnyFalse`, `opis`) VALUES
+(1, 'pomoc', 'pomoc_1', '500', 'komunikat', '', 'dostępne polecenia:', '', 'pomoc_2', 'pomoc_2', ''),
+(2, 'pomoc', 'pomoc_2', '250', 'linie', '', 'polecenia', '', 'pomoc_3', 'pomoc_3', 'wyświetlenie listy poleceń'),
+(3, 'pomoc', 'pomoc_3', '500', 'komunikat', '', 'koniec dostępnych poleceń', '', 'end', 'end', ''),
+(4, 'zaloguj', 'zaloguj_1', '500', 'komunikat', '', 'procedura: logowanie do terminala', '', 'zaloguj_2', 'zaloguj_2', ''),
+(5, 'zaloguj', 'zaloguj_2', '500', 'dane', '', 'podaj login ?', '', 'zaloguj_3', 'zaloguj_3', ''),
+(6, 'zaloguj', 'zaloguj_3', '500', 'zapiszdane', '', 'login', '', 'zaloguj_4', 'zaloguj_4', ''),
+(7, 'zaloguj', 'zaloguj_4', '500', 'password', '', 'on', '', 'zaloguj_5', 'zaloguj_5', 'załączenie ***'),
+(8, 'zaloguj', 'zaloguj_5', '500', 'dane', '', 'podaj hasło ?', '', 'zaloguj_6', 'zaloguj_6', ''),
+(9, 'zaloguj', 'zaloguj_6', '500', 'dodajdane', '', 'hasło', '', 'zaloguj_7', 'zaloguj_7', ''),
+(10, 'zaloguj', 'zaloguj_7', '500', 'password', '', 'off', '', 'zaloguj_8', 'zaloguj_8', 'wyłączenie ***'),
+(11, 'zaloguj', 'zaloguj_8', '500', 'komunikat', '', 'loguję', '', 'zaloguj_9', 'zaloguj_9', ''),
+(12, 'zaloguj', 'zaloguj_9', '500', 'logowanie', '', '', '', 'end', 'end', ''),
+(13, 'wyloguj', 'wyloguj_1', '500', 'komunikat', '', 'procedura: wylogowanie z terminala', '', 'wyloguj_2', 'wyloguj_2', ''),
+(14, 'wyloguj', 'wyloguj_2', '500', 'wylogowanie', '', '', '', 'end', 'end', ''),
+(15, 'moduły', 'moduly_1', '500', 'komunikat', '', 'wczytuję dostępne moduły', '', 'moduly_2', 'moduly_2', ''),
+(16, 'moduły', 'moduly_2', '250', 'getset', '', 'wczytaj', 'moduly', 'moduly_4', 'moduly_3', 'wczytuje moduły'),
+(17, 'moduły', 'moduly_4', '500', 'linie', '', 'moduly', '', 'moduly_5', 'moduly_5', 'wyswietla listę modułów'),
+(28, 'pomoc cała', 'pomoc_cala_1', '500', 'komunikat', '', 'wszystkie dostępne polecenia:', '', 'pomoc_cala_2', 'pomoc_cala_2', ''),
+(29, 'pomoc cała', 'pomoc_cala_2', '250', 'linie', '', 'polecenia_all', '', 'pomoc_cala_3', 'pomoc_cala_3', 'wyświetlenie listy poleceń'),
+(30, 'pomoc cała', 'pomoc_cala_3', '500', 'komunikat', '', 'koniec dostępnych poleceń', '', 'end', 'end', ''),
+(31, 'pomoc', 'pomoc_0', '1000', 'komunikat', '', 'wykonuję: [ pomoc ]', '', 'pomoc_1', 'pomoc_1', 'alternatywa'),
+(32, 'moduły', 'moduly_0', '500', 'komunikat', '', 'wykonuję: [ moduły ]', '', 'moduly_1', 'moduly_1', 'alternatywa'),
+(34, 'pomoc cała', 'pomoc_cala_0', '1000', 'komunikat', '', 'wykonuję: [ pomoc cała ]', '', 'pomoc_cala_1', 'pomoc_cala_1', 'alternatywa'),
+(35, 'zaloguj', 'zaloguj_0', '1000', 'komunikat', '', 'wykonuję: [ zaloguj ]', '', 'zaloguj_1', 'zaloguj_1', 'alternatywa'),
+(36, 'wyloguj', 'wyloguj_0', '1000', 'komunikat', '', 'wykonuję: [ wyloguj ]', '', 'wyloguj_1', 'wyloguj_1', 'alternatywa'),
+(37, 'notatki', 'notatki_1', '500', 'komunikat', '', 'wczytuję dostępne notatki', '', 'notatki_2', 'notatki_2', ''),
+(38, 'notatki', 'notatki_2', '500', 'getset', '', 'wczytaj', 'notatki', 'notatki_4', 'notatki_3', 'wczytuje notatki'),
+(40, 'notatki', 'notatki_4', '500', 'linie', '', 'notatki', '', 'notatki_5', 'notatki_5', 'wyświetla listę tytułów notatek'),
+(42, 'notatki', 'notatki_0', '500', 'komunikat', '', 'wykonuję: [ notatki ]', '', 'notatki_1', 'notatki_1', 'alternatywa'),
+(43, 'notatka wczytaj', 'notatka_0', '500', 'komunikat', '', 'wykonuję: [ notatka wczytaj ]', '', 'notatka_1', 'notatka_1', 'alternatywa'),
+(44, 'notatka wczytaj', 'notatka_1', '500', 'komunikat', '', 'wczytuję notatkę', '', 'notatka_8', 'notatka_8', ''),
+(45, 'notatki', 'notatki_3', '500', 'informacja', 'problem z dostępem do notatek: ', 'tekst', '', 'end', 'end', 'informacja z error'),
+(46, 'moduly', 'moduly_3', '500', 'informacja', 'problem z dostępem do modułów: ', 'tekst', '', 'end', 'end', 'informacja z error'),
+(47, 'notatka wczytaj', 'notatka_2', '500', 'dane', '', 'podaj id notatki ?', '', 'notatka_3', 'notatka_3', ''),
+(48, 'notatka wczytaj', 'notatka_3', '500', 'zapiszdane', '', 'nr notatki', '', 'notatka_4', 'notatka_4', ''),
+(49, 'notatka wczytaj', 'notatka_4', '500', 'informacja', 'wczytuję motatkę nr: ', 'bufor1', '', 'notatka_5', 'notatka_5', ''),
+(50, 'notatka wczytaj', 'notatka_5', '500', 'getset', '', 'wczytaj', 'notatka', 'notatka_7', 'notatka_6', ''),
+(52, 'notatka wczytaj', 'notatka_7', '500', 'komunikat', '', 'wczytano notatkę', '', 'end', 'end', ''),
+(53, 'notatka wczytaj', 'notatka_6', '500', 'informacja', 'problem z wczytaniem notatki: ', 'tekst', '', 'end', 'end', ''),
+(54, 'moduły', 'moduly_5', '500', 'informacja', '', 'tekst', '', 'end', 'end', ''),
+(55, 'notatki', 'notatki_5', '500', 'informacja', '', 'tekst', '', 'end', 'end', ''),
+(56, 'notatka edytuj', 'edytuj_0', '500', 'komunikat', '', 'wykonuję: [ notatka edytuj ]', '', 'edytuj_1', 'edytuj_1', 'alternatywa'),
+(57, 'notatka edytuj', 'edytuj_1', '500', 'warunek', '', 'notatka', '', 'edytuj_3', 'edytuj_2', 'czy wczytana?'),
+(58, 'notatka edytuj', 'edytuj_2', '500', 'komunikat', '', 'brak notatki do edycji, wczytaj notatkę', '', 'end', 'end', ''),
+(59, 'notatka edytuj', 'edytuj_3', '500', 'warunek', '', 'edycja', '', 'edytuj_4', 'edytuj_5', 'Czy w stanie edycji?'),
+(60, 'notatka edytuj', 'edytuj_4', '500', 'komunikat', '', 'notatka w stanie edycji', '', 'end', 'end', ''),
+(61, 'notatka edytuj', 'edytuj_5', '500', 'warunek', '', 'edytuj', '', 'edytuj_6', 'edytuj_7', 'Czy możliwa edycja?'),
+(62, 'notatka edytuj', 'edytuj_6', '500', 'wykonaj', '', 'edytuj', 'on', 'edytuj_4', 'edytuj_4', 'notatka do edycji'),
+(63, 'notatka edytuj', 'edytuj_7', '500', 'informacja', 'edycja niemożliwa, autor: ', 'notatka', 'wlasciciel', 'end', 'end', ''),
+(64, 'notatka zapisz', 'zapisz_0', '500', 'komunikat', '', 'wykonuję: [ notatka zapisz ]', '', 'zapisz_1', 'zapisz_1', 'alternatywa'),
+(65, 'notatka zapisz', 'zapisz_1', '500', 'warunek', '', 'notatka', '', 'zapisz_3', 'zapisz_2', 'czy wczytana?'),
+(66, 'notatka zapisz', 'zapisz_2', '500', 'komunikat', '', 'brak notatki, zapis niemożliwy', '', 'end', 'end', ''),
+(67, 'notatka zapisz', 'zapisz_3', '500', 'warunek', '', 'edycja', '', 'zapisz_5', 'zapisz_4', 'Czy w stanie edycji?'),
+(68, 'notatka zapisz', 'zapisz_4', '500', 'komunikat', '', 'notatka nie była edytowana', '', 'end', 'end', ''),
+(69, 'notatka zapisz', 'zapisz_5', '500', 'komunikat', '', 'zapisuję notatkę', '', 'zapisz_6', 'zapisz_6', ''),
+(70, 'notatka zapisz', 'zapisz_6', '500', 'wykonaj', '', 'zapisz', '', 'zapisz_7', 'zapisz_8', ''),
+(71, 'notatka zapisz', 'zapisz_7', '500', 'komunikat', '', 'zapisano', '', 'end', 'end', ''),
+(72, 'notatka zapisz', 'zapisz_8', '500', 'komunikat', '', 'nie zapisano', '', 'end', 'end', ''),
+(73, 'notatka nowa', 'nowa_0', '500', 'komunikat', '', 'wykonuję: [ notatka nowa ]', '', 'nowa_1', 'nowa_1', 'alternatywa'),
+(74, 'notatka nowa', 'nowa_1', '500', 'komunikat', '', 'zakładam nową notatkę', '', 'nowa_2', 'nowa_2', ''),
+(75, 'notatka nowa', 'nowa_4', '500', 'dane', '', 'podaj tytuł notatki ?', '', 'nowa_5', 'nowa_5', ''),
+(76, 'notatka nowa', 'nowa_2', '500', 'warunek', '', 'edycja', '', 'nowa_3', 'nowa_4', 'Czy w stanie edycji?'),
+(77, 'notatka nowa', 'nowa_3', '500', 'komunikat', '', 'masz notatkę w edycji', '', 'end', 'end', ''),
+(78, 'notatka nowa', 'nowa_5', '500', 'zapiszdane', '', 'tytuł notatki', '', 'nowa_6', 'nowa_6', ''),
+(79, 'notatka nowa', 'nowa_6', '500', 'getset', '', 'zapisz', 'notatki', 'nowa_8', 'nowa_7', ''),
+(80, 'notatka nowa', 'nowa_7', '500', 'informacja', '', 'tekst', '', 'end', 'end', ''),
+(81, 'notatka wczytaj', 'notatka_8', '500', 'warunek', '', 'edycja', '', 'notatka_9', 'notatka_2', 'Czy w stanie edycji?'),
+(82, 'notatka wczytaj', 'notatka_9', '500', 'komunikat', '', 'masz notatkę w edycji', '', 'end', 'end', '');
 
 -- --------------------------------------------------------
 
@@ -1412,7 +1445,99 @@ INSERT INTO `komputery` (`id`, `nazwa`, `hostid`, `czaslogowania`, `czaszmiana`,
 (1307, 'Komputer-Tomka.10wsk.mil.pl', 'PO201644585633QY82151301878236ZK', '2022-02-11 14:20:33', '2022-02-11 14:20:33', 0),
 (1308, 'Komputer-Tomka.10wsk.mil.pl', 'QB381644585800JI3849337574000EV', '2022-02-11 14:23:20', '2022-02-11 14:23:20', 0),
 (1309, 'Komputer-Tomka.10wsk.mil.pl', 'BZ181644585855BV16103608908865VN', '2022-02-11 14:24:15', '2022-02-11 14:24:15', 0),
-(1310, 'Komputer-Tomka.10wsk.mil.pl', 'RT231644585974MW8974006368830QZ', '2022-02-11 14:26:14', '2022-02-11 14:26:14', 0);
+(1310, 'Komputer-Tomka.10wsk.mil.pl', 'RT231644585974MW8974006368830QZ', '2022-02-11 14:26:14', '2022-02-11 14:26:14', 0),
+(1311, 'DESKTOP-2KPJSHU', 'HJ891644613813OY97149659856983WH', '2022-02-11 22:10:13', '2022-02-11 22:10:13', 0),
+(1312, 'DESKTOP-2KPJSHU', 'YS101644614566YZ350983051546NV', '2022-02-11 22:22:46', '2022-02-11 22:22:46', 0),
+(1313, 'DESKTOP-2KPJSHU', 'AJ881644615364JY8221379999732ZE', '2022-02-11 22:36:04', '2022-02-11 22:36:04', 0),
+(1314, 'DESKTOP-2KPJSHU', 'DR621644615703IF87110189252101FA', '2022-02-11 22:41:43', '2022-02-11 22:41:43', 0),
+(1315, 'DESKTOP-2KPJSHU', 'WP91644616077HZ27154593911238RO', '2022-02-11 22:47:57', '2022-02-11 22:47:57', 0),
+(1316, 'DESKTOP-2KPJSHU', 'GV831644616101QQ27146370832989OL', '2022-02-11 22:48:21', '2022-02-11 22:48:21', 0),
+(1317, 'DESKTOP-2KPJSHU', 'UO921644616288QB77103610826144RW', '2022-02-11 22:51:28', '2022-02-11 22:51:28', 0),
+(1318, 'DESKTOP-2KPJSHU', 'OJ681644616307YX6749338489210OR', '2022-02-11 22:51:47', '2022-02-11 22:51:47', 0),
+(1319, 'DESKTOP-2KPJSHU', 'TG391644616336NR726313861376DV', '2022-02-11 22:52:16', '2022-02-11 22:52:16', 0),
+(1320, 'DESKTOP-2KPJSHU', 'BD831644616651SO286578466604AE', '2022-02-11 22:57:31', '2022-02-11 22:57:31', 0),
+(1321, 'DESKTOP-2KPJSHU', 'GS361644649717ZI67115125480190OE', '2022-02-12 08:08:37', '2022-02-12 08:08:37', 0),
+(1322, 'DESKTOP-2KPJSHU', 'XN221644649800YX1974009241000PG', '2022-02-12 08:10:00', '2022-02-12 08:10:00', 0),
+(1323, 'DESKTOP-2KPJSHU', 'EA981644649806OX5437826945538VT', '2022-02-12 08:10:06', '2022-02-12 08:10:06', 0),
+(1324, 'DESKTOP-2KPJSHU', 'MK361644649884EY731644649884EM', '2022-02-12 08:11:24', '2022-02-12 08:11:24', 0),
+(1325, 'DESKTOP-2KPJSHU', 'OC951644650504XH8065786020160QV', '2022-02-12 08:21:44', '2022-02-12 08:21:44', 0),
+(1326, 'DESKTOP-2KPJSHU', 'PX121644650525CW3526314408400NT', '2022-02-12 08:22:05', '2022-02-12 08:22:05', 0),
+(1327, 'DESKTOP-2KPJSHU', 'OS161644650738GC668223253690BM', '2022-02-12 08:25:38', '2022-02-12 08:25:38', 0),
+(1328, 'DESKTOP-2KPJSHU', 'EH311644650849QF8460852081413PN', '2022-02-12 08:27:29', '2022-02-12 08:27:29', 0),
+(1329, 'DESKTOP-2KPJSHU', 'HO861644650966QH114933952898SI', '2022-02-12 08:29:26', '2022-02-12 08:29:26', 0),
+(1330, 'DESKTOP-2KPJSHU', 'SO971644651071ML58108546970686FA', '2022-02-12 08:31:11', '2022-02-12 08:31:11', 0),
+(1331, 'DESKTOP-2KPJSHU', 'MU541644651225FC21100323724725GZ', '2022-02-12 08:33:45', '2022-02-12 08:33:45', 0),
+(1332, 'DESKTOP-2KPJSHU', 'SF711644651710ZH550984203010XY', '2022-02-12 08:41:50', '2022-02-12 08:41:50', 0),
+(1333, 'DESKTOP-2KPJSHU', 'PL381644652154ZK22101968433548GJ', '2022-02-12 08:49:14', '2022-02-12 08:49:14', 0),
+(1334, 'DESKTOP-2KPJSHU', 'XD231644652245SH4116770309395FA', '2022-02-12 08:50:45', '2022-02-12 08:50:45', 0),
+(1335, 'DESKTOP-2KPJSHU', 'TI431644652370MY1216446523700BL', '2022-02-12 08:52:50', '2022-02-12 08:52:50', 0),
+(1336, 'DESKTOP-2KPJSHU', 'XQ581644652410LN7467430748810MI', '2022-02-12 08:53:30', '2022-02-12 08:53:30', 0),
+(1337, 'DESKTOP-2KPJSHU', 'LV111644652538WT4698679152280MN', '2022-02-12 08:55:38', '2022-02-12 08:55:38', 0),
+(1338, 'DESKTOP-2KPJSHU', 'TE941644657091IN172364912004PK', '2022-02-12 10:11:31', '2022-02-12 10:11:31', 0),
+(1339, 'DESKTOP-2KPJSHU', 'FK171644657232MX32133217235792RE', '2022-02-12 10:13:52', '2022-02-12 10:13:52', 0),
+(1340, 'DESKTOP-2KPJSHU', 'UL151644657518QV4138151231512PC', '2022-02-12 10:18:38', '2022-02-12 10:18:38', 0),
+(1341, 'DESKTOP-2KPJSHU', 'GG831644657825LI5688811522550BT', '2022-02-12 10:23:45', '2022-02-12 10:23:45', 0),
+(1342, 'DESKTOP-2KPJSHU', 'PL911644657910SS518091237010FN', '2022-02-12 10:25:10', '2022-02-12 10:25:10', 0),
+(1343, 'DESKTOP-2KPJSHU', 'BA451644662142UU829867972852IN', '2022-02-12 11:35:41', '2022-02-12 11:35:41', 0),
+(1344, 'DESKTOP-2KPJSHU', 'OQ731644662256XV28139796291760QS', '2022-02-12 11:37:36', '2022-02-12 11:37:36', 0),
+(1345, 'DESKTOP-2KPJSHU', 'MM381644662316IH1070720479588AK', '2022-02-12 11:38:36', '2022-02-12 11:38:36', 0),
+(1346, 'DESKTOP-2KPJSHU', 'PG791644662331NK83136506973473IR', '2022-02-12 11:38:51', '2022-02-12 11:38:51', 0),
+(1347, 'DESKTOP-2KPJSHU', 'KI81644662432HJ581644662432KJ', '2022-02-12 11:40:32', '2022-02-12 11:40:32', 0),
+(1348, 'DESKTOP-2KPJSHU', 'DB831644662529JX48133217664849TA', '2022-02-12 11:42:09', '2022-02-12 11:42:09', 0),
+(1349, 'DESKTOP-2KPJSHU', 'LZ581644662535EH90123349690125VW', '2022-02-12 11:42:15', '2022-02-12 11:42:15', 0),
+(1350, 'DESKTOP-2KPJSHU', 'HJ971644662770CW6518091290470UC', '2022-02-12 11:46:10', '2022-02-12 11:46:10', 0),
+(1351, 'DESKTOP-2KPJSHU', 'SZ981644662985WL10136507027755LF', '2022-02-12 11:49:45', '2022-02-12 11:49:45', 0),
+(1352, 'DESKTOP-2KPJSHU', 'MQ271644663506WT5657563222710ZQ', '2022-02-12 11:58:26', '2022-02-12 11:58:26', 0),
+(1353, 'DESKTOP-2KPJSHU', 'UA951644663650OF8142761254900JW', '2022-02-12 12:00:50', '2022-02-12 12:00:50', 0),
+(1354, 'DESKTOP-2KPJSHU', 'GN91644663681YS1878943856688XS', '2022-02-12 12:01:21', '2022-02-12 12:01:21', 0),
+(1355, 'DESKTOP-2KPJSHU', 'UK141644663971JH9762497230898MB', '2022-02-12 12:06:11', '2022-02-12 12:06:11', 0),
+(1356, 'DESKTOP-2KPJSHU', 'ML71644664090CM66143085775830EY', '2022-02-12 12:08:10', '2022-02-12 12:08:10', 0),
+(1357, 'DESKTOP-2KPJSHU', 'YY111644666142OX44144730620496AK', '2022-02-12 12:42:22', '2022-02-12 12:42:22', 0),
+(1358, 'DESKTOP-2KPJSHU', 'TK861644666176GX28131573294080UI', '2022-02-12 12:42:56', '2022-02-12 12:42:56', 0),
+(1359, 'DESKTOP-2KPJSHU', 'YQ451644666677RN48111837334036RG', '2022-02-12 12:51:17', '2022-02-12 12:51:17', 0),
+(1360, 'DESKTOP-2KPJSHU', 'CA521644667038DC541116675950WO', '2022-02-12 12:57:18', '2022-02-12 12:57:18', 0),
+(1361, 'DESKTOP-2KPJSHU', 'SX541644667044YW4819736004528IO', '2022-02-12 12:57:24', '2022-02-12 12:57:24', 0),
+(1362, 'DESKTOP-2KPJSHU', 'LD441644667079AZ3831248674501XN', '2022-02-12 12:57:59', '2022-02-12 12:57:59', 0),
+(1363, 'DESKTOP-2KPJSHU', 'SS251644667349KD4670720696007EH', '2022-02-12 13:02:29', '2022-02-12 13:02:29', 0),
+(1364, 'DESKTOP-2KPJSHU', 'RD991644667378EX8178944034144EN', '2022-02-12 13:02:58', '2022-02-12 13:02:58', 0),
+(1365, 'DESKTOP-2KPJSHU', 'KS471644667428NI2983878038828YS', '2022-02-12 13:03:48', '2022-02-12 13:03:48', 0),
+(1366, 'DESKTOP-2KPJSHU', 'KF21644667480DT16105258718720PV', '2022-02-12 13:04:40', '2022-02-12 13:04:40', 0),
+(1367, 'DESKTOP-2KPJSHU', 'JT521644667525AY9583878043775WZ', '2022-02-12 13:05:25', '2022-02-12 13:05:25', 0),
+(1368, 'DESKTOP-2KPJSHU', 'NA151644667867NY8960852711079YP', '2022-02-12 13:11:07', '2022-02-12 13:11:07', 0),
+(1369, 'DESKTOP-2KPJSHU', 'IG681644667893OX55138152103012DZ', '2022-02-12 13:11:33', '2022-02-12 13:11:33', 0),
+(1370, 'DESKTOP-2KPJSHU', 'CI201644667977TF98152954121861BH', '2022-02-12 13:12:57', '2022-02-12 13:12:57', 0),
+(1371, 'DESKTOP-2KPJSHU', 'WG891644668088MX11134862783216NJ', '2022-02-12 13:14:48', '2022-02-12 13:14:48', 0),
+(1372, 'DESKTOP-2KPJSHU', 'ON751644670430HD54111837589240TZ', '2022-02-12 13:53:50', '2022-02-12 13:53:50', 0),
+(1373, 'DESKTOP-2KPJSHU', 'QM511644670458CW1742761431908US', '2022-02-12 13:54:18', '2022-02-12 13:54:18', 0),
+(1374, 'DESKTOP-2KPJSHU', 'YC581644670543XL883289341086KT', '2022-02-12 13:55:43', '2022-02-12 13:55:43', 0),
+(1375, 'DESKTOP-2KPJSHU', 'FF941644671242SE29131573699360KA', '2022-02-12 14:07:22', '2022-02-12 14:07:22', 0),
+(1376, 'DESKTOP-2KPJSHU', 'UL951644671336RR26157888448256MB', '2022-02-12 14:08:56', '2022-02-12 14:08:56', 0),
+(1377, 'DESKTOP-2KPJSHU', 'LN51644671377AZ5614802042393QO', '2022-02-12 14:09:37', '2022-02-12 14:09:37', 0),
+(1378, 'DESKTOP-2KPJSHU', 'VZ691644677207BL3862497733866IP', '2022-02-12 15:46:47', '2022-02-12 15:46:47', 0),
+(1379, 'DESKTOP-2KPJSHU', 'RQ241644685634MJ541644685634SD', '2022-02-12 18:07:14', '2022-02-12 18:07:14', 0),
+(1380, 'DESKTOP-2KPJSHU', 'UE831644685756UC20118417374432FC', '2022-02-12 18:09:16', '2022-02-12 18:09:16', 0),
+(1381, 'DESKTOP-2KPJSHU', 'WX41644685851OI37121706752974CF', '2022-02-12 18:10:51', '2022-02-12 18:10:51', 0),
+(1382, 'DESKTOP-2KPJSHU', 'GX81644700583FI3236183412826HZ', '2022-02-12 22:16:23', '2022-02-12 22:16:23', 0),
+(1383, 'DESKTOP-2KPJSHU', 'OV421644703807SQ257564633245OX', '2022-02-12 23:10:07', '2022-02-12 23:10:07', 0),
+(1384, 'DESKTOP-2KPJSHU', 'YL751644703846QC2927959965382JG', '2022-02-12 23:10:46', '2022-02-12 23:10:46', 0),
+(1385, 'DESKTOP-2KPJSHU', 'HT571644704111GA536578816444TF', '2022-02-12 23:15:11', '2022-02-12 23:15:11', 0),
+(1386, 'DESKTOP-2KPJSHU', 'TT251644704254JX38139799861590QK', '2022-02-12 23:17:34', '2022-02-12 23:17:34', 0),
+(1387, 'DESKTOP-2KPJSHU', 'EM811644704259JS9156246904605FQ', '2022-02-12 23:17:39', '2022-02-12 23:17:39', 0),
+(1388, 'DESKTOP-2KPJSHU', 'TA461644704317KR34129931641043OC', '2022-02-12 23:18:37', '2022-02-12 23:18:37', 0),
+(1389, 'DESKTOP-2KPJSHU', 'QL361644704350OF3198682261000MU', '2022-02-12 23:19:10', '2022-02-12 23:19:10', 0),
+(1390, 'DESKTOP-2KPJSHU', 'HQ531644705808PN6424670587120KM', '2022-02-12 23:43:28', '2022-02-12 23:43:28', 0),
+(1391, 'DESKTOP-2KPJSHU', 'UJ531644706057EF17118418836104VF', '2022-02-12 23:47:37', '2022-02-12 23:47:37', 0),
+(1392, 'DESKTOP-2KPJSHU', 'TJ761644744922FW821381683986KS', '2022-02-13 10:35:21', '2022-02-13 10:35:21', 0),
+(1393, 'DESKTOP-2KPJSHU', 'IT331644745028GJ62105263681792ET', '2022-02-13 10:37:08', '2022-02-13 10:37:08', 0),
+(1394, 'DESKTOP-2KPJSHU', 'OD871644745235AP9726315923760CD', '2022-02-13 10:40:35', '2022-02-13 10:40:35', 0),
+(1395, 'DESKTOP-2KPJSHU', 'KC471644746045JG67123355953375ZW', '2022-02-13 10:54:04', '2022-02-13 10:54:04', 0),
+(1396, 'DESKTOP-2KPJSHU', 'KR431644747084NB2493750583788AC', '2022-02-13 11:11:24', '2022-02-13 11:11:24', 0),
+(1397, 'DESKTOP-2KPJSHU', 'RE621644769150OO724671537250FF', '2022-02-13 17:19:10', '2022-02-13 17:19:10', 0),
+(1398, 'DESKTOP-2KPJSHU', 'MI321644769373FR689868616238GW', '2022-02-13 17:22:53', '2022-02-13 17:22:53', 0),
+(1399, 'DESKTOP-2KPJSHU', 'RL751644769418QR5865790776720WY', '2022-02-13 17:23:38', '2022-02-13 17:23:38', 0),
+(1400, 'DESKTOP-2KPJSHU', 'NX581644770201LX333289540402GP', '2022-02-13 17:36:41', '2022-02-13 17:36:41', 0),
+(1401, 'DESKTOP-2KPJSHU', 'CR571644770513UU33164477051300TR', '2022-02-13 17:41:53', '2022-02-13 17:41:53', 0),
+(1402, 'DESKTOP-2KPJSHU', 'RB541644788403PA9742764498478IZ', '2022-02-13 22:40:03', '2022-02-13 22:40:03', 0);
 
 -- --------------------------------------------------------
 
@@ -1445,6 +1570,7 @@ INSERT INTO `moduly` (`id`, `nazwa`, `symbol`, `producent`, `uprawnienia`, `opis
 
 CREATE TABLE `notatki_ng` (
   `id` int(11) NOT NULL,
+  `identyfikator` varchar(30) COLLATE utf8_polish_ci NOT NULL,
   `tytul` text COLLATE utf8_polish_ci NOT NULL,
   `wlasciciel` int(11) NOT NULL,
   `czas` text COLLATE utf8_polish_ci NOT NULL,
@@ -1456,11 +1582,12 @@ CREATE TABLE `notatki_ng` (
 -- Zrzut danych tabeli `notatki_ng`
 --
 
-INSERT INTO `notatki_ng` (`id`, `tytul`, `wlasciciel`, `czas`, `stan`, `udostepnienie`) VALUES
-(1, 'testowa', 2, '2022-02-06 09:00', 0, '00000000000'),
-(2, 'testowa 3', 3, '2022-02-06 09:00', 0, '00000000000'),
-(3, 'testowa 4', 4, '2022-02-06 09:00', 0, '01000000000'),
-(4, 'testowa 5', 2, '2022-02-06 09:00', 2, '00000000000');
+INSERT INTO `notatki_ng` (`id`, `identyfikator`, `tytul`, `wlasciciel`, `czas`, `stan`, `udostepnienie`) VALUES
+(1, '1644743771H5V129934757909', 'testowa', 2, '2022-02-06 09:00', 0, '00000000000'),
+(2, '1644743786H6Q27960644362', 'testowa 3', 3, '2022-02-06 09:00', 0, '00000000000'),
+(3, '1644743790H7N121711040460', 'testowa 4', 4, '2022-02-06 09:00', 0, '01000000000'),
+(4, '1644743790H8C52631801280', 'testowa 5', 2, '2022-02-06 09:00', 2, '00000000000'),
+(5, '1644743791H9M34539619611', 'notatka nowa', 2, '2022-02-13 10:14:32', 0, '10000000000');
 
 -- --------------------------------------------------------
 
@@ -1481,7 +1608,8 @@ CREATE TABLE `notatki_tr` (
 --
 
 INSERT INTO `notatki_tr` (`id`, `notatki_ng`, `wersja`, `czas`, `tresc`) VALUES
-(1, 1, 1, '2022-02-06 09:00', 'notatki_ng.id, notatki_ng.tytul, notatki_ng.wlasciciel, notatki_ng.stan,\r\nnotatki_ng.czasU,\r\nnotatki_ng.czasA,');
+(1, 1, 0, '2022-02-06 09:00', 'notatki_ng.id, notatki_ng.tytul, notatki_ng.wlasciciel, notatki_ng.stan,\r\nnotatki_ng.czasU,\r\nnotatki_ng.czasA,'),
+(2, 3, 0, '2022-02-07 19:00', 'notatka 3 obca');
 
 -- --------------------------------------------------------
 
@@ -1524,7 +1652,7 @@ CREATE TABLE `osoby` (
 INSERT INTO `osoby` (`id`, `czaszmiana`, `kolejnosc`, `imie`, `nazwisko`, `funkcja`, `specjalnosc`, `narodowosc`, `userlogin`, `rodzaj`, `user`, `hasloorg`, `autoryzacja`, `zalogowanyorg`, `blokadaorg`, `hannahorg`, `uzytkownik`, `czaslogowania`, `czaswylogowania`, `odpowiedz`, `reakcja`, `haslonew`, `zalogowanynew`, `blokadanew`, `hannahnew`) VALUES
 (0, '', '0', '', '', '', '', '', '', '', 0, '', 0, 0, 0, 0, '', '', '', '', 0, '', 0, 0, 0),
 (1, '', '0', 'Dedal', '', 'statek', '', '', '', 'M', 2, '!@#', 0, 1, 0, 1, '', '2022-01-30 13:39:18', '', 'Dedal jest tylko jeden', 0, '!@#', 1, 0, 1),
-(2, '2022-02-05 22:17:54', '1', 'John', 'Spow', 'Kapitan', 'nawigator, pilot', 'USA', 'john', 'M', 1, '123', 1, 0, 0, 0, 'DESKTOP-2KPJSHU', '2022-02-05 11:34:36', '2022-02-05 22:17:54', 'Witaj John Spow', 200, '123', 1, 0, 0),
+(2, '2022-02-12 08:11:46', '1', 'John', 'Spow', 'Kapitan', 'nawigator, pilot', 'USA', 'john', 'M', 1, '123', 1, 0, 0, 0, 'DESKTOP-2KPJSHU', '2022-02-12 08:11:46', '', 'Witaj John Spow', 200, '123', 1, 0, 0),
 (3, '', '2', 'Wang', 'Yaping', 'I oficer', 'astrofizyk, dyplomata', 'Chiny', 'wang', 'K', 1, '123', 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '', '', 'Witaj Louise Banks', 400, '123', 0, 0, 0),
 (4, '2022-01-30 23:07:50', '3', 'William', 'Weir', 'II oficer', 'matematyk, inżynier napędu', 'Unia Europejska', 'william', 'M', 1, '123', 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '2022-01-30 23:07:50', '', 'Witaj Dave Bowman', 400, '123', 0, 0, 0),
 (5, '', '4', 'Fatima', 'Punjabi', 'III oficer', 'elektronik, nawigator', 'Indie', 'fatima', 'K', 1, '123', 0, 0, 0, 0, '', '', '', 'Witaj Dwayne Hicks', 400, '123', 0, 0, 0),
@@ -1573,7 +1701,13 @@ INSERT INTO `polecenia` (`id`, `nazwa`, `zalogowany`, `wylogowany`, `autoryzacja
 (11, 'notatki', 1, 0, 0, 11, '11111111111', '500', 'notatki_1', 'Lista tytułów notatek'),
 (12, '?', 1, 1, 0, 1, '', '500', 'pomoc_0', 'Dostepne polecenia w zależności od logowania i autoryzacji'),
 (13, 'notatka wczytaj', 1, 0, 0, 13, '11111111111', '500', 'notatka_1', 'Wczytanie notatki'),
-(14, 'notatka', 1, 0, 0, 13, '', '500', 'notatka_0', 'Wczytanie notatki');
+(14, 'notatka', 1, 0, 0, 13, '', '500', 'notatka_0', 'Wczytanie notatki'),
+(15, 'notatka edytuj', 1, 0, 0, 15, '11111111111', '500', 'edytuj_1', 'Edycja notatki'),
+(16, 'edytuj', 1, 0, 0, 15, '', '500', 'edytuj_0', 'Edycja notatki'),
+(17, 'notatka zapisz', 1, 0, 0, 17, '11111111111', '500', 'zapisz_1', 'Zapis notatki'),
+(18, 'zapisz', 1, 0, 0, 17, '', '500', 'zapisz_0', 'Zapis notatki'),
+(19, 'notatka nowa', 1, 0, 0, 19, '11111111111', '500', 'nowa_1', 'Nowa notatka nagłówek'),
+(20, 'nowa', 1, 0, 0, 19, '', '500', 'nowa_0', 'Nowa notatka nagłówek');
 
 -- --------------------------------------------------------
 
@@ -1662,51 +1796,42 @@ ALTER TABLE `ustawienia`
 -- AUTO_INCREMENT dla tabeli `dzialania`
 --
 ALTER TABLE `dzialania`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 --
 -- AUTO_INCREMENT dla tabeli `komputery`
 --
 ALTER TABLE `komputery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1311;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1403;
 --
 -- AUTO_INCREMENT dla tabeli `moduly`
 --
 ALTER TABLE `moduly`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT dla tabeli `notatki_ng`
 --
 ALTER TABLE `notatki_ng`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT dla tabeli `notatki_tr`
 --
 ALTER TABLE `notatki_tr`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT dla tabeli `osoby`
 --
 ALTER TABLE `osoby`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
 --
 -- AUTO_INCREMENT dla tabeli `polecenia`
 --
 ALTER TABLE `polecenia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT dla tabeli `ustawienia`
 --
 ALTER TABLE `ustawienia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

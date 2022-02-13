@@ -28,7 +28,9 @@ try
                     dzialania.nazwa,
                     dzialania.czas,
                     dzialania.dzialanie,
+                    dzialania.prefix,
                     dzialania.komunikat,
+                    dzialania.sufix,
                     dzialania.nastepnyTrue,
                     dzialania.nastepnyFalse,
                     polecenia.autoryzacja
@@ -38,6 +40,8 @@ try
                     where
                     ".$wiersz."
                     AND polecenia.nazwa = dzialania.polecenia
+                    order by
+                    dzialania.nazwa
                 ";
                 $wynik = $conn->query($sql); 
                 if ($wynik->num_rows > 0) 
@@ -45,7 +49,7 @@ try
                 $polecenia = array ();    
                 while ($row = $wynik->fetch_assoc())
                 {
-                $polecenie = array ("nazwa"=>$row['nazwa'], "czas"=>$row['czas'], "dzialanie"=>$row['dzialanie'], "autoryzacja"=>false, "polecenie"=>true, "komunikat"=>$row['komunikat'], "nastepnyTrue"=>$row['nastepnyTrue'], "nastepnyFalse"=>$row['nastepnyFalse']);
+                $polecenie = array ("nazwa"=>$row['nazwa'], "czas"=>$row['czas'], "dzialanie"=>$row['dzialanie'], "autoryzacja"=>false, "polecenie"=>true, "prefix"=>$row['prefix'], "komunikat"=>$row['komunikat'], "sufix"=>$row['sufix'], "nastepnyTrue"=>$row['nastepnyTrue'], "nastepnyFalse"=>$row['nastepnyFalse']);
                 array_push($polecenia,$polecenie);
                 }
                 $result = array ("wynik"=>true, "stan"=>"ok", "polecenia"=>$polecenia);
