@@ -26,6 +26,7 @@ try
                     CASE notatki_ng.wlasciciel WHEN ".$body->stan." THEN 'własna'
                                                ELSE concat(osoby.imie,' ',osoby.nazwisko)
                                                END as wlascicielText,
+                    notatki_ng.stan,
                     CASE notatki_ng.stan WHEN 0 THEN 'dostępna'
                                       WHEN 1 THEN 'usunięta'
                                       ELSE 'uszkodzona'
@@ -48,7 +49,7 @@ try
                 $notatki = array ();    
                 while ($row = $wynik->fetch_assoc())
                 {
-                $notatka = array ("id"=>$row['id'],"identyfikator"=>$row['identyfikator'], "tytul"=>$row['tytul'], "wlascicielText"=>$row['wlascicielText'], "stanText"=>$row['stanText'], "czas"=>$row['czas']);
+                $notatka = array ("id"=>$row['id'],"identyfikator"=>$row['identyfikator'], "tytul"=>$row['tytul'], "wlascicielText"=>$row['wlascicielText'], "stan"=>$row['stan'], "stanText"=>$row['stanText'], "czas"=>$row['czas']);
                 array_push($notatki,$notatka);
                 }
                 $result = array ("wynik"=>true, "stan"=>true, "notatki"=>$notatki, "error"=>"wczytano: ".$wynik->num_rows." pozycje");

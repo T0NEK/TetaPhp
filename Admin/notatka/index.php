@@ -10,43 +10,41 @@ try
     { throw new Exception( $conn->connect_error); } 
     else
     {
-        //$body = (object) array ('kierunek'=>'get', 'stan' => 2, 'notatka' => '1644743790H8C52631801280');
+        //$body = (object) array ('kierunek'=>'get', 'stan' => 2, 'notatka' => 1);
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {
         if ($body->kierunek == 'get')    
             {//get
+            $sql = 
+            "SELECT
+            id
+            FROM
+            notatki_ng
+            WHERE
+            id = ".$body->notatka."
+            AND (
+                wlasciciel = ".$body->stan."
+                OR substring(udostepnienie,".$body->stan.",1) = '1' 
+                )
+            ";
+            $wynik = $conn->query($sql); 
+            if ($wynik->num_rows > 0) 
+            {
+            $row = $wynik->fetch_assoc();
+            $id = $row['id'];
                 $sql = 
                 "SELECT
-                    notatki_tr.id,
-                    notatki_tr.wersja,
-                    notatki_tr.czas,
-                    notatki_tr.tresc,
-                    notatki_ng.tytul,
-                    notatki_ng.identyfikator,
-                    notatki_ng.wlasciciel,
-                    CASE notatki_ng.wlasciciel WHEN ".$body->stan." THEN 'własna'
-                                               ELSE concat(osoby.imie,' ',osoby.nazwisko)
-                                               END as wlascicielText,
-                    notatki_ng.stan,
-                    CASE notatki_ng.stan WHEN 0 THEN 'dostępna'
-                                      WHEN 1 THEN 'usunięta'
-                                      ELSE 'uszkodzona'
-                    END as stanText
+                    id,
+                    wersja,
+                    czas,
+                    tresc
                     FROM
-                    notatki_tr,
-                    notatki_ng,
-                    osoby
+                    notatki_tr                   
                     WHERE
-                    notatki_ng.identyfikator = '".$body->notatka."'
-                    AND notatki_tr.notatki_ng = notatki_ng.id
-                    AND (
-                        notatki_ng.wlasciciel = ".$body->stan."
-                        OR substring(notatki_ng.udostepnienie,".$body->stan.",1) = '1' 
-                        )
-                    AND osoby.id = notatki_ng.wlasciciel
+                    notatki_tr.notatki_ng = ".$id."
                     ORDER BY
-                    notatki_tr.wersja desc
+                    wersja
                 ";
                 $wynik = $conn->query($sql); 
                 if ($wynik->num_rows > 0) 
@@ -54,22 +52,29 @@ try
                 $notatki = array ();    
                 while ($row = $wynik->fetch_assoc())
                 {
-                $notatka = array ("id"=>$row['id'],"identyfikator"=>$row['identyfikator'], "wersja"=>$row['wersja'], "tytul"=>$row['tytul'], "edycja"=>($row['wlasciciel']==$body->stan), "wlascicielText"=>$row['wlascicielText'], "stan"=>($row['stan']==0), "stanText"=>$row['stanText'], "czas"=>$row['czas'], "tresc"=>$row['tresc']);
+                $notatka = array ("id"=>$row['id'], "wersja"=>$row['wersja'], "czas"=>$row['czas'], "tresc"=>$row['tresc']);
                 array_push($notatki,$notatka);
+                $idmax = $row['wersja'];
                 }
-                $result = array ("wynik"=>true, "stan"=>true, "notatki"=>$notatki, "error"=>"wczytano: ".$wynik->num_rows." pozycje");
-                $conn->close();   
+                $result = array ("wynik"=>true, "stan"=>true, "notatki"=>$notatki, "wersja"=>$idmax, "error"=>"wczytano: ".$wynik->num_rows." pozycje");
                 }
                 else
                 {
-                    $result = array ("wynik"=>true, "stan"=>false, "error"=>"brak dostepnych notatek");      
+                    $result = array ("wynik"=>true, "stan"=>false, "error"=>"treść notatki niedostepna");
                 }
-            }  
+               
+            }
             else
-            {//set
-
-
+            {//set brak notatek
+                $result = array ("wynik"=>true, "stan"=>false, "error"=>"brak dostepnych notatek");      
             }  
+            $conn->close();   
+            }
+            else
+            {
+                //set
+            }    
+
         }
         else
         {
@@ -81,7 +86,7 @@ try
 catch(Exception $e)    
 {
     $result = array("wynik"=>false, "stan"=>false, "error"=>"problem z odczytem");
-    //echo ($e);
+    echo ($e);
 }
 echo json_encode($result);     
 ?>
