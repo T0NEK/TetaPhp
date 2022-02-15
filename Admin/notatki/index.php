@@ -10,7 +10,7 @@ try
     { throw new Exception( $conn->connect_error); } 
     else
     {
-        //$body = (object) array ( 'kierunek'=>'get', 'stan' => 2, 'tytul' => 'notatka nowa' );
+        //$body = (object) array ( 'kierunek'=>'set', 'stan' => 2, 'tytul' => 'notatka nowa' );
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {
@@ -93,9 +93,9 @@ try
                 ";
                 if ($conn->query($sql) === TRUE) 
                 {     
-                    $result = array ("wynik"=>true, "stan"=>true, "identyfikator"=>$identyfikator, "error"=>'zapisano notatkę'); }
+                    $result = array ("wynik"=>true, "stan"=>true, "error"=>$identyfikator); }
                 else 
-                { $result = array ("wynik"=>false, "stan"=>false, "identyfikator"=>$identyfikator, "error"=>'błąd zapisu'); }
+                { $result = array ("wynik"=>false, "stan"=>false,  "error"=>'błąd zapisu'); }
                 $conn->close();    
             }   
         }

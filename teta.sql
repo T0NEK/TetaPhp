@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 15 Lut 2022, 13:50
--- Wersja serwera: 10.1.28-MariaDB
--- Wersja PHP: 7.1.10
+-- Czas generowania: 15 Lut 2022, 23:24
+-- Wersja serwera: 10.1.21-MariaDB
+-- Wersja PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -99,10 +97,10 @@ INSERT INTO `dzialania` (`id`, `polecenia`, `nazwa`, `czas`, `dzialanie`, `prefi
 (64, 'notatka zapisz', 'zapisz_0', '500', 'komunikat', '', 'wykonuję: [ notatka zapisz ]', '', 'zapisz_1', 'zapisz_1', 'alternatywa'),
 (65, 'notatka zapisz', 'zapisz_1', '500', 'warunek', '', 'notatka', '', 'zapisz_3', 'zapisz_2', 'czy wczytana?'),
 (66, 'notatka zapisz', 'zapisz_2', '500', 'komunikat', '', 'brak notatki, zapis niemożliwy', '', 'end', 'end', ''),
-(67, 'notatka zapisz', 'zapisz_3', '500', 'warunek', '', 'edycja', '', 'zapisz_5', 'zapisz_4', 'Czy w stanie edycji?'),
-(68, 'notatka zapisz', 'zapisz_4', '500', 'komunikat', '', 'notatka nie była edytowana', '', 'end', 'end', ''),
+(67, 'notatka zapisz', 'zapisz_3', '500', 'warunek', '', 'zmiany', '', 'zapisz_5', 'zapisz_4', 'Czy w stanie edycji?'),
+(68, 'notatka zapisz', 'zapisz_4', '500', 'komunikat', '', 'brak zmian - zaniechano zapisu', '', 'end', 'end', ''),
 (69, 'notatka zapisz', 'zapisz_5', '500', 'komunikat', '', 'zapisuję notatkę', '', 'zapisz_6', 'zapisz_6', ''),
-(70, 'notatka zapisz', 'zapisz_6', '500', 'wykonaj', '', 'zapisz', '', 'zapisz_7', 'zapisz_8', ''),
+(70, 'notatka zapisz', 'zapisz_6', '500', 'wykonaj', '', 'zapisz', 'notatka', 'zapisz_7', 'zapisz_8', ''),
 (71, 'notatka zapisz', 'zapisz_7', '500', 'komunikat', '', 'zapisano', '', 'end', 'end', ''),
 (72, 'notatka zapisz', 'zapisz_8', '500', 'komunikat', '', 'nie zapisano', '', 'end', 'end', ''),
 (73, 'notatka nowa', 'nowa_0', '500', 'komunikat', '', 'wykonuję: [ notatka nowa ]', '', 'nowa_1', 'nowa_1', 'alternatywa'),
@@ -112,16 +110,23 @@ INSERT INTO `dzialania` (`id`, `polecenia`, `nazwa`, `czas`, `dzialanie`, `prefi
 (77, 'notatka nowa', 'nowa_3', '500', 'komunikat', '', 'masz notatkę w edycji', '', 'end', 'end', ''),
 (78, 'notatka nowa', 'nowa_5', '500', 'zapiszdane', '', 'tytuł notatki', '', 'nowa_6', 'nowa_6', ''),
 (79, 'notatka nowa', 'nowa_6', '500', 'getset', '', 'zapisz', 'notatki', 'nowa_8', 'nowa_7', ''),
-(80, 'notatka nowa', 'nowa_7', '500', 'informacja', '', 'tekst', '', 'end', 'end', ''),
+(80, 'notatka nowa', 'nowa_7', '500', 'informacja', 'problem z założeniem notatki:', 'tekst', '', 'end', 'end', ''),
 (81, 'notatka wczytaj', 'notatka_8', '500', 'warunek', '', 'edycja', '', 'notatka_9', 'notatka_2', 'Czy w stanie edycji?'),
 (82, 'notatka wczytaj', 'notatka_9', '500', 'komunikat', '', 'masz notatkę w edycji', '', 'end', 'end', ''),
 (83, 'notatka zamknij', 'zamknij_0', '500', 'komunikat', '', 'wykonuję: [ notatka zamknij ]', '', 'zamknij_1', 'zamknij_1', 'alternatywa'),
 (84, 'notatka zamknij', 'zamknij_1', '500', 'warunek', '', 'notatka', '', 'zamknij_3', 'zamknij_2', 'czy wczytana?'),
 (85, 'notatka zamknij', 'zamknij_2', '500', 'komunikat', '', 'brak wczytanej notatki', '', 'end', 'end', ''),
 (86, 'notatka zamknij', 'zamknij_3', '500', 'warunek', '', 'edycja', '', 'zamknij_5', 'zamknij_4', 'Czy w stanie edycji?'),
-(87, 'notatka zamknij', 'zamknij_4', '500', 'komunikat', '', 'notatka nie była edytowana', '', 'end', 'end', ''),
-(88, 'notatka zamknij', 'zamknij_5', '500', 'komunikat', '', 'zamykam notatkę', '', 'zamknij_6', 'zamknij_6', ''),
-(89, 'notatka zamknij', 'zamknij_6', '500', 'wykonaj', '', 'edytuj', 'off', 'zamknij_7', 'zamknij_8', '');
+(87, 'notatka zamknij', 'zamknij_4', '500', 'komunikat', '', 'notatka nie jest edytowana', '', 'end', 'end', ''),
+(88, 'notatka zamknij', 'zamknij_5', '500', 'warunek', '', 'zmiany', '', 'zamknij_8', 'zamknij_6', 'Czy są zmiany ?'),
+(89, 'notatka zamknij', 'zamknij_6', '500', 'komunikat', '', 'notatka zamknięta', '', 'zamknij_7', 'zamknij_7', ''),
+(90, 'notatka zamknij', 'zamknij_7', '500', 'wykonaj', '', 'edytuj', 'off', 'end', 'end', ''),
+(91, 'notatka zamknij', 'zamknij_8', '500', 'komunikat', '', 'notatka była edytowana', '', 'zamknij_9', 'zamknij_9', ''),
+(92, 'notatka zamknij', 'zamknij_9', '500', 'dane', '', 'zapisać ? (t/n)', '', 'zamknij_10', 'zamknij_10', ''),
+(93, 'notatka zamknij', 'zamknij_10', '500', 'zapiszdane', '', '(t/n)', '', 'zamknij_11', 'zamknij_11', ''),
+(94, 'notatka zamknij', 'zamknij_11', '500', 'warunek', '', 'taknieSprawdz', '', 'zamknij_12', 'zamknij_9', ''),
+(95, 'notatka zamknij', 'zamknij_12', '500', 'warunek', '', 'taknieZdecyduj', '', 'zapisz_5', 'zamknij_6', ''),
+(96, 'notatka nowa', 'nowa_8', '500', 'informacja', 'założono notatkę - id: [', 'tekst', ']', 'end', 'end', '');
 
 -- --------------------------------------------------------
 
@@ -156,7 +161,24 @@ INSERT INTO `komputery` (`id`, `nazwa`, `hostid`, `czaslogowania`, `czaszmiana`,
 (11, 'Komputer-Tomka', 'AJ381644843649OA5965793745960PO', '2022-02-14 14:00:49', '2022-02-14 14:00:49', 0),
 (12, 'Komputer-Tomka.10wsk.mil.pl', 'PZ351644844216GA890466431880EP', '2022-02-14 14:10:16', '2022-02-14 14:10:16', 0),
 (13, 'Komputer-Tomka', 'JD881644844352QY5292111283712IG', '2022-02-14 14:12:32', '2022-02-14 14:12:32', 0),
-(14, 'Komputer-Tomka', 'QW221644844438RX4249345333140ZJ', '2022-02-14 14:13:58', '2022-02-14 14:13:58', 0);
+(14, 'Komputer-Tomka', 'QW221644844438RX4249345333140ZJ', '2022-02-14 14:13:58', '2022-02-14 14:13:58', 0),
+(15, 'DESKTOP-2KPJSHU', 'RH261644939830NG47121725547420LX', '2022-02-15 16:43:50', '2022-02-15 16:43:50', 0),
+(16, 'DESKTOP-2KPJSHU', 'KK411644940265AI546579761060TQ', '2022-02-15 16:51:05', '2022-02-15 16:51:05', 0),
+(17, 'DESKTOP-2KPJSHU', 'WW721644940571BA86116790780541DT', '2022-02-15 16:56:11', '2022-02-15 16:56:11', 0),
+(18, 'DESKTOP-2KPJSHU', 'XZ761644940889JT6093761630673WQ', '2022-02-15 17:01:29', '2022-02-15 17:01:29', 0),
+(19, 'DESKTOP-2KPJSHU', 'AX341644942852YD401644942852SV', '2022-02-15 17:34:12', '2022-02-15 17:34:12', 0),
+(20, 'DESKTOP-2KPJSHU', 'VM961644943009FS40144754984792QC', '2022-02-15 17:36:49', '2022-02-15 17:36:49', 0),
+(21, 'DESKTOP-2KPJSHU', 'CT201644943110GJ2019739317320NO', '2022-02-15 17:38:30', '2022-02-15 17:38:30', 0),
+(22, 'DESKTOP-2KPJSHU', 'NJ611644944341IA37106921382165YP', '2022-02-15 17:59:01', '2022-02-15 17:59:01', 0),
+(23, 'DESKTOP-2KPJSHU', 'OL901644944808LE97106921412520DN', '2022-02-15 18:06:48', '2022-02-15 18:06:48', 0),
+(24, 'DESKTOP-2KPJSHU', 'WN961644944848XZ25138175367232AF', '2022-02-15 18:07:28', '2022-02-15 18:07:28', 0),
+(25, 'DESKTOP-2KPJSHU', 'XN201644945135DA51152979897555MP', '2022-02-15 18:12:15', '2022-02-15 18:12:15', 0),
+(26, 'DESKTOP-2KPJSHU', 'DX951644961365DZ1057573647775XU', '2022-02-15 22:42:45', '2022-02-15 22:42:45', 0),
+(27, 'DESKTOP-2KPJSHU', 'DB611644961379OV267443416539PH', '2022-02-15 22:42:59', '2022-02-15 22:42:59', 0),
+(28, 'DESKTOP-2KPJSHU', 'KQ531644961439FQ7554283727487QM', '2022-02-15 22:43:59', '2022-02-15 22:43:59', 0),
+(29, 'DESKTOP-2KPJSHU', 'HK601644962331MN91128307061818VT', '2022-02-15 22:58:51', '2022-02-15 22:58:51', 0),
+(30, 'DESKTOP-2KPJSHU', 'TK351644962644HM13133241974164XW', '2022-02-15 23:04:04', '2022-02-15 23:04:04', 0),
+(31, 'DESKTOP-2KPJSHU', 'UE131644963796SJ56134887031272AN', '2022-02-15 23:23:16', '2022-02-15 23:23:16', 0);
 
 -- --------------------------------------------------------
 
@@ -206,7 +228,14 @@ INSERT INTO `notatki_ng` (`id`, `identyfikator`, `tytul`, `wlasciciel`, `czas`, 
 (2, '1644743786H6Q27960644362', 'testowa 3', 3, '2022-02-06 09:00', 0, '00000000000'),
 (3, '1644743790H7N121711040460', 'testowa 4', 4, '2022-02-06 09:00', 0, '01000000000'),
 (4, '1644743790H8C52631801280', 'testowa 5', 2, '2022-02-06 09:00', 2, '00000000000'),
-(5, '1644743791H9M34539619611', 'notatka nowa', 2, '2022-02-13 10:14:32', 0, '10000000000');
+(5, '1644743791H9M34539619611', 'notatka nowa', 2, '2022-02-13 10:14:32', 0, '10000000000'),
+(16, '1644944362H5D90471939910', 'nowa notatka testowa', 2, '2022-02-15 17:59:22', 0, '10000000000'),
+(17, '1644944539H16K128305674042', 'notatka nowa', 2, '2022-02-15 18:02:19', 0, '10000000000'),
+(18, '1644944819H17G106921413235', 'notatka nowa', 2, '2022-02-15 18:06:59', 0, '10000000000'),
+(19, '1644944819H18Q92116909864', 'notatka nowa', 2, '2022-02-15 18:06:59', 0, '10000000000'),
+(20, '1644944860H19F18094393460', 'notatka nowa', 2, '2022-02-15 18:07:40', 0, '10000000000'),
+(21, '1644944860H20P18094393460', 'notatka nowa', 2, '2022-02-15 18:07:40', 0, '10000000000'),
+(22, '1644945147H21L4934835441', 'test 1', 2, '2022-02-15 18:12:27', 0, '10000000000');
 
 -- --------------------------------------------------------
 
@@ -419,51 +448,42 @@ ALTER TABLE `ustawienia`
 -- AUTO_INCREMENT dla tabeli `dzialania`
 --
 ALTER TABLE `dzialania`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 --
 -- AUTO_INCREMENT dla tabeli `komputery`
 --
 ALTER TABLE `komputery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT dla tabeli `moduly`
 --
 ALTER TABLE `moduly`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT dla tabeli `notatki_ng`
 --
 ALTER TABLE `notatki_ng`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT dla tabeli `notatki_tr`
 --
 ALTER TABLE `notatki_tr`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT dla tabeli `osoby`
 --
 ALTER TABLE `osoby`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
 --
 -- AUTO_INCREMENT dla tabeli `polecenia`
 --
 ALTER TABLE `polecenia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
 --
 -- AUTO_INCREMENT dla tabeli `ustawienia`
 --
 ALTER TABLE `ustawienia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
