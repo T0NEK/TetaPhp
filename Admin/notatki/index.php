@@ -49,7 +49,7 @@ try
                 $notatki = array ();    
                 while ($row = $wynik->fetch_assoc())
                 {
-                $notatka = array ("id"=>$row['id'],"identyfikator"=>$row['identyfikator'], "tytul"=>$row['tytul'], "wlascicielText"=>$row['wlascicielText'], "stan"=>$row['stan'], "stanText"=>$row['stanText'], "czas"=>$row['czas']);
+                $notatka = array ("id"=>$row['id'],"identyfikator"=>$row['identyfikator'], "tytul"=>$row['tytul'], "wlascicielText"=>$row['wlascicielText'], "wlasciciel"=>$row['wlasciciel'], "stan"=>($row['stan']==0), "stanText"=>$row['stanText'], "czas"=>$row['czas']);
                 array_push($notatki,$notatka);
                 }
                 $result = array ("wynik"=>true, "stan"=>true, "notatki"=>$notatki, "error"=>"wczytano: ".$wynik->num_rows." pozycje");
