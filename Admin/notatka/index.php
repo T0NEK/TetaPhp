@@ -11,6 +11,7 @@ try
     else
     {
         //$body = (object) array ('kierunek'=>'get', 'stan' => 2, 'notatka' => '1644743771H5V129934757909');
+        //$body = (object) array ('kierunek'=>'set', 'stan' => 2, 'wersja' => 1, 'notatka' => 'hello notatka');
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {
@@ -72,6 +73,11 @@ try
                 "SELECT
                     id,
                     wersja,
+                    stan,
+                    CASE stan WHEN 0 THEN 'dostępna'
+                                     WHEN 1 THEN 'usunięta'
+                                     ELSE 'uszkodzona'
+                    END as stanText,
                     czas,
                     tresc
                     FROM
@@ -87,11 +93,11 @@ try
                 $notatki = array ();    
                 while ($row = $wynik->fetch_assoc())
                 {
-                $notatka = array ("id"=>$row['id'], "wersja"=>$row['wersja'], "czas"=>$row['czas'], "tresc"=>$row['tresc']);
+                $notatka = array ("id"=>$row['id'], "wersja"=>$row['wersja'], "stan"=>($row['stan']==0), "stanText"=>$row['stanText'], "czas"=>$row['czas'], "tresc"=>$row['tresc']);
                 array_push($notatki,$notatka);
                 $idmax = $row['wersja'];
                 }
-                $result = array_merge( array ("wynik"=>true, "stan"=>true, "notatki"=>$notatki, "id"=>$id, "wersja"=>$idmax, "error"=>"znaleziono: ".$wynik->num_rows." wersje"), $notatkaresult);
+                $result = array_merge( array ("wynik"=>true, "stan"=>true, "notatki"=>$notatki, "id"=>$id, "wersja"=>$idmax, "error"=>"znaleziono wersji: ".$wynik->num_rows), $notatkaresult);
                 }
                 else
                 {
@@ -109,6 +115,36 @@ try
             else
             {
                 //set
+                $time = time();
+                $czasserwera = date("Y-m-d H:i:s",$time);
+                $sql = "INSERT 
+                INTO notatki_tr
+                (
+                notatki_ng,
+                wersja,
+                stan,
+                czas,
+                tresc
+                )
+                VALUES
+                (
+                 '".$body->stan."',
+                 '".$body->wersja."',
+                 0,
+                 '".$czasserwera."',
+                 '".$body->notatka."'
+                 )
+                ";
+                if ($conn->query($sql) === TRUE) 
+                {  
+                   $id  = $conn->insert_id;   
+                   $result = array ("wynik"=>true, "stan"=>true, "error"=>'wersja: '.$body->wersja, "id"=>$id, "wersja"=>$body->wersja, "stan"=>true, "stanText"=>'dostępna', 'czas'=>$czasserwera, "tresc"=>$body->notatka ); 
+                }
+                else 
+                { 
+                $result = array ("wynik"=>false, "stan"=>false,  "error"=>'błąd zapisu'); }
+                $conn->close();        
+
             }    
 
         }
@@ -121,7 +157,7 @@ try
 }
 catch(Exception $e)    
 {
-    $result = array("wynik"=>false, "stan"=>false, "error"=>"problem z odczytem");
+    $result = array("wynik"=>false, "stan"=>false, "error"=>"problem z połączeniem");
     echo ($e);
 }
 echo json_encode($result);     

@@ -38,7 +38,7 @@ try
                 $modul = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "producent"=>$row['producent'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis']);
                 array_push($moduly,$modul);
                 }
-                $result = array ("wynik"=>true, "stan"=>true, "moduly"=>$moduly, "error"=>"wczytano: ".$wynik->num_rows." pozycje");
+                $result = array ("wynik"=>true, "stan"=>true, "moduly"=>$moduly, "error"=>"wczytano: ".$wynik->num_rows);
                 $conn->close();   
                 }
                 else

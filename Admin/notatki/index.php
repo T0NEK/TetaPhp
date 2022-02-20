@@ -11,6 +11,7 @@ try
     else
     {
         //$body = (object) array ( 'kierunek'=>'set', 'stan' => 2, 'tytul' => 'notatka nowa' );
+        //$body = (object) array ( 'kierunek'=>'get', 'stan' => 2, 'tytul' => 'notatka nowa' );
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {
@@ -52,7 +53,7 @@ try
                 $notatka = array ("id"=>$row['id'],"identyfikator"=>$row['identyfikator'], "tytul"=>$row['tytul'], "wlascicielText"=>$row['wlascicielText'], "wlasciciel"=>$row['wlasciciel'], "stan"=>($row['stan']==0), "stanText"=>$row['stanText'], "czas"=>$row['czas']);
                 array_push($notatki,$notatka);
                 }
-                $result = array ("wynik"=>true, "stan"=>true, "notatki"=>$notatki, "error"=>"wczytano: ".$wynik->num_rows." pozycje");
+                $result = array ("wynik"=>true, "stan"=>true, "notatki"=>$notatki, "error"=>"wczytano: ".$wynik->num_rows);
                 $conn->close();   
                 }
                 else
@@ -72,6 +73,7 @@ try
                       $identyfikator = $time.chr($body->stan + 70).$row['idmax'].chr(rand(65,90)).$time*rand(1,100); }
                     else                
                     { $identyfikator = $time.chr($body->stan + 70).'666'.chr(rand(65,90)).$time*rand(1,100); }
+                $conn->autocommit(false);
                 $sql = "INSERT 
                 INTO notatki_ng
                 (
@@ -92,10 +94,32 @@ try
                  )
                 ";
                 if ($conn->query($sql) === TRUE) 
-                {     
-                    $result = array ("wynik"=>true, "stan"=>true, "error"=>$identyfikator); }
+                { 
+                        $id = $conn->insert_id;
+                        $sql = "INSERT 
+                        INTO notatki_tr
+                        (
+                        notatki_ng,
+                        wersja,
+                        stan,
+                        czas,
+                        tresc
+                        )
+                        VALUES
+                        (
+                         '".$id."',
+                         0,
+                         0,
+                         '".$czasserwera."',
+                         ''
+                         )
+                        ";
+                        $conn->query($sql);
+                if ($conn->commit() === TRUE) 
+                { $result = array ("wynik"=>true, "stan"=>true, "error"=>$identyfikator); }
                 else 
                 { $result = array ("wynik"=>false, "stan"=>false,  "error"=>'błąd zapisu'); }
+                }
                 $conn->close();    
             }   
         }
@@ -108,7 +132,7 @@ try
 }
 catch(Exception $e)    
 {
-    $result = array("wynik"=>false, "stan"=>false, "error"=>"błąd odczytu");
+    $result = array("wynik"=>false, "stan"=>false, "error"=>"problem z połączeniem");
     echo ($e);
 }
 echo json_encode($result);     
