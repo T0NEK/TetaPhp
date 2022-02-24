@@ -13,38 +13,57 @@ try
         //$body = (object) array ( 'kierunek'=>'set', 'stan' => 2, 'tytul' => 'notatka nowa' );
         //$body = (object) array ( 'kierunek'=>'get', 'stan' => 2, 'tytul' => 'notatka nowa' );
         //$body = (object) array ( 'kierunek'=>'del', 'stan' => 2, 'tytul' => '1644743771H5V129934757909' );
+        //$body = (object) array ( 'kierunek'=>'dos', 'stan' => 2, 'id' => '1645281249H4D60875406213' );
         //$body = (object) array ( 'kierunek'=>'udo', 'stan' => 2, 'tytul' => '1644743771H5V129934757909', 'imie' => 'Borys', 'nazwisko' => 'Gulkov' );
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {
         if ($body->kierunek == 'get')    
-            {//get
+            {//get get
                 $sql = 
-                "SELECT
-                    notatki_ng.id,
-                    notatki_ng.identyfikator,
-                    notatki_ng.tytul,
-                    notatki_ng.wlasciciel,
-                    notatki_ng.czas,
-                    CASE notatki_ng.wlasciciel WHEN ".$body->stan." THEN 'własna'
-                                               ELSE concat(osoby.imie,' ',osoby.nazwisko)
-                                               END as wlascicielText,
-                    notatki_ng.stan,
-                    CASE notatki_ng.stan WHEN 0 THEN 'dostępna'
-                                      WHEN 1 THEN 'usunięta'
-                                      ELSE 'uszkodzona'
-                    END as stanText                    
+                "   SELECT
+                        notatki_ng.id,
+                        notatki_ng.identyfikator,
+                        notatki_ng.tytul,
+                        notatki_ng.wlasciciel,
+                        notatki_ng.czas as czas,
+                        'własna' as wlascicielText,
+                        notatki_ng.stan,
+                        CASE notatki_ng.stan WHEN 0 THEN 'dostępna'
+                                        WHEN 1 THEN 'usunięta'
+                                        ELSE 'uszkodzona'
+                        END as stanText                    
                     FROM
-                    notatki_ng,
-                    osoby
-                    where
-                    (
-                    notatki_ng.wlasciciel = ".$body->stan."
-                    OR substring(notatki_ng.udostepnienie,".$body->stan.",1) = '1' 
-                    )
-                    AND osoby.id = notatki_ng.wlasciciel
+                        notatki_ng
+                    WHERE
+                        notatki_ng.wlasciciel = ".$body->stan."
+                UNION ALL
+                    (SELECT
+                        notatki_ng.id,
+                        notatki_ng.identyfikator,
+                        notatki_ng.tytul,
+                        notatki_ng.wlasciciel,
+                        notatki_ng.czas,
+                        CASE notatki_ng.wlasciciel WHEN ".$body->stan." THEN 'własna'
+                                                ELSE concat(osoby.imie,' ',osoby.nazwisko)
+                                                END as wlascicielText,
+                        notatki_ng.stan,
+                        CASE notatki_ng.stan WHEN 0 THEN 'dostępna'
+                                        WHEN 1 THEN 'usunięta'
+                                        ELSE 'uszkodzona'
+                        END as stanText                    
+                    FROM
+                        notatki_ng,
+                        osoby,
+                        notatki_udo
+                    WHERE
+                        notatki_udo.osoby = ".$body->stan." 
+                        AND notatki_udo.del = 0
+                        AND notatki_ng.id  = notatki_udo.notatki_ng
+                        AND osoby.id = notatki_ng.wlasciciel
+                        )
                     ORDER BY
-                    notatki_ng.czas desc
+                        czas desc        
                 ";
                 $wynik = $conn->query($sql); 
                 if ($wynik->num_rows > 0) 
@@ -61,7 +80,79 @@ try
                 {
                     $result = array ("wynik"=>true, "stan"=>false, "error"=>"brak dostepnych notatek");      
                 }
-                $conn->close();   
+            $conn->close();   
+            }
+            elseif ($body->kierunek == 'dos')
+            {//get dos
+                $sql = "
+                SELECT
+                    notatki_ng.id,
+                    notatki_ng.wlasciciel,
+                    notatki_ng.stan,
+                    CASE notatki_ng.stan WHEN 0 THEN 'dostępna'
+                                        WHEN 1 THEN 'usunięta'
+                                        ELSE 'uszkodzona'
+                        END as stanText
+                FROM
+                    notatki_ng
+                WHERE
+                    notatki_ng.identyfikator = '".$body->id."'
+                ";
+                $wynik = $conn->query($sql); 
+                if ($wynik->num_rows > 0) 
+                    { 
+                    $row = $wynik->fetch_assoc();
+                    if ( $row['wlasciciel'] == $body->stan)
+                    {
+                        if ($row['stan'] > 0 )
+                        {
+                            $result = array ("wynik"=>true, "stan"=>false, "error"=>"notatka o identyfikatorze: ".$body->id." jest: ".$row['stanText']);
+                        }
+                        else
+                        {
+                            $idnotatki = $row['id'];
+                            $sql = "
+                            SELECT
+                                notatki_udo.czas,
+                                osoby.id,
+                                osoby.imie,
+                                osoby.nazwisko,
+                                osoby.funkcja
+                            FROM    
+                                notatki_udo,
+                                osoby
+                            WHERE  
+                                notatki_ng = ".$idnotatki."
+                                AND osoby.id = notatki_udo.osoby 
+                                AND del = 0
+                            ";
+                            $wynik = $conn->query($sql); 
+                            if ($wynik->num_rows > 0) 
+                                {
+                                $notatki = array ();    
+                                while ($row = $wynik->fetch_assoc())
+                                {
+                                $notatka = array ("id"=>$row['id'],"identyfikator"=>"", "tytul"=>$row['funkcja'], "wlascicielText"=>$row['nazwisko'], "wlasciciel"=>0, "stan"=>false, "stanText"=>$row['imie'], "czas"=>$row['czas']);
+                                array_push($notatki,$notatka);
+                                }
+                                $result = array ("wynik"=>true, "stan"=>true, "notatki"=>$notatki, "error"=>"wczytano: ".$wynik->num_rows);
+                                }
+                                else
+                                {
+                                    $result = array ("wynik"=>true, "stan"=>false, "error"=>"notatka o identyfikatorze: ".$body->id." nie jest udostepniana");   
+                                }
+                        }
+                    }
+                    else
+                    {
+                        $result = array ("wynik"=>true, "stan"=>false, "error"=>"nie jesteś autorem notatki o id: ".$body->id);
+                    }
+                    }
+                    else
+                    {
+                        $result = array ("wynik"=>true, "stan"=>false, "error"=>"nie znaleziono notatki o id: ".$body->id);
+                    }
+                $conn->close();     
             }
             elseif ($body->kierunek == 'del')
             {//skasuj
@@ -142,7 +233,6 @@ try
                                         WHEN 1 THEN 'usunięta'
                                         ELSE 'uszkodzona'
                         END as stanText,
-                    notatki_ng.udostepnienie,    
                     notatki_ng.blokadaudo
                 FROM
                     notatki_ng
@@ -164,7 +254,6 @@ try
                             if ($row['blokadaudo'] == 0)
                             {
                             $idnotatki = $row['id'];    
-                            $udo = $row['udostepnienie'];
                             $sql = "
                             SELECT
                                 id
@@ -178,25 +267,70 @@ try
                             if ($wynik->num_rows > 0) 
                             { 
                             $row = $wynik->fetch_assoc();
-                                if ($row['id'] == $body->stan)
+                            $idosoby = $row['id'];
+                                if ($idosoby == $body->stan)
                                 {
                                     $result = array ("wynik"=>true, "stan"=>false, "error"=>"nie ma potrzeby udostepniania sobie własnej notatki");
                                 }
                                 else
-                                { 
-                                $udonewp = substr($udo,0,$row['id']);
-                                $udonewk = substr($udo,$row['id']+1);
+                                {
                                 $sql = "
-                                UPDATE
-                                notatki_ng
-                                SET
-                                udostepnienie = ".$udonewp."1".$udonewk."
-                                WHERE
-                                id = ".$idnotatki."
+                                SELECT
+                                    id,
+                                    del
+                                FROM    
+                                    notatki_udo
+                                WHERE  
+                                    notatki_ng = ".$idnotatki."
+                                    AND osoby = ".$idosoby."
                                 ";
+                                $wynik = $conn->query($sql); 
+                                $time = time();
+                                $czasserwera = date("Y-m-d H:i:s",$time);
+                                if ($wynik->num_rows > 0) 
+                                { 
+                                $row = $wynik->fetch_assoc();
+                                $del = ($row['del'] == 0 ? 1 : 0 );
+                                $sql = "
+                                    UPDATE
+                                    notatki_udo
+                                    SET
+                                    del = ".$del.",
+                                    czas = '".$czasserwera."'
+                                    WHERE
+                                    id = ".$row['id']."
+                                ";
+                                }
+                                else
+                                {
+                                $del = 0;
+                                $sql = "
+                                    INSERT INTO notatki_udo
+                                    (
+                                        notatki_ng,
+                                        osoby,
+                                        czas,
+                                        del
+                                    )
+                                    VALUES
+                                    (
+                                        ".$idnotatki.",
+                                        ".$idosoby.",
+                                        '".$czasserwera."',
+                                        ".$del."
+                                    )
+                                ";
+                                }
                                 if ($conn->query($sql) === TRUE) 
                                 {
+                                    if ($del == 0)
+                                    {
                                     $result = array ("wynik"=>true, "stan"=>true, "error"=>"notatka o id: ".$body->tytul." została udostepniona dla: ".$body->imie." ".$body->nazwisko);
+                                    }
+                                    else
+                                    {
+                                    $result = array ("wynik"=>true, "stan"=>true, "error"=>"notatce o id: ".$body->tytul." cofnięto udostepnienie dla: ".$body->imie." ".$body->nazwisko);
+                                    }
                                 }
                                 else
                                 {
@@ -247,7 +381,6 @@ try
                 czas,
                 stan,
                 blokadastan,
-                udostepnienie,
                 blokadaudo
                 )
                 VALUES
@@ -257,9 +390,8 @@ try
                     '".$czasserwera."',
                     0,
                     0,
-                    '10000000000',
                     0
-                    )
+                )
                 ";
                 if ($conn->query($sql) === TRUE) 
                 { 
