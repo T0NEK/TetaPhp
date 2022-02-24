@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 24 Lut 2022, 05:43
+-- Czas generowania: 24 Lut 2022, 23:00
 -- Wersja serwera: 10.1.21-MariaDB
 -- Wersja PHP: 5.6.30
 
@@ -211,7 +211,15 @@ INSERT INTO `dzialania` (`id`, `polecenia`, `nazwa`, `czas`, `dzialanie`, `prefi
 (183, 'notatka udostępnij', 'udostepnij_10', '500', 'dodajdane', '', 'osoba nazwisko', '', 'udostepnij_11', 'udostepnij_11', ''),
 (184, 'notatka udostępnij', 'udostepnij_6', '500', 'komunikat', '', 'podaj osobę:', '', 'udostepnij_7', 'udostepnij_7', ''),
 (185, 'notatka udostępnij', 'udostepnij_12', '500', 'informacja', '', 'tekst', '', 'end', 'end', ''),
-(186, 'notatka udostępnij', 'udostepnij_13', '500', 'informacja', 'odmowa: ', 'tekst', '', 'end', 'end', '');
+(186, 'notatka udostępnij', 'udostepnij_13', '500', 'informacja', 'odmowa: ', 'tekst', '', 'end', 'end', ''),
+(187, 'notatka dostęp', 'dostep_0', '500', 'komunikat', '', 'wykonuję: [ notatka dostęp ]', '', 'dostep_1', 'dostep_1', 'alternatywa'),
+(188, 'notatka dostęp', 'dostep_1', '500', 'dane', '', 'podaj id notatki ?', '', 'dostep_2', 'dostep_2', ''),
+(189, 'notatka dostęp', 'dostep_2', '500', 'zapiszdane', '', 'nr notatki', '', 'dostep_3', 'dostep_3', ''),
+(190, 'notatka dostęp', 'dostep_3', '500', 'getset', '', 'wczytaj', 'notatka_dostep', 'dostep_5', 'dostep_4', ''),
+(191, 'notatka dostęp', 'dostep_4', '500', 'informacja', 'odmowa: ', 'tekst', '', 'end', 'end', ''),
+(192, 'notatka dostęp', 'dostep_5', '500', 'informacja', 'notatka o id: [ ', 'bufor1', '] jest udostępniona:', 'dostep_6', 'dostep_6', ''),
+(193, 'notatka dostęp', 'dostep_7', '500', 'informacja', '', 'tekst', '', 'end', 'end', ''),
+(194, 'notatka dostęp', 'dostep_6', '500', 'linie', '', 'dostep', '', 'dostep_7', 'dostep_7', '');
 
 -- --------------------------------------------------------
 
@@ -842,7 +850,16 @@ INSERT INTO `komputery` (`id`, `nazwa`, `hostid`, `czaslogowania`, `czaszmiana`,
 (606, 'DESKTOP-2KPJSHU', 'HI551645611482QL56143168198934DG', '2022-02-23 11:18:02', '2022-02-23 11:18:02', 0),
 (607, 'DESKTOP-2KPJSHU', 'UM691645611782HY1751013965242ID', '2022-02-23 11:23:02', '2022-02-23 11:23:02', 0),
 (608, 'DESKTOP-2KPJSHU', 'DD471645611789SI65146459449221HU', '2022-02-23 11:23:09', '2022-02-23 11:23:09', 0),
-(609, 'DESKTOP-2KPJSHU', 'CZ11645677165FR9042787606290ZC', '2022-02-24 05:32:45', '2022-02-24 05:32:45', 0);
+(609, 'DESKTOP-2KPJSHU', 'CZ11645677165FR9042787606290ZC', '2022-02-24 05:32:45', '2022-02-24 05:32:45', 0),
+(610, 'DESKTOP-2KPJSHU', 'OL941645716774TF18105325873536RZ', '2022-02-24 16:32:54', '2022-02-24 16:32:54', 0),
+(611, 'DESKTOP-2KPJSHU', 'MA761645717496JO119748609952VG', '2022-02-24 16:44:56', '2022-02-24 16:44:56', 0),
+(612, 'DESKTOP-2KPJSHU', 'DH131645718394TM8075703046124RF', '2022-02-24 16:59:54', '2022-02-24 16:59:54', 0),
+(613, 'DESKTOP-2KPJSHU', 'OL211645721595ZT5742788761470QV', '2022-02-24 17:53:15', '2022-02-24 17:53:15', 0),
+(614, 'DESKTOP-2KPJSHU', 'AG611645721813HC2454308819829UW', '2022-02-24 17:56:53', '2022-02-24 17:56:53', 0),
+(615, 'DESKTOP-2KPJSHU', 'YY201645737709YS8097098524831AX', '2022-02-24 22:21:49', '2022-02-24 22:21:49', 0),
+(616, 'DESKTOP-2KPJSHU', 'LR231645737860QV823040330040PH', '2022-02-24 22:24:20', '2022-02-24 22:24:20', 0),
+(617, 'DESKTOP-2KPJSHU', 'NK441645737917SV4132914758340CH', '2022-02-24 22:25:17', '2022-02-24 22:25:17', 0),
+(618, 'DESKTOP-2KPJSHU', 'ZF911645738216HP691645738216CD', '2022-02-24 22:30:16', '2022-02-24 22:30:16', 0);
 
 -- --------------------------------------------------------
 
@@ -881,7 +898,6 @@ CREATE TABLE `notatki_ng` (
   `czas` text COLLATE utf8_polish_ci NOT NULL,
   `stan` tinyint(1) NOT NULL,
   `blokadastan` tinyint(1) NOT NULL,
-  `udostepnienie` text COLLATE utf8_polish_ci NOT NULL,
   `blokadaudo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
@@ -889,16 +905,16 @@ CREATE TABLE `notatki_ng` (
 -- Zrzut danych tabeli `notatki_ng`
 --
 
-INSERT INTO `notatki_ng` (`id`, `identyfikator`, `tytul`, `wlasciciel`, `czas`, `stan`, `blokadastan`, `udostepnienie`, `blokadaudo`) VALUES
-(1, '1644743771H5V129934757909', 'testowa', 2, '2022-02-23 08:50:54', 0, 0, '10000010000', 0),
-(2, '1644743786H6Q27960644362', 'testowa 3', 3, '2022-02-06 09:00', 0, 1, '10000000000', 0),
-(3, '1644743790H7N121711040460', 'testowa 4', 4, '2022-02-06 09:00', 0, 0, '11000000000', 0),
-(4, '1644743790H8C52631801280', 'testowa 5', 2, '2022-02-06 09:00', 2, 0, '10000000000', 0),
-(33, '1645281249H4D60875406213', 'test ostateczny nowej notatki', 2, '2022-02-19 15:34:09', 0, 0, '10000000000', 0),
-(34, '1645281533H33P60875416721', 'dowykonania.sufix', 2, '2022-02-19 15:38:53', 0, 0, '10000010000', 0),
-(35, '1645288563H34C21388751319', '//doskasowaniathis.zalogujOsoba({zalogowany:2,imie', 2, '2022-02-19 17:36:03', 0, 0, '10000000000', 0),
-(36, '1645288932H35O31260489708', '//doskasowaniathis.zalogujOsoba({zalogowany:2,imie', 2, '2022-02-23 09:00:57', 1, 0, '10000000000', 0),
-(37, '1645391490H36D14808523410', 'WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW', 2, '2022-02-20 22:11:30', 0, 0, '10000000000', 0);
+INSERT INTO `notatki_ng` (`id`, `identyfikator`, `tytul`, `wlasciciel`, `czas`, `stan`, `blokadastan`, `blokadaudo`) VALUES
+(1, '1644743771H5V129934757909', 'testowa', 2, '2022-02-23 08:50:54', 0, 0, 0),
+(2, '1644743786H6Q27960644362', 'testowa 3', 3, '2022-02-06 09:00', 0, 1, 0),
+(3, '1644743790H7N121711040460', 'testowa 4', 4, '2022-02-06 09:00', 0, 0, 0),
+(4, '1644743790H8C52631801280', 'testowa 5', 2, '2022-02-06 09:00', 2, 0, 0),
+(33, '1645281249H4D60875406213', 'test ostateczny nowej notatki', 5, '2022-02-19 15:34:09', 0, 0, 0),
+(34, '1645281533H33P60875416721', 'dowykonania.sufix', 2, '2022-02-19 15:38:53', 0, 0, 0),
+(35, '1645288563H34C21388751319', '//doskasowaniathis.zalogujOsoba({zalogowany:2,imie', 2, '2022-02-19 17:36:03', 0, 0, 0),
+(36, '1645288932H35O31260489708', '//doskasowaniathis.zalogujOsoba({zalogowany:2,imie', 2, '2022-02-23 09:00:57', 1, 0, 0),
+(37, '1645391490H36D14808523410', 'WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW', 2, '2022-02-20 22:11:30', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -938,7 +954,34 @@ INSERT INTO `notatki_tr` (`id`, `notatki_ng`, `wersja`, `stan`, `czas`, `tresc`)
 (38, 1, 7, 0, '2022-02-19 23:48:42', 'treść notatki 1 w wersji 7 z 2'),
 (39, 1, 8, 0, '2022-02-19 23:54:24', 'treść notatki 1 w wersji 8 z 7\n'),
 (40, 37, 0, 0, '2022-02-20 22:11:30', ''),
-(41, 1, 9, 0, '2022-02-20 22:22:35', 'treść notatki 1 w wersji 8 z 7\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\n1\n2\n34\n5\n67\n8\n9\n0\n-\nq\nwe\nr\nt\ny\nuii\n\nopp\na\ns\nd\nfg\nh\njk\nl\n;;\nZ\nasd\ns\nfsg\nh\n\nqa\na\n\na\n');
+(41, 1, 9, 0, '2022-02-20 22:22:35', 'treść notatki 1 w wersji 8 z 7\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\n1\n2\n34\n5\n67\n8\n9\n0\n-\nq\nwe\nr\nt\ny\nuii\n\nopp\na\ns\nd\nfg\nh\njk\nl\n;;\nZ\nasd\ns\nfsg\nh\n\nqa\na\n\na\n'),
+(42, 1, 10, 0, '2022-02-24 17:13:52', 'treść notatki 1 w wersji 8 z 7\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\n'),
+(43, 1, 11, 0, '2022-02-24 17:18:07', 'treść notatki 1 w wersji 8 z 7\n1\n2\n3\n4\n5\n6\n7\n8\n9\n'),
+(44, 1, 12, 0, '2022-02-24 17:21:38', 'treść notatki 1 w wersji 8 z 7\n1\n2\n3\n4\n5\n6');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `notatki_udo`
+--
+
+CREATE TABLE `notatki_udo` (
+  `id` int(11) NOT NULL,
+  `notatki_ng` int(11) NOT NULL,
+  `osoby` int(11) NOT NULL,
+  `czas` text CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
+  `del` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `notatki_udo`
+--
+
+INSERT INTO `notatki_udo` (`id`, `notatki_ng`, `osoby`, `czas`, `del`) VALUES
+(1, 33, 2, '2022-02-23 19:00', 0),
+(2, 3, 2, '2022-02-23 19:00', 0),
+(3, 37, 6, '2022-02-24 21:33:10', 0),
+(4, 37, 8, '2022-02-24 21:33:32', 0);
 
 -- --------------------------------------------------------
 
@@ -990,7 +1033,7 @@ INSERT INTO `osoby` (`id`, `czaszmiana`, `kolejnosc`, `imie`, `nazwisko`, `funkc
 (1, '', '110', 'Dedal', '', 'statek', '', '', '', 'M', 2, '!@#', 0, 1, 0, 1, 1, 1, '', '2022-01-30 13:39:18', '', 'Dedal jest tylko jeden', 0, '!@#', 1, 0, 1, 1, 1, 9, 7, 11),
 (2, '2022-02-19 12:39:22', '10', 'John', 'Spow', 'Kapitan', 'nawigator, pilot', 'USA', 'john', 'M', 1, '123', 1, 0, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '2022-02-19 12:39:22', '', 'Witaj John Spow', 200, '123', 1, 0, 0, 0, 0, 9, 7, 11),
 (3, '', '20', 'Wang', 'Yaping', 'I oficer', 'astrofizyk, dyplomata', 'Chiny', 'wang', 'K', 1, '123', 0, 0, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '', '', 'Witaj Louise Banks', 400, '123', 0, 0, 0, 0, 0, 9, 7, 11),
-(4, '2022-01-30 23:07:50', '30', 'William', 'Weir', 'II oficer', 'matematyk, inżynier napędu', 'Unia Europejska', 'william', 'M', 1, '123', 0, 0, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '2022-01-30 23:07:50', '', 'Witaj Dave Bowman', 400, '123', 0, 0, 0, 0, 0, 9, 7, 11),
+(4, '2022-01-30 23:07:50', '30', 'William', 'Weir', 'II oficer', 'matematyk, inżynier jądrowy', 'Unia Europejska', 'william', 'M', 1, '123', 0, 0, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '2022-01-30 23:07:50', '', 'Witaj Dave Bowman', 400, '123', 0, 0, 0, 0, 0, 9, 7, 11),
 (5, '', '40', 'Fatima', 'Punjabi', 'III oficer', 'elektronik, nawigator', 'Indie', 'fatima', 'K', 1, '123', 0, 0, 0, 0, 0, 0, '', '', '', 'Witaj Dwayne Hicks', 400, '123', 0, 0, 0, 0, 0, 9, 7, 11),
 (6, '2022-02-05 11:34:18', '50', 'Borys', 'Gulkov', 'IV oficer', 'pilot, nawigator', 'Rosja', 'borys', 'M', 1, '123', 1, 0, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '2022-02-05 11:26:00', '2022-02-05 11:34:18', 'Witaj Anna Lee Dwell', 400, '123', 1, 0, 0, 0, 0, 9, 7, 11),
 (7, '2022-01-30 23:03:13', '60', 'Fiona', 'Zaharova', 'Lekarz', 'psychiatra, programista', 'Chiny', 'fiona', 'K', 2, '123', 0, 0, 0, 0, 0, 0, 'Komputer-Tomka', '2022-01-30 23:03:13', '', 'Witaj William Weir', 400, '123', 1, 0, 1, 1, 0, 9, 7, 11),
@@ -1063,7 +1106,11 @@ INSERT INTO `polecenia` (`id`, `nazwa`, `zalogowany`, `wylogowany`, `autoryzacja
 (37, 'notatka udostępnij', 1, 0, 0, 37, '11111111111', '500', 'udostepnij_1', 'udostępnia osobie notatkę o identyfikatorze'),
 (38, 'udostępnij', 1, 0, 0, 37, '', '500', 'udostepnij_0', 'udostępnia osobie notatkę o identyfikatorze'),
 (39, 'notatka udostepnij', 1, 0, 0, 37, '', '500', 'udostepnij_0', 'udostępnia osobie notatkę o identyfikatorze'),
-(40, 'udostepnij', 1, 0, 0, 37, '', '500', 'udostepnij_0', 'udostępnia osobie notatkę o identyfikatorze');
+(40, 'udostepnij', 1, 0, 0, 37, '', '500', 'udostepnij_0', 'udostępnia osobie notatkę o identyfikatorze'),
+(41, 'notatka dostęp', 1, 0, 0, 41, '11111111111', '500', 'dostep_1', 'pokazuje udostępnienie notatki o identyfikatorze'),
+(42, 'dostęp', 1, 0, 0, 41, '', '500', 'dostep_0', 'pokazuje udostępnienie notatki o identyfikatorze'),
+(43, 'notatka dostep', 1, 0, 0, 41, '', '500', 'dostep_0', 'pokazuje udostępnienie notatki o identyfikatorze'),
+(44, 'dostep', 1, 0, 0, 41, '', '500', 'dostep_0', 'pokazuje udostępnienie notatki o identyfikatorze');
 
 -- --------------------------------------------------------
 
@@ -1126,6 +1173,12 @@ ALTER TABLE `notatki_tr`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `notatki_udo`
+--
+ALTER TABLE `notatki_udo`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `osoby`
 --
 ALTER TABLE `osoby`
@@ -1152,12 +1205,12 @@ ALTER TABLE `ustawienia`
 -- AUTO_INCREMENT dla tabeli `dzialania`
 --
 ALTER TABLE `dzialania`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
 --
 -- AUTO_INCREMENT dla tabeli `komputery`
 --
 ALTER TABLE `komputery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=610;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=619;
 --
 -- AUTO_INCREMENT dla tabeli `moduly`
 --
@@ -1172,7 +1225,12 @@ ALTER TABLE `notatki_ng`
 -- AUTO_INCREMENT dla tabeli `notatki_tr`
 --
 ALTER TABLE `notatki_tr`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+--
+-- AUTO_INCREMENT dla tabeli `notatki_udo`
+--
+ALTER TABLE `notatki_udo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT dla tabeli `osoby`
 --
@@ -1182,7 +1240,7 @@ ALTER TABLE `osoby`
 -- AUTO_INCREMENT dla tabeli `polecenia`
 --
 ALTER TABLE `polecenia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT dla tabeli `ustawienia`
 --
