@@ -10,38 +10,24 @@ try
     { throw new Exception( $conn->connect_error); } 
     else
     {
-        $body = json_decode(file_get_contents("php://input"));
-        //$body = (object) array ('stan' => 0);
-        if (isset($body))
-        {
-        switch (strtoupper($body->stan)) 
-                    {
-                        case '0':
-                            $wiersz1 = 'polecenia.wylogowany = 1 ';
-                            $wiersz2 = '';
-                            break;   
-                        default:
-                            $wiersz1 = 'polecenia.zalogowany = 1 ';
-                            $wiersz2 = "AND substring(poleceniaorg.uprawnienia,".$body->stan.",1) = '1' ";
-                            break;
-                    }
-         //get
                 $sql = 
                 "SELECT
                     polecenia.id,
                     polecenia.nazwa,
+                    polecenia.zalogowany,
+                    polecenia.wylogowany,
+                    polecenia.polecenie
                     polecenia.czas,
                     polecenia.dzialania,
-                    polecenia.autoryzacja,
-                    polecenia.polecenie,
+                    CASE polecenia.id WHEN polecenia.polecenie THEN '-----'
+                                           ELSE poleceniaorg.nazwa
+                                           END as nazwaOrg,
                     polecenia.komunikat
                     FROM
                     polecenia,
                     polecenia poleceniaorg
-                    where
-                    ".$wiersz1."
-                    AND poleceniaorg.id = polecenia.polecenie
-                    ".$wiersz2."
+                    WHERE
+                    poleceniaorg.id = polecenia.polecenie
                     ORDER BY
                     nazwa
                 ";
@@ -51,28 +37,22 @@ try
                 $polecenia = array ();    
                 while ($row = $wynik->fetch_assoc())
                 {
-                $polecenie = array ("nazwa"=>$row['nazwa'], "czas"=>$row['czas'], "dzialanie"=>$row['dzialania'], "autoryzacja"=>($row['autoryzacja']==1), "polecenie"=>($row['polecenie']==$row['id']), "prefix"=>"", "komunikat"=>$row['komunikat'], "sufix"=>"", "nastepnyTrue"=>"brak", "nastepnyFalse"=>"brak");
+                $polecenie = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "zalogowany"=>$row['zalogowany'], "wylogowany"=>$row['wylogowany'], "polecenie"=>$row['polecenie'], "czas"=>$row['czas'], "dzialania"=>$row['dzialania'], "nazwaOrg"=>$row['nazwaOrg'], "komunikat"=>$row['komunikat']);
                 array_push($polecenia,$polecenie);
                 }
-                $result = array ("wynik"=>true, "stan"=>"ok", "polecenia"=>$polecenia);
-                $conn->close();   
+                $result = array ("wynik"=>true, "stan"=>true, "polecenia"=>$polecenia, "error"=>"wczytano".$wynik->num_rows);
                 }
                 else
                 {
-                    $result = array ("wynik"=>false, "stan"=>"0 wyników");      
+                    $result = array ("wynik"=>false, "stan"=>false, "error"=>"problem z wczytaniem");      
                 }
-            
-        }
-        else
-        {
-            $result = array ("wynik"=>false, "stan"=>"error", "error"=>"brak danych");      
-        }
+    $conn->close();               
     }    
     
 }
 catch(Exception $e)    
 {
-    $result = array("wynik"=>false, "stan"=>"error", "error"=>$e);
+    $result = array("wynik"=>false, "stan"=>false, "stan"=>"error", "error"=>$e);
     echo ($e);
 }
 echo json_encode($result);     
