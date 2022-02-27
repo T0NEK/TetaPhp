@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 24 Lut 2022, 23:00
+-- Czas generowania: 27 Lut 2022, 22:01
 -- Wersja serwera: 10.1.21-MariaDB
 -- Wersja PHP: 5.6.30
 
@@ -1030,7 +1030,7 @@ CREATE TABLE `osoby` (
 
 INSERT INTO `osoby` (`id`, `czaszmiana`, `kolejnosc`, `imie`, `nazwisko`, `funkcja`, `specjalnosc`, `narodowosc`, `userlogin`, `rodzaj`, `user`, `hasloorg`, `autoryzacja`, `zalogowanyorg`, `blokadaorg`, `hannahorg`, `fionaorg`, `rajehorg`, `uzytkownik`, `czaslogowania`, `czaswylogowania`, `odpowiedz`, `reakcja`, `haslonew`, `zalogowanynew`, `blokadanew`, `hannahnew`, `fionanew`, `rajehnew`, `hannahid`, `fionaid`, `rajehid`) VALUES
 (0, '', '0', '', '', '', '', '', '', '', 0, '', 0, 0, 0, 0, 0, 0, '', '', '', '', 0, '', 0, 0, 0, 0, 0, 9, 7, 11),
-(1, '', '110', 'Dedal', '', 'statek', '', '', '', 'M', 2, '!@#', 0, 1, 0, 1, 1, 1, '', '2022-01-30 13:39:18', '', 'Dedal jest tylko jeden', 0, '!@#', 1, 0, 1, 1, 1, 9, 7, 11),
+(1, '', '110', 'Dedal', '', 'statek', '', '', '', 'S', 2, '!@#', 0, 1, 0, 1, 1, 1, '', '2022-01-30 13:39:18', '', 'Dedal jest tylko jeden', 0, '!@#', 1, 0, 1, 1, 1, 9, 7, 11),
 (2, '2022-02-19 12:39:22', '10', 'John', 'Spow', 'Kapitan', 'nawigator, pilot', 'USA', 'john', 'M', 1, '123', 1, 0, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '2022-02-19 12:39:22', '', 'Witaj John Spow', 200, '123', 1, 0, 0, 0, 0, 9, 7, 11),
 (3, '', '20', 'Wang', 'Yaping', 'I oficer', 'astrofizyk, dyplomata', 'Chiny', 'wang', 'K', 1, '123', 0, 0, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '', '', 'Witaj Louise Banks', 400, '123', 0, 0, 0, 0, 0, 9, 7, 11),
 (4, '2022-01-30 23:07:50', '30', 'William', 'Weir', 'II oficer', 'matematyk, inżynier jądrowy', 'Unia Europejska', 'william', 'M', 1, '123', 0, 0, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '2022-01-30 23:07:50', '', 'Witaj Dave Bowman', 400, '123', 0, 0, 0, 0, 0, 9, 7, 11),
@@ -1041,7 +1041,7 @@ INSERT INTO `osoby` (`id`, `czaszmiana`, `kolejnosc`, `imie`, `nazwisko`, `funkc
 (9, '', '80', 'Hannah', 'Stevens', 'Informatyk', 'programista, łącznościowiec', 'Unia Europejska', 'hannah', 'K', 2, '123', 0, 0, 0, 0, 0, 0, 'Komputer-Tomka', '', '', 'Witaj Hannah Stevens', 0, '!@#', 1, 0, 1, 1, 0, 9, 7, 11),
 (10, '', '90', 'Dave', 'Bowman', 'Łącznościowiec', 'łącznościowiec, psycholog', 'USA', 'dave', 'M', 1, '123', 0, 0, 0, 0, 0, 0, '', '', '', 'Witam Joshua', 0, 'pomoc', 0, 0, 0, 0, 0, 9, 7, 11),
 (11, '', '100', 'Rajeh', ' Amit', 'Pilot', 'pilot / nawigator', 'Indie', 'rajeh', 'M', 2, '123', 0, 0, 0, 0, 0, 0, '', '', '', 'Witam MG', 0, '123', 1, 0, 1, 1, 0, 9, 7, 11),
-(12, '', '120', 'GRACE', ' ', 'SI', '', '', '', 'K', 2, '123', 0, 0, 0, 0, 0, 0, '', '', '', 'Witam Grace', 0, '123', 0, 0, 1, 1, 1, 9, 7, 11);
+(12, '', '120', 'GRACE', ' ', 'SI', '', '', '', 'S', 2, '123', 0, 0, 0, 0, 0, 0, '', '', '', 'Witam Grace', 0, '123', 0, 0, 1, 1, 1, 9, 7, 11);
 
 -- --------------------------------------------------------
 
@@ -1056,7 +1056,6 @@ CREATE TABLE `polecenia` (
   `wylogowany` tinyint(1) NOT NULL,
   `autoryzacja` tinyint(1) NOT NULL,
   `polecenie` tinyint(1) NOT NULL,
-  `uprawnienia` text COLLATE utf8_polish_ci NOT NULL,
   `czas` text COLLATE utf8_polish_ci NOT NULL,
   `dzialania` text COLLATE utf8_polish_ci NOT NULL,
   `komunikat` text COLLATE utf8_polish_ci NOT NULL
@@ -1066,51 +1065,95 @@ CREATE TABLE `polecenia` (
 -- Zrzut danych tabeli `polecenia`
 --
 
-INSERT INTO `polecenia` (`id`, `nazwa`, `zalogowany`, `wylogowany`, `autoryzacja`, `polecenie`, `uprawnienia`, `czas`, `dzialania`, `komunikat`) VALUES
-(1, 'pomoc', 1, 1, 0, 1, '11111111111', '500', 'pomoc_1', 'Dostepne polecenia w zależności od logowania i autoryzacji'),
-(2, 'zaloguj', 0, 1, 0, 2, '11111111111', '500', 'zaloguj_1', 'Logowanie do terminala'),
-(3, 'wyloguj', 1, 0, 0, 3, '11111111111', '500', 'wyloguj_1', 'Wylogowanie z terminala'),
-(4, 'moduły', 1, 0, 0, 4, '11111111111', '1000', 'moduly_1', 'Lista modułów Dedala'),
-(5, 'login', 0, 1, 0, 2, '', '250', 'zaloguj_0', 'Logowanie do terminala'),
-(6, 'pomoc cała', 1, 1, 1, 6, '11111111111', '500', 'pomoc_cala_1', 'Wszystkie polecenia w zależności od logowania'),
-(7, 'pomoc cala', 1, 1, 1, 6, '', '500', 'pomoc_cala_0', 'Wszystkie polecenia w zależności od logowania'),
-(8, 'pomoc all', 1, 1, 1, 6, '', '500', 'pomoc_cala_0', 'Wszystkie polecenia w zależności od logowania'),
-(9, 'help', 1, 1, 0, 1, '', '500', 'pomoc_0', 'Dostepne polecenia w zależności od logowania i autoryzacji'),
-(10, 'moduly', 1, 0, 0, 4, '', '1000', 'moduly_0', 'Lista modułów Dedala'),
-(11, 'notatki', 1, 0, 0, 11, '11111111111', '500', 'notatki_1', 'Lista tytułów notatek'),
-(12, '?', 1, 1, 0, 1, '', '500', 'pomoc_0', 'Dostepne polecenia w zależności od logowania i autoryzacji'),
-(13, 'notatka wczytaj', 1, 0, 0, 13, '11111111111', '500', 'notatka_1', 'Wczytanie notatki'),
-(14, 'notatka', 1, 0, 0, 13, '', '500', 'notatka_0', 'Wczytanie notatki'),
-(15, 'notatka edytuj', 1, 0, 0, 15, '11111111111', '500', 'edytuj_1', 'Edycja notatki'),
-(16, 'edytuj', 1, 0, 0, 15, '', '500', 'edytuj_0', 'Edycja notatki'),
-(17, 'notatka zapisz', 1, 0, 0, 17, '11111111111', '500', 'zapisz_1', 'Zapis notatki'),
-(18, 'zapisz', 1, 0, 0, 17, '', '500', 'zapisz_0', 'Zapis notatki'),
-(19, 'notatka nowa', 1, 0, 0, 19, '11111111111', '500', 'nowa_1', 'Nowa notatka nagłówek'),
-(20, 'nowa', 1, 0, 0, 19, '', '500', 'nowa_0', 'Nowa notatka nagłówek'),
-(21, 'notatka zamknij', 1, 0, 0, 21, '11111111111', '500', 'zamknij_1', 'Zamyka edycję notatki bez edycji'),
-(22, 'zamknij', 1, 0, 0, 21, '', '500', 'zamknij_0', 'Zamyka edycję notatki bez edycji'),
-(23, 'notatka wersja', 1, 0, 0, 23, '11111111111', '500', 'wersja_1', 'Zmienia wersję notatki'),
-(24, 'wersja', 1, 0, 0, 23, '', '500', 'wersja_0', 'Zmienia wersję notatki'),
-(25, 'historia kasuj', 1, 1, 0, 25, '11111111111', '500', 'kasujh_1', 'Kasuje historię komunikatów'),
-(26, 'kasujh', 1, 1, 0, 25, '', '500', 'kasujh_0', 'Kasuje historię komunikatów'),
-(27, 'polecenia kasuj', 1, 1, 0, 27, '11111111111', '500', 'kasujp_1', 'Kasuje historię poleceń'),
-(28, 'kasujp', 1, 1, 0, 27, '', '500', 'kasujp_0', 'Kasuje historię poleceń'),
-(29, 'wszystko kasuj', 1, 1, 0, 29, '11111111111', '500', 'kasuja_7', 'Kasuje historię komunikatów i poleceń'),
-(30, 'kasuja', 1, 1, 0, 29, '', '500', 'kasuja_0', 'Kasuje historię komunikatów i poleceń'),
-(31, 'notatka kasuj', 1, 1, 0, 31, '11111111111', '500', 'kasujn_1', 'kasuje wyświetlenie notatki'),
-(32, 'kasujn', 1, 1, 0, 31, '', '500', 'kasujn_0', 'kasuje wyświetlenie notatki'),
-(33, 'notatka usuń', 1, 0, 0, 33, '11111111111', '500', 'usun_1', 'usuwa notatkę o identyfikatorze'),
-(34, 'usuń', 1, 0, 0, 33, '', '500', 'usun_0', 'usuwa notatkę o identyfikatorze'),
-(35, 'notatka usun', 1, 0, 0, 33, '', '500', 'usun_0', 'usuwa notatkę o identyfikatorze'),
-(36, 'usun', 1, 0, 0, 33, '', '500', 'usun_0', 'usuwa notatkę o identyfikatorze'),
-(37, 'notatka udostępnij', 1, 0, 0, 37, '11111111111', '500', 'udostepnij_1', 'udostępnia osobie notatkę o identyfikatorze'),
-(38, 'udostępnij', 1, 0, 0, 37, '', '500', 'udostepnij_0', 'udostępnia osobie notatkę o identyfikatorze'),
-(39, 'notatka udostepnij', 1, 0, 0, 37, '', '500', 'udostepnij_0', 'udostępnia osobie notatkę o identyfikatorze'),
-(40, 'udostepnij', 1, 0, 0, 37, '', '500', 'udostepnij_0', 'udostępnia osobie notatkę o identyfikatorze'),
-(41, 'notatka dostęp', 1, 0, 0, 41, '11111111111', '500', 'dostep_1', 'pokazuje udostępnienie notatki o identyfikatorze'),
-(42, 'dostęp', 1, 0, 0, 41, '', '500', 'dostep_0', 'pokazuje udostępnienie notatki o identyfikatorze'),
-(43, 'notatka dostep', 1, 0, 0, 41, '', '500', 'dostep_0', 'pokazuje udostępnienie notatki o identyfikatorze'),
-(44, 'dostep', 1, 0, 0, 41, '', '500', 'dostep_0', 'pokazuje udostępnienie notatki o identyfikatorze');
+INSERT INTO `polecenia` (`id`, `nazwa`, `zalogowany`, `wylogowany`, `autoryzacja`, `polecenie`, `czas`, `dzialania`, `komunikat`) VALUES
+(1, 'pomoc', 0, 0, 0, 1, '500', 'pomoc_1', 'Dostepne polecenia w zależności od logowania i autoryzacji'),
+(2, 'zaloguj', 0, 1, 0, 2, '500', 'zaloguj_1', 'Logowanie do terminala'),
+(3, 'wyloguj', 1, 0, 0, 3, '500', 'wyloguj_1', 'Wylogowanie z terminala'),
+(4, 'moduły', 1, 0, 0, 4, '1000', 'moduly_1', 'Lista modułów Dedala'),
+(5, 'login', 0, 1, 0, 2, '250', 'zaloguj_0', 'Logowanie do terminala'),
+(6, 'pomoc cała', 1, 1, 1, 6, '500', 'pomoc_cala_1', 'Wszystkie polecenia w zależności od logowania'),
+(7, 'pomoc cala', 1, 1, 1, 6, '500', 'pomoc_cala_0', 'Wszystkie polecenia w zależności od logowania'),
+(8, 'pomoc all', 1, 1, 1, 6, '500', 'pomoc_cala_0', 'Wszystkie polecenia w zależności od logowania'),
+(9, 'help', 1, 1, 0, 1, '500', 'pomoc_0', 'Dostepne polecenia w zależności od logowania i autoryzacji'),
+(10, 'moduly', 1, 0, 0, 4, '1000', 'moduly_0', 'Lista modułów Dedala'),
+(11, 'notatki', 1, 0, 0, 11, '500', 'notatki_1', 'Lista tytułów notatek'),
+(12, '?', 1, 1, 0, 1, '500', 'pomoc_0', 'Dostepne polecenia w zależności od logowania i autoryzacji'),
+(13, 'notatka wczytaj', 1, 0, 0, 13, '500', 'notatka_1', 'Wczytanie notatki'),
+(14, 'notatka', 1, 0, 0, 13, '500', 'notatka_0', 'Wczytanie notatki'),
+(15, 'notatka edytuj', 1, 0, 0, 15, '500', 'edytuj_1', 'Edycja notatki'),
+(16, 'edytuj', 1, 0, 0, 15, '500', 'edytuj_0', 'Edycja notatki'),
+(17, 'notatka zapisz', 1, 0, 0, 17, '500', 'zapisz_1', 'Zapis notatki'),
+(18, 'zapisz', 1, 0, 0, 17, '500', 'zapisz_0', 'Zapis notatki'),
+(19, 'notatka nowa', 1, 0, 0, 19, '500', 'nowa_1', 'Nowa notatka nagłówek'),
+(20, 'nowa', 1, 0, 0, 19, '500', 'nowa_0', 'Nowa notatka nagłówek'),
+(21, 'notatka zamknij', 1, 0, 0, 21, '500', 'zamknij_1', 'Zamyka edycję notatki bez edycji'),
+(22, 'zamknij', 1, 0, 0, 21, '500', 'zamknij_0', 'Zamyka edycję notatki bez edycji'),
+(23, 'notatka wersja', 1, 0, 0, 23, '500', 'wersja_1', 'Zmienia wersję notatki'),
+(24, 'wersja', 1, 0, 0, 23, '500', 'wersja_0', 'Zmienia wersję notatki'),
+(25, 'historia kasuj', 1, 1, 0, 25, '500', 'kasujh_1', 'Kasuje historię komunikatów'),
+(26, 'kasujh', 1, 1, 0, 25, '500', 'kasujh_0', 'Kasuje historię komunikatów'),
+(27, 'polecenia kasuj', 1, 1, 0, 27, '500', 'kasujp_1', 'Kasuje historię poleceń'),
+(28, 'kasujp', 1, 1, 0, 27, '500', 'kasujp_0', 'Kasuje historię poleceń'),
+(29, 'wszystko kasuj', 1, 1, 0, 29, '500', 'kasuja_7', 'Kasuje historię komunikatów i poleceń'),
+(30, 'kasuja', 1, 1, 0, 29, '500', 'kasuja_0', 'Kasuje historię komunikatów i poleceń'),
+(31, 'notatka kasuj', 1, 1, 0, 31, '500', 'kasujn_1', 'kasuje wyświetlenie notatki'),
+(32, 'kasujn', 1, 1, 0, 31, '500', 'kasujn_0', 'kasuje wyświetlenie notatki'),
+(33, 'notatka usuń', 1, 0, 0, 33, '500', 'usun_1', 'usuwa notatkę o identyfikatorze'),
+(34, 'usuń', 1, 0, 0, 33, '500', 'usun_0', 'usuwa notatkę o identyfikatorze'),
+(35, 'notatka usun', 1, 0, 0, 33, '500', 'usun_0', 'usuwa notatkę o identyfikatorze'),
+(36, 'usun', 1, 0, 0, 33, '500', 'usun_0', 'usuwa notatkę o identyfikatorze'),
+(37, 'notatka udostępnij', 1, 0, 0, 37, '500', 'udostepnij_1', 'udostępnia osobie notatkę o identyfikatorze'),
+(38, 'udostępnij', 1, 0, 0, 37, '500', 'udostepnij_0', 'udostępnia osobie notatkę o identyfikatorze'),
+(39, 'notatka udostepnij', 1, 0, 0, 37, '500', 'udostepnij_0', 'udostępnia osobie notatkę o identyfikatorze'),
+(40, 'udostepnij', 1, 0, 0, 37, '500', 'udostepnij_0', 'udostępnia osobie notatkę o identyfikatorze'),
+(41, 'notatka dostęp', 1, 0, 0, 41, '500', 'dostep_1', 'pokazuje udostępnienie notatki o identyfikatorze'),
+(42, 'dostęp', 1, 0, 0, 41, '500', 'dostep_0', 'pokazuje udostępnienie notatki o identyfikatorze'),
+(43, 'notatka dostep', 1, 0, 0, 41, '500', 'dostep_0', 'pokazuje udostępnienie notatki o identyfikatorze'),
+(44, 'dostep', 1, 0, 0, 41, '500', 'dostep_0', 'pokazuje udostępnienie notatki o identyfikatorze');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `polecenia_osoby`
+--
+
+CREATE TABLE `polecenia_osoby` (
+  `id` int(11) NOT NULL,
+  `polecenia` int(11) NOT NULL,
+  `osoby` int(11) NOT NULL,
+  `czas` text COLLATE utf8_polish_ci NOT NULL,
+  `dos` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `polecenia_osoby`
+--
+
+INSERT INTO `polecenia_osoby` (`id`, `polecenia`, `osoby`, `czas`, `dos`) VALUES
+(1, 1, 1, '2022-02-27 09:00:37', 1),
+(2, 1, 2, '2022-02-27 11:23:46', 1),
+(3, 1, 3, '2022-02-27 11:23:46', 1),
+(4, 1, 12, '2022-02-27 09:08:17', 1),
+(71, 1, 4, '2022-02-27 11:23:46', 1),
+(72, 1, 5, '2022-02-27 11:23:46', 1),
+(73, 1, 6, '2022-02-27 11:23:46', 1),
+(74, 1, 7, '2022-02-27 11:23:46', 1),
+(75, 1, 8, '2022-02-27 11:23:46', 1),
+(76, 1, 9, '2022-02-27 11:23:46', 1),
+(77, 1, 10, '2022-02-27 11:23:46', 1),
+(78, 1, 11, '2022-02-27 11:23:46', 1),
+(79, 27, 2, '2022-02-27 08:04:59', 1),
+(80, 27, 3, '2022-02-27 08:04:59', 1),
+(81, 27, 4, '2022-02-27 08:04:59', 1),
+(82, 27, 5, '2022-02-27 08:04:59', 1),
+(83, 27, 6, '2022-02-27 08:04:59', 1),
+(84, 27, 7, '2022-02-27 08:04:59', 1),
+(85, 27, 8, '2022-02-27 08:04:59', 1),
+(86, 27, 9, '2022-02-27 08:04:59', 1),
+(87, 27, 10, '2022-02-27 08:04:59', 1),
+(88, 27, 11, '2022-02-27 08:04:59', 1),
+(89, 17, 12, '2022-02-27 08:08:17', 1),
+(90, 23, 12, '2022-02-27 08:09:34', 1);
 
 -- --------------------------------------------------------
 
@@ -1131,9 +1174,9 @@ CREATE TABLE `ustawienia` (
 
 INSERT INTO `ustawienia` (`id`, `zmiana`, `nazwa`, `wartosc`) VALUES
 (1, '', 'Oryginalna data startu Dedala', '2043-03-11 12:01:02'),
-(2, '2022-01-16 18:50:01', 'Obecna data startu Dedala', '2043-03-11 12:01:02'),
+(2, '2022-02-27 08:02:47', 'Obecna data startu Dedala', '2043-03-11 12:01:02'),
 (3, '', 'Oryginalna data startu akcji na Dedalu', '2045-04-18 21:35:00'),
-(4, '2022-01-30 13:49:01', 'Obecna data akcji na Dedalu', '2045-04-18 21:35:00'),
+(4, '2022-02-27 08:13:49', 'Obecna data akcji na Dedalu', '2045-05-16 15:59:47'),
 (5, '2022-01-30 13:49:01', 'Stan larpa', 'START'),
 (6, '2022-01-30 13:49:01', 'Data startu larpa ', '2022-01-30 13:49:01');
 
@@ -1192,6 +1235,12 @@ ALTER TABLE `polecenia`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `polecenia_osoby`
+--
+ALTER TABLE `polecenia_osoby`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ustawienia`
 --
 ALTER TABLE `ustawienia`
@@ -1241,6 +1290,11 @@ ALTER TABLE `osoby`
 --
 ALTER TABLE `polecenia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+--
+-- AUTO_INCREMENT dla tabeli `polecenia_osoby`
+--
+ALTER TABLE `polecenia_osoby`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 --
 -- AUTO_INCREMENT dla tabeli `ustawienia`
 --
