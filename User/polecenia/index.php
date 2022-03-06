@@ -10,8 +10,8 @@ try
     { throw new Exception( $conn->connect_error); } 
     else
     {
+        //$body = (object) array ('stan' => 2);
         $body = json_decode(file_get_contents("php://input"));
-        //$body = (object) array ('stan' => 0);
         if (isset($body))
         {
         switch (strtoupper($body->stan)) 
@@ -24,7 +24,7 @@ try
                         default:
                             $wiersz0 = ', polecenia_osoby';
                             $wiersz1 = 'poleceniaorg.zalogowany = 1 ';
-                            $wiersz2 = "AND polecenia_osoby.polecenia =  poleceniaorg.id AND polecenia_osoby.osoby = ".$body->stan." ";
+                            $wiersz2 = "AND polecenia_osoby.polecenia =  poleceniaorg.id AND polecenia_osoby.osoby = ".$body->stan." AND polecenia_osoby.dos = 1";
                             break;
                     }
          //get

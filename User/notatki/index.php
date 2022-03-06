@@ -10,7 +10,7 @@ try
     { throw new Exception( $conn->connect_error); } 
     else
     {
-        //$body = (object) array ( 'kierunek'=>'set', 'stan' => 2, 'tytul' => 'notatka nowa' );
+        //$body = (object) array ( 'kierunek'=>'set', 'stan' => 2, 'tytul' => 'notatka nowa' 'czas' => '2024-02-02 12:20:12' );
         //$body = (object) array ( 'kierunek'=>'get', 'stan' => 2, 'tytul' => 'notatka nowa' );
         //$body = (object) array ( 'kierunek'=>'del', 'stan' => 2, 'tytul' => '1644743771H5V129934757909' );
         //$body = (object) array ( 'kierunek'=>'dos', 'stan' => 2, 'id' => '1645281249H4D60875406213' );
@@ -185,14 +185,11 @@ try
                         {
                             if ($row['blokadastan'] == 0)
                             {
-                            $time = time();
-                            $czasserwera = date("Y-m-d H:i:s",$time);
                             $sql = "
                             UPDATE
                             notatki_ng
                             SET
-                            stan = 1,
-                            czas = '".$czasserwera."'
+                            stan = 1
                             WHERE
                             id = ".$row['id']."
                             ";
@@ -285,8 +282,6 @@ try
                                     AND osoby = ".$idosoby."
                                 ";
                                 $wynik = $conn->query($sql); 
-                                $time = time();
-                                $czasserwera = date("Y-m-d H:i:s",$time);
                                 if ($wynik->num_rows > 0) 
                                 { 
                                 $row = $wynik->fetch_assoc();
@@ -295,8 +290,7 @@ try
                                     UPDATE
                                     notatki_udo
                                     SET
-                                    del = ".$del.",
-                                    czas = '".$czasserwera."'
+                                    del = ".$del."
                                     WHERE
                                     id = ".$row['id']."
                                 ";
@@ -309,14 +303,12 @@ try
                                     (
                                         notatki_ng,
                                         osoby,
-                                        czas,
                                         del
                                     )
                                     VALUES
                                     (
                                         ".$idnotatki.",
                                         ".$idosoby.",
-                                        '".$czasserwera."',
                                         ".$del."
                                     )
                                 ";
@@ -362,10 +354,9 @@ try
             }
             else
             { //nowa   
-                $time = time();
-                $czasserwera = date("Y-m-d H:i:s",$time);
                 $sql = "SELECT max(id) as idmax FROM notatki_ng";
                 $wynik = $conn->query($sql); 
+                $time = time();
                 if ($wynik->num_rows > 0) 
                     { $row = $wynik->fetch_assoc();
                         $identyfikator = $time.chr($body->stan + 70).$row['idmax'].chr(rand(65,90)).$time*rand(1,100); }
@@ -387,7 +378,7 @@ try
                 ('".$identyfikator."',
                     '".$body->tytul."',
                     '".$body->stan."',
-                    '".$czasserwera."',
+                    '".$body->czas."',
                     0,
                     0,
                     0
@@ -410,7 +401,7 @@ try
                             '".$id."',
                             0,
                             0,
-                            '".$czasserwera."',
+                            '".$body->czas."',
                             ''
                             )
                         ";

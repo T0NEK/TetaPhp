@@ -285,7 +285,7 @@ try
             UPDATE
                 polecenia
             SET
-                ".$body->get." = ".($body->dos ? 1:0)."
+                ".$body->get." = ".($body->dos ? 0:1)."
             WHERE
             id = ".$body->idpolecenia."
         ";

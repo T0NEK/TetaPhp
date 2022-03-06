@@ -23,7 +23,14 @@ try
                 notatki_ng.identyfikator,
                 notatki_ng.tytul,
                 notatki_ng.wlasciciel,
-                substring(notatki_ng.udostepnienie,".$body->stan.",1) as udostepniona,
+                (   SELECT
+                    IFNULL(notatki_udo.del,1)
+                    FROM
+                    notatki_udo
+                    WHERE
+                    notatki_udo.osoby = ".$body->stan."
+                    AND notatki_udo.notatki_ng = notatki_ng.id
+                ) as udostepniona,
                 notatki_ng.czas,
                 CASE notatki_ng.wlasciciel WHEN ".$body->stan." THEN 'własna'
                                            ELSE concat(osoby.imie,' ',osoby.nazwisko)
@@ -62,7 +69,7 @@ try
             }
             else
             {
-            if ( ($udostepniona == '0') && ($wlasciciel != $body->stan) )
+            if ( ($udostepniona == '1') && ($wlasciciel != $body->stan) )
             {
                 $result = array ("wynik"=>true, "stan"=>false, "error"=>"notatka o identyfikatorze: ".$body->notatka.' jest nieudostępniona - właściciel: '.$wlascicielText);
             }   
@@ -115,8 +122,6 @@ try
             else
             {
                 //set
-                $time = time();
-                $czasserwera = date("Y-m-d H:i:s",$time);
                 $sql = "INSERT 
                 INTO notatki_tr
                 (
@@ -131,14 +136,14 @@ try
                  '".$body->stan."',
                  '".$body->wersja."',
                  0,
-                 '".$czasserwera."',
+                 '".$body->czas."',
                  '".$body->notatka."'
                  )
                 ";
                 if ($conn->query($sql) === TRUE) 
                 {  
                    $id  = $conn->insert_id;   
-                   $result = array ("wynik"=>true, "stan"=>true, "error"=>'wersja: '.$body->wersja, "id"=>$id, "wersja"=>$body->wersja, "stan"=>true, "stanText"=>'dostępna', 'czas'=>$czasserwera, "tresc"=>$body->notatka ); 
+                   $result = array ("wynik"=>true, "stan"=>true, "error"=>'wersja: '.$body->wersja, "id"=>$id, "wersja"=>$body->wersja, "stan"=>true, "stanText"=>'dostępna', 'czas'=>$body->czas, "tresc"=>$body->notatka ); 
                 }
                 else 
                 { 
@@ -158,7 +163,7 @@ try
 catch(Exception $e)    
 {
     $result = array("wynik"=>false, "stan"=>false, "error"=>"problem z połączeniem");
-    echo ($e);
+    //echo ($e);
 }
 echo json_encode($result);     
 ?>

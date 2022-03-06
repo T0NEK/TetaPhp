@@ -13,6 +13,7 @@ try
         //$body = (object) array ('kierunek'=>'get', 'stan' => 2, 'notatka' => '1644743771H5V129934757909');
         //$body = (object) array ('kierunek'=>'get', 'stan' => 2, 'notatka' => '1');
         //$body = (object) array ('kierunek'=>'set', 'stan' => 2, 'wersja' => 1, 'notatka' => 'hello notatka');
+        //$body = (object) array ("kierunek"=>'setstan', "idnotatki"=>40, "idtablica"=>0); 
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {
@@ -34,7 +35,7 @@ try
                     WHERE
                     notatki_tr.notatki_ng = ".$body->notatka."
                     ORDER BY
-                    wersja
+                    wersja desc
                 ";
                 $wynik = $conn->query($sql); 
                 if ($wynik->num_rows > 0) 
@@ -54,41 +55,69 @@ try
                 }
             $conn->close();   
             }
-            else
-            {
-                //set
-                $time = time();
-                $czasserwera = date("Y-m-d H:i:s",$time);
-                $sql = "INSERT 
-                INTO notatki_tr
-                (
-                notatki_ng,
-                wersja,
-                stan,
-                czas,
-                tresc
-                )
-                VALUES
-                (
-                 '".$body->stan."',
-                 '".$body->wersja."',
-                 0,
-                 '".$czasserwera."',
-                 '".$body->notatka."'
-                 )
+            elseif ($body->kierunek == 'setstan')
+            { //set
+                $sql = "
+                SELECT
+                    notatki_tr.stan,
+                    notatki_ng.tytul
+                FROM    
+                    notatki_tr,
+                    notatki_ng
+                WHERE  
+                    notatki_ng.id = notatki_tr.notatki_ng
+                    AND notatki_tr.id = ".$body->idnotatki."
+                ";
+                $wynik = $conn->query($sql); 
+                if ($wynik->num_rows > 0) 
+                { 
+                $row = $wynik->fetch_assoc();
+                $tytul = $row['tytul'];
+                $stan = $row['stan'] + 1; if ($stan > 2) {$stan = 0;}
+                $stanText = array ('dostępna', 'usunięta', 'uszkodzona');
+                $sql = "
+                    UPDATE
+                    notatki_tr
+                    SET
+                    stan = ".$stan."
+                    WHERE
+                    id = ".$body->idnotatki."
                 ";
                 if ($conn->query($sql) === TRUE) 
-                {  
-                   $id  = $conn->insert_id;   
-                   $result = array ("wynik"=>true, "stan"=>true, "error"=>'wersja: '.$body->wersja, "id"=>$id, "wersja"=>$body->wersja, "stan"=>true, "stanText"=>'dostępna', 'czas'=>$czasserwera, "tresc"=>$body->notatka ); 
+                {
+                    $result = array ("wynik"=>true,"idnotatki"=>$body->idnotatki,"idtablica"=>$body->idtablica, "stan"=>($stan==0), "error"=>'zmieniono stan wersji notatki: "'.$row['tytul'].'" na: '.$stanText[$stan], "stanText"=>$stanText[$stan], "kierunek"=>$body->kierunek);
                 }
-                else 
-                { 
-                $result = array ("wynik"=>false, "stan"=>false,  "error"=>'błąd zapisu'); }
-                $conn->close();        
-
+                else
+                {
+                    $result = array ("wynik"=>false, "stan"=>false,  "error"=>'błąd zapisu stanu wersji');                
+                }
+                }
+                else
+                {
+                    $result = array ("wynik"=>false, "stan"=>false, "error"=>"problem ze odczytem stanu wersji");
+                }
+            $conn->close();        
             }    
-
+            elseif ($body->kierunek == 'set')
+            { //set
+                $sql = "
+                    UPDATE
+                    notatki_tr
+                    SET
+                    tresc = '".$body->tresc."'
+                    WHERE
+                    id = ".$body->idnotatki."
+                ";
+                if ($conn->query($sql) === TRUE) 
+                {
+                    $result = array ("wynik"=>true,"idnotatki"=>$body->idnotatki,"idtablica"=>$body->idtablica, "error"=>'zmieniono treść  notatki', "kierunek"=>$body->kierunek, "tresc"=>$body->tresc);
+                }
+                else
+                {
+                    $result = array ("wynik"=>false, "stan"=>false,  "error"=>'błąd zapisu treści notatki');                
+                }
+            $conn->close();        
+            }    
         }
         else
         {
