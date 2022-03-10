@@ -39,13 +39,21 @@ try
         $wynik = $conn->query($sql); 
         if ($wynik->num_rows > 0) 
         {
-        $wiadomosci = array ();    
+        $odebrane = 0;    
+        $wiadomosci = array ();   
+        $nadawcy = array (); 
         while ($row = $wynik->fetch_assoc())
         {
-        $wiadomosc = array ( "id"=>$row['id'], "autor"=>$row['autor'], "autorText"=>$row['autorText'], "odbiorca"=>$row['odbiorca'], "odbiorcaText"=>$row['odbiorcaText'], "tresc"=>$row['tresc'], "czas"=>$row['czas'], "przeczytana"=>($row['przeczytana']==1));
+        if (($row['odbiorca'] == $body->odbiorca)&&($row['przeczytana']==0))
+        {
+            $odebrane = $odebrane + 1;
+            array_push($nadawcy,$row['autor']);
+        }
+        $wiadomosc = array ( "id"=>$row['id'], "autor"=>$row['autor'], "autorText"=>$row['autorText'], "odbiorca"=>$row['odbiorca'], "odbiorcaText"=>$row['odbiorcaText'], "tresc"=>$row['tresc'], "czas"=>$row['czas'], "przeczytana"=>($row['przeczytana']==1), "wyslana"=>($row['autor'] == $body->odbiorca));
         array_push($wiadomosci,$wiadomosc);
         }
-        $result = array ("wynik"=>true,"kierunek"=>$body->get,"wiadomosci"=>$wiadomosci);
+        $nadawcy = array_unique($nadawcy);
+        $result = array ("wynik"=>true,"kierunek"=>$body->get,"wiadomosci"=>$wiadomosci, "ilosc"=>$wynik->num_rows, "odebrane"=>$odebrane, "nadawcy"=>$nadawcy);
         $conn->close();   
         }
         else
@@ -75,7 +83,7 @@ try
         $osoby = array ();    
         while ($row = $wynik->fetch_assoc())
         {
-        $osoba = array ( "id"=>$row['id'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "funkcja"=>$row['funkcja'], "widoczny"=>($row['user']<3), "wybrany"=>true);
+        $osoba = array ( "id"=>$row['id'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "funkcja"=>$row['funkcja'], "widoczny"=>($row['user']<3), "wybrany"=>false, "nowe"=>false);
         array_push($osoby,$osoba);
         }
         $result = array ("wynik"=>true,"kierunek"=>$body->get,"osoby"=>$osoby);
