@@ -952,9 +952,30 @@ CREATE TABLE `wiadomosci` (
 INSERT INTO `wiadomosci` (`id`, `autor`, `autorText`, `odbiorca`, `odbiorcaText`, `tresc`, `czas`, `przeczytana`) VALUES
 (1, 1, 'Dedal', 2, 'John Spow', 'cześć Dedal do John', '2044-01-02 14:12:24', 0),
 (2, 1, 'Dedal', 3, 'Wang Japing', 'cześć Dedal do Wang', '2044-01-02 15:12:24', 0),
-(3, 3, 'Wang Japing', 2, 'John Spow', 'cześć Wang do John', '2044-01-02 16:12:24', 0),
-(4, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang', '2044-01-02 15:12:00', 0),
-(5, 2, 'John Spow', 3, 'Rajech Amid', 'cześć John do Rajeh', '2044-01-02 15:12:24', 0);
+(3, 3, 'Wang Japing', 2, 'John Spow', 'cześć Wang do John 1', '2044-01-02 16:12:24', 0),
+(4, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 2', '2044-01-02 15:12:01', 0),
+(5, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 3', '2044-01-02 15:12:02', 0),
+(6, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 4', '2044-01-02 15:12:03', 0),
+(7, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 5', '2044-01-02 15:12:04', 0),
+(8, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 6', '2044-01-02 15:12:06', 0),
+(9, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 7', '2044-01-02 15:12:05', 0),
+(10, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 8', '2044-01-02 15:12:07', 0),
+(11, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 9', '2044-01-02 15:12:08', 0),
+(12, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 10', '2044-01-02 15:12:09', 0),
+(13, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 11', '2044-01-02 15:11:00', 0),
+(14, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 12', '2044-01-02 15:13:00', 0),
+(15, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 13', '2044-01-02 15:14:00', 0),
+(16, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 14', '2044-01-02 15:15:00', 0),
+(17, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 15', '2044-01-02 15:16:00', 0),
+(18, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 16', '2044-01-02 15:17:00', 0),
+(19, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 17', '2044-01-02 15:18:00', 0),
+(21, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 18', '2044-01-02 15:19:00', 0),
+(22, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 19', '2044-01-02 15:14:09', 0),
+(23, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 20', '2044-01-02 15:14:00', 0),
+(24, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 21', '2044-01-02 15:15:05', 0),
+(25, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 22', '2044-01-02 15:15:00', 0),
+(26, 2, 'John Spow', 3, 'Wang Japing', 'cześć John do Wang 23', '2044-01-02 15:16:00', 0),
+(27, 2, 'John Spow', 3, 'Rajech Amid', 'cześć John do Rajeh', '2044-01-02 15:12:24', 0);
 
 --
 -- Indeksy dla zrzutów tabel
