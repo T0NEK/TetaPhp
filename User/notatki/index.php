@@ -410,8 +410,7 @@ try
                 { $result = array ("wynik"=>true, "stan"=>true, "error"=>$identyfikator); }
                 else 
                 { $result = array ("wynik"=>false, "stan"=>false,  "error"=>'błąd zapisu'); }
-                }
-                $conn->close();     
+                }   
             }   
         }
         else
