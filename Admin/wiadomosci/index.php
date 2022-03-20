@@ -87,9 +87,9 @@ if ($body->get == 'set')
             $conn2->query($sql);
             }
             if ($conn2->commit() === TRUE) 
-                { $result = array ("wynik"=>true, "stan"=>true, "odczytane"=>$body->odczytane, "error"=>'wysłano wiadomość'); }
+                { $result = array ("wynik"=>true, "stan"=>true, "error"=>'wysłano wiadomość'); }
                 else 
-                { $result = array ("wynik"=>false, "stan"=>false, "odczytane"=>$body->odczytane,  "error"=>'problem z wysłaniem wiadomości'); }
+                { $result = array ("wynik"=>false, "stan"=>false,  "error"=>'problem z wysłaniem wiadomości'); }
             }  
         }
         }
@@ -109,11 +109,11 @@ if ($body->get == 'prze')
             ";
             if ($conn->query($sql) === TRUE) 
             {
-                $result = array ("wynik"=>true, "stan"=>true, "odczytane"=>$body->odczytane, "error"=>"przeczytano wiadomości (".$body->przeczytane.")");
+                $result = array ("wynik"=>true, "stan"=>true, "odczytane"=>$body->odczytane , "error"=>"przeczytano wiadomości (".$body->przeczytane.")");
             }
             else
             {
-                { $result = array ("wynik"=>false, "stan"=>false, "odczytane"=>$body->odczytane,  "error"=>'wystepują probley z połączeniem'); }                
+                { $result = array ("wynik"=>false, "stan"=>false,  "error"=>'wystepują probley z połączeniem'); }                
             }
         }
 elseif ($body->get == 'wiad')
@@ -158,7 +158,7 @@ elseif ($body->get == 'wiad')
             array_push($nadawcy,(1*$row['autor']));
             }
         }
-        $wiadomosc = array ( "id"=>$row['id'], "autor"=>$row['autor'], "autorText"=>$row['autorText'], "odbiorca"=>$row['odbiorca'], "odbiorcaText"=>$row['odbiorcaText'], "tresc"=>array($row['tresc']), "czas"=>$row['czas'], "przeczytana"=>($row['przeczytana']==1), "wyslana"=>($row['autor'] == $body->odbiorca));
+        $wiadomosc = array ( "id"=>$row['id'], "autor"=>$row['autor'], "autorText"=>$row['autorText'], "odbiorca"=>$row['odbiorca'], "odbiorcaText"=>$row['odbiorcaText'], "tresc"=>$row['tresc'], "czas"=>$row['czas'], "przeczytana"=>($row['przeczytana']==1), "wyslana"=>($row['autor'] == $body->odbiorca));
         array_push($wiadomosci,$wiadomosc);
         }
         array_shift($nadawcy);
