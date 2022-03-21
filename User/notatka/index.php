@@ -65,13 +65,13 @@ try
             $wynik = $conn->query($sql); 
             if ($stan != 0)
             {// uszkodzona lub usunięta
-                $result = array ("wynik"=>true, "stan"=>false, "error"=>"notatka o identyfikatorze: ".$body->notatka.' jest '.$row['stanText']);
+                $result = array ("wynik"=>true, "stan"=>false, "error"=>"notatka o id: ".$body->notatka.' jest '.$row['stanText']);
             }
             else
             {
             if ( ($udostepniona == '1') && ($wlasciciel != $body->stan) )
             {
-                $result = array ("wynik"=>true, "stan"=>false, "error"=>"notatka o identyfikatorze: ".$body->notatka.' jest nieudostępniona - właściciel: '.$wlascicielText);
+                $result = array ("wynik"=>true, "stan"=>false, "error"=>"notatka o id: ".$body->notatka.' jest nieudostępniona - właściciel: '.$wlascicielText);
             }   
             else
             {    
@@ -115,7 +115,7 @@ try
             }
             else
             {//set brak notatek
-                $result = array ("wynik"=>true, "stan"=>false, "error"=>"brak notatki o identyfikatorze: ".$body->notatka);      
+                $result = array ("wynik"=>true, "stan"=>false, "error"=>"brak notatki o id: ".$body->notatka);      
             }  
             $conn->close();   
             }

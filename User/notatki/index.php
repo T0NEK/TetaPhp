@@ -106,7 +106,7 @@ try
                     {
                         if ($row['stan'] > 0 )
                         {
-                            $result = array ("wynik"=>true, "stan"=>false, "error"=>"notatka o identyfikatorze: ".$body->id." jest: ".$row['stanText']);
+                            $result = array ("wynik"=>true, "stan"=>false, "error"=>"notatka o id: ".$body->id." jest: ".$row['stanText']);
                         }
                         else
                         {
@@ -139,7 +139,7 @@ try
                                 }
                                 else
                                 {
-                                    $result = array ("wynik"=>true, "stan"=>false, "error"=>"notatka o identyfikatorze: ".$body->id." nie jest udostepniana");   
+                                    $result = array ("wynik"=>true, "stan"=>false, "error"=>"notatka o id: ".$body->id." nie jest udostepniana");   
                                 }
                         }
                     }
@@ -179,7 +179,7 @@ try
                     {
                         if ($row['stan'] > 0 )
                         {
-                            $result = array ("wynik"=>true, "stan"=>false, "error"=>"notatka o identyfikatorze: ".$body->tytul." jest: ".$row['stanText']);
+                            $result = array ("wynik"=>true, "stan"=>false, "error"=>"notatka o id: ".$body->tytul." jest: ".$row['stanText']);
                         }
                         else
                         {
@@ -244,7 +244,7 @@ try
                     {
                         if ($row['stan'] > 0 )
                         {
-                            $result = array ("wynik"=>true, "stan"=>false, "error"=>"notatka o identyfikatorze: ".$body->tytul." jest: ".$row['stanText']);
+                            $result = array ("wynik"=>true, "stan"=>false, "error"=>"notatka o id: ".$body->tytul." jest: ".$row['stanText']);
                         }
                         else
                         {
