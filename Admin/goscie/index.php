@@ -30,6 +30,9 @@ try
                         case 'RAJEH':
                             $wiersz = 'rajehnew = '.($body->stan ? 1:0);
                             break;    
+                        case 'NAROSL':
+                            $wiersz = 'naroslnew = '.($body->stan ? 1:0);
+                            break;        
                         }
         switch ($body->id) {
                         case 0: //all
@@ -75,7 +78,8 @@ try
                      IF (".$warunek.",blokadanew,blokadaorg) as blokada,
                      IF (".$warunek.",hannahnew,hannahorg) as hannah,
                     IF (".$warunek.",fionanew,fionaorg) as fiona,
-                    IF (".$warunek.",rajehnew,rajehorg) as rajeh
+                    IF (".$warunek.",rajehnew,rajehorg) as rajeh,
+                    IF (".$warunek.",naroslnew,naroslorg) as narosl
                      FROM
                      osoby
                      where
@@ -89,7 +93,7 @@ try
                     $osoby = array ();    
                     while ($row = $wynik->fetch_assoc())
                     {
-                    $osoba = array ("id"=>$row['id'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "funkcja"=>$row['funkcja'], "zalogowany"=>($row['zalogowany']==1), "blokada"=>($row['blokada']==1), "hannah"=>($row['hannah']==1), "fiona"=>($row['fiona']==1), "rajeh"=>($row['rajeh']==1));
+                    $osoba = array ("id"=>$row['id'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "funkcja"=>$row['funkcja'], "zalogowany"=>($row['zalogowany']==1), "blokada"=>($row['blokada']==1), "hannah"=>($row['hannah']==1), "fiona"=>($row['fiona']==1), "rajeh"=>($row['rajeh']==1), "narosl"=>($row['narosl']==1));
                     array_push($osoby,$osoba);
                     }
                     $result = array ("wynik"=>true,"stan"=>$start,"osoby"=>$osoby);

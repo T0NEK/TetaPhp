@@ -28,7 +28,9 @@ try
                     fionaid,
                     IF (".$warunek.",fionanew,fionaorg) as fiona,
                     rajehid,
-                    IF (".$warunek.",rajehnew,rajehorg) as rajeh
+                    IF (".$warunek.",rajehnew,rajehorg) as rajeh,
+                    naroslid,
+                    IF (".$warunek.",naroslnew,naroslorg) as narosl
                  FROM
                     osoby
                  WHERE
@@ -41,12 +43,14 @@ try
                 $hannahid = $row['hannahid']; $hannah = $row['hannah'];  
                 $fionaid = $row['fionaid']; $fiona = $row['fiona'];  
                 $rajehid = $row['rajehid']; $rajeh = $row['rajeh'];  
+                $naroslid = $row['naroslid']; $narosl = $row['narosl'];  
                 }
                 else
                 {
                 $hannahid = 0; $hannah = 0;
                 $fionaid = 0; $fiona = 0;
                 $rajehid = 0; $rajeh = 0;
+                $naroslid = 0; $narosl = 0;
                 }
                 $sql = 
                 "SELECT
@@ -76,7 +80,8 @@ try
                         ($row['zalogowany']==1 ? 1:0)&&(
                             (($row['id']==$hannahid ? 1:0)&&($hannah==1 ? 1:0))||
                             (($row['id']==$fionaid ? 1:0)&&($fiona==1 ? 1:0))||
-                            (($row['id']==$rajehid ? 1:0)&&($rajeh==1 ? 1:0))
+                            (($row['id']==$rajehid ? 1:0)&&($rajeh==1 ? 1:0))||
+                            (($row['id']==$naroslid ? 1:0)&&($narosl==1 ? 1:0))
                                                        )
                         )                               
                        ) 

@@ -26,7 +26,7 @@ try
                    FROM
                    osoby 
                    WHERE
-                   user=1 AND
+                   (user = 1 OR user = 2 ) AND
                    userlogin = '".$body->login."' AND
                    haslonew = '".$body->pass."' 
                    ";
