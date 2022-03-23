@@ -11,7 +11,7 @@ try
     else
     {
     //$body = (object) array ('get' => 'prze', "odbiorca"=>3, "przeczytane"=>'0,8', "odczytane"=>10);    
-    //$body = (object) array ('get' => 'wiad', "odbiorca"=>3);    
+    //$body = (object) array ('get' => 'wiad', "odbiorca"=>2);    
     //$body = (object) array ('get' => 'set', "odbiorca"=>2, "przeczytane"=>'0,8', "tresc"=>'cześć Liy test', "czas"=>'2022-01-01 12:00:00');    
     $body = json_decode(file_get_contents("php://input"));
     if (isset($body))

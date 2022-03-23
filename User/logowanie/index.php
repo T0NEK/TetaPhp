@@ -42,7 +42,7 @@ try
                 $rodzaj = $row['rodzaj'];
                 $blokada = $row['blokadanew'];
                 $zalogowany = $row['zalogowanynew'];
-                if ($blokada == 0)  
+                if ($blokada == 1)  
                     {
                     if ($zalogowany == 0)    
                         {
