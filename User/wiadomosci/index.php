@@ -71,7 +71,8 @@ if ($body->get == 'set')
                 odbiorcaText,
                 tresc,
                 czas,
-                przeczytana
+                przeczytana,
+                admin
                 )
             VALUES
                 (
@@ -81,6 +82,7 @@ if ($body->get == 'set')
                 '".$odbiorcaText."',
                 '".$body->tresc."',
                 '".$body->czas."',
+                0,
                 0
                 )
             ";

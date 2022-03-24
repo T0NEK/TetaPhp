@@ -71,7 +71,8 @@ if ($body->get == 'set')
                 odbiorcaText,
                 tresc,
                 czas,
-                przeczytana
+                przeczytanaadmin,
+                admin
                 )
             VALUES
                 (
@@ -81,7 +82,8 @@ if ($body->get == 'set')
                 '".$odbiorcaText."',
                 '".$body->tresc."',
                 '".$body->czas."',
-                0
+                0,
+                1
                 )
             ";
             $conn2->query($sql);
@@ -101,7 +103,7 @@ if ($body->get == 'prze')
             UPDATE
             wiadomosci
             SET
-            przeczytana = 1
+            przeczytanaadmin = 1
             WHERE
             id in (".$body->przeczytane.")
             AND id > 0
@@ -128,7 +130,8 @@ elseif ($body->get == 'wiad')
             odbiorcaText,
             tresc,
             czas,
-            przeczytana
+            przeczytanaadmin,
+            admin
         FROM
             wiadomosci
         WHERE
@@ -146,11 +149,11 @@ elseif ($body->get == 'wiad')
         $noweid = array (-1);
         while ($row = $wynik->fetch_assoc())
         {
-        if (($row['autor'] != $body->odbiorca)&&($row['przeczytana']==0))
+        if (($row['autor'] != $body->odbiorca)&&($row['przeczytanaadmin']==0))
             {
                 array_push($noweid,(1*$row['id']));    
             }    
-        if (($row['odbiorca'] == $body->odbiorca)&&($row['przeczytana']==0))
+        if (($row['odbiorca'] == $body->odbiorca)&&($row['przeczytanaadmin']==0))
         {
             $odebrane = $odebrane + 1;
             if ( array_search(1*$row['autor'],$nadawcy) == null )
@@ -158,7 +161,7 @@ elseif ($body->get == 'wiad')
             array_push($nadawcy,(1*$row['autor']));
             }
         }
-        $wiadomosc = array ( "id"=>$row['id'], "autor"=>$row['autor'], "autorText"=>$row['autorText'], "odbiorca"=>$row['odbiorca'], "odbiorcaText"=>$row['odbiorcaText'], "tresc"=>$row['tresc'], "czas"=>$row['czas'], "przeczytana"=>($row['przeczytana']==1), "wyslana"=>($row['autor'] == $body->odbiorca));
+        $wiadomosc = array ( "id"=>$row['id'], "autor"=>$row['autor'], "autorText"=>$row['autorText'], "odbiorca"=>$row['odbiorca'], "odbiorcaText"=>$row['odbiorcaText'], "tresc"=>array($row['tresc']), "czas"=>$row['czas'], "przeczytana"=>($row['przeczytanaadmin']==1), "wyslana"=>($row['autor'] == $body->odbiorca), "admin"=>($row['admin'] == 1));
         array_push($wiadomosci,$wiadomosc);
         }
         array_shift($nadawcy);
