@@ -71,8 +71,9 @@ if ($body->get == 'set')
                 odbiorcaText,
                 tresc,
                 czas,
+                przeczytana,
                 przeczytanaadmin,
-                admin
+                admindodana
                 )
             VALUES
                 (
@@ -82,6 +83,7 @@ if ($body->get == 'set')
                 '".$odbiorcaText."',
                 '".$body->tresc."',
                 '".$body->czas."',
+                0,
                 0,
                 1
                 )
@@ -97,7 +99,7 @@ if ($body->get == 'set')
         }
         $conn->close();
         }
-if ($body->get == 'prze')
+elseif ($body->get == 'prze')
         {
             $sql = "
             UPDATE
@@ -107,7 +109,6 @@ if ($body->get == 'prze')
             WHERE
             id in (".$body->przeczytane.")
             AND id > 0
-            AND autor <> ".$body->odbiorca."
             ";
             if ($conn->query($sql) === TRUE) 
             {
@@ -118,11 +119,52 @@ if ($body->get == 'prze')
                 { $result = array ("wynik"=>false, "stan"=>false,  "error"=>'wystepują probley z połączeniem'); }                
             }
         }
+elseif ($body->get == 'przeoso')
+        {   $sql = 
+            "SELECT
+                przeczytana
+            FROM
+                wiadomosci
+            WHERE
+                id = ".$body->przeczytane."
+            ";
+            $wynik = $conn->query($sql); 
+            if ($wynik->num_rows > 0) 
+            {
+            $row = $wynik->fetch_assoc();
+            $przeczytana = (($row['przeczytana']) == 1 ? 0 : 1 );
+            $sql = "
+            UPDATE
+            wiadomosci
+            SET
+            przeczytana = ".$przeczytana."
+            WHERE
+            id = ".$body->przeczytane."
+            AND id > 0
+            ";
+            if ($conn->query($sql) === TRUE) 
+            {
+                $result = array ("wynik"=>true, "stan"=>true, "odczytane"=>$body->odczytane , "error"=>"przeczytano wiadomości (".$body->przeczytane.")");
+            }
+            else
+            {
+                 $result = array ("wynik"=>false, "stan"=>false,  "error"=>'wystepują probley z połączeniem'); 
+            }
+            }
+            else
+            {
+                $result = array ("wynik"=>false, "stan"=>false,  "error"=>'wystepują probley z odczytem stanu'); 
+            }
+
+        }
 elseif ($body->get == 'wiad')
         {
+        if ( $body->odbiorca == 0 )    
+        { $wiersz = " id > 0 "; }
+        else
+        { $wiersz = " odbiorca = ".$body->odbiorca." OR autor = ".$body->odbiorca." "; }
         $sql = 
-        "
-        SELECT
+        "SELECT
             id,
             autor,
             autorText,
@@ -130,13 +172,13 @@ elseif ($body->get == 'wiad')
             odbiorcaText,
             tresc,
             czas,
+            przeczytana,
             przeczytanaadmin,
-            admin
+            admindodana
         FROM
             wiadomosci
         WHERE
-            odbiorca = ".$body->odbiorca."
-            OR autor = ".$body->odbiorca."
+            ".$wiersz."
         ORDER BY
             czas
         ";
@@ -149,11 +191,11 @@ elseif ($body->get == 'wiad')
         $noweid = array (-1);
         while ($row = $wynik->fetch_assoc())
         {
-        if (($row['autor'] != $body->odbiorca)&&($row['przeczytanaadmin']==0))
+        if (($row['przeczytanaadmin']==0))
             {
                 array_push($noweid,(1*$row['id']));    
             }    
-        if (($row['odbiorca'] == $body->odbiorca)&&($row['przeczytanaadmin']==0))
+        if (($row['przeczytanaadmin']==0))
         {
             $odebrane = $odebrane + 1;
             if ( array_search(1*$row['autor'],$nadawcy) == null )
@@ -161,7 +203,7 @@ elseif ($body->get == 'wiad')
             array_push($nadawcy,(1*$row['autor']));
             }
         }
-        $wiadomosc = array ( "id"=>$row['id'], "autor"=>$row['autor'], "autorText"=>$row['autorText'], "odbiorca"=>$row['odbiorca'], "odbiorcaText"=>$row['odbiorcaText'], "tresc"=>array($row['tresc']), "czas"=>$row['czas'], "przeczytana"=>($row['przeczytanaadmin']==1), "wyslana"=>($row['autor'] == $body->odbiorca), "admin"=>($row['admin'] == 1));
+        $wiadomosc = array ( "id"=>$row['id'], "autor"=>$row['autor'], "autorText"=>$row['autorText'], "odbiorca"=>$row['odbiorca'], "odbiorcaText"=>$row['odbiorcaText'], "tresc"=>array($row['tresc']), "czas"=>$row['czas'], "przeczytana"=>($row['przeczytana']==1), "przeczytanaadmin"=>($row['przeczytanaadmin']==1), "wyslana"=>($row['autor'] == $body->odbiorca), "admin"=>($row['admindodana'] == 1));
         array_push($wiadomosci,$wiadomosc);
         }
         array_shift($nadawcy);

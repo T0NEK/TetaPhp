@@ -72,7 +72,7 @@ if ($body->get == 'set')
                 tresc,
                 czas,
                 przeczytana,
-                admin
+                admindodana
                 )
             VALUES
                 (
@@ -97,7 +97,7 @@ if ($body->get == 'set')
         }
         $conn->close();
         }
-if ($body->get == 'prze')
+elseif ($body->get == 'prze')
         {
             $sql = "
             UPDATE
