@@ -134,8 +134,7 @@ elseif ($body->get == 'wiad')
         FROM
             wiadomosci
         WHERE
-            odbiorca = ".$body->odbiorca."
-            OR autor = ".$body->odbiorca."
+            (odbiorca = ".$body->odbiorca." OR autor = ".$body->odbiorca.")
         ORDER BY
             czas
         ";

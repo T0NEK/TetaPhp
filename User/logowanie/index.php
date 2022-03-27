@@ -12,7 +12,7 @@ try
        //$body = (object) array ('login' => 'john', 'pass' => '123');
         if (isset($body))
         { //set   
-        if ($body->zalogowany == 0)    
+    if ($body->zalogowany == 0)    
         {//logowanie
             $sql ="SELECT
                    id,
@@ -22,7 +22,8 @@ try
                    funkcja,
                    rodzaj,
                    blokadanew,
-                   zalogowanynew
+                   zalogowanynew,
+                   naroslnew
                    FROM
                    osoby 
                    WHERE
@@ -42,6 +43,7 @@ try
                 $rodzaj = $row['rodzaj'];
                 $blokada = $row['blokadanew'];
                 $zalogowany = $row['zalogowanynew'];
+                $naroslnew = $row['naroslnew'];
                 if ($blokada == 1)  
                     {
                     if ($zalogowany == 0)    
@@ -59,7 +61,7 @@ try
                                 ";
                         if ($conn->query($sql) === TRUE) 
                             { 
-                                $result = array ("wynik"=>true, "stan"=>true, "zalogowany"=>$id, "imie"=>$imie, "nazwisko"=>$nazwisko, "autoryzacja"=>($autoryzacja==1), "funkcja"=>$funkcja, "rodzaj"=>$rodzaj, "error"=>" - zostałeś zalogowany");
+                                $result = array ("wynik"=>true, "stan"=>true, "zalogowany"=>$id, "imie"=>$imie, "nazwisko"=>$nazwisko, "autoryzacja"=>($autoryzacja==1), "funkcja"=>$funkcja, "rodzaj"=>$rodzaj, "naroslnew"=>$naroslnew, "error"=>" - zostałeś zalogowany");
                             }
                             else 
                             { 
@@ -93,7 +95,7 @@ try
             FROM
             osoby 
             WHERE
-            user=1 AND
+            (user = 1 OR user = 2 ) AND
             id = ".$body->zalogowany."
             ";
      $wynik = $conn->query($sql); 
