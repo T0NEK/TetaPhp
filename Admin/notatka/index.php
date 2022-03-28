@@ -55,7 +55,7 @@ try
                 }
             $conn->close();   
             }
-            elseif ($body->kierunek == 'setstan')
+    elseif ($body->kierunek == 'setstan')
             { //set
                 $sql = "
                 SELECT

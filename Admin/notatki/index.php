@@ -22,7 +22,7 @@ try
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {
-        if ($body->kierunek == 'get')    
+if ($body->kierunek == 'get')    
             {//get get
                 $sql = 
                 "   SELECT
@@ -90,7 +90,7 @@ try
                 }
             $conn->close();   
             }
-            elseif ($body->kierunek == 'getudo')
+elseif ($body->kierunek == 'getudo')
             {//get dos
                 $sql = "
                 SELECT
@@ -136,103 +136,7 @@ try
                     }
             $conn->close();     
             }
-            elseif ($body->kierunek == 'setudo')
-            {//set dos
-                $sql = "
-                SELECT
-                    id,
-                    del
-                FROM    
-                    notatki_udo
-                WHERE  
-                    notatki_ng = ".$body->idnotatki."
-                    AND osoby = ".$body->stan."
-                ";
-                $wynik = $conn->query($sql); 
-                $time = time();
-                $czasserwera = date("Y-m-d H:i:s",$time);
-                if ($wynik->num_rows > 0) 
-                { 
-                $row = $wynik->fetch_assoc();
-                $del = ($row['del'] == 0 ? 1 : 0 );
-                $sql = "
-                    UPDATE
-                    notatki_udo
-                    SET
-                    del = ".$del.",
-                    czas = '".$czasserwera."'
-                    WHERE
-                    id = ".$row['id']."
-                ";
-                }
-                else
-                {
-                $del = 0;
-                $sql = "
-                    INSERT INTO notatki_udo
-                    (
-                        notatki_ng,
-                        osoby,
-                        czas,
-                        del
-                    )
-                    VALUES
-                    (
-                        ".$body->idnotatki.",
-                        ".$body->stan.",
-                        '".$czasserwera."',
-                        ".$del."
-                    )
-                ";
-                }
-                if ($conn->query($sql) === TRUE) 
-                {
-                $sql = "
-                SELECT
-                notatki_ng.wlasciciel,
-                os.id as idosoby,
-                os.kolejnosc,
-                IFNULL(udo.id,0) as idudo,
-                udo.czas,
-                CASE IFNULL(udo.id,0) WHEN 0 THEN 'niewidoczna'
-                                      ELSE 'widoczna'
-                        END as stanudo                    
-                FROM
-                notatki_ng,
-                (   SELECT id, kolejnosc
-                    FROM osoby
-                    WHERE user > 0
-                )os
-                LEFT JOIN
-                (   SELECT id, czas, osoby
-                    FROM notatki_udo
-                    WHERE notatki_ng = ".$body->idnotatki." AND del = 0   
-                )udo
-                ON os.id = udo.osoby
-                WHERE
-                notatki_ng.id = ".$body->idnotatki."
-                ORDER BY
-                os.kolejnosc
-                ";
-                $wynik = $conn->query($sql); 
-                if ($wynik->num_rows > 0) 
-                    {
-                    $notatki = array ();    
-                    while ($row = $wynik->fetch_assoc())
-                    {
-                    $notatka = array ("idosoby"=>$row['idosoby'], "idudo"=>$row['idudo'], "czas"=>$row['czas'], "stanudo"=>$row['stanudo'], "autor"=>$row['wlasciciel']);
-                    array_push($notatki,$notatka);
-                    }
-                    $result = array ("wynik"=>true, "stan"=>true, "notatki"=>$notatki, "error"=>"wczytano dostęp: ".$wynik->num_rows);
-                    }
-                    else
-                    {
-                        $result = array ("wynik"=>false, "stan"=>false, "error"=>"problem ze sprawdzeniem udostępnień");   
-                    }
-                $conn->close();     
-                }
-            }
-            elseif ($body->kierunek == 'setdel')
+ elseif ($body->kierunek == 'setdel')
             {//set del
                 $sql = "
                 SELECT
@@ -275,7 +179,7 @@ try
                 }
             $conn->close();     
             }
-            elseif ($body->kierunek == 'setwer')
+    elseif ($body->kierunek == 'setwer')
             { //nowa   
                 $sql = "INSERT 
                         INTO notatki_tr
@@ -302,7 +206,7 @@ try
                 { $result = array ("wynik"=>false, "stan"=>$body->stan,  "error"=>'błąd zapisu nowej wersji notatki', "kierunek"=>$body->kierunek); }
             $conn->close();     
             }
-            elseif ($body->kierunek == 'setnowa')
+    elseif ($body->kierunek == 'setnowa')
             { //nowa   
                 $sql = "SELECT max(id) as idmax FROM notatki_ng";
                 $wynik = $conn->query($sql); 
@@ -363,15 +267,54 @@ try
                 }
                 $conn->close();     
             }   
-            else
-            { 
-                if ($body->kierunek == 'setstan')
-                { $wiersz = 'blokadastan'; }
-                else
-                { $wiersz = 'blokadaudo'; }
+elseif ($body->kierunek == 'setstan')
+                {
+                    $sql = "
+                    SELECT
+                    blokadastan as stan,
+                        tytul    
+                    FROM
+                        notatki_ng
+                    WHERE
+                        id = '".$body->idnotatki."'
+                    ";
+                    $wynik = $conn->query($sql); 
+                    if ($wynik->num_rows > 0) 
+                    {
+                        $row = $wynik->fetch_assoc();
+                        if ($row['stan'] == 0) { $stan = 1;} else { $stan = 0;}
+                        $time = time();
+                        $czasserwera = date("Y-m-d H:i:s",$time);
+                        $sql = "
+                        UPDATE
+                        notatki_ng
+                        SET
+                        blokadastan = ".$stan.",
+                        czas = '".$czasserwera."'
+                        WHERE
+                        id = ".$body->idnotatki."
+                        ";
+                        if ($conn->query($sql) === TRUE) 
+                        {
+                        $result = array ("wynik"=>true,"idnotatki"=>$body->idnotatki,"idtablica"=>$body->idtablica, "stan"=>($stan==1), "error"=>'zmieniono możliwość usunięcia notatki: "'.$row['tytul'].'" na: '.($stan==1 ? 'Tak' : 'Nie'), "stanText"=>"", "kierunek"=>$body->kierunek);
+                        }
+                        else
+                        {
+                            $result = array ("wynik"=>false, "stan"=>false,  "error"=>'błąd zapisu stanu notatki');                
+                        }
+                    }
+                    else
+                    {
+                        $result = array ("wynik"=>false, "stan"=>false, "error"=>"problem ze odczytem stanu notatki");
+                    }
+                
+                $conn->close(); 
+                }
+elseif ($body->kierunek == 'setudo')                   
+                {
                 $sql = "
                 SELECT
-                    ".$wiersz." as stan,
+                blokadaudo as stan,
                     tytul    
                 FROM
                     notatki_ng
@@ -389,14 +332,14 @@ try
                     UPDATE
                     notatki_ng
                     SET
-                    ".$wiersz." = ".$stan.",
+                    blokadaudo = ".$stan.",
                     czas = '".$czasserwera."'
                     WHERE
                     id = ".$body->idnotatki."
                     ";
                     if ($conn->query($sql) === TRUE) 
                     {
-                    $result = array ("wynik"=>true,"idnotatki"=>$body->idnotatki,"idtablica"=>$body->idtablica, "stan"=>($stan==1), "error"=>'zmieniono stan notatki: "'.$row['tytul'].'" na: '.($stan==1 ? 'Tak' : 'Nie'), "stanText"=>"", "kierunek"=>$body->kierunek);
+                    $result = array ("wynik"=>true,"idnotatki"=>$body->idnotatki,"idtablica"=>$body->idtablica, "stan"=>($stan==1), "error"=>'zmieniono możliwość udostępnienia notatki: "'.$row['tytul'].'" na: '.($stan==1 ? 'Tak' : 'Nie'), "stanText"=>"", "kierunek"=>$body->kierunek);
                     }
                     else
                     {
