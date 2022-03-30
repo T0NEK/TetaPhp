@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 27 Mar 2022, 23:46
+-- Czas generowania: 30 Mar 2022, 23:19
 -- Wersja serwera: 10.1.21-MariaDB
 -- Wersja PHP: 5.6.30
 
@@ -230,106 +230,47 @@ INSERT INTO `dzialania` (`id`, `polecenia`, `nazwa`, `czas`, `dzialanie`, `prefi
 CREATE TABLE `komputery` (
   `id` int(11) NOT NULL,
   `nazwa` text COLLATE utf8_polish_ci NOT NULL,
+  `nrip` text COLLATE utf8_polish_ci NOT NULL,
   `hostid` text COLLATE utf8_polish_ci NOT NULL,
-  `czaslogowania` text COLLATE utf8_polish_ci NOT NULL,
-  `czaszmiana` text COLLATE utf8_polish_ci NOT NULL,
-  `ustawienia_1` int(11) NOT NULL DEFAULT '0'
+  `czasrejestracja` text COLLATE utf8_polish_ci NOT NULL,
+  `czaszmiana` text COLLATE utf8_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
 -- Zrzut danych tabeli `komputery`
 --
 
-INSERT INTO `komputery` (`id`, `nazwa`, `hostid`, `czaslogowania`, `czaszmiana`, `ustawienia_1`) VALUES
-(1, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'PL91648314904QL83296629808DW', '2022-03-26 18:15:04', '2022-03-26 18:15:04', 0),
-(2, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'EI221648314919OY5519779779028RB', '2022-03-26 18:15:19', '2022-03-26 18:15:19', 0),
-(3, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'RO101648314996DH1459339339856UA', '2022-03-26 18:16:35', '2022-03-26 18:16:35', 0),
-(4, 'DESKTOP-2KPJSHU', 'LE471648315007SS36110437105469UC', '2022-03-26 18:16:47', '2022-03-26 18:16:47', 0),
-(5, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'FX811648315026OC1616483150260AA', '2022-03-26 18:17:06', '2022-03-26 18:17:06', 0),
-(6, 'DESKTOP-2KPJSHU', 'TM931648315036XX3136262930792PN', '2022-03-26 18:17:15', '2022-03-26 18:17:15', 0),
-(7, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'QD801648315042ZQ7118131465462DE', '2022-03-26 18:17:21', '2022-03-26 18:17:21', 0),
-(8, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'FE621648315047MK8639559561128NO', '2022-03-26 18:17:27', '2022-03-26 18:17:27', 0),
-(9, 'DESKTOP-2KPJSHU', 'LC921648315528ET9339559572672GD', '2022-03-26 18:25:27', '2022-03-26 18:25:27', 0),
-(10, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'ZK721648315541OR5432966310820FO', '2022-03-26 18:25:41', '2022-03-26 18:25:41', 0),
-(11, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'OU101648315707PA29135161887974XO', '2022-03-26 18:28:27', '2022-03-26 18:28:27', 0),
-(12, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'EM601648315721DY869889894326SV', '2022-03-26 18:28:40', '2022-03-26 18:28:40', 0),
-(13, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'BY431648315722QK45103843890486MP', '2022-03-26 18:28:42', '2022-03-26 18:28:42', 0),
-(14, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'VI481648316737RP51120327121801XY', '2022-03-26 18:45:37', '2022-03-26 18:45:37', 0),
-(15, 'DESKTOP-2KPJSHU', 'KD771648317460JL6551097841260MN', '2022-03-26 18:57:40', '2022-03-26 18:57:40', 0),
-(16, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'JV241648317468GB95138458667312YM', '2022-03-26 18:57:48', '2022-03-26 18:57:48', 0),
-(17, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'AL11648318866JG7121975596084IL', '2022-03-26 19:21:06', '2022-03-26 19:21:06', 0),
-(18, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'NL951648318876YU63107140726940BU', '2022-03-26 19:21:16', '2022-03-26 19:21:16', 0),
-(19, 'DESKTOP-2KPJSHU', 'OH351648318885OS8651097885435VH', '2022-03-26 19:21:25', '2022-03-26 19:21:25', 0),
-(20, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'KQ121648332004SY5884064932204LT', '2022-03-26 23:00:04', '2022-03-26 23:00:04', 0),
-(21, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'CA931648364189BM9992308394584JK', '2022-03-27 08:56:29', '2022-03-27 08:56:29', 0),
-(22, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'IX811648364627EF2846154209556GA', '2022-03-27 09:03:47', '2022-03-27 09:03:47', 0),
-(23, 'DESKTOP-2KPJSHU', 'YF341648364633SC16131869170640BU', '2022-03-27 09:03:53', '2022-03-27 09:03:53', 0),
-(24, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'ZB231648364642BW870879679606IY', '2022-03-27 09:04:02', '2022-03-27 09:04:02', 0),
-(25, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'OA411648375067PX83161540756566MR', '2022-03-27 11:57:47', '2022-03-27 11:57:47', 0),
-(26, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'ED841648375092ZX2529670751656PG', '2022-03-27 11:58:12', '2022-03-27 11:58:12', 0),
-(27, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'JK31648375178DL7241209379450SG', '2022-03-27 11:59:38', '2022-03-27 11:59:38', 0),
-(28, 'DESKTOP-2KPJSHU', 'WP481648375265KL54121979769610CS', '2022-03-27 12:01:05', '2022-03-27 12:01:05', 0),
-(29, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'RM961648375533XJ44121979789442BZ', '2022-03-27 12:05:33', '2022-03-27 12:05:33', 0),
-(30, 'DESKTOP-2KPJSHU', 'UN791648375539YH6079122025872KR', '2022-03-27 12:05:39', '2022-03-27 12:05:39', 0),
-(31, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'JB871648380877ZB54100551233497KR', '2022-03-27 13:34:37', '2022-03-27 13:34:37', 0),
-(32, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'XP451648384987SS5642858009662FD', '2022-03-27 14:43:07', '2022-03-27 14:43:07', 0),
-(33, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'JX181648385058LU8793957948306OM', '2022-03-27 14:44:18', '2022-03-27 14:44:18', 0),
-(34, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'QS191648385283HK6941209632075AA', '2022-03-27 14:48:03', '2022-03-27 14:48:03', 0),
-(35, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'UD501648385694IS3124725785410YW', '2022-03-27 14:54:54', '2022-03-27 14:54:54', 0),
-(36, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'HA701648385786AK8941209644650UC', '2022-03-27 14:56:26', '2022-03-27 14:56:26', 0),
-(37, 'DESKTOP-2KPJSHU', 'QZ531648385791JS9864287045849UV', '2022-03-27 14:56:31', '2022-03-27 14:56:31', 0),
-(38, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'QK151648386172RF23123628962900PW', '2022-03-27 15:02:52', '2022-03-27 15:02:52', 0),
-(39, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'KH51648386418XK7695606412244DR', '2022-03-27 15:06:58', '2022-03-27 15:06:58', 0),
-(40, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'TK391648386480PN34131870918400LJ', '2022-03-27 15:08:00', '2022-03-27 15:08:00', 0),
-(41, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'FS811648386515ES82164838651500PM', '2022-03-27 15:08:35', '2022-03-27 15:08:35', 0),
-(42, 'DESKTOP-2KPJSHU', 'ND181648386547EL7944506436769GI', '2022-03-27 15:09:07', '2022-03-27 15:09:07', 0),
-(43, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'AW11648386788XL29153299971284TS', '2022-03-27 15:13:08', '2022-03-27 15:13:08', 0),
-(44, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'OR441648386832LS4336264510304HC', '2022-03-27 15:13:52', '2022-03-27 15:13:52', 0),
-(45, 'DESKTOP-2KPJSHU', 'RR961648386891PN93146706433299CK', '2022-03-27 15:14:51', '2022-03-27 15:14:51', 0),
-(46, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'NI691648389644XY5140113119740WL', '2022-03-27 16:00:44', '2022-03-27 16:00:44', 0),
-(47, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'NV141648389776OH33125277622976VE', '2022-03-27 16:02:56', '2022-03-27 16:02:56', 0),
-(48, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'UC691648389981EM7298903398860EY', '2022-03-27 16:06:21', '2022-03-27 16:06:21', 0),
-(49, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'TX321648399126UB87112091140568NZ', '2022-03-27 18:38:46', '2022-03-27 18:38:46', 0),
-(50, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'UF41648399132QC2893958750524BA', '2022-03-27 18:38:52', '2022-03-27 18:38:52', 0),
-(51, 'DESKTOP-2KPJSHU', 'NJ301648399454UM788241997270MH', '2022-03-27 18:44:14', '2022-03-27 18:44:14', 0),
-(52, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'GM741648399600AE7672529582400ER', '2022-03-27 18:46:40', '2022-03-27 18:46:40', 0),
-(53, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'HN151648399908HA40110442793836LT', '2022-03-27 18:51:48', '2022-03-27 18:51:48', 0),
-(54, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'QG381648400866PA8884068444166VV', '2022-03-27 19:07:46', '2022-03-27 19:07:46', 0),
-(55, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'QC191648401314VO9174178059130MI', '2022-03-27 19:15:14', '2022-03-27 19:15:14', 0),
-(56, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'NO521648401319JP356593605276JQ', '2022-03-27 19:15:19', '2022-03-27 19:15:19', 0),
-(57, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'QR581648401351KW968242006755LE', '2022-03-27 19:15:50', '2022-03-27 19:15:50', 0),
-(58, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'KF921648401358FQ5870881258394XL', '2022-03-27 19:15:58', '2022-03-27 19:15:58', 0),
-(59, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'XC801648401481AG4975826468126EJ', '2022-03-27 19:18:01', '2022-03-27 19:18:01', 0),
-(60, 'DESKTOP-2KPJSHU', 'GN871648401686TY9497255699474LX', '2022-03-27 19:21:26', '2022-03-27 19:21:26', 0),
-(61, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'NH61648404046VB9536264889012LR', '2022-03-27 20:00:46', '2022-03-27 20:00:46', 0),
-(62, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'FX991648404312BD4284068619912QG', '2022-03-27 20:05:12', '2022-03-27 20:05:12', 0),
-(63, 'DESKTOP-2KPJSHU', 'FD611648406138PO5646155371864TR', '2022-03-27 20:35:38', '2022-03-27 20:35:38', 0),
-(64, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'CS481648406146DF8241210153650DH', '2022-03-27 20:35:46', '2022-03-27 20:35:46', 0),
-(65, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'KQ721648406857ZE932968137140IS', '2022-03-27 20:47:37', '2022-03-27 20:47:37', 0),
-(66, 'DESKTOP-2KPJSHU', 'RC681648406877GW53158247060192XZ', '2022-03-27 20:47:57', '2022-03-27 20:47:57', 0),
-(67, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'WT751648406887TV19164840688700JB', '2022-03-27 20:48:07', '2022-03-27 20:48:07', 0),
-(68, 'DESKTOP-2KPJSHU', 'VJ291648406923EO2551100614613GS', '2022-03-27 20:48:43', '2022-03-27 20:48:43', 0),
-(69, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'KK221648413277HR83102201623174SQ', '2022-03-27 22:34:37', '2022-03-27 22:34:37', 0),
-(70, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'ZL221648413300HM2328023026100SF', '2022-03-27 22:35:00', '2022-03-27 22:35:00', 0),
-(71, 'DESKTOP-2KPJSHU', 'KG541648413752ZA6197256411368GF', '2022-03-27 22:42:32', '2022-03-27 22:42:32', 0),
-(72, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'CF441648413872YO7024726208080JH', '2022-03-27 22:44:32', '2022-03-27 22:44:32', 0),
-(73, 'DESKTOP-2KPJSHU', 'EN821648413965QG1767584972565HQ', '2022-03-27 22:46:05', '2022-03-27 22:46:05', 0),
-(74, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'VL631648414475EB29133521572475RZ', '2022-03-27 22:54:35', '2022-03-27 22:54:35', 0),
-(75, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'PA201648414504RR6790662797720CW', '2022-03-27 22:55:04', '2022-03-27 22:55:04', 0),
-(76, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'OM151648414536PE2680772312264OY', '2022-03-27 22:55:36', '2022-03-27 22:55:36', 0),
-(77, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'CX181648414917NI7941210372925TK', '2022-03-27 23:01:57', '2022-03-27 23:01:57', 0),
-(78, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'KQ821648415044YH6769233431848AC', '2022-03-27 23:04:04', '2022-03-27 23:04:04', 0),
-(79, 'DESKTOP-2KPJSHU', 'JR861648415137GI8765936605480PP', '2022-03-27 23:05:37', '2022-03-27 23:05:37', 0),
-(80, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'DG1001648415281AS6351100873711KZ', '2022-03-27 23:08:01', '2022-03-27 23:08:01', 0),
-(81, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'HQ391648415432YR874178694440WN', '2022-03-27 23:10:32', '2022-03-27 23:10:32', 0),
-(82, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'MX801648415468RR56150005807588TL', '2022-03-27 23:11:08', '2022-03-27 23:11:08', 0),
-(83, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'WP771648415544MW61145060567872CF', '2022-03-27 23:12:24', '2022-03-27 23:12:24', 0),
-(84, 'DESKTOP-2KPJSHU', 'OD81648415607FJ218242078035OY', '2022-03-27 23:13:27', '2022-03-27 23:13:27', 0),
-(85, 'DESKTOP-2KPJSHU', 'MC211648415711YK8554397718463RU', '2022-03-27 23:15:11', '2022-03-27 23:15:11', 0),
-(86, 'DESKTOP-2KPJSHU', 'PW591648415921RI67115389114470EM', '2022-03-27 23:18:41', '2022-03-27 23:18:41', 0),
-(87, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'BM671648416384KN5718132580224BN', '2022-03-27 23:26:24', '2022-03-27 23:26:24', 0),
-(88, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'JP431648416706EP55108795502596GV', '2022-03-27 23:31:46', '2022-03-27 23:31:46', 0),
-(89, 'DESKTOP-2KPJSHU.NAT.bydgoszcz.vectranet.pl', 'WC321648417581UO32158248087776DM', '2022-03-27 23:46:20', '2022-03-27 23:46:20', 0);
+INSERT INTO `komputery` (`id`, `nazwa`, `nrip`, `hostid`, `czasrejestracja`, `czaszmiana`) VALUES
+(1, 'DESKTOP-2KPJSHU', '127.0.0.1', 'KJ181648661122IL78112108956296UA', '2022-03-30 19:25:22', '2045-06-17 01:56:25'),
+(2, 'DESKTOP-2KPJSHU', '127.0.0.1', 'ME831648673514US50154975310316SU', '2022-03-30 22:51:54', '2022-03-30 22:51:54'),
+(3, 'DESKTOP-2KPJSHU', '127.0.0.1', 'RN461648674033WU59118704530376YL', '2022-03-30 23:00:33', '2022-03-30 23:00:33'),
+(4, 'DESKTOP-2KPJSHU', '127.0.0.1', 'TX41648674040GZ4198920442400ND', '2022-03-30 23:00:40', '2022-03-30 23:00:40');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `logowania`
+--
+
+CREATE TABLE `logowania` (
+  `id` int(11) NOT NULL,
+  `komputery` int(11) NOT NULL,
+  `czaslogowania` text COLLATE utf8_polish_ci NOT NULL,
+  `czaswylogowania` text COLLATE utf8_polish_ci NOT NULL,
+  `czaszmiana` text COLLATE utf8_polish_ci NOT NULL,
+  `zalogowany` int(11) NOT NULL DEFAULT '0',
+  `del` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `logowania`
+--
+
+INSERT INTO `logowania` (`id`, `komputery`, `czaslogowania`, `czaswylogowania`, `czaszmiana`, `zalogowany`, `del`) VALUES
+(1, 1, '2045-06-17 01:56:08', '2045-06-17 01:56:25', '2045-06-17 01:56:25', 2, 1),
+(2, 4, '2045-06-17 05:33:49', '', '2045-06-17 05:33:49', 2, 0),
+(3, 4, '2045-06-17 05:37:14', '2045-06-17 05:47:01', '2045-06-17 05:47:01', 8, 1),
+(4, 4, '2045-06-17 05:47:27', '2045-06-17 05:48:06', '2045-06-17 05:48:06', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -570,14 +511,14 @@ CREATE TABLE `osoby` (
 
 INSERT INTO `osoby` (`id`, `czaszmiana`, `kolejnosc`, `imie`, `nazwisko`, `funkcja`, `specjalnosc`, `narodowosc`, `userlogin`, `rodzaj`, `user`, `hasloorg`, `haslonew`, `autoryzacja`, `zalogowanyorg`, `blokadaorg`, `hannahorg`, `fionaorg`, `rajehorg`, `naroslorg`, `uzytkownik`, `czaslogowania`, `czaswylogowania`, `odpowiedz`, `reakcja`, `zalogowanynew`, `blokadanew`, `hannahnew`, `fionanew`, `rajehnew`, `naroslnew`, `hannahid`, `fionaid`, `rajehid`, `naroslid`) VALUES
 (0, '', '0', '', '', '', '', '', '', '', 0, '', '', 0, 0, 0, 0, 0, 0, 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 0, 9, 7, 11, 13),
-(1, '', '110', 'Dedal', '', 'statek', '', '', '', 'S', 2, '!@#', '!@#', 0, 1, 0, 1, 1, 1, 0, '', '2022-03-27 22:23:40', '', 'Dedal jest tylko jeden', 0, 1, 0, 1, 1, 1, 0, 9, 7, 11, 13),
-(2, '2022-03-27 23:41:15', '10', 'John', 'Spow', 'Kapitan', 'nawigator, pilot', 'USA', 'john', 'M', 1, '123', '123', 1, 0, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '', '2022-03-27 23:41:15', 'Witaj John Spow', 200, 0, 1, 0, 0, 0, 0, 9, 7, 11, 13),
+(1, '', '110', 'Dedal', '', 'statek', '', '', '', 'S', 2, '!@#', '!@#', 0, 1, 0, 1, 1, 1, 0, '', '2022-03-27 22:23:40', '', 'Dedal jest tylko jeden', 0, 0, 0, 1, 1, 1, 0, 9, 7, 11, 13),
+(2, '2045-06-17 05:34:13', '10', 'John', 'Spow', 'Kapitan', 'nawigator, pilot', 'USA', 'john', 'M', 1, '123', '123', 1, 0, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '2045-06-17 05:33:49', '2045-06-17 05:34:13', 'Witaj John Spow', 200, 0, 1, 0, 0, 0, 0, 9, 7, 11, 13),
 (3, '2022-03-16 21:59:32', '20', 'Peng', 'Yaping', 'I oficer', 'astrofizyk, dyplomata', 'Chiny', 'peng', 'M', 1, '123', '123', 0, 0, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '', '', 'Witaj Louise Banks', 400, 0, 1, 0, 0, 0, 0, 9, 7, 11, 13),
-(4, '2022-03-27 23:41:43', '30', 'William', 'Weir', 'II oficer', 'matematyk, inżynier jądrowy', 'Unia Europejska', 'william', 'M', 1, '123', '123', 0, 0, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '2022-03-27 23:41:43', '', 'Witaj Dave Bowman', 400, 1, 1, 0, 0, 0, 0, 9, 7, 11, 13),
+(4, '2045-06-17 05:48:06', '30', 'William', 'Weir', 'II oficer', 'matematyk, inżynier jądrowy', 'Unia Europejska', 'william', 'M', 1, '123', '123', 0, 0, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '2045-06-17 05:47:27', '2045-06-17 05:48:06', 'Witaj Dave Bowman', 400, 0, 1, 0, 0, 0, 0, 9, 7, 11, 13),
 (5, '2022-03-13 21:38:03', '40', 'Manu', 'Punjabi', 'III oficer', 'elektronik, nawigator', 'Indie', 'manu', 'M', 1, '123', '123', 0, 0, 1, 0, 0, 0, 0, '', '', '', 'Witaj Dwayne Hicks', 400, 0, 1, 0, 0, 0, 0, 9, 7, 11, 13),
 (6, '2022-03-20 13:40:13', '50', 'Zeki', 'Demir', 'IV oficer', 'pilot, nawigator', 'Turcja', 'zeki', 'M', 1, '123', '123', 1, 0, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '', '', 'Witaj Anna Lee Dwell', 400, 0, 1, 0, 0, 0, 0, 9, 7, 11, 13),
 (7, '2022-03-23 18:44:54', '60', 'Akito', 'Yamazaki', 'Psychiatra', 'psychiatra, programista', 'Japonia', 'akito', 'M', 2, '123', '123', 0, 0, 1, 1, 1, 1, 1, 'Komputer-Tomka', '', '', 'Witaj William Weir', 400, 0, 1, 1, 1, 1, 0, 9, 7, 11, 13),
-(8, '2022-03-27 11:52:27', '70', 'Da', 'Yang', 'Lekarz', 'lekarz, biolog', 'Chiny', 'da', 'M', 1, '123', '123', 0, 0, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '', '', 'Witaj Elizabeth Halperin', 400, 0, 1, 0, 0, 0, 0, 9, 7, 11, 13),
+(8, '2045-06-17 05:47:01', '70', 'Da', 'Yang', 'Lekarz', 'lekarz, biolog', 'Chiny', 'da', 'M', 1, '123', '123', 0, 0, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '2045-06-17 05:37:14', '2045-06-17 05:47:01', 'Witaj Elizabeth Halperin', 400, 0, 1, 0, 0, 0, 0, 9, 7, 11, 13),
 (9, '2022-03-27 20:10:49', '80', 'Han', 'Stevens', 'Informatyk', 'programista, łącznościowiec', 'Turcja', 'han', 'M', 2, '123', '123', 0, 0, 1, 1, 1, 1, 1, 'Komputer-Tomka', '', '', 'Witaj Hannah Stevens', 0, 0, 1, 1, 1, 1, 0, 9, 7, 11, 13),
 (10, '', '90', 'Dave', 'Bowman', 'Łącznościowiec', 'łącznościowiec, psycholog', 'USA', 'dave', 'M', 1, '123', '123', 0, 0, 1, 0, 0, 0, 0, '', '', '', 'Witam Joshua', 0, 0, 1, 0, 0, 0, 0, 9, 7, 11, 13),
 (11, '', '100', 'Rajeh', ' Amit', 'Pilot', 'pilot / nawigator', 'Indie', 'rajeh', 'M', 2, '123', '123', 0, 0, 1, 1, 1, 1, 1, '', '', '', 'Witam MG', 0, 0, 1, 1, 1, 1, 0, 9, 7, 11, 13),
@@ -923,8 +864,8 @@ INSERT INTO `wiadomosci` (`id`, `autor`, `autorText`, `odbiorca`, `odbiorcaText`
 (25, 9, 'Han Stevens', 1, 'Dedal ', 'dedal ?', '2045-06-14 02:32:51', 1, 0, 1),
 (26, 1, 'Dedal ', 9, 'Han Stevens', 'tak', '2045-06-14 02:33:44', 1, 1, 1),
 (27, 9, 'Han Stevens', 1, 'Dedal ', 'jesteś martwy, hihi', '2045-06-14 02:44:37', 1, 1, 1),
-(28, 1, 'Dedal ', 9, 'Han Stevens', 'jesteś martwy, hihi', '2045-06-14 02:48:17', 1, 1, 0),
-(29, 9, 'Han Stevens', 1, 'Dedal ', 'wyloguj', '2045-06-14 02:49:37', 0, 0, 0),
+(28, 1, 'Dedal ', 9, 'Han Stevens', 'jesteś martwy, hihi', '2045-06-14 02:48:17', 1, 1, 1),
+(29, 9, 'Han Stevens', 1, 'Dedal ', 'wyloguj', '2045-06-14 02:49:37', 1, 0, 1),
 (30, 13, 'Narośl Weira', 4, 'William Weir', 'to ja', '2045-06-14 02:58:15', 1, 1, 0),
 (31, 13, 'Narośl Weira', 2, 'John Spow', 'to ja', '2045-06-14 03:34:13', 1, 1, 0),
 (32, 2, 'John Spow', 13, 'Narośl Weira', 'kto ty jesteś ?', '2045-06-14 05:56:56', 0, 0, 0),
@@ -934,7 +875,8 @@ INSERT INTO `wiadomosci` (`id`, `autor`, `autorText`, `odbiorca`, `odbiorcaText`
 (36, 13, ' ', 2, 'John Spow', 'test nazwiska', '2045-06-14 06:09:34', 1, 1, 0),
 (37, 2, 'John Spow', 13, ' ', 'kto ty ?', '2045-06-14 06:09:59', 0, 0, 0),
 (38, 4, 'William Weir', 13, '           ', 'co za ja ?', '2045-06-14 06:12:27', 0, 0, 0),
-(39, 13, '***** ***', 4, 'William Weir', 'test nazwiska', '2045-06-14 06:14:40', 1, 1, 0);
+(39, 13, '***** ***', 4, 'William Weir', 'test nazwiska', '2045-06-14 06:14:40', 1, 1, 0),
+(40, 2, 'John Spow', 15, 'NASA  ', 'wyloguj', '2045-06-15 00:34:45', 0, 0, 0);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -950,6 +892,12 @@ ALTER TABLE `dzialania`
 -- Indexes for table `komputery`
 --
 ALTER TABLE `komputery`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `logowania`
+--
+ALTER TABLE `logowania`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1021,7 +969,12 @@ ALTER TABLE `dzialania`
 -- AUTO_INCREMENT dla tabeli `komputery`
 --
 ALTER TABLE `komputery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT dla tabeli `logowania`
+--
+ALTER TABLE `logowania`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT dla tabeli `moduly`
 --
@@ -1066,7 +1019,7 @@ ALTER TABLE `ustawienia`
 -- AUTO_INCREMENT dla tabeli `wiadomosci`
 --
 ALTER TABLE `wiadomosci`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
