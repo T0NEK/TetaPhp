@@ -46,20 +46,62 @@ try
                 $naroslnew = $row['naroslnew'];
                 if ($blokada == 1)  
                     {
+                    $sql = "
+                    SELECT
+                        logowania.czaslogowania,
+                        komputery.nazwa
+                    FROM
+                        logowania,
+                        komputery
+                    WHERE
+                        logowania.zalogowany = ".$id." 
+                        AND logowania.del = 0   
+                        AND komputery.id = logowania.komputery
+                    ";    
+                    $wynik = $conn->query($sql); 
+                    if ($wynik->num_rows > 0)
+                    {
+                        $row = $wynik->fetch_assoc();
+                        $result = array ("wynik"=>true,  "stan"=>false, "error"=>$imie." ".$nazwisko." - jesteś zalogowany na: ".$row['nazwa'].' od:'.$row['czaslogowania']);
+                    } 
+                    else
+                    {
                     if ($zalogowany == 0)    
                         {
-                        $time = date("Y-m-d H:i:s",time());
+                        $conn->autocommit(false);
                         $sql = "UPDATE 
-                                osoby
+                                    osoby
                                 SET
-                                zalogowanynew = 1,
-                                czaslogowania = '".$time."',
-                                czaswylogowania = '',
-                                czaszmiana = '".$time."'
+                                    zalogowanynew = 1,
+                                    czaslogowania = '".$body->czas."',
+                                    czaswylogowania = '',
+                                    czaszmiana = '".$body->czas."'
                                 WHERE
-                                id = ".$id."
+                                    id = ".$id."
                                 ";
-                        if ($conn->query($sql) === TRUE) 
+                        $conn->query($sql);
+
+                        $sql = "INSERT 
+                        INTO logowania
+                        (
+                        komputery,
+                        czaslogowania,
+                        czaswylogowania,
+                        czaszmiana,
+                        zalogowany,
+                        del
+                        )
+                        VALUES
+                        (".$body->idhost.",
+                         '".$body->czas."',
+                         '',
+                         '".$body->czas."',
+                         '".$id."',
+                         0
+                         )
+                        ";
+                        $conn->query($sql);
+                        if ($conn->commit() === TRUE) 
                             { 
                                 $result = array ("wynik"=>true, "stan"=>true, "zalogowany"=>$id, "imie"=>$imie, "nazwisko"=>$nazwisko, "autoryzacja"=>($autoryzacja==1), "funkcja"=>$funkcja, "rodzaj"=>$rodzaj, "naroslnew"=>$naroslnew, "error"=>" - zostałeś zalogowany");
                             }
@@ -71,7 +113,8 @@ try
                         else
                         {
                             $result = array ("wynik"=>true,  "stan"=>false, "error"=>$imie." ".$nazwisko." - jesteś zalogowany na innym urzadzeniu");     
-                        }        
+                        }   
+                    }         
                     }
                     else
                     {
@@ -98,27 +141,58 @@ try
             (user = 1 OR user = 2 ) AND
             id = ".$body->zalogowany."
             ";
-     $wynik = $conn->query($sql); 
-     if ($wynik->num_rows == 1) 
-         {
-         $row = $wynik->fetch_assoc();
-         $id = $row['id'];
-         $imie = $row['imie'];
-         $nazwisko = $row['nazwisko'];
-         $zalogowany = $row['zalogowanynew'];
+        $wynik = $conn->query($sql); 
+        if ($wynik->num_rows == 1) 
+            {
+            $row = $wynik->fetch_assoc();
+            $id = $row['id'];
+            $imie = $row['imie'];
+            $nazwisko = $row['nazwisko'];
+            $zalogowany = $row['zalogowanynew'];
+            $sql = "
+            SELECT
+                id,
+                czaslogowania
+            FROM
+                logowania
+            WHERE
+                zalogowany = ".$id." 
+                AND del = 0   
+            ";    
+            $wynik = $conn->query($sql); 
+            if ($wynik->num_rows == 0)
+            {
+                $result = array ("wynik"=>true,  "stan"=>false, "error"=>$imie." ".$nazwisko." - nie jesteś zalogowany");
+            } 
+            else
+            {
+            $row = $wynik->fetch_assoc();    
+            $czaslogowania = $row['czaslogowania'];
+            $idlog = $row['id'];
             if ($zalogowany == 1)
             {
-            $time = date("Y-m-d H:i:s",time());
+            $conn->autocommit(false);
             $sql = "UPDATE 
-                    osoby
+                        osoby
                     SET
-                    zalogowanynew = 0,
-                    czaswylogowania = '".$time."',
-                    czaszmiana = '".$time."'
+                        zalogowanynew = 0,
+                        czaswylogowania = '".$body->czas."',
+                        czaszmiana = '".$body->czas."'
                     WHERE
-                    id = ".$id."
+                        id = ".$id."
                     ";
-            if ($conn->query($sql) === TRUE) 
+            $conn->query($sql);
+            $sql = "UPDATE 
+                        logowania
+                    SET
+                        czaswylogowania = '".$body->czas."',
+                        czaszmiana = '".$body->czas."',
+                        del = 1
+                    WHERE
+                        id = ".$idlog."
+                        ";
+            $conn->query($sql);
+            if ($conn->commit() === TRUE) 
             {
                 $result = array ("wynik"=>true, "stan"=>true, "zalogowany"=>0, "imie"=>"", "nazwisko"=>"", "autoryzacja"=>false, "funkcja"=>"", "rodzaj"=>"", "error"=>$imie." ".$nazwisko." - zostałeś wylogowany");
             }
@@ -132,10 +206,12 @@ try
                 $result = array ("wynik"=>false, "stan"=>false, "error"=>$imie." ".$nazwisko." - nie jesteś zalogowany");  
             }
         }
+        }
         else
         {
             $result = array ("wynik"=>false, "stan"=>false, "error"=>"błąd nie znaleziono osoby");  
         }
+        $conn->close();       
         }
         }  
         else
@@ -147,7 +223,7 @@ try
 catch(Exception $e)    
 {
     $result = array("wynik"=>false, "stan"=>"error", "error"=>$e);
-    //echo $e;
+    echo $e;
 }
 echo json_encode($result);
 ?>

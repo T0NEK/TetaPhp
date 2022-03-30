@@ -1,7 +1,13 @@
 <?php
 require_once "../../connect.php";
 //echo json_encode(getallheaders());
-$host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+if(isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARTDED_FOR'] != '') {
+    $nrip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+} else {
+    $nrip = $_SERVER['REMOTE_ADDR'];
+}   
+//$host = ($_SERVER['REMOTE_ADDR']);
+$host = gethostbyaddr($nrip);
 $time = time();
 $hostid = chr(rand(65,90)).chr(rand(65,90)).rand(1,100).$time.chr(rand(65,90)).chr(rand(65,90)).rand(1,100).$time*rand(1,100).chr(rand(65,90)).chr(rand(65,90));
 $czasserwera = date("Y-m-d H:i:s",$time);
@@ -20,19 +26,24 @@ try
                     INTO komputery
                     (
                     nazwa,
+                    nrip,
                     hostid,
-                    czaslogowania,
+                    czasrejestracja,
                     czaszmiana
                     )
                     VALUES
                     ('".$host."',
+                     '".$nrip."',
                      '".$hostid."',
                      '".$body->czas."',
                      '".$body->czas."'
                      )
                     ";
             if ($conn->query($sql) === TRUE) 
-            { $result = array ("wynik"=>true, "nazwa"=>$host, "hostid"=>$hostid, "czas"=>$body->czas, "czasserwera"=>$czasserwera); }
+
+            { 
+            $id  = $conn->insert_id;   
+            $result = array ("wynik"=>true, "id"=>$id, "nazwa"=>$host, "nrip"=>$nrip, "hostid"=>$hostid, "czas"=>$body->czas, "czasserwera"=>$czasserwera); }
             else 
             { $result = array ("wynik"=>false, "czas"=>$body->czas, "error"=>'nie zarejestrowano', "czasserwera"=>$czasserwera); }
             $conn->close();    
