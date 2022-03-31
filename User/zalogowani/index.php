@@ -50,18 +50,41 @@ try
                 }
                 $sql = 
                 "SELECT
+                os.id,
+                os.imie,
+                os.nazwisko,
+                os.funkcja,
+                ifnull(lo.jest,0) as zalogowany,
+                os.polecenia,
+                os.blokada
+                FROM
+                (
+                SELECT
                     id,
                     imie,
                     nazwisko,
                     funkcja,
-                    IF (".$warunek.",zalogowanynew,zalogowanyorg) as zalogowany,
-                    IF (".$warunek.",blokadanew,blokadaorg) as blokada
+                    IF (".$warunek.",zalogowanynew,zalogowanyorg) as polecenia,
+                    IF (".$warunek.",blokadanew,blokadaorg) as blokada,
+                    kolejnosc
                  FROM
                     osoby
                  WHERE
                     user = 1 OR user = 2
-                 ORDER BY
-                    kolejnosc
+                )os    
+                LEFT JOIN 
+                (
+                SELECT
+                    	zalogowany,
+                    	1 jest
+                    FROM
+                        logowania
+                    WHERE
+                        del = 0   
+                )lo
+                on lo.zalogowany = os.id
+                order BY
+                os.kolejnosc
                 ";
                 $wynik = $conn->query($sql); 
                 if ($wynik->num_rows > 0) 
@@ -79,7 +102,7 @@ try
                             (($row['id']==$rajehid ? 1:0)&&($rajeh==1 ? 1:0))
                                                        )
                         )                               
-                       ) 
+                ), "polecenia"=>($row['polecenia']==1) 
                 );
                 array_push($osoby,$osoba);
                 }

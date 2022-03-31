@@ -70,22 +70,49 @@ try
                     if ($start == 'START') {$warunek = 'TRUE';} else {$warunek = 'FALSE';}   
                     $sql = 
                     "SELECT
-                     id,
-                     imie,
-                     nazwisko,
-                     funkcja,
-                     IF (".$warunek.",zalogowanynew,zalogowanyorg) as zalogowany,
-                     IF (".$warunek.",blokadanew,blokadaorg) as blokada,
-                     IF (".$warunek.",hannahnew,hannahorg) as hannah,
-                    IF (".$warunek.",fionanew,fionaorg) as fiona,
-                    IF (".$warunek.",rajehnew,rajehorg) as rajeh,
-                    IF (".$warunek.",naroslnew,naroslorg) as narosl
+                    os.id,
+                    os.imie,
+                    os.nazwisko,
+                    os.funkcja,
+                    ifnull(lo.jest,0) as zalogowany,
+                    os.polecenia,
+                    os.hannah,
+                    os.fiona,
+                    os.rajeh,
+                    os.narosl,
+                    os.blokada
+                    FROM
+                    (
+                    SELECT
+                        id,
+                        imie,
+                        nazwisko,
+                        funkcja,
+                        IF (".$warunek.",zalogowanynew,zalogowanyorg) as polecenia,
+                        IF (".$warunek.",blokadanew,blokadaorg) as blokada,
+                        IF (".$warunek.",hannahnew,hannahorg) as hannah,
+                        IF (".$warunek.",fionanew,fionaorg) as fiona,
+                        IF (".$warunek.",rajehnew,rajehorg) as rajeh,
+                        IF (".$warunek.",naroslnew,naroslorg) as narosl,
+                        kolejnosc
                      FROM
-                     osoby
-                     where
-                     user = 3 
-                     ORDER BY
-                     kolejnosc
+                        osoby
+                     WHERE
+                        user = 3
+                    )os    
+                    LEFT JOIN 
+                    (
+                    SELECT
+                            zalogowany,
+                            1 jest
+                        FROM
+                            logowania
+                        WHERE
+                            del = 0   
+                    )lo
+                    on lo.zalogowany = os.id
+                    order BY
+                    os.kolejnosc
                     ";
                     $wynik = $conn->query($sql); 
                     if ($wynik->num_rows > 0) 
@@ -93,7 +120,7 @@ try
                     $osoby = array ();    
                     while ($row = $wynik->fetch_assoc())
                     {
-                    $osoba = array ("id"=>$row['id'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "funkcja"=>$row['funkcja'], "zalogowany"=>($row['zalogowany']==1), "blokada"=>($row['blokada']==1), "hannah"=>($row['hannah']==1), "fiona"=>($row['fiona']==1), "rajeh"=>($row['rajeh']==1), "narosl"=>($row['narosl']==1));
+                    $osoba = array ("id"=>$row['id'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "funkcja"=>$row['funkcja'], "zalogowany"=>($row['zalogowany']==1), "polecenia"=>($row['polecenia']==1), "blokada"=>($row['blokada']==1), "hannah"=>($row['hannah']==1), "fiona"=>($row['fiona']==1), "rajeh"=>($row['rajeh']==1), "narosl"=>($row['narosl']==1));
                     array_push($osoby,$osoba);
                     }
                     $result = array ("wynik"=>true,"stan"=>$start,"osoby"=>$osoby);

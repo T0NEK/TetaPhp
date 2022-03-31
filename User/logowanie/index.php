@@ -66,21 +66,6 @@ try
                     } 
                     else
                     {
-                    if ($zalogowany == 0)    
-                        {
-                        $conn->autocommit(false);
-                        $sql = "UPDATE 
-                                    osoby
-                                SET
-                                    zalogowanynew = 1,
-                                    czaslogowania = '".$body->czas."',
-                                    czaswylogowania = '',
-                                    czaszmiana = '".$body->czas."'
-                                WHERE
-                                    id = ".$id."
-                                ";
-                        $conn->query($sql);
-
                         $sql = "INSERT 
                         INTO logowania
                         (
@@ -100,20 +85,14 @@ try
                          0
                          )
                         ";
-                        $conn->query($sql);
-                        if ($conn->commit() === TRUE) 
+                        if ($conn->query($sql) === TRUE) 
                             { 
-                                $result = array ("wynik"=>true, "stan"=>true, "zalogowany"=>$id, "imie"=>$imie, "nazwisko"=>$nazwisko, "autoryzacja"=>($autoryzacja==1), "funkcja"=>$funkcja, "rodzaj"=>$rodzaj, "naroslnew"=>$naroslnew, "error"=>" - zostałeś zalogowany");
+                                $result = array ("wynik"=>true, "stan"=>true, "zalogowany"=>$id, "imie"=>$imie, "nazwisko"=>$nazwisko, "autoryzacja"=>($autoryzacja==1), "funkcja"=>$funkcja, "rodzaj"=>$rodzaj, "polecenia"=>($zalogowany==1), "naroslnew"=>$naroslnew, "error"=>" - zostałeś zalogowany");
                             }
                             else 
                             { 
                                 $result = array ("wynik"=>false, "stan"=>false, "error"=>$imie." ".$nazwisko." - błąd logowania"); 
-                            }
-                        }
-                        else
-                        {
-                            $result = array ("wynik"=>true,  "stan"=>false, "error"=>$imie." ".$nazwisko." - jesteś zalogowany na innym urzadzeniu");     
-                        }   
+                            }   
                     }         
                     }
                     else
@@ -169,19 +148,6 @@ try
             $row = $wynik->fetch_assoc();    
             $czaslogowania = $row['czaslogowania'];
             $idlog = $row['id'];
-            if ($zalogowany == 1)
-            {
-            $conn->autocommit(false);
-            $sql = "UPDATE 
-                        osoby
-                    SET
-                        zalogowanynew = 0,
-                        czaswylogowania = '".$body->czas."',
-                        czaszmiana = '".$body->czas."'
-                    WHERE
-                        id = ".$id."
-                    ";
-            $conn->query($sql);
             $sql = "UPDATE 
                         logowania
                     SET
@@ -191,19 +157,13 @@ try
                     WHERE
                         id = ".$idlog."
                         ";
-            $conn->query($sql);
-            if ($conn->commit() === TRUE) 
+            if ($conn->query($sql) === TRUE) 
             {
-                $result = array ("wynik"=>true, "stan"=>true, "zalogowany"=>0, "imie"=>"", "nazwisko"=>"", "autoryzacja"=>false, "funkcja"=>"", "rodzaj"=>"", "error"=>$imie." ".$nazwisko." - zostałeś wylogowany");
+                $result = array ("wynik"=>true, "stan"=>true, "zalogowany"=>0, "imie"=>"", "nazwisko"=>"", "autoryzacja"=>false, "funkcja"=>"", "polecenia"=>true, "rodzaj"=>"", "error"=>$imie." ".$nazwisko." - zostałeś wylogowany");
             }
             else
             {
                 $result = array ("wynik"=>false, "stan"=>false, "error"=>"nieokreślony błąd podczas wylogowywania");  
-            }
-            }
-            else
-            {
-                $result = array ("wynik"=>false, "stan"=>false, "error"=>$imie." ".$nazwisko." - nie jesteś zalogowany");  
             }
         }
         }

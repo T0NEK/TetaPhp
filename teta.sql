@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 30 Mar 2022, 23:19
+-- Czas generowania: 31 Mar 2022, 23:17
 -- Wersja serwera: 10.1.21-MariaDB
 -- Wersja PHP: 5.6.30
 
@@ -244,7 +244,17 @@ INSERT INTO `komputery` (`id`, `nazwa`, `nrip`, `hostid`, `czasrejestracja`, `cz
 (1, 'DESKTOP-2KPJSHU', '127.0.0.1', 'KJ181648661122IL78112108956296UA', '2022-03-30 19:25:22', '2045-06-17 01:56:25'),
 (2, 'DESKTOP-2KPJSHU', '127.0.0.1', 'ME831648673514US50154975310316SU', '2022-03-30 22:51:54', '2022-03-30 22:51:54'),
 (3, 'DESKTOP-2KPJSHU', '127.0.0.1', 'RN461648674033WU59118704530376YL', '2022-03-30 23:00:33', '2022-03-30 23:00:33'),
-(4, 'DESKTOP-2KPJSHU', '127.0.0.1', 'TX41648674040GZ4198920442400ND', '2022-03-30 23:00:40', '2022-03-30 23:00:40');
+(4, 'DESKTOP-2KPJSHU', '127.0.0.1', 'TX41648674040GZ4198920442400ND', '2022-03-30 23:00:40', '2022-03-30 23:00:40'),
+(5, 'DESKTOP-2KPJSHU', '127.0.0.1', 'NT911648740180VL95154981576920FI', '2022-03-31 17:23:00', '2022-03-31 17:23:00'),
+(6, 'DESKTOP-2KPJSHU', '127.0.0.1', 'XM511648753244KB313190025952XX', '2022-03-31 21:00:44', '2022-03-31 21:00:44'),
+(7, 'DESKTOP-2KPJSHU', '127.0.0.1', 'SV611648753288NA24148387795920TG', '2022-03-31 21:01:28', '2022-03-31 21:01:28'),
+(8, 'DESKTOP-2KPJSHU', '127.0.0.1', 'OU211648753475VR9482437673750RZ', '2022-03-31 21:04:35', '2022-03-31 21:04:35'),
+(9, 'DESKTOP-2KPJSHU', '127.0.0.1', 'MT441648754190EB1156631648050WJ', '2022-03-31 21:16:30', '2022-03-31 21:16:30'),
+(10, 'DESKTOP-2KPJSHU', '127.0.0.1', 'WR301648754783EZ35130251627857NN', '2022-03-31 21:26:23', '2022-03-31 21:26:23'),
+(11, 'DESKTOP-2KPJSHU', '127.0.0.1', 'OG131648754889EJ1767598950449ZR', '2022-03-31 21:28:09', '2022-03-31 21:28:09'),
+(12, 'DESKTOP-2KPJSHU', '127.0.0.1', 'MO851648754916SB6226380078656YQ', '2022-03-31 21:28:36', '2022-03-31 21:28:36'),
+(13, 'DESKTOP-2KPJSHU', '127.0.0.1', 'BM981648755316JU9434623861636VY', '2022-03-31 21:35:16', '2022-03-31 21:35:16'),
+(14, 'DESKTOP-2KPJSHU', '127.0.0.1', 'IL771648761344ME5623082658816MI', '2022-03-31 23:15:44', '2022-03-31 23:15:44');
 
 -- --------------------------------------------------------
 
@@ -268,9 +278,29 @@ CREATE TABLE `logowania` (
 
 INSERT INTO `logowania` (`id`, `komputery`, `czaslogowania`, `czaswylogowania`, `czaszmiana`, `zalogowany`, `del`) VALUES
 (1, 1, '2045-06-17 01:56:08', '2045-06-17 01:56:25', '2045-06-17 01:56:25', 2, 1),
-(2, 4, '2045-06-17 05:33:49', '', '2045-06-17 05:33:49', 2, 0),
+(2, 4, '2045-06-17 05:33:49', '2022-03-31 17:24:08', '2022-03-31 17:24:08', 2, 1),
 (3, 4, '2045-06-17 05:37:14', '2045-06-17 05:47:01', '2045-06-17 05:47:01', 8, 1),
-(4, 4, '2045-06-17 05:47:27', '2045-06-17 05:48:06', '2045-06-17 05:48:06', 4, 1);
+(4, 4, '2045-06-17 05:47:27', '2045-06-17 05:48:06', '2045-06-17 05:48:06', 4, 1),
+(5, 5, '2045-06-17 23:54:30', '2045-06-17 23:54:56', '2045-06-17 23:54:56', 2, 1),
+(6, 5, '2045-06-18 00:04:54', '2045-06-18 00:05:17', '2045-06-18 00:05:17', 2, 1),
+(7, 5, '2045-06-18 00:05:48', '2045-06-18 00:06:29', '2045-06-18 00:06:29', 2, 1),
+(8, 5, '2045-06-18 00:06:55', '2045-06-18 00:33:03', '2045-06-18 00:33:03', 8, 1),
+(9, 5, '2045-06-18 00:33:58', '2045-06-18 01:32:26', '2045-06-18 01:32:26', 2, 1),
+(10, 5, '2045-06-18 02:26:29', '', '2045-06-18 02:26:29', 10, 1),
+(11, 7, '2045-06-18 03:32:31', '', '2045-06-18 03:32:31', 10, 1),
+(12, 8, '2045-06-18 03:35:08', '', '2045-06-18 03:35:08', 10, 1),
+(13, 9, '2045-06-18 03:47:03', '2045-06-18 03:55:04', '2045-06-18 03:55:04', 10, 1),
+(14, 12, '2045-06-18 03:58:54', '2045-06-18 03:59:03', '2045-06-18 03:59:03', 2, 1),
+(15, 13, '2045-06-18 04:05:36', '', '2045-06-18 04:05:36', 2, 1),
+(16, 13, '2045-06-18 04:06:23', '', '2045-06-18 04:06:23', 2, 1),
+(17, 13, '2045-06-18 04:06:59', '', '2045-06-18 04:06:59', 2, 1),
+(18, 13, '2045-06-18 04:08:38', '2045-06-18 04:09:09', '2045-06-18 04:09:09', 2, 1),
+(19, 13, '2045-06-18 04:09:31', '2045-06-18 04:10:24', '2045-06-18 04:10:24', 5, 1),
+(20, 13, '2045-06-18 04:12:37', '2045-06-18 04:18:51', '2045-06-18 04:18:51', 5, 1),
+(21, 13, '2045-06-18 04:20:05', '2045-06-18 04:21:02', '2045-06-18 04:21:02', 5, 1),
+(22, 13, '2045-06-18 05:25:06', '2045-06-18 05:39:31', '2045-06-18 05:39:31', 5, 1),
+(23, 13, '2045-06-18 05:42:32', '2045-06-18 05:43:43', '2045-06-18 05:43:43', 5, 1),
+(24, 14, '2045-06-18 05:46:11', '', '2045-06-18 05:46:11', 8, 0);
 
 -- --------------------------------------------------------
 
@@ -511,20 +541,20 @@ CREATE TABLE `osoby` (
 
 INSERT INTO `osoby` (`id`, `czaszmiana`, `kolejnosc`, `imie`, `nazwisko`, `funkcja`, `specjalnosc`, `narodowosc`, `userlogin`, `rodzaj`, `user`, `hasloorg`, `haslonew`, `autoryzacja`, `zalogowanyorg`, `blokadaorg`, `hannahorg`, `fionaorg`, `rajehorg`, `naroslorg`, `uzytkownik`, `czaslogowania`, `czaswylogowania`, `odpowiedz`, `reakcja`, `zalogowanynew`, `blokadanew`, `hannahnew`, `fionanew`, `rajehnew`, `naroslnew`, `hannahid`, `fionaid`, `rajehid`, `naroslid`) VALUES
 (0, '', '0', '', '', '', '', '', '', '', 0, '', '', 0, 0, 0, 0, 0, 0, 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 0, 9, 7, 11, 13),
-(1, '', '110', 'Dedal', '', 'statek', '', '', '', 'S', 2, '!@#', '!@#', 0, 1, 0, 1, 1, 1, 0, '', '2022-03-27 22:23:40', '', 'Dedal jest tylko jeden', 0, 0, 0, 1, 1, 1, 0, 9, 7, 11, 13),
-(2, '2045-06-17 05:34:13', '10', 'John', 'Spow', 'Kapitan', 'nawigator, pilot', 'USA', 'john', 'M', 1, '123', '123', 1, 0, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '2045-06-17 05:33:49', '2045-06-17 05:34:13', 'Witaj John Spow', 200, 0, 1, 0, 0, 0, 0, 9, 7, 11, 13),
-(3, '2022-03-16 21:59:32', '20', 'Peng', 'Yaping', 'I oficer', 'astrofizyk, dyplomata', 'Chiny', 'peng', 'M', 1, '123', '123', 0, 0, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '', '', 'Witaj Louise Banks', 400, 0, 1, 0, 0, 0, 0, 9, 7, 11, 13),
-(4, '2045-06-17 05:48:06', '30', 'William', 'Weir', 'II oficer', 'matematyk, inżynier jądrowy', 'Unia Europejska', 'william', 'M', 1, '123', '123', 0, 0, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '2045-06-17 05:47:27', '2045-06-17 05:48:06', 'Witaj Dave Bowman', 400, 0, 1, 0, 0, 0, 0, 9, 7, 11, 13),
-(5, '2022-03-13 21:38:03', '40', 'Manu', 'Punjabi', 'III oficer', 'elektronik, nawigator', 'Indie', 'manu', 'M', 1, '123', '123', 0, 0, 1, 0, 0, 0, 0, '', '', '', 'Witaj Dwayne Hicks', 400, 0, 1, 0, 0, 0, 0, 9, 7, 11, 13),
-(6, '2022-03-20 13:40:13', '50', 'Zeki', 'Demir', 'IV oficer', 'pilot, nawigator', 'Turcja', 'zeki', 'M', 1, '123', '123', 1, 0, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '', '', 'Witaj Anna Lee Dwell', 400, 0, 1, 0, 0, 0, 0, 9, 7, 11, 13),
-(7, '2022-03-23 18:44:54', '60', 'Akito', 'Yamazaki', 'Psychiatra', 'psychiatra, programista', 'Japonia', 'akito', 'M', 2, '123', '123', 0, 0, 1, 1, 1, 1, 1, 'Komputer-Tomka', '', '', 'Witaj William Weir', 400, 0, 1, 1, 1, 1, 0, 9, 7, 11, 13),
-(8, '2045-06-17 05:47:01', '70', 'Da', 'Yang', 'Lekarz', 'lekarz, biolog', 'Chiny', 'da', 'M', 1, '123', '123', 0, 0, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '2045-06-17 05:37:14', '2045-06-17 05:47:01', 'Witaj Elizabeth Halperin', 400, 0, 1, 0, 0, 0, 0, 9, 7, 11, 13),
-(9, '2022-03-27 20:10:49', '80', 'Han', 'Stevens', 'Informatyk', 'programista, łącznościowiec', 'Turcja', 'han', 'M', 2, '123', '123', 0, 0, 1, 1, 1, 1, 1, 'Komputer-Tomka', '', '', 'Witaj Hannah Stevens', 0, 0, 1, 1, 1, 1, 0, 9, 7, 11, 13),
-(10, '', '90', 'Dave', 'Bowman', 'Łącznościowiec', 'łącznościowiec, psycholog', 'USA', 'dave', 'M', 1, '123', '123', 0, 0, 1, 0, 0, 0, 0, '', '', '', 'Witam Joshua', 0, 0, 1, 0, 0, 0, 0, 9, 7, 11, 13),
-(11, '', '100', 'Rajeh', ' Amit', 'Pilot', 'pilot / nawigator', 'Indie', 'rajeh', 'M', 2, '123', '123', 0, 0, 1, 1, 1, 1, 1, '', '', '', 'Witam MG', 0, 0, 1, 1, 1, 1, 0, 9, 7, 11, 13),
-(12, '', '120', 'GRACE', ' ', 'SI', '', '', '', 'S', 2, '123', '123', 0, 0, 0, 1, 1, 1, 1, '', '', '', 'Witam Grace', 0, 0, 0, 1, 1, 1, 0, 9, 7, 11, 13),
+(1, '', '110', 'Dedal', '', 'statek', '', '', '', 'S', 2, '!@#', '!@#', 0, 1, 0, 1, 1, 1, 0, '', '2022-03-31 17:24:08', '', 'Dedal jest tylko jeden', 0, 0, 0, 0, 0, 0, 0, 9, 7, 11, 13),
+(2, '2045-06-17 23:54:56', '10', 'John', 'Spow', 'Kapitan', 'nawigator, pilot', 'USA', 'john', 'M', 1, '123', '123', 1, 1, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '2045-06-17 23:54:30', '2045-06-17 23:54:56', 'Witaj John Spow', 200, 1, 1, 0, 0, 0, 0, 9, 7, 11, 13),
+(3, '2022-03-16 21:59:32', '20', 'Peng', 'Yaping', 'I oficer', 'astrofizyk, dyplomata', 'Chiny', 'peng', 'M', 1, '123', '123', 0, 1, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '', '', 'Witaj Louise Banks', 400, 1, 1, 0, 0, 0, 0, 9, 7, 11, 13),
+(4, '2045-06-17 05:48:06', '30', 'William', 'Weir', 'II oficer', 'matematyk, inżynier jądrowy', 'Unia Europejska', 'william', 'M', 1, '123', '123', 0, 1, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '', '', 'Witaj Dave Bowman', 400, 1, 1, 0, 0, 0, 1, 9, 7, 11, 13),
+(5, '2022-03-13 21:38:03', '40', 'Manu', 'Punjabi', 'III oficer', 'elektronik, nawigator', 'Indie', 'manu', 'M', 1, '123', '123', 0, 1, 1, 0, 0, 0, 0, '', '', '', 'Witaj Dwayne Hicks', 400, 1, 1, 0, 0, 0, 0, 9, 7, 11, 13),
+(6, '2022-03-20 13:40:13', '50', 'Zeki', 'Demir', 'IV oficer', 'pilot, nawigator', 'Turcja', 'zeki', 'M', 1, '123', '123', 1, 1, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '', '', 'Witaj Anna Lee Dwell', 400, 1, 1, 0, 0, 0, 0, 9, 7, 11, 13),
+(7, '2022-03-23 18:44:54', '60', 'Akito', 'Yamazaki', 'Psychiatra', 'psychiatra, programista', 'Japonia', 'akito', 'M', 2, '123', '123', 0, 0, 1, 1, 1, 1, 1, 'Komputer-Tomka', '', '', 'Witaj William Weir', 400, 1, 1, 0, 0, 0, 0, 9, 7, 11, 13),
+(8, '2045-06-17 05:47:01', '70', 'Da', 'Yang', 'Lekarz', 'lekarz, biolog', 'Chiny', 'da', 'M', 1, '123', '123', 0, 1, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '', '', 'Witaj Elizabeth Halperin', 400, 1, 1, 0, 0, 0, 0, 9, 7, 11, 13),
+(9, '2022-03-27 20:10:49', '80', 'Han', 'Stevens', 'Informatyk', 'programista, łącznościowiec', 'Turcja', 'han', 'M', 2, '123', '123', 0, 0, 1, 1, 1, 1, 1, 'Komputer-Tomka', '', '', 'Witaj Hannah Stevens', 0, 1, 1, 0, 0, 0, 0, 9, 7, 11, 13),
+(10, '', '90', 'Dave', 'Bowman', 'Łącznościowiec', 'łącznościowiec, psycholog', 'USA', 'dave', 'M', 1, '123', '123', 0, 1, 1, 0, 0, 0, 0, '', '', '', 'Witam Joshua', 0, 1, 1, 0, 0, 0, 0, 9, 7, 11, 13),
+(11, '', '100', 'Rajeh', ' Amit', 'Pilot', 'pilot / nawigator', 'Indie', 'rajeh', 'M', 2, '123', '123', 0, 0, 1, 1, 1, 1, 1, '', '', '', 'Witam MG', 0, 1, 1, 0, 0, 0, 0, 9, 7, 11, 13),
+(12, '', '120', 'GRACE', ' ', 'SI', '', '', '', 'S', 2, '123', '123', 0, 0, 0, 1, 1, 1, 1, '', '', '', 'Witam Grace', 0, 1, 0, 0, 0, 0, 0, 9, 7, 11, 13),
 (13, '', '130', '*****', '***', 'Narośl Weira', '', '', '', 'S', 3, '123', '123', 0, 0, 0, 1, 1, 1, 1, '', '', '', 'Witam', 0, 0, 0, 1, 1, 1, 0, 9, 7, 11, 13),
-(15, '', '140', 'NASA', ' ', 'Ziemia', '', '', '', 'S', 2, '123', '123', 0, 0, 0, 1, 1, 1, 1, '', '', '', 'Witam Grace', 0, 0, 0, 1, 1, 1, 0, 9, 7, 11, 13);
+(15, '', '140', 'NASA', ' ', 'Ziemia', '', '', '', 'S', 2, '123', '123', 0, 0, 0, 1, 1, 1, 1, '', '', '', 'Witam Grace', 0, 0, 0, 0, 0, 0, 0, 9, 7, 11, 13);
 
 -- --------------------------------------------------------
 
@@ -822,9 +852,9 @@ INSERT INTO `ustawienia` (`id`, `zmiana`, `nazwa`, `wartosc`) VALUES
 (1, '', 'Oryginalna data startu Dedala', '2043-03-11 12:01:02'),
 (2, '2022-02-27 08:02:47', 'Obecna data startu Dedala', '2043-03-11 12:01:02'),
 (3, '', 'Oryginalna data startu akcji na Dedalu', '2045-04-18 21:35:00'),
-(4, '2022-03-27 22:23:47', 'Obecna data akcji na Dedalu', '2045-06-14 04:53:55'),
-(5, '2022-03-27 22:23:47', 'Stan larpa', 'START'),
-(6, '2022-03-27 22:23:47', 'Data startu larpa ', '2022-03-27 22:23:47');
+(4, '2022-03-31 17:24:11', 'Obecna data akcji na Dedalu', '2045-06-17 23:54:13'),
+(5, '2022-03-31 17:24:11', 'Stan larpa', 'START'),
+(6, '2022-03-31 17:24:11', 'Data startu larpa ', '2022-03-31 17:24:11');
 
 -- --------------------------------------------------------
 
@@ -852,7 +882,7 @@ CREATE TABLE `wiadomosci` (
 INSERT INTO `wiadomosci` (`id`, `autor`, `autorText`, `odbiorca`, `odbiorcaText`, `tresc`, `czas`, `przeczytana`, `admindodana`, `przeczytanaadmin`) VALUES
 (1, 2, 'John Spow', 8, 'Da Yang', 'cześć', '2045-07-11 00:51:47', 1, 1, 1),
 (2, 2, 'John Spow', 1, 'Dedal ', 'dedal ?', '2045-06-13 15:50:14', 0, 0, 1),
-(3, 2, 'John Spow', 10, 'Dave Bowman', 'hello', '2045-06-13 18:38:50', 0, 0, 1),
+(3, 2, 'John Spow', 10, 'Dave Bowman', 'hello', '2045-06-13 18:38:50', 1, 0, 1),
 (4, 8, 'Da Yang', 2, 'John Spow', 'cześć', '2045-06-13 18:39:11', 1, 0, 1),
 (5, 8, 'Da Yang', 7, 'Akito Yamazaki', 'cześć Akito', '2045-06-13 18:41:59', 1, 0, 1),
 (6, 2, 'John Spow', 15, 'NASA  ', 'ratunku', '2045-06-13 18:52:24', 1, 0, 1),
@@ -873,10 +903,25 @@ INSERT INTO `wiadomosci` (`id`, `autor`, `autorText`, `odbiorca`, `odbiorcaText`
 (34, 2, 'John Spow', 13, 'Narośl Weira', 'test', '2045-06-14 05:57:33', 0, 0, 0),
 (35, 2, 'John Spow', 3, 'Peng Yaping', 'test', '2045-06-14 05:58:45', 0, 0, 0),
 (36, 13, ' ', 2, 'John Spow', 'test nazwiska', '2045-06-14 06:09:34', 1, 1, 0),
-(37, 2, 'John Spow', 13, ' ', 'kto ty ?', '2045-06-14 06:09:59', 0, 0, 0),
-(38, 4, 'William Weir', 13, '           ', 'co za ja ?', '2045-06-14 06:12:27', 0, 0, 0),
-(39, 13, '***** ***', 4, 'William Weir', 'test nazwiska', '2045-06-14 06:14:40', 1, 1, 0),
-(40, 2, 'John Spow', 15, 'NASA  ', 'wyloguj', '2045-06-15 00:34:45', 0, 0, 0);
+(37, 2, 'John Spow', 13, ' ', 'kto ty ?', '2045-06-14 06:09:59', 1, 0, 1),
+(38, 4, 'William Weir', 13, '           ', 'co za ja ?', '2045-06-14 06:12:27', 1, 0, 1),
+(39, 13, '***** ***', 4, 'William Weir', 'test nazwiska', '2045-06-14 06:14:40', 1, 1, 1),
+(40, 2, 'John Spow', 15, 'NASA  ', 'wyloguj', '2045-06-15 00:34:45', 0, 0, 0),
+(41, 10, 'Dave Bowman', 2, 'John Spow', 'cześć', '2045-06-18 02:27:00', 0, 0, 0),
+(42, 5, 'Manu Punjabi', 2, 'John Spow', 'do js', '2045-06-18 05:38:47', 0, 0, 0),
+(43, 8, 'Da Yang', 1, 'Dedal ', 'wyloguj', '2045-06-18 05:46:39', 1, 0, 1),
+(44, 8, 'Da Yang', 2, 'John Spow', 'wyloguj', '2045-06-18 05:46:39', 1, 0, 1),
+(45, 8, 'Da Yang', 3, 'Peng Yaping', 'wyloguj', '2045-06-18 05:46:39', 1, 0, 1),
+(46, 8, 'Da Yang', 4, 'William Weir', 'wyloguj', '2045-06-18 05:46:39', 1, 0, 1),
+(47, 8, 'Da Yang', 5, 'Manu Punjabi', 'wyloguj', '2045-06-18 05:46:39', 1, 0, 1),
+(48, 8, 'Da Yang', 6, 'Zeki Demir', 'wyloguj', '2045-06-18 05:46:39', 1, 0, 1),
+(49, 8, 'Da Yang', 7, 'Akito Yamazaki', 'wyloguj', '2045-06-18 05:46:39', 1, 0, 1),
+(50, 8, 'Da Yang', 9, 'Han Stevens', 'wyloguj', '2045-06-18 05:46:39', 1, 0, 1),
+(51, 8, 'Da Yang', 10, 'Dave Bowman', 'wyloguj', '2045-06-18 05:46:39', 1, 0, 1),
+(52, 8, 'Da Yang', 11, 'Rajeh  Amit', 'wyloguj', '2045-06-18 05:46:39', 1, 0, 1),
+(53, 8, 'Da Yang', 12, 'GRACE  ', 'wyloguj', '2045-06-18 05:46:39', 1, 0, 1),
+(54, 8, 'Da Yang', 13, '***** ***', 'wyloguj', '2045-06-18 05:46:39', 1, 0, 1),
+(55, 8, 'Da Yang', 15, 'NASA  ', 'wyloguj', '2045-06-18 05:46:39', 1, 0, 1);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -969,12 +1014,12 @@ ALTER TABLE `dzialania`
 -- AUTO_INCREMENT dla tabeli `komputery`
 --
 ALTER TABLE `komputery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT dla tabeli `logowania`
 --
 ALTER TABLE `logowania`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT dla tabeli `moduly`
 --
@@ -1019,7 +1064,7 @@ ALTER TABLE `ustawienia`
 -- AUTO_INCREMENT dla tabeli `wiadomosci`
 --
 ALTER TABLE `wiadomosci`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

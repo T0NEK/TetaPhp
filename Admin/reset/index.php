@@ -12,11 +12,11 @@ try
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         { //set   
-            $time = date("Y-m-d H:i:s",time());
+            $conn->autocommit(false);
             $sql = "UPDATE 
                     osoby 
                     SET
-                    czaslogowania = CASE zalogowanyorg WHEN 1 THEN '".$time."' ELSE '' END,
+                    czaslogowania = CASE zalogowanyorg WHEN 1 THEN '".$body->czas."' ELSE '' END,
                     czaswylogowania = '',
                     zalogowanynew = zalogowanyorg,
                     blokadanew = blokadaorg,
@@ -24,7 +24,18 @@ try
                     WHERE
                     user in (1, 2)
                     ";
-            if ($conn->query($sql) === TRUE)
+            $conn->query($sql);
+                    $sql = "UPDATE 
+                    logowania
+                    SET
+                    czaswylogowania = '".$body->czas."',
+                    czaszmiana = '".$body->czas."',
+                    del = 1
+                    WHERE
+                    del <> 1
+                    ";
+                $conn->query($sql);
+            if ($conn->commit() === TRUE) 
                 { $result = array ("wynik"=>true, "stan"=>"ok");}
                 else 
                 { $result = array ("wynik"=>false, "stan"=>"error", "error"=>"nie zresetowano");}
