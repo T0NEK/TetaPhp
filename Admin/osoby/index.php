@@ -13,6 +13,47 @@ try
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {
+        if (strtoupper($body->zmiana) == 'LOGOWANIE')    
+        {
+            if (stan)
+            {
+            $sql = "INSERT 
+            INTO logowania
+            (
+            komputery,
+            czaslogowania,
+            czaswylogowania,
+            czaszmiana,
+            zalogowany,
+            del
+            )
+            VALUES
+            (".$body->idhost.",
+                '".$body->czas."',
+                '',
+                '".$body->czas."',
+                '".$id."',
+                0
+                )
+            ";
+            }
+            else
+            {
+
+
+
+            }
+            if ($conn->query($sql) === TRUE) 
+                { 
+                    $result = array ("wynik"=>true, "stan"=>true, "zalogowany"=>$id, "imie"=>$imie, "nazwisko"=>$nazwisko, "autoryzacja"=>($autoryzacja==1), "funkcja"=>$funkcja, "rodzaj"=>$rodzaj, "polecenia"=>($zalogowany==1), "naroslnew"=>$naroslnew, "error"=>" - zostałeś zalogowany");
+                }
+                else 
+                { 
+                    $result = array ("wynik"=>false, "stan"=>false, "error"=>$imie." ".$nazwisko." - błąd logowania"); 
+                }   
+        }
+        else
+        {
         switch (strtoupper($body->zmiana)) 
                         {
                         case 'POLECENIA':
@@ -59,6 +100,7 @@ try
                 $result = array ("wynik"=>true, "id"=>$body->id, "zmiana"=>$body->zmiana, 'dane'=>$tabela[1]->nazwisko);    
 */                
         }
+        }
         else
         { //get
             $sql = "SELECT wartosc from ustawienia WHERE id=5"; 
@@ -75,6 +117,10 @@ try
                 os.nazwisko,
                 os.funkcja,
                 ifnull(lo.jest,0) as zalogowany,
+                ifnull(lo.czaslogowania,'') as czaslogowania,
+                ifnull(lo.idhosta,0) as idhosta,
+                ifnull(lo.nazwahosta,'') as nazwahosta,
+                ifnull(lo.iphosta,'') as iphosta,
                 os.polecenia,
                 os.hannah,
                 os.fiona,
@@ -103,12 +149,18 @@ try
                 LEFT JOIN 
                 (
                 SELECT
-                    	zalogowany,
-                    	1 jest
+                        logowania.zalogowany,
+                        logowania.czaslogowania,
+                    	1 as jest,
+                        komputery.id as idhosta,
+                        komputery.nazwa as nazwahosta,
+                        komputery.nrip as iphosta
                     FROM
-                        logowania
+                        logowania,
+                        komputery
                     WHERE
-                        del = 0   
+                        logowania.del = 0   
+                        AND logowania.komputery = komputery.id
                 )lo
                 on lo.zalogowany = os.id
                 order BY
@@ -120,7 +172,7 @@ try
                 $osoby = array ();    
                 while ($row = $wynik->fetch_assoc())
                 {
-                $osoba = array ("id"=>$row['id'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "funkcja"=>$row['funkcja'], "zalogowany"=>($row['zalogowany']==1), "polecenia"=>($row['polecenia']==1), "blokada"=>($row['blokada']==1), "hannah"=>($row['hannah']==1), "fiona"=>($row['fiona']==1), "rajeh"=>($row['rajeh']==1), "narosl"=>($row['narosl']==1));
+                $osoba = array ("id"=>$row['id'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "funkcja"=>$row['funkcja'], "czaslogowania"=>$row['czaslogowania'], "idhosta"=>$row['idhosta'], "nazwahosta"=>$row['nazwahosta'], "iphosta"=>$row['iphosta'], "zalogowany"=>($row['zalogowany']==1), "polecenia"=>($row['polecenia']==1), "blokada"=>($row['blokada']==1), "hannah"=>($row['hannah']==1), "fiona"=>($row['fiona']==1), "rajeh"=>($row['rajeh']==1), "narosl"=>($row['narosl']==1));
                 array_push($osoby,$osoba);
                 }
                 $result = array ("wynik"=>true,"stan"=>$start,"osoby"=>$osoby);
@@ -136,8 +188,6 @@ try
             {
                 $result = array ("wynik"=>false, "stan"=>"0 wyników");
             }
-            
-            
             }          
     }
 }
