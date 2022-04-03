@@ -62,7 +62,7 @@ try
                     if ($wynik->num_rows > 0)
                     {
                         $row = $wynik->fetch_assoc();
-                        $result = array ("wynik"=>true,  "stan"=>false, "error"=>$imie." ".$nazwisko." - jesteś zalogowany na: ".$row['nazwa'].' od:'.$row['czaslogowania']);
+                        $result = array ("wynik"=>false,  "stan"=>false, "error"=>$imie." ".$nazwisko." - jesteś zalogowany na: ".$row['nazwa'].' od:'.$row['czaslogowania']);
                     } 
                     else
                     {
@@ -74,7 +74,8 @@ try
                         czaswylogowania,
                         czaszmiana,
                         zalogowany,
-                        del
+                        del,
+                        wyloguj
                         )
                         VALUES
                         (".$body->idhost.",
@@ -82,6 +83,7 @@ try
                          '',
                          '".$body->czas."',
                          '".$id."',
+                         0,
                          0
                          )
                         ";
@@ -97,12 +99,12 @@ try
                     }
                     else
                     {
-                        $result = array ("wynik"=>true,  "stan"=>false, "error"=>$imie." ".$nazwisko." - odmowa logowania");     
+                        $result = array ("wynik"=>false,  "stan"=>false, "error"=>$imie." ".$nazwisko." - odmowa logowania");     
                     }    
                 }
                 else
                 {
-                    $result = array ("wynik"=>true, "stan"=>false, "error"=>"nieprawidłowy login lub hasło");     
+                    $result = array ("wynik"=>false, "stan"=>false, "error"=>"nieprawidłowy login lub hasło");     
                 }
         $conn->close();                        
         }  
@@ -136,12 +138,12 @@ try
                 logowania
             WHERE
                 zalogowany = ".$id." 
-                AND del = 0   
+                AND ((del = 0) OR ((del = 1) && (wyloguj = 1)))
             ";    
             $wynik = $conn->query($sql); 
             if ($wynik->num_rows == 0)
             {
-                $result = array ("wynik"=>true,  "stan"=>false, "error"=>$imie." ".$nazwisko." - nie jesteś zalogowany");
+                $result = array ("wynik"=>false,  "stan"=>false, "error"=>$imie." ".$nazwisko." - nie jesteś zalogowany");
             } 
             else
             {

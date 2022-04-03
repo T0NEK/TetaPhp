@@ -12,7 +12,7 @@ try
        //$body = (object) array ('login' => 'john', 'pass' => '123');
         if (isset($body))
         { //set   
-    if ($body->zalogowany == 0)    
+    if ($body->stan == true)    
         {//logowanie
             $sql ="SELECT
                    id,
@@ -28,8 +28,7 @@ try
                    osoby 
                    WHERE
                    (user = 1 OR user = 2 ) AND
-                   userlogin = '".$body->login."' AND
-                   haslonew = '".$body->pass."' 
+                   id = ".$body->zalogowany."
                    ";
             $wynik = $conn->query($sql); 
             if ($wynik->num_rows == 1) 
@@ -44,61 +43,35 @@ try
                 $blokada = $row['blokadanew'];
                 $zalogowany = $row['zalogowanynew'];
                 $naroslnew = $row['naroslnew'];
-                if ($blokada == 1)  
-                    {
-                    $sql = "
-                    SELECT
-                        logowania.czaslogowania,
-                        komputery.nazwa
-                    FROM
-                        logowania,
-                        komputery
-                    WHERE
-                        logowania.zalogowany = ".$id." 
-                        AND logowania.del = 0   
-                        AND komputery.id = logowania.komputery
-                    ";    
-                    $wynik = $conn->query($sql); 
-                    if ($wynik->num_rows > 0)
-                    {
-                        $row = $wynik->fetch_assoc();
-                        $result = array ("wynik"=>true,  "stan"=>false, "error"=>$imie." ".$nazwisko." - jesteś zalogowany na: ".$row['nazwa'].' od:'.$row['czaslogowania']);
-                    } 
-                    else
-                    {
-                        $sql = "INSERT 
-                        INTO logowania
-                        (
-                        komputery,
-                        czaslogowania,
-                        czaswylogowania,
-                        czaszmiana,
-                        zalogowany,
-                        del
-                        )
-                        VALUES
-                        (".$body->idhost.",
-                         '".$body->czas."',
-                         '',
-                         '".$body->czas."',
-                         '".$id."',
-                         0
-                         )
-                        ";
-                        if ($conn->query($sql) === TRUE) 
-                            { 
-                                $result = array ("wynik"=>true, "stan"=>true, "zalogowany"=>$id, "imie"=>$imie, "nazwisko"=>$nazwisko, "autoryzacja"=>($autoryzacja==1), "funkcja"=>$funkcja, "rodzaj"=>$rodzaj, "polecenia"=>($zalogowany==1), "naroslnew"=>$naroslnew, "error"=>" - zostałeś zalogowany");
-                            }
-                            else 
-                            { 
-                                $result = array ("wynik"=>false, "stan"=>false, "error"=>$imie." ".$nazwisko." - błąd logowania"); 
-                            }   
-                    }         
+                $sql = "INSERT 
+                INTO logowania
+                (
+                komputery,
+                czaslogowania,
+                czaswylogowania,
+                czaszmiana,
+                zalogowany,
+                del,
+                wyloguj
+                )
+                VALUES
+                (".$body->idhost.",
+                    '".$body->czas."',
+                    '',
+                    '".$body->czas."',
+                    '".$id."',
+                    0,
+                    0
+                    )
+                ";
+                if ($conn->query($sql) === TRUE) 
+                    { 
+                        $result = array ("wynik"=>true, "stan"=>true, "zalogowany"=>$id, "imie"=>$imie, "nazwisko"=>$nazwisko, "autoryzacja"=>($autoryzacja==1), "funkcja"=>$funkcja, "rodzaj"=>$rodzaj, "polecenia"=>($zalogowany==1), "naroslnew"=>$naroslnew, "error"=>$imie." ".$nazwisko." - został zalogowany");
                     }
-                    else
-                    {
-                        $result = array ("wynik"=>true,  "stan"=>false, "error"=>$imie." ".$nazwisko." - odmowa logowania");     
-                    }    
+                    else 
+                    { 
+                        $result = array ("wynik"=>false, "stan"=>false, "error"=>$imie." ".$nazwisko." - błąd logowania"); 
+                    }     
                 }
                 else
                 {
@@ -108,7 +81,6 @@ try
         }  
         else
         {//wylogowanie
-
             $sql ="SELECT
             id,
             imie,
@@ -120,8 +92,8 @@ try
             (user = 1 OR user = 2 ) AND
             id = ".$body->zalogowany."
             ";
-        $wynik = $conn->query($sql); 
-        if ($wynik->num_rows == 1) 
+            $wynik = $conn->query($sql); 
+            if ($wynik->num_rows == 1) 
             {
             $row = $wynik->fetch_assoc();
             $id = $row['id'];
@@ -130,40 +102,54 @@ try
             $zalogowany = $row['zalogowanynew'];
             $sql = "
             SELECT
-                id,
-                czaslogowania
+                logowania.id,
+                logowania.czaslogowania,
+                logowania.wyloguj,
+                komputery.nazwa
             FROM
-                logowania
+                logowania,
+                komputery
             WHERE
-                zalogowany = ".$id." 
-                AND del = 0   
+                logowania.zalogowany = ".$id." 
+                AND logowania.komputery = komputery.id
+                AND logowania.del = 0   
             ";    
             $wynik = $conn->query($sql); 
             if ($wynik->num_rows == 0)
             {
-                $result = array ("wynik"=>true,  "stan"=>false, "error"=>$imie." ".$nazwisko." - nie jesteś zalogowany");
+                $result = array ("wynik"=>false,  "stan"=>false, "error"=>$imie." ".$nazwisko." - nie jest zalogowany");
             } 
             else
             {
-            $row = $wynik->fetch_assoc();    
+            while ($row = $wynik->fetch_assoc())
+            {
             $czaslogowania = $row['czaslogowania'];
             $idlog = $row['id'];
+            $nazwa = $row['nazwa'];
+            $wyloguj = $row['wyloguj'];
+            if ($nazwa == $body->nazwa)
+            {   $wiersz = ' del = 1 '; $komunikat = '- został wylogowany'; }
+            else
+            { if ($wyloguj == 1)
+                { $wiersz = ' del = 1, wyloguj = 0 '; $komunikat = '- został brutalnie wylogowany '; }
+                else
+                { $wiersz = ' wyloguj = 1 '; $komunikat = '- wydano polecenie wylogowania'; }
+            }
             $sql = "UPDATE 
                         logowania
                     SET
-                        czaswylogowania = '".$body->czas."',
-                        czaszmiana = '".$body->czas."',
-                        del = 1
+                        ".$wiersz."
                     WHERE
                         id = ".$idlog."
                         ";
             if ($conn->query($sql) === TRUE) 
             {
-                $result = array ("wynik"=>true, "stan"=>true, "zalogowany"=>0, "imie"=>"", "nazwisko"=>"", "autoryzacja"=>false, "funkcja"=>"", "polecenia"=>true, "rodzaj"=>"", "error"=>$imie." ".$nazwisko." - zostałeś wylogowany");
+                $result = array ("wynik"=>true, "stan"=>true, "zalogowany"=>0, "imie"=>"", "nazwisko"=>"", "autoryzacja"=>false, "funkcja"=>"", "polecenia"=>true, "rodzaj"=>"", "error"=>$imie." ".$nazwisko." z: ".$czaslogowania." ".$komunikat);
             }
             else
             {
-                $result = array ("wynik"=>false, "stan"=>false, "error"=>"nieokreślony błąd podczas wylogowywania");  
+                $result = array ("wynik"=>false, "stan"=>false, "error"=>"nieokreślony błąd podczas wylogowywania: ".$imie." ".$nazwisko." z:".$czaslogowania);  
+            }
             }
         }
         }
@@ -175,7 +161,7 @@ try
         }
         }  
         else
-        { //get
+        {
            $result = array ("wynik"=>false, "error"=>"brak danych");
         } 
     }   

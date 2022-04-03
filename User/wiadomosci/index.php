@@ -123,20 +123,23 @@ elseif ($body->get == 'wiad')
         $sql = 
         "
         SELECT
-            id,
-            autor,
-            autorText,
-            odbiorca,
-            odbiorcaText,
-            tresc,
-            czas,
-            przeczytana
+        wiadomosci.id,
+        wiadomosci.autor,
+        wiadomosci.autorText,
+        wiadomosci.odbiorca,
+        wiadomosci.odbiorcaText,
+        wiadomosci.tresc,
+        wiadomosci.czas,
+        wiadomosci.przeczytana,
+        osoby.naroslnew
         FROM
-            wiadomosci
+            wiadomosci,
+            osoby
         WHERE
-            (odbiorca = ".$body->odbiorca." OR autor = ".$body->odbiorca.")
+            (wiadomosci.odbiorca = ".$body->odbiorca." OR wiadomosci.autor = ".$body->odbiorca.")
+            AND osoby.id = ".$body->odbiorca."
         ORDER BY
-            czas
+        wiadomosci.czas
         ";
         $wynik = $conn->query($sql); 
         if ($wynik->num_rows > 0) 
@@ -149,7 +152,10 @@ elseif ($body->get == 'wiad')
         {
         if (($row['autor'] != $body->odbiorca)&&($row['przeczytana']==0))
             {
-                array_push($noweid,(1*$row['id']));    
+                if ( $row['autor'] == 13)
+                { if ($row['naroslnew'] == 1 ) { array_push($noweid,(1*$row['id'])); } }
+                else
+                { array_push($noweid,(1*$row['id'])); }
             }    
         if (($row['odbiorca'] == $body->odbiorca)&&($row['przeczytana']==0))
         {

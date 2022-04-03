@@ -13,47 +13,6 @@ try
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {
-        if (strtoupper($body->zmiana) == 'LOGOWANIE')    
-        {
-            if (stan)
-            {
-            $sql = "INSERT 
-            INTO logowania
-            (
-            komputery,
-            czaslogowania,
-            czaswylogowania,
-            czaszmiana,
-            zalogowany,
-            del
-            )
-            VALUES
-            (".$body->idhost.",
-                '".$body->czas."',
-                '',
-                '".$body->czas."',
-                '".$id."',
-                0
-                )
-            ";
-            }
-            else
-            {
-
-
-
-            }
-            if ($conn->query($sql) === TRUE) 
-                { 
-                    $result = array ("wynik"=>true, "stan"=>true, "zalogowany"=>$id, "imie"=>$imie, "nazwisko"=>$nazwisko, "autoryzacja"=>($autoryzacja==1), "funkcja"=>$funkcja, "rodzaj"=>$rodzaj, "polecenia"=>($zalogowany==1), "naroslnew"=>$naroslnew, "error"=>" - zostałeś zalogowany");
-                }
-                else 
-                { 
-                    $result = array ("wynik"=>false, "stan"=>false, "error"=>$imie." ".$nazwisko." - błąd logowania"); 
-                }   
-        }
-        else
-        {
         switch (strtoupper($body->zmiana)) 
                         {
                         case 'POLECENIA':
@@ -99,7 +58,6 @@ try
                 $tabela = $body->dane;
                 $result = array ("wynik"=>true, "id"=>$body->id, "zmiana"=>$body->zmiana, 'dane'=>$tabela[1]->nazwisko);    
 */                
-        }
         }
         else
         { //get

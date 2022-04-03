@@ -6,8 +6,16 @@ if(isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARTDED_FOR'] 
 } else {
     $nrip = $_SERVER['REMOTE_ADDR'];
 }   
-//$host = ($_SERVER['REMOTE_ADDR']);
-$host = gethostbyaddr($nrip);
+$serverip = $_SERVER['SERVER_ADDR'];
+if ($nrip == $serverip)
+{ $host = 'Dedal';}
+else
+{
+  $host = gethostbyaddr($nrip); 
+  $poz = strpos($host,'.');
+  if ($pos !== false) 
+  { $host = substr($host,0,$pos) ;}
+}
 $time = time();
 $hostid = chr(rand(65,90)).chr(rand(65,90)).rand(1,100).$time.chr(rand(65,90)).chr(rand(65,90)).rand(1,100).$time*rand(1,100).chr(rand(65,90)).chr(rand(65,90));
 $czasserwera = date("Y-m-d H:i:s",$time);

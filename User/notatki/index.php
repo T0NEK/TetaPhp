@@ -230,16 +230,23 @@ try
                                         WHEN 1 THEN 'usunięta'
                                         ELSE 'uszkodzona'
                         END as stanText,
-                    notatki_ng.blokadaudo
+                    notatki_ng.blokadaudo,
+                    osoby.imie,
+                    osoby.nazwisko
                 FROM
-                    notatki_ng
+                    notatki_ng,
+                    osoby
                 WHERE
                     notatki_ng.identyfikator = '".$body->tytul."'
+                    AND osoby.id = notatki_ng.wlasciciel
                 ";
                 $wynik = $conn->query($sql); 
                 if ($wynik->num_rows > 0) 
                     { 
                     $row = $wynik->fetch_assoc();
+                    $autorid = $row['wlasciciel'];
+                    $autorimie = $row['imie'];
+                    $autornazwisko = $row['nazwisko'];
                     if ( $row['wlasciciel'] == $body->stan)
                     {
                         if ($row['stan'] > 0 )
@@ -253,7 +260,9 @@ try
                             $idnotatki = $row['id'];    
                             $sql = "
                             SELECT
-                                id
+                                id,
+                                imie,
+                                nazwisko
                             FROM
                                 osoby
                             WHERE
@@ -264,6 +273,9 @@ try
                             if ($wynik->num_rows > 0) 
                             { 
                             $row = $wynik->fetch_assoc();
+                            $odbiorcaid = $row['id'];
+                            $odbiorcaimie = $row['imie'];
+                            $odbiorcanazwisko = $row['nazwisko'];
                             $idosoby = $row['id'];
                                 if ($idosoby == $body->stan)
                                 {
@@ -318,11 +330,39 @@ try
                                     if ($del == 0)
                                     {
                                     $result = array ("wynik"=>true, "stan"=>true, "error"=>"notatka o id: ".$body->tytul." została udostepniona dla: ".$body->imie." ".$body->nazwisko);
+                                    $udostepnienie = 'udostępnienie notatki o id: '.$body->tytul;
                                     }
                                     else
                                     {
                                     $result = array ("wynik"=>true, "stan"=>true, "error"=>"notatce o id: ".$body->tytul." cofnięto udostepnienie dla: ".$body->imie." ".$body->nazwisko);
+                                    $udostepnienie = 'cofnięto udostępnienie notatki o id: '.$body->tytul;
                                     }
+                                $sql = "
+                                INSERT INTO 
+                                    wiadomosci
+                                    (
+                                    autor,
+                                    autorText,
+                                    odbiorca,
+                                    odbiorcaText,
+                                    tresc,
+                                    czas,
+                                    przeczytana,
+                                    admindodana
+                                    )
+                                VALUES
+                                    (
+                                    ".$autorid.",
+                                    '".$autorimie." ".$autornazwisko."',
+                                    ".$odbiorcaid.",
+                                    '".$odbiorcaimie." ".$odbiorcanazwisko."',
+                                    '".$udostepnienie."',
+                                    '".$body->czas."',
+                                    0,
+                                    1
+                                    )
+                                ";
+                                $conn->query($sql);
                                 }
                                 else
                                 {

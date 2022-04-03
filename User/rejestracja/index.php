@@ -6,8 +6,10 @@ if(isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARTDED_FOR'] 
 } else {
     $nrip = $_SERVER['REMOTE_ADDR'];
 }   
-//$host = ($_SERVER['REMOTE_ADDR']);
-$host = gethostbyaddr($nrip);
+  $host = gethostbyaddr($nrip); 
+  $poz = strpos($host,'.');
+  if ($poz !== false) 
+  { $host = substr($host,0,$poz) ;}
 $time = time();
 $hostid = chr(rand(65,90)).chr(rand(65,90)).rand(1,100).$time.chr(rand(65,90)).chr(rand(65,90)).rand(1,100).$time*rand(1,100).chr(rand(65,90)).chr(rand(65,90));
 $czasserwera = date("Y-m-d H:i:s",$time);

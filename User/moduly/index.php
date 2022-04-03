@@ -20,12 +20,11 @@ try
                     id,
                     nazwa,
                     symbol,
-                    producent,
+                    stan,
+                    czasbadania,
                     opis
                     FROM
                     moduly
-                    where
-                    substring(uprawnienia,".$body->stan.",1) = '1' 
                     ORDER BY
                     nazwa
                 ";
@@ -35,17 +34,17 @@ try
                 $moduly = array ();    
                 while ($row = $wynik->fetch_assoc())
                 {
-                $modul = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "producent"=>$row['producent'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis']);
+                $modul = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "stan"=>$row['stan'], "czasbadania"=>$row['czasbadania'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis']);
                 array_push($moduly,$modul);
                 }
                 $result = array ("wynik"=>true, "stan"=>true, "moduly"=>$moduly, "error"=>"wczytano: ".$wynik->num_rows);
-                $conn->close();   
+                
                 }
                 else
                 {
-                    $result = array ("wynik"=>false, "stan"=>false, "error"=>"brak dostępnych modułów");      
+                    $result = array ("wynik"=>true, "stan"=>false, "error"=>"brak dostępnych modułów");      
                 }
-            
+        $conn->close();               
         }
         else
         {
