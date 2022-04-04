@@ -10,16 +10,10 @@ try
     { throw new Exception( $conn->connect_error); } 
     else
     {
-        //$body = (object) array ('stan' => 2, "modul" => 'all', "czas" => "2045-06-08 15:22:50");
-        //$body = (object) array ('stan' => 2, "modul" => 'GRACE', "czas" => "2045-06-08 15:22:50");
+        //$body = (object) array ('stan' => 2, "modul" => 'LAB', "zespol" => 'PL', "czas" => "2045-06-08 15:22:50");
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
-        {
-            if ($body->modul == 'all')
-            { $warunek = ' '; $orderby = ''; }
-            else
-            { $warunek = " AND moduly.symbol = '".strtoupper($body->modul)."' "; $orderby = '';}
-         //get
+        {//get
                 $sql = 
                 "SELECT
                     zespoly.id,
@@ -44,10 +38,8 @@ try
                     moduly.id =  zespoly.moduly
                     AND stan.id = zespoly.stan
                     AND osoby.id = zespoly.osobabadania
-                    ".$warunek."
-                ORDER BY
-                    ".$orderby."
-                    zespoly.nazwa  
+                    AND moduly.symbol = '".$body->modul."'
+                    AND zespoly.symbol = '".$body->zespol."'
                 ";
                 $wynik = $conn->query($sql); 
                 if ($wynik->num_rows > 0) 
@@ -67,14 +59,11 @@ try
                 $zespol = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "stanText"=>$stanText, "stanNr"=>$stanNr, "czasbadania"=>$row['czasbadania'], "symbolModul"=>$row['symbolM'], "moduly"=>$row['moduly'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
                 array_push($zespoly,$zespol);
                 }
-                $result = array ("wynik"=>true, "stan"=>true, "zespoly"=>$zespoly, "error"=>"wczytano: ".$wynik->num_rows);
+                $result = array ("wynik"=>true, "stan"=>true, "zespol"=>$zespoly, "error"=>"wczytano: ".$wynik->num_rows);
                 }
                 else
                 {
-                    if ($body->modul == 'all')
-                    {$result = array ("wynik"=>true, "stan"=>false, "error"=>"brak dostępnych zespołów");}
-                    else
-                    {$result = array ("wynik"=>true, "stan"=>false, "error"=>"brak dostępnych zespołów w module: ".strtoupper($body->modul));}
+                $result = array ("wynik"=>true, "stan"=>false, "error"=>"brak dostępnego zespołu: ".$body->zespol." w module: ".$body->modul);
                 }
         $conn->close();       
         }
@@ -88,7 +77,7 @@ try
 catch(Exception $e)    
 {
     $result = array("wynik"=>false, "stan"=>false, "error"=>"problem z odczytem");
-    //echo ($e);
+    echo ($e);
 }
 echo json_encode($result);    
 ?>
