@@ -15,7 +15,8 @@ try
         if (isset($body))
         {//get
                 $sql = 
-                "SELECT
+                "
+                SELECT
                     zespoly.id,
                     zespoly.nazwa,
                     zespoly.symbol,
@@ -26,7 +27,8 @@ try
                     stan.stan as stanNr,
                     osoby.imie,
                     osoby.nazwisko,
-                    zespoly.czasbadania,
+                    test.czasstart as czasbadania,
+                    test.czasend as czaszakonczenia,
                     zespoly.przedawnienie,
                     moduly.nazwa as nazwaM,
                     moduly.symbol as symbolM
@@ -34,13 +36,26 @@ try
                     zespoly,
                     moduly,
                     stan,
-                    osoby
+                    osoby,
+                    (
+                        SELECT 
+                            ifnull(MAX(id),0) as id,
+                            ifnull(stan,1) as stan,
+                            ifnull(czasstart,'2043-03-10 00:00:00') as czasstart,
+                            ifnull(czasend,'2043-03-11 00:00:00') as czasend,
+                            ifnull(osoba,1) as osoba
+                        FROM 
+                            testylog
+                        WHERE
+                                testylog.moduly = '".$body->modul."'
+                            AND testylog.zespoly = '".$body->zespol."'    
+                    )test
                 WHERE
                     moduly.id =  zespoly.moduly
-                    AND stan.id = zespoly.stan
-                    AND osoby.id = zespoly.osobabadania
+                    AND stan.id = test.stan
+                    AND osoby.id = test.osoba
                     AND moduly.symbol = '".$body->modul."'
-                    AND zespoly.symbol = '".$body->zespol."'
+                    AND zespoly.symbol = '".$body->zespol."'    
                 ";
                 $wynik = $conn->query($sql); 
                 if ($wynik->num_rows > 0) 
@@ -57,7 +72,7 @@ try
                 else
                 {$stanText = $row['stanText'].' - badany '.$dni.' dni temu'; $stanNr = $row['stanNr'];}
 
-                $zespol = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "stanText"=>$stanText, "stanNr"=>$stanNr, "czasbadania"=>$row['czasbadania'], "czaswykonania"=>$row['czaswykonania'], "modulSymbol"=>$row['symbolM'], "modulNazwa"=>$row['nazwaM'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
+                $zespol = array ("id"=>$row['id'],"idmodul"=>$row['moduly'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "stanText"=>$stanText, "stanNr"=>$stanNr, "czasbadania"=>$row['czasbadania'], "czaszakonczenia"=>$row['czaszakonczenia'], "czaswykonania"=>$row['czaswykonania'], "modulSymbol"=>$row['symbolM'], "modulNazwa"=>$row['nazwaM'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
                 array_push($zespoly,$zespol);
                 }
                 $result = array ("wynik"=>true, "stan"=>true, "zespol"=>$zespoly, "error"=>"wczytano: ".$wynik->num_rows);

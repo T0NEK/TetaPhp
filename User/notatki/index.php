@@ -329,12 +329,12 @@ try
                                 {
                                     if ($del == 0)
                                     {
-                                    $result = array ("wynik"=>true, "stan"=>true, "error"=>"notatka o id: ".$body->tytul." została udostepniona dla: ".$body->imie." ".$body->nazwisko);
+                                    $error = "notatka o id: ".$body->tytul." została udostepniona dla: ".$body->imie." ".$body->nazwisko;
                                     $udostepnienie = 'udostępnienie notatki o id: '.$body->tytul;
                                     }
                                     else
                                     {
-                                    $result = array ("wynik"=>true, "stan"=>true, "error"=>"notatce o id: ".$body->tytul." cofnięto udostepnienie dla: ".$body->imie." ".$body->nazwisko);
+                                    $error = $body->imie." ".$body->nazwisko." cofnięto dostęp do notatki o id: ".$body->tytul;
                                     $udostepnienie = 'cofnięto udostępnienie notatki o id: '.$body->tytul;
                                     }
                                 $sql = "
@@ -362,7 +362,15 @@ try
                                     1
                                     )
                                 ";
-                                $conn->query($sql);
+                                if ($conn->query($sql) === TRUE) 
+                                {
+                                    $result = array ("wynik"=>true, "stan"=>true, "error"=>$error.", wysłano powiadomienie");
+                                    
+                                }
+                                else
+                                {
+                                    $result = array ("wynik"=>true, "stan"=>true, "error"=>$error.", nie udału się wysłać powiadomienia");
+                                }
                                 }
                                 else
                                 {
