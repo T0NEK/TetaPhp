@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 06 Kwi 2022, 00:03
--- Wersja serwera: 10.1.21-MariaDB
--- Wersja PHP: 5.6.30
+-- Czas generowania: 06 Kwi 2022, 14:31
+-- Wersja serwera: 10.1.28-MariaDB
+-- Wersja PHP: 7.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -549,7 +551,45 @@ INSERT INTO `komputery` (`id`, `nazwa`, `nrip`, `hostid`, `czasrejestracja`, `cz
 (272, 'DESKTOP-2KPJSHU', '127.0.0.1', 'PX211649195888WJ4859371051968VJ', '2022-04-05 23:58:08', '2022-04-05 23:58:08'),
 (273, 'DESKTOP-2KPJSHU', '127.0.0.1', 'OM751649196014AP4634633116294RZ', '2022-04-06 00:00:14', '2022-04-06 00:00:14'),
 (274, 'DESKTOP-2KPJSHU', '127.0.0.1', 'KF11649196035YE71105548546240FB', '2022-04-06 00:00:35', '2022-04-06 00:00:35'),
-(275, 'DESKTOP-2KPJSHU', '127.0.0.1', 'RL561649196097OJ1079161412656OV', '2022-04-06 00:01:37', '2022-04-06 00:01:37');
+(275, 'DESKTOP-2KPJSHU', '127.0.0.1', 'RL561649196097OJ1079161412656OV', '2022-04-06 00:01:37', '2022-04-06 00:01:37'),
+(276, 'Komputer-Tomka', '127.0.0.1', 'ED281649219002WX6528036723034SY', '2022-04-06 06:23:22', '2022-04-06 06:23:22'),
+(277, 'Komputer-Tomka', '127.0.0.1', 'SX51649219189HC7692356274584EI', '2022-04-06 06:26:29', '2022-04-06 06:26:29'),
+(278, 'Komputer-Tomka', '127.0.0.1', 'FS931649219279TS59135235980878WT', '2022-04-06 06:27:59', '2022-04-06 06:27:59'),
+(279, 'Komputer-Tomka', '127.0.0.1', 'JE741649219369MK970916432867BW', '2022-04-06 06:29:29', '2022-04-06 06:29:29'),
+(280, 'Komputer-Tomka', '127.0.0.1', 'YS501649221123KC3018141432353ZW', '2022-04-06 06:58:43', '2022-04-06 06:58:43'),
+(281, 'Komputer-Tomka', '127.0.0.1', 'LF751649221216LP475864175936NZ', '2022-04-06 07:00:16', '2022-04-06 07:00:16'),
+(282, 'Komputer-Tomka', '127.0.0.1', 'AK211649221316MA9332984426320HN', '2022-04-06 07:01:56', '2022-04-06 07:01:56'),
+(283, 'Komputer-Tomka', '127.0.0.1', 'CN311649221464MA236596885856KA', '2022-04-06 07:04:24', '2022-04-06 07:04:24'),
+(284, 'Komputer-Tomka', '127.0.0.1', 'ON661649221518NR99141833050548FA', '2022-04-06 07:05:18', '2022-04-06 07:05:18'),
+(285, 'Komputer-Tomka', '127.0.0.1', 'PA151649221967UC65130288535393GA', '2022-04-06 07:12:47', '2022-04-06 07:12:47'),
+(286, 'Komputer-Tomka', '127.0.0.1', 'LB761649221998MY63143482313826PK', '2022-04-06 07:13:18', '2022-04-06 07:13:18'),
+(287, 'Komputer-Tomka', '127.0.0.1', 'WO231649222028XR16156676092660LO', '2022-04-06 07:13:48', '2022-04-06 07:13:48'),
+(288, 'Komputer-Tomka', '127.0.0.1', 'GY731649222737DZ9529686009266KU', '2022-04-06 07:25:37', '2022-04-06 07:25:37'),
+(289, 'Komputer-Tomka', '127.0.0.1', 'HI171649225475HG398953528500NK', '2022-04-06 08:11:15', '2022-04-06 08:11:15'),
+(290, 'Komputer-Tomka', '127.0.0.1', 'ET591649225731XH9094005866667VM', '2022-04-06 08:15:31', '2022-04-06 08:15:31'),
+(291, 'Komputer-Tomka', '127.0.0.1', 'BE311649235847NL1546178603716SX', '2022-04-06 11:04:07', '2022-04-06 11:04:07'),
+(292, 'Komputer-Tomka', '127.0.0.1', 'YV281649235856LV9389058736224VC', '2022-04-06 11:04:16', '2022-04-06 11:04:16'),
+(293, 'Komputer-Tomka', '127.0.0.1', 'FM51649236217YN5651126322727YC', '2022-04-06 11:10:17', '2022-04-06 11:10:17'),
+(294, 'Komputer-Tomka', '127.0.0.1', 'UM91649236224QN5490707992320QZ', '2022-04-06 11:10:24', '2022-04-06 11:10:24'),
+(295, 'Komputer-Tomka', '127.0.0.1', 'XN221649236459PZ4718141601049XT', '2022-04-06 11:14:19', '2022-04-06 11:14:19'),
+(296, 'Komputer-Tomka', '127.0.0.1', 'FZ21649236539RG4995655719262PL', '2022-04-06 11:15:39', '2022-04-06 11:15:39'),
+(297, 'Komputer-Tomka', '127.0.0.1', 'MT241649236660OY87145132826080CJ', '2022-04-06 11:17:40', '2022-04-06 11:17:40'),
+(298, 'Komputer-Tomka', '127.0.0.1', 'GH961649236879BR65163274451021CD', '2022-04-06 11:21:19', '2022-04-06 11:21:19'),
+(299, 'Dedal', '127.0.0.1', 'WV891649244083ZQ5232984881660UU', '2022-04-06 13:21:23', '2022-04-06 13:21:23'),
+(300, 'Komputer-Tomka', '127.0.0.1', 'TA961649244117UY6536283370574KE', '2022-04-06 13:21:57', '2022-04-06 13:21:57'),
+(301, 'Komputer-Tomka', '127.0.0.1', 'FI481649244338TQ7397305415942UJ', '2022-04-06 13:25:38', '2022-04-06 13:25:38'),
+(302, 'Komputer-Tomka', '127.0.0.1', 'XQ931649244549MB1152775825568YZ', '2022-04-06 13:29:09', '2022-04-06 13:29:09'),
+(303, 'Komputer-Tomka', '127.0.0.1', 'AM881649245245MP19117096412395NR', '2022-04-06 13:40:45', '2022-04-06 13:40:45'),
+(304, 'Komputer-Tomka', '127.0.0.1', 'EJ251649245395VX9170917551985DT', '2022-04-06 13:43:15', '2022-04-06 13:43:15'),
+(305, 'Komputer-Tomka', '127.0.0.1', 'YG901649245900YW54112148721200PM', '2022-04-06 13:51:40', '2022-04-06 13:51:40'),
+(306, 'Komputer-Tomka', '127.0.0.1', 'PD171649245954FB989895475724VH', '2022-04-06 13:52:34', '2022-04-06 13:52:34'),
+(307, 'Komputer-Tomka', '127.0.0.1', 'VM811649245958OS71128641184724PP', '2022-04-06 13:52:38', '2022-04-06 13:52:38'),
+(308, 'Komputer-Tomka', '127.0.0.1', 'PD331649246120NA4372566829280VE', '2022-04-06 13:55:20', '2022-04-06 13:55:20'),
+(309, 'Komputer-Tomka', '127.0.0.1', 'FR31649246242CH22163275377958XK', '2022-04-06 13:57:22', '2022-04-06 13:57:22'),
+(310, 'Komputer-Tomka', '127.0.0.1', 'LE711649246542GJ7141231163550PO', '2022-04-06 14:02:22', '2022-04-06 14:02:22'),
+(311, 'Komputer-Tomka', '127.0.0.1', 'GW841649246685OH2129686440330ZC', '2022-04-06 14:04:45', '2022-04-06 14:04:45'),
+(312, 'Komputer-Tomka', '127.0.0.1', 'RL441649246737VY5218141714107PF', '2022-04-06 14:05:37', '2022-04-06 14:05:37'),
+(313, 'Komputer-Tomka', '127.0.0.1', 'IM461649248253SQ37143484598011VA', '2022-04-06 14:30:53', '2022-04-06 14:30:53');
 
 -- --------------------------------------------------------
 
@@ -817,7 +857,8 @@ INSERT INTO `notatki_udo` (`id`, `notatki_ng`, `osoby`, `czas`, `del`) VALUES
 (43, 56, 1, '2022-03-06 09:28:42', 0),
 (44, 54, 8, '2022-03-23 18:21:39', 1),
 (45, 56, 3, '2022-03-23 18:30:01', 1),
-(46, 54, 10, '2022-03-23 18:26:19', 0);
+(46, 54, 10, '2022-03-23 18:26:19', 0),
+(47, 34, 5, '', 0);
 
 -- --------------------------------------------------------
 
@@ -1241,11 +1282,11 @@ INSERT INTO `stan` (`id`, `nazwa`, `stan`, `opis`) VALUES
 
 CREATE TABLE `testylog` (
   `id` int(11) NOT NULL,
-  `test` int(11) NOT NULL,
   `moduly` int(11) NOT NULL,
   `zespoly` int(11) NOT NULL,
   `stan` int(11) NOT NULL,
-  `czasbadania` text COLLATE utf8_polish_ci NOT NULL,
+  `czasstart` text COLLATE utf8_polish_ci NOT NULL,
+  `czasend` text COLLATE utf8_polish_ci NOT NULL,
   `osoba` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci ROW_FORMAT=COMPACT;
 
@@ -1253,13 +1294,32 @@ CREATE TABLE `testylog` (
 -- Zrzut danych tabeli `testylog`
 --
 
-INSERT INTO `testylog` (`id`, `test`, `moduly`, `zespoly`, `stan`, `czasbadania`, `osoba`) VALUES
-(1, 1, 3, 0, 1, '2022-04-03 16:57:38', 1),
-(2, 1, 3, 0, 1, '2045-01-03 16:57:38', 1),
-(3, 1, 3, 0, 1, '2045-06-03 16:27:38', 8),
-(4, 1, 3, 0, 2, '2042-04-03 16:57:38', 8),
-(5, 1, 3, 0, 0, '2045-06-06 16:27:38', 9),
-(6, 1, 3, 0, 3, '2045-05-30 16:27:38', 15);
+INSERT INTO `testylog` (`id`, `moduly`, `zespoly`, `stan`, `czasstart`, `czasend`, `osoba`) VALUES
+(1, 3, 1, 1, '2022-04-03 16:57:38', '2022-04-03 16:59:38', 1),
+(2, 3, 2, 1, '2045-01-03 16:57:38', '2045-01-03 17:01:28', 1),
+(3, 3, 2, 1, '2045-06-03 16:27:38', '2045-06-03 16:29:38', 8),
+(4, 3, 1, 2, '2042-04-03 13:37:38', '2042-04-03 13:39:18', 8),
+(5, 3, 4, 0, '2045-06-06 16:27:38', '2045-06-06 16:29:38', 9),
+(6, 3, 3, 3, '2045-05-30 16:27:38', '2045-05-30 16:29:08', 15),
+(7, 3, 3, 1, '2045-06-08 15:22:50', '2045-06-08 15:22:55', 2),
+(8, 3, 6, 2, '2045-06-23 18:02:12', '2045-06-23 18:02:17', 2),
+(9, 3, 6, 2, '2045-06-23 19:55:50', '2045-06-23 19:56:16', 2),
+(10, 3, 6, 2, '2045-06-23 19:59:20', '2045-06-23 19:59:43', 2),
+(11, 3, 6, 2, '2045-06-23 19:59:52', '2045-06-23 20:00:11', 2),
+(12, 3, 6, 2, '2045-06-23 19:59:59', '2045-06-23 20:00:28', 2),
+(13, 3, 6, 2, '2045-06-23 20:01:12', '2045-06-23 20:01:34', 2),
+(14, 3, 6, 2, '2045-06-23 20:01:19', '2045-06-23 20:01:48', 2),
+(15, 3, 6, 2, '2045-06-23 20:11:04', '2045-06-23 20:11:56', 2),
+(16, 3, 6, 2, '2045-06-23 20:10:57', '2045-06-23 20:12:10', 2),
+(17, 3, 6, 2, '2045-06-23 20:13:28', '2045-06-23 20:14:42', 2),
+(18, 3, 6, 2, '2045-06-23 20:14:53', '2045-06-23 20:16:07', 2),
+(19, 3, 6, 2, '2045-06-23 20:23:11', '2045-06-23 20:23:51', 2),
+(20, 3, 6, 2, '2045-06-23 20:25:34', '2045-06-23 20:25:47', 2),
+(21, 3, 6, 2, '2045-06-23 20:27:37', '2045-06-23 20:27:49', 2),
+(22, 3, 6, 2, '2045-06-23 20:30:30', '2045-06-23 20:30:43', 2),
+(23, 3, 6, 2, '2045-06-23 20:32:36', '2045-06-23 20:32:57', 2),
+(24, 3, 6, 2, '2045-06-23 20:34:57', '2045-06-23 20:35:22', 2),
+(25, 3, 6, 2, '2045-06-23 20:57:28', '2045-06-23 20:57:55', 2);
 
 -- --------------------------------------------------------
 
@@ -1388,7 +1448,8 @@ INSERT INTO `wiadomosci` (`id`, `autor`, `autorText`, `odbiorca`, `odbiorcaText`
 (89, 2, 'John Spow', 10, 'Dave Bowman', 'notatka udostępnij', '2045-06-20 00:45:07', 1, 0, 0),
 (90, 2, 'John Spow', 10, 'Dave Bowman', 'udostępnienie notatki o id: 1646500108H53E69153004536', '2045-06-20 00:45:45', 1, 1, 0),
 (91, 10, 'Dave Bowman', 2, 'John Spow', 'dzięki', '2045-06-20 00:46:34', 1, 0, 0),
-(92, 2, 'John Spow', 10, 'Dave Bowman', 'moduły', '2045-06-20 00:47:05', 0, 0, 0);
+(92, 2, 'John Spow', 10, 'Dave Bowman', 'moduły', '2045-06-20 00:47:05', 0, 0, 0),
+(93, 2, 'John Spow', 5, 'Manu Punjabi', 'udostępnienie notatki o id: 1645281533H33P60875416721', '2045-06-23 15:25:24', 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -1402,8 +1463,6 @@ CREATE TABLE `zespoly` (
   `symbol` varchar(25) COLLATE utf8_polish_ci NOT NULL,
   `moduly` int(11) NOT NULL,
   `stan` int(11) NOT NULL,
-  `czasbadania` text COLLATE utf8_polish_ci NOT NULL,
-  `osobabadania` int(11) NOT NULL,
   `przedawnienie` int(11) NOT NULL,
   `opis` text COLLATE utf8_polish_ci NOT NULL,
   `czaswykonania` int(11) NOT NULL
@@ -1413,13 +1472,13 @@ CREATE TABLE `zespoly` (
 -- Zrzut danych tabeli `zespoly`
 --
 
-INSERT INTO `zespoly` (`id`, `nazwa`, `symbol`, `moduly`, `stan`, `czasbadania`, `osobabadania`, `przedawnienie`, `opis`, `czaswykonania`) VALUES
-(1, 'Pomieszczenie laboratorium', 'PL', 3, 1, '2022-04-03 16:57:38', 1, 7, '', 3000),
-(2, 'Pomieszczenie oranżerii', 'PO', 3, 1, '2045-01-03 16:57:38', 1, 7, '', 6000),
-(3, 'Pomieszczenie medyczne', 'PM', 3, 1, '2045-06-03 16:27:38', 8, 7, '', 1000),
-(4, 'Urządzenia medyczne', 'UM', 3, 2, '2042-04-03 16:57:38', 8, 7, '', 2000),
-(5, 'Magazyn leków', 'ML', 3, 0, '2045-06-06 16:27:38', 9, 7, '', 6000),
-(6, 'Zespół upraw', 'ZU', 3, 3, '2045-05-30 16:27:38', 15, 7, '', 2500);
+INSERT INTO `zespoly` (`id`, `nazwa`, `symbol`, `moduly`, `stan`, `przedawnienie`, `opis`, `czaswykonania`) VALUES
+(1, 'Pomieszczenie laboratorium', 'PL', 3, 1, 7, '', 3),
+(2, 'Pomieszczenie oranżerii', 'PO', 3, 1, 7, '', 6),
+(3, 'Pomieszczenie medyczne', 'PM', 3, 1, 7, '', 5),
+(4, 'Urządzenia medyczne', 'UM', 3, 2, 7, '', 2),
+(5, 'Magazyn leków', 'ML', 3, 0, 7, '', 6),
+(6, 'Zespół upraw', 'ZU', 3, 3, 7, '', 7);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -1527,76 +1586,92 @@ ALTER TABLE `zespoly`
 --
 ALTER TABLE `dzialania`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
+
 --
 -- AUTO_INCREMENT dla tabeli `komputery`
 --
 ALTER TABLE `komputery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=276;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=314;
+
 --
 -- AUTO_INCREMENT dla tabeli `logowania`
 --
 ALTER TABLE `logowania`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+
 --
 -- AUTO_INCREMENT dla tabeli `moduly`
 --
 ALTER TABLE `moduly`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT dla tabeli `notatki_ng`
 --
 ALTER TABLE `notatki_ng`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+
 --
 -- AUTO_INCREMENT dla tabeli `notatki_tr`
 --
 ALTER TABLE `notatki_tr`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+
 --
 -- AUTO_INCREMENT dla tabeli `notatki_udo`
 --
 ALTER TABLE `notatki_udo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
 --
 -- AUTO_INCREMENT dla tabeli `osoby`
 --
 ALTER TABLE `osoby`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
 --
 -- AUTO_INCREMENT dla tabeli `polecenia`
 --
 ALTER TABLE `polecenia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
 --
 -- AUTO_INCREMENT dla tabeli `polecenia_osoby`
 --
 ALTER TABLE `polecenia_osoby`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=294;
+
 --
 -- AUTO_INCREMENT dla tabeli `stan`
 --
 ALTER TABLE `stan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT dla tabeli `testylog`
 --
 ALTER TABLE `testylog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
 --
 -- AUTO_INCREMENT dla tabeli `ustawienia`
 --
 ALTER TABLE `ustawienia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT dla tabeli `wiadomosci`
 --
 ALTER TABLE `wiadomosci`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+
 --
 -- AUTO_INCREMENT dla tabeli `zespoly`
 --
 ALTER TABLE `zespoly`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
