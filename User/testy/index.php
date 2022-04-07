@@ -21,7 +21,9 @@ try
                 uszkodzenia.id as idU,
                 stan.nazwa as stanText,
                 stan.stan as stanNr,
-                zespoly.uszkodzeniapotest
+                zespoly.uszkodzenia,
+                zespoly.uszkodzeniapotest,
+                uszkodzenia.nazwa as element
             FROM
                 zespoly,
                 uszkodzenia,
@@ -39,7 +41,11 @@ try
                 $stanText = $row['stanText'];
                 $stanNr = $row['stanNr'];
                 $uszkodzenia = $row['idU'];
-                $uszkodzeniapotest = $row['uszkodzeniapotest'];
+                $element = $row['element'];
+                if ($row['uszkodzeniapotest'] == 1)
+                { $uszkodzeniapotest = $row['uszkodzenia']; }
+                else
+                { $uszkodzeniapotest = $row['uszkodzeniapotest'];}
                 $conn->autocommit(false);
                 $sql =
                 "
@@ -79,7 +85,7 @@ try
                     $conn->query($sql);
                     if ($conn->commit() === TRUE) 
                     {
-                        $result = array ("wynik"=>true, "stan"=>true, "stanText"=>$stanText, "stanNr"=>$stanNr, "uszkodzenia"=>$uszkodzenia , "czasend"=>$body->czasend);  
+                        $result = array ("wynik"=>true, "stan"=>true, "stanText"=>$stanText, "stanNr"=>$stanNr, "uszkodzenia"=>$element , "czasend"=>$body->czasend);  
                     }
                     else    
                     {

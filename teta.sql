@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 07 Kwi 2022, 14:26
--- Wersja serwera: 10.1.28-MariaDB
--- Wersja PHP: 7.1.10
+-- Czas generowania: 07 Kwi 2022, 23:11
+-- Wersja serwera: 10.1.21-MariaDB
+-- Wersja PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -159,8 +157,8 @@ INSERT INTO `dzialania` (`id`, `polecenia`, `nazwa`, `czas`, `dzialanie`, `prefi
 (126, 'wszystko kasuj', 'kasuja_2', '50', 'komunikat', '', 'kasuję historię poleceń', '', 'kasuja_3', 'kasuja_3', ''),
 (127, 'wszystko kasuj', 'kasuja_3', '50', 'wykonaj', '', 'kasuj', 'polecenia', 'kasuja_4', 'kasuja_4', ''),
 (129, 'wszystko kasuj', 'kasuja_4', '50', 'komunikat', '', 'kasuję historię komunikatów', '', 'kasuja_5', 'kasuja_5', ''),
-(130, 'wszystko kasuj', 'kasuja_5', '50', 'wykonaj', '', 'kasuj', 'historia', 'kasuja_6', 'kasuja_6', ''),
-(131, 'wszystko kasuj', 'kasuja_6', '50', 'komunikat', '', 'skasowano historię komunikatów i poleceń', '', 'kasuja_15', 'kasuja_15', ''),
+(130, 'wszystko kasuj', 'kasuja_5', '50', 'wykonaj', '', 'kasuj', 'historia', 'kasuja_16', 'kasuja_16', ''),
+(131, 'wszystko kasuj', 'kasuja_6', '50', 'komunikat', '', 'skasowano wszystkie historie', '', 'kasuja_15', 'kasuja_15', ''),
 (132, 'wszystko kasuj', 'kasuja_15', '50', 'komunikat', '', 'Gotowy', '', 'end', 'end', ''),
 (133, 'notatka wersja', 'wersja_6', '50', 'informacja', 'nieprawidłowa liczba: ', 'bufor1', '', 'wersja_3', 'wersja_3', ''),
 (134, 'notatka wersja', 'wersja_5', '50', 'warunek', '', 'sprawdz', 'number', 'wersja_7', 'wersja_6', ''),
@@ -249,7 +247,6 @@ INSERT INTO `dzialania` (`id`, `polecenia`, `nazwa`, `czas`, `dzialanie`, `prefi
 (219, 'test', 'test_3', '50', 'zapiszdane', '', 'nr modułu', '', 'test_4', 'test_4', ''),
 (220, 'test', 'test_2', '50', 'dane', '', 'podaj symbol modułu ?', '', 'test_3', 'test_3', ''),
 (221, 'test', 'test_1', '50', 'komunikat', '', 'wczytuję dane zespołu do testu', '', 'test_2', 'test_2', ''),
-(222, 'test', 'test_0', '50', 'komunikat', '', 'wykonuję: [ test ]', '', 'test_1', 'test_1', 'alternatywa'),
 (223, 'test', 'test_5', '50', 'dodajdane', '', 'nr zespołu', '', 'test_6', 'test_6', ''),
 (224, 'test', 'test_4', '50', 'dane', '', 'podaj symbol zespołu ?', '', 'test_5', 'test_5', ''),
 (225, 'test', 'test_9', '50', 'informacja', '', 'tekst', '', 'end', 'end', ''),
@@ -260,7 +257,18 @@ INSERT INTO `dzialania` (`id`, `polecenia`, `nazwa`, `czas`, `dzialanie`, `prefi
 (230, 'informacje kasuj', 'kasuji_1', '50', 'komunikat', '', 'kasuję historię informacji', '', 'kasuji_2', 'kasuji_2', ''),
 (231, 'informacje kasuj', 'kasuji_2', '50', 'wykonaj', '', 'kasuj', 'informacje', 'kasuji_3', 'kasuji_3', ''),
 (232, 'informacje kasuj', 'kasuji_3', '50', 'komunikat', '', 'skasowano historię informacji', '', 'kasuji_4', 'kasuji_4', ''),
-(233, 'informacje kasuj', 'kasuji_4', '50', 'komunikat', '', 'Gotowy', '', 'end', 'end', '');
+(233, 'informacje kasuj', 'kasuji_4', '50', 'komunikat', '', 'Gotowy', '', 'end', 'end', ''),
+(234, 'wszystko kasuj', 'kasuja_16', '50', 'komunikat', '', 'kasuję historię informacji', '', 'kasuja_17', 'kasuja_17', ''),
+(235, 'wszystko kasuj', 'kasuja_17', '50', 'wykonaj', '', 'kasuj', 'informacje', 'kasuja_6', 'kasuja_6', ''),
+(236, 'reset', 'reset_9', '50', 'informacja', '', 'tekst', '', 'end', 'end', ''),
+(237, 'reset', 'reset_7', '50', 'testy', '', 'reset', '', 'reset_8', 'reset_8', 'wyświetla listę zespołów'),
+(238, 'reset', 'reset_6', '50', 'informacja', 'problem z dostępem do: ', 'tekstAlert', '', 'end', 'end', 'informacja z error'),
+(239, 'reset', 'reset_5', '50', 'getset', '', 'wczytaj', 'reset', 'reset_7', 'reset_6', 'wczytuje zespół ustawia nieokreślony'),
+(240, 'reset', 'reset_4', '50', 'dodajdane', '', 'nr zespołu', '', 'reset_5', 'reset_5', ''),
+(241, 'reset', 'reset_3', '50', 'dane', '', 'podaj symbol zespołu ?', '', 'reset_4', 'reset_4', ''),
+(242, 'reset', 'reset_2', '50', 'zapiszdane', '', 'nr modułu', '', 'reset_3', 'reset_3', ''),
+(243, 'reset', 'reset_1', '50', 'dane', '', 'podaj symbol modułu ?', '', 'reset_2', 'reset_2', ''),
+(244, 'reset', 'reset_8', '50', 'komunikat', '', 'resetuję zespół', '', 'reset_9', 'reset_9', '');
 
 -- --------------------------------------------------------
 
@@ -604,7 +612,56 @@ INSERT INTO `komputery` (`id`, `nazwa`, `nrip`, `hostid`, `czasrejestracja`, `cz
 (320, 'Komputer-Tomka', '127.0.0.1', 'HY591649334040SV88136894725320MI', '2022-04-07 14:20:40', '2022-04-07 14:20:40'),
 (321, 'Dedal', '127.0.0.1', 'LG511649334065RP2177518701055QI', '2022-04-07 14:21:05', '2022-04-07 14:21:05'),
 (322, 'Dedal', '127.0.0.1', 'LA801649334122AK1256077360148SC', '2022-04-07 14:22:02', '2022-04-07 14:22:02'),
-(323, 'Komputer-Tomka', '127.0.0.1', 'EY31649334140TI76112154721520KT', '2022-04-07 14:22:20', '2022-04-07 14:22:20');
+(323, 'Komputer-Tomka', '127.0.0.1', 'EY31649334140TI76112154721520KT', '2022-04-07 14:22:20', '2022-04-07 14:22:20'),
+(324, 'DESKTOP-2KPJSHU', '127.0.0.1', 'VV541649342736WT7656077653024DK', '2022-04-07 16:45:36', '2022-04-07 16:45:36'),
+(325, 'DESKTOP-2KPJSHU', '127.0.0.1', 'BG471649343035BZ4521441459455NZ', '2022-04-07 16:50:35', '2022-04-07 16:50:35'),
+(326, 'DESKTOP-2KPJSHU', '127.0.0.1', 'XZ631649344119IF2762675076522ZN', '2022-04-07 17:08:39', '2022-04-07 17:08:39'),
+(327, 'Dedal', '127.0.0.1', 'XL991649344120GA4313194752960QQ', '2022-04-07 17:08:40', '2022-04-07 17:08:40'),
+(328, 'DESKTOP-2KPJSHU', '127.0.0.1', 'IX811649344351OX5128648859378OD', '2022-04-07 17:12:31', '2022-04-07 17:12:31'),
+(329, 'DESKTOP-2KPJSHU', '127.0.0.1', 'HW211649347896FT93103908917448YY', '2022-04-07 18:11:36', '2022-04-07 18:11:36'),
+(330, 'DESKTOP-2KPJSHU', '127.0.0.1', 'DN861649347904GA5272571307776LA', '2022-04-07 18:11:44', '2022-04-07 18:11:44'),
+(331, 'DESKTOP-2KPJSHU', '127.0.0.1', 'OP291649347987QM5114844131883WE', '2022-04-07 18:13:07', '2022-04-07 18:13:07'),
+(332, 'DESKTOP-2KPJSHU', '127.0.0.1', 'JM661649348067EI82145142629896DB', '2022-04-07 18:14:27', '2022-04-07 18:14:27'),
+(333, 'DESKTOP-2KPJSHU', '127.0.0.1', 'OF621649348233OS1877519366951SC', '2022-04-07 18:17:13', '2022-04-07 18:17:13'),
+(334, 'DESKTOP-2KPJSHU', '127.0.0.1', 'DN161649348522FH8989064820188GL', '2022-04-07 18:22:02', '2022-04-07 18:22:02'),
+(335, 'DESKTOP-2KPJSHU', '127.0.0.1', 'CE691649348531DR34131947882480DK', '2022-04-07 18:22:11', '2022-04-07 18:22:11'),
+(336, 'DESKTOP-2KPJSHU', '127.0.0.1', 'UC71649348583RR77148441372470XF', '2022-04-07 18:23:03', '2022-04-07 18:23:03'),
+(337, 'DESKTOP-2KPJSHU', '127.0.0.1', 'OU491649348693JT4095662224194SV', '2022-04-07 18:24:53', '2022-04-07 18:24:53'),
+(338, 'Dedal', '127.0.0.1', 'AZ971649348859ZA50103908978117DQ', '2022-04-07 18:27:39', '2022-04-07 18:27:39'),
+(339, 'DESKTOP-2KPJSHU', '127.0.0.1', 'LB401649348998QA56123701174850RU', '2022-04-07 18:29:58', '2022-04-07 18:29:58'),
+(340, 'DESKTOP-2KPJSHU', '127.0.0.1', 'AN631649350798VW94141844168628BI', '2022-04-07 18:59:58', '2022-04-07 18:59:58'),
+(341, 'Dedal', '127.0.0.1', 'VG921649351114WC2138545493576HY', '2022-04-07 19:05:14', '2022-04-07 19:05:14'),
+(342, 'Dedal', '127.0.0.1', 'DH651649351421HE18156688384995GO', '2022-04-07 19:10:21', '2022-04-07 19:10:21'),
+(343, 'DESKTOP-2KPJSHU', '127.0.0.1', 'QU441649352777MK9714844174993LL', '2022-04-07 19:32:57', '2022-04-07 19:32:57'),
+(344, 'DESKTOP-2KPJSHU', '127.0.0.1', 'DK291649352787GX5889065050498LG', '2022-04-07 19:33:07', '2022-04-07 19:33:07'),
+(345, 'DESKTOP-2KPJSHU', '127.0.0.1', 'OC851649352890DT6731337704910IF', '2022-04-07 19:34:50', '2022-04-07 19:34:50'),
+(346, 'DESKTOP-2KPJSHU', '127.0.0.1', 'OY551649353009CR474220885405EG', '2022-04-07 19:36:49', '2022-04-07 19:36:49'),
+(347, 'DESKTOP-2KPJSHU', '127.0.0.1', 'FI901649353484VU5182467674200UY', '2022-04-07 19:44:44', '2022-04-07 19:44:44'),
+(348, 'DESKTOP-2KPJSHU', '127.0.0.1', 'RF811649354070YK6387415765710PI', '2022-04-07 19:54:30', '2022-04-07 19:54:30'),
+(349, 'Dedal', '127.0.0.1', 'OC161649354436CA447831278644CQ', '2022-04-07 20:00:36', '2022-04-07 20:00:36'),
+(350, 'DESKTOP-2KPJSHU', '127.0.0.1', 'EY941649355759FY72131948460720PA', '2022-04-07 20:22:39', '2022-04-07 20:22:39'),
+(351, 'DESKTOP-2KPJSHU', '127.0.0.1', 'RP921649357537AZ6572571731628LX', '2022-04-07 20:52:17', '2022-04-07 20:52:17'),
+(352, 'DESKTOP-2KPJSHU', '127.0.0.1', 'NG741649357549KR6107208240685EK', '2022-04-07 20:52:29', '2022-04-07 20:52:29'),
+(353, 'DESKTOP-2KPJSHU', '127.0.0.1', 'JG741649357815HX5485766606380ZC', '2022-04-07 20:56:55', '2022-04-07 20:56:55'),
+(354, 'DESKTOP-2KPJSHU', '127.0.0.1', 'LL811649358173KI8851130103363FU', '2022-04-07 21:02:53', '2022-04-07 21:02:53'),
+(355, 'DESKTOP-2KPJSHU', '127.0.0.1', 'YV151649358269MI2329688448842QM', '2022-04-07 21:04:29', '2022-04-07 21:04:29'),
+(356, 'DESKTOP-2KPJSHU', '127.0.0.1', 'AG101649358454JS957727545890XK', '2022-04-07 21:07:34', '2022-04-07 21:07:34'),
+(357, 'DESKTOP-2KPJSHU', '127.0.0.1', 'PE851649358507MG3616493585070CL', '2022-04-07 21:08:27', '2022-04-07 21:08:27'),
+(358, 'DESKTOP-2KPJSHU', '127.0.0.1', 'PW201649358696ZO1865974347840BL', '2022-04-07 21:11:36', '2022-04-07 21:11:36'),
+(359, 'DESKTOP-2KPJSHU', '127.0.0.1', 'LG121649362090GT98125351518840RS', '2022-04-07 22:08:10', '2022-04-07 22:08:10'),
+(360, 'DESKTOP-2KPJSHU', '127.0.0.1', 'II631649363059LW3187416242127DC', '2022-04-07 22:24:19', '2022-04-07 22:24:19'),
+(361, 'DESKTOP-2KPJSHU', '127.0.0.1', 'OU291649363838ZW8432987276760HS', '2022-04-07 22:37:18', '2022-04-07 22:37:18'),
+(362, 'DESKTOP-2KPJSHU', '127.0.0.1', 'BF771649364121SS75127001037317GJ', '2022-04-07 22:42:01', '2022-04-07 22:42:01'),
+(363, 'DESKTOP-2KPJSHU', '127.0.0.1', 'MZ651649364134DX3572572021896BV', '2022-04-07 22:42:14', '2022-04-07 22:42:14'),
+(364, 'DESKTOP-2KPJSHU', '127.0.0.1', 'XJ851649364223QK95159988329631PN', '2022-04-07 22:43:43', '2022-04-07 22:43:43'),
+(365, 'DESKTOP-2KPJSHU', '127.0.0.1', 'IF981649364905QI61159988395785DM', '2022-04-07 22:55:05', '2022-04-07 22:55:05'),
+(366, 'DESKTOP-2KPJSHU', '127.0.0.1', 'SC951649364966FQ7789065708164FY', '2022-04-07 22:56:06', '2022-04-07 22:56:06'),
+(367, 'DESKTOP-2KPJSHU', '127.0.0.1', 'LD141649365599RA2497312570341VZ', '2022-04-07 23:06:39', '2022-04-07 23:06:39'),
+(368, 'DESKTOP-2KPJSHU', '127.0.0.1', 'DS731649365663OW5357727798205ZL', '2022-04-07 23:07:43', '2022-04-07 23:07:43'),
+(369, 'DESKTOP-2KPJSHU', '127.0.0.1', 'PH621649365685XF8762675896030MJ', '2022-04-07 23:08:05', '2022-04-07 23:08:05'),
+(370, 'DESKTOP-2KPJSHU', '127.0.0.1', 'EG881649365759GS3695663214022QX', '2022-04-07 23:09:19', '2022-04-07 23:09:19'),
+(371, 'DESKTOP-2KPJSHU', '127.0.0.1', 'YC791649365842MX8967623999522ER', '2022-04-07 23:10:42', '2022-04-07 23:10:42'),
+(372, 'DESKTOP-2KPJSHU', '127.0.0.1', 'ND91649365885VQ4390715123675GV', '2022-04-07 23:11:25', '2022-04-07 23:11:25');
 
 -- --------------------------------------------------------
 
@@ -1016,7 +1073,7 @@ INSERT INTO `polecenia` (`id`, `nazwa`, `zalogowany`, `wylogowany`, `autoryzacja
 (51, 'zespól', 1, 0, 0, 49, '1000', 'zespol_0', 'Stan wybranego zespołu'),
 (52, 'zespoł', 1, 0, 0, 49, '1000', 'zespol_0', 'Stan wybranego zespołu'),
 (53, 'test', 1, 0, 0, 53, '1000', 'test_1', 'wykonanie testu na zespole'),
-(54, 'test', 1, 0, 0, 53, '1000', 'test_0', 'Wykonanie testu na zespole'),
+(54, 'reset', 1, 0, 0, 54, '1000', 'reset_1', 'wykonanie resetu na zespole'),
 (55, 'informacje kasuj', 1, 1, 0, 55, '500', 'kasuji_1', 'Kasuje historię informacji'),
 (56, 'kasuji', 1, 1, 0, 55, '500', 'kasuji_0', 'Kasuje historię informacji');
 
@@ -1275,7 +1332,17 @@ INSERT INTO `polecenia_osoby` (`id`, `polecenia`, `osoby`, `czas`, `dos`) VALUES
 (300, 55, 8, '2022-04-07 14:22:14', 1),
 (301, 55, 9, '2022-04-07 14:22:14', 1),
 (302, 55, 10, '2022-04-07 14:22:14', 1),
-(303, 55, 11, '2022-04-07 14:22:14', 1);
+(303, 55, 11, '2022-04-07 14:22:14', 1),
+(304, 54, 2, '2022-04-07 19:10:29', 1),
+(305, 54, 3, '2022-04-07 19:10:29', 1),
+(306, 54, 4, '2022-04-07 19:10:29', 1),
+(307, 54, 5, '2022-04-07 19:10:29', 1),
+(308, 54, 6, '2022-04-07 19:10:29', 1),
+(309, 54, 7, '2022-04-07 19:10:29', 1),
+(310, 54, 8, '2022-04-07 19:10:29', 1),
+(311, 54, 9, '2022-04-07 19:10:29', 1),
+(312, 54, 10, '2022-04-07 19:10:29', 1),
+(313, 54, 11, '2022-04-07 19:10:29', 1);
 
 -- --------------------------------------------------------
 
@@ -1328,7 +1395,46 @@ INSERT INTO `testylog` (`id`, `moduly`, `zespoly`, `uszkodzenia`, `czasstart`, `
 (3, 3, 3, 1, '2045-06-24 16:53:16', '2045-06-24 16:53:36', 2),
 (4, 3, 6, 1, '2045-06-22 23:11:17', '2045-06-22 23:11:43', 2),
 (5, 3, 3, 1, '2045-06-24 19:33:24', '2045-06-24 19:33:45', 2),
-(6, 3, 6, 3, '2045-06-24 19:42:37', '2045-06-24 19:43:05', 2);
+(6, 3, 6, 3, '2045-06-24 19:42:37', '2045-06-24 19:43:05', 2),
+(12, 3, 2, 1, '2045-06-24 23:16:33', '2045-06-24 23:17:09', 2),
+(13, 3, 2, 1, '2045-06-24 23:17:43', '2045-06-24 23:19:02', 2),
+(14, 3, 2, 1, '2045-06-24 23:20:58', '2045-06-24 23:21:43', 2),
+(15, 3, 6, 3, '2045-06-24 23:38:54', '2045-06-24 23:39:12', 2),
+(16, 3, 6, 1, '2045-06-24 23:44:12', '2045-06-24 23:44:41', 2),
+(17, 3, 6, 1, '2045-06-25 00:41:57', '2045-06-25 00:42:57', 2),
+(18, 3, 6, 1, '2045-06-25 00:43:23', '2045-06-25 00:44:17', 2),
+(19, 3, 6, 1, '2045-06-25 00:44:40', '2045-06-25 00:45:18', 2),
+(20, 3, 6, 1, '2045-06-25 00:47:35', '2045-06-25 00:48:29', 2),
+(21, 3, 6, 1, '2045-06-25 00:53:18', '2045-06-25 00:54:22', 2),
+(22, 3, 6, 1, '2045-06-25 00:55:11', '2045-06-25 00:56:10', 2),
+(23, 3, 6, 1, '2045-06-25 00:57:44', '2045-06-25 00:58:12', 2),
+(24, 3, 6, 1, '2045-06-25 01:00:15', '2045-06-25 01:00:50', 2),
+(25, 3, 6, 1, '2045-06-25 01:30:47', '2045-06-25 01:31:06', 2),
+(26, 3, 6, 1, '2045-06-25 01:30:40', '2045-06-25 01:31:08', 2),
+(27, 3, 2, 1, '2045-06-25 01:30:31', '2045-06-25 01:31:25', 2),
+(28, 3, 3, 1, '2045-06-25 02:07:52', '2045-06-25 02:08:27', 2),
+(29, 3, 6, 1, '2045-06-25 02:14:58', '2045-06-25 02:15:24', 2),
+(30, 3, 6, 1, '2045-06-25 02:24:49', '2045-06-25 02:25:23', 2),
+(31, 3, 3, 3, '2045-06-25 02:26:25', '2045-06-25 02:27:04', 2),
+(32, 3, 2, 1, '2045-06-25 02:58:04', '2045-06-25 02:58:57', 2),
+(33, 3, 3, 3, '2045-06-25 02:59:25', '2045-06-25 02:59:45', 2),
+(34, 3, 5, 0, '2045-06-25 03:03:52', '2045-06-25 03:04:40', 2),
+(35, 3, 5, 0, '2045-06-25 03:23:20', '2045-06-25 03:24:11', 2),
+(36, 3, 5, 0, '2045-06-25 03:27:25', '2045-06-25 03:28:25', 2),
+(37, 3, 5, 0, '2045-06-25 03:33:20', '2045-06-25 03:34:03', 2),
+(38, 3, 5, 0, '2045-06-25 03:34:40', '2045-06-25 03:35:40', 2),
+(39, 3, 5, 0, '2045-06-25 03:36:09', '2045-06-25 03:36:46', 2),
+(40, 3, 5, 0, '2045-06-25 03:38:47', '2045-06-25 03:39:19', 2),
+(41, 3, 6, 2, '2045-06-25 03:39:57', '2045-06-25 03:40:18', 2),
+(42, 3, 6, 2, '2045-06-25 03:41:49', '2045-06-25 03:42:02', 2),
+(43, 3, 6, 2, '2045-06-25 04:39:50', '2045-06-25 04:40:07', 2),
+(44, 3, 6, 5, '2045-06-25 04:40:34', '2045-06-25 04:40:53', 2),
+(45, 3, 6, 5, '2045-06-25 04:41:26', '2045-06-25 04:41:54', 2),
+(46, 3, 6, 5, '2045-06-25 04:54:51', '2045-06-25 04:55:13', 2),
+(47, 3, 6, 5, '2045-06-25 04:55:53', '2045-06-25 04:56:19', 2),
+(48, 3, 6, 5, '2045-06-25 05:07:33', '2045-06-25 05:07:45', 2),
+(49, 3, 6, 5, '2045-06-25 05:12:29', '2045-06-25 05:12:41', 2),
+(50, 3, 6, 5, '2045-06-25 05:13:55', '2045-06-25 05:14:03', 2);
 
 -- --------------------------------------------------------
 
@@ -1373,11 +1479,12 @@ CREATE TABLE `uszkodzenia` (
 --
 
 INSERT INTO `uszkodzenia` (`id`, `nazwa`, `stan`, `opis`) VALUES
-(0, 'błąd wykonania', 2, 'błąd wykonania'),
+(0, 'błąd wykonania', 3, 'błąd wykonania'),
 (1, 'brak problemów', 1, 'wszystkie testy ok.'),
-(2, 'brak szczelności pomieszczenia - ścianki wewnętrzne', 2, 'uszkodzenie ścianek'),
-(3, 'brak szczelności pomieszczenia - ścianki wzewnętrzne', 2, 'uszkodzenie ścianek'),
-(4, 'brak szczelności pomieszczenia', 2, 'uszkodzenie ścianek');
+(2, 'brak szczelności pomieszczenia (ściany wewnętrzne)', 2, 'uszkodzenie ścianek'),
+(3, 'brak szczelności pomieszczenia (ściany zewnętrzne)', 2, 'uszkodzenie ścianek'),
+(4, 'brak szczelności pomieszczenia', 2, 'uszkodzenie ścianek'),
+(5, 'brak odpowiedzi', 4, 'przy resecie ustawiany');
 
 -- --------------------------------------------------------
 
@@ -1497,23 +1604,25 @@ CREATE TABLE `zespoly` (
   `moduly` int(11) NOT NULL,
   `uszkodzenia` int(11) NOT NULL,
   `uszkodzeniapotest` int(11) NOT NULL,
+  `naprawaporeset` int(11) NOT NULL,
   `ostatni` int(11) NOT NULL,
   `przedawnienie` int(11) NOT NULL,
   `opis` text COLLATE utf8_polish_ci NOT NULL,
-  `czaswykonania` int(11) NOT NULL
+  `czaswykonania` int(11) NOT NULL,
+  `elementy` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci ROW_FORMAT=COMPACT;
 
 --
 -- Zrzut danych tabeli `zespoly`
 --
 
-INSERT INTO `zespoly` (`id`, `nazwa`, `symbol`, `moduly`, `uszkodzenia`, `uszkodzeniapotest`, `ostatni`, `przedawnienie`, `opis`, `czaswykonania`) VALUES
-(1, 'Pomieszczenie laboratorium', 'PL', 3, 1, 1, 0, 7, '', 3),
-(2, 'Pomieszczenie oranżerii', 'PO', 3, 1, 1, 0, 7, '', 6),
-(3, 'Pomieszczenie medyczne', 'PM', 3, 1, 1, 5, 7, '', 5),
-(4, 'Urządzenia medyczne', 'UM', 3, 2, 2, 0, 7, '', 2),
-(5, 'Magazyn leków', 'ML', 3, 0, 0, 0, 7, '', 6),
-(6, 'Zespół upraw', 'ZU', 3, 3, 1, 6, 7, '', 7);
+INSERT INTO `zespoly` (`id`, `nazwa`, `symbol`, `moduly`, `uszkodzenia`, `uszkodzeniapotest`, `naprawaporeset`, `ostatni`, `przedawnienie`, `opis`, `czaswykonania`, `elementy`) VALUES
+(1, 'Pomieszczenie laboratorium', 'PL', 3, 1, 1, 1, 0, 7, '', 3, 20),
+(2, 'Pomieszczenie oranżerii', 'PO', 3, 1, 1, 1, 32, 7, '', 6, 10),
+(3, 'Pomieszczenie medyczne', 'PM', 3, 3, 1, 1, 33, 7, '', 5, 7),
+(4, 'Urządzenia medyczne', 'UM', 3, 2, 2, 1, 0, 7, '', 2, 15),
+(5, 'Magazyn leków', 'ML', 3, 0, 0, 0, 40, 7, '', 6, 8),
+(6, 'Zespół upraw', 'ZU', 3, 5, 1, 2, 50, 7, '', 3, 10);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -1626,99 +1735,82 @@ ALTER TABLE `zespoly`
 -- AUTO_INCREMENT dla tabeli `dzialania`
 --
 ALTER TABLE `dzialania`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=234;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
 --
 -- AUTO_INCREMENT dla tabeli `komputery`
 --
 ALTER TABLE `komputery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=324;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=373;
 --
 -- AUTO_INCREMENT dla tabeli `logowania`
 --
 ALTER TABLE `logowania`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
-
 --
 -- AUTO_INCREMENT dla tabeli `moduly`
 --
 ALTER TABLE `moduly`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT dla tabeli `notatki_ng`
 --
 ALTER TABLE `notatki_ng`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
-
 --
 -- AUTO_INCREMENT dla tabeli `notatki_tr`
 --
 ALTER TABLE `notatki_tr`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
-
 --
 -- AUTO_INCREMENT dla tabeli `notatki_udo`
 --
 ALTER TABLE `notatki_udo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
-
 --
 -- AUTO_INCREMENT dla tabeli `osoby`
 --
 ALTER TABLE `osoby`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
 --
 -- AUTO_INCREMENT dla tabeli `polecenia`
 --
 ALTER TABLE `polecenia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
-
 --
 -- AUTO_INCREMENT dla tabeli `polecenia_osoby`
 --
 ALTER TABLE `polecenia_osoby`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=304;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=314;
 --
 -- AUTO_INCREMENT dla tabeli `stan`
 --
 ALTER TABLE `stan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT dla tabeli `testylog`
 --
 ALTER TABLE `testylog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 --
 -- AUTO_INCREMENT dla tabeli `ustawienia`
 --
 ALTER TABLE `ustawienia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT dla tabeli `uszkodzenia`
 --
 ALTER TABLE `uszkodzenia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT dla tabeli `wiadomosci`
 --
 ALTER TABLE `wiadomosci`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
-
 --
 -- AUTO_INCREMENT dla tabeli `zespoly`
 --
 ALTER TABLE `zespoly`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

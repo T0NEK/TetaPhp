@@ -23,6 +23,9 @@ try
                 zespoly.moduly,
                 zespoly.opis,
                 zespoly.czaswykonania,
+                zespoly.elementy,
+                zespoly.naprawaporeset,
+                zespoly.uszkodzenia,
                 uszkodzenia.nazwa as nazwaU,
                 stan.nazwa as stanText,
                 stan.stan as stanNr,
@@ -49,14 +52,12 @@ try
                 AND moduly.symbol = '".$body->modul."'
                 AND zespoly.symbol = '".$body->zespol."'    
             ";
-
                 $wynik = $conn->query($sql); 
                 if ($wynik->num_rows > 0) 
                 {    
                 $zespoly = array ();    
                 $date2 = date_create($body->czas);
-                while ($row = $wynik->fetch_assoc())
-                {
+                $row = $wynik->fetch_assoc();
                 $date1 = date_create($row['czaszakonczenia']);    
                 $diff = date_diff($date1,$date2);
                 $dni = $diff->days;
@@ -64,11 +65,30 @@ try
                 { $stanText = $row['stanText'].' - przedawniony '.($dni - $row['przedawnienie']).' dni'; $stanNr = 2;} //id 5 ze stan
                 else
                 {$stanText = $row['stanText'].' - badany '.$dni.' dni temu'; $stanNr = $row['stanNr'];}
+                if ($row['naprawaporeset'] == 1)    
+                { $naprawa = 1;}
+                else
+                { $naprawa = $row['uszkodzenia'];}
 
-                $zespol = array ("id"=>$row['id'],"idmodul"=>$row['moduly'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "stanText"=>$stanText, "uszkodzenia"=>$row['nazwaU'], "stanNr"=>$stanNr, "czasbadania"=>$row['czasbadania'], "czaszakonczenia"=>$row['czaszakonczenia'], "czaswykonania"=>$row['czaswykonania'], "modulSymbol"=>$row['symbolM'], "modulNazwa"=>$row['nazwaM'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
+                $zespol = array ("id"=>$row['id'],"idmodul"=>$row['moduly'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "stanText"=>$stanText, "uszkodzenia"=>$row['nazwaU'], "naprawaporeset"=>$naprawa, "stanNr"=>$stanNr, "czasbadania"=>$row['czasbadania'], "czaszakonczenia"=>$row['czaszakonczenia'], "czaswykonania"=>$row['czaswykonania'], "elementy"=>$row['elementy'], "modulSymbol"=>$row['symbolM'], "modulNazwa"=>$row['nazwaM'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
                 array_push($zespoly,$zespol);
-                }
                 $result = array ("wynik"=>true, "stan"=>true, "zespol"=>$zespoly, "error"=>"wczytano: ".$wynik->num_rows);
+                if ($body->rodzaj == 'reset')
+                {
+                $sql = 
+                "
+                UPDATE
+                    zespoly
+                SET
+                    uszkodzenia = 5
+                WHERE
+                    id = ".$row['id']."        
+                ";
+                if ($conn->query($sql) === TRUE) 
+                { $result = $result;}
+                else
+                { $result = array("wynik"=>false, "stan"=>false, "error"=>"brak połączenia z zespołem: ".$body->zespol." w module: ".$body->modul); }
+                }
                 }
                 else
                 {
