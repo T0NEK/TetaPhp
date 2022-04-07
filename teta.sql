@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 06 Kwi 2022, 14:31
+-- Czas generowania: 07 Kwi 2022, 14:26
 -- Wersja serwera: 10.1.28-MariaDB
 -- Wersja PHP: 7.1.10
 
@@ -155,7 +155,7 @@ INSERT INTO `dzialania` (`id`, `polecenia`, `nazwa`, `czas`, `dzialanie`, `prefi
 (121, 'polecenia kasuj', 'kasujp_2', '50', 'wykonaj', '', 'kasuj', 'polecenia', 'kasujp_3', 'kasujp_3', ''),
 (122, 'polecenia kasuj', 'kasujp_3', '50', 'komunikat', '', 'skasowano historię poleceń 	', '', 'end', 'end', ''),
 (124, 'wszystko kasuj', 'kasuja_0', '50', 'komunikat', '', 'wykonuję: [ wszystko kasuj ]', '', 'kasuja_7', 'kasuja_7', 'alternatywa'),
-(125, 'wszystko kasuj', 'kasuja_1', '50', 'komunikat', '', 'kasuję historię komunikatów i poleceń', '', 'kasuja_2', 'kasuja_2', ''),
+(125, 'wszystko kasuj', 'kasuja_1', '50', 'komunikat', '', 'kasuję wszystkie historie', '', 'kasuja_2', 'kasuja_2', ''),
 (126, 'wszystko kasuj', 'kasuja_2', '50', 'komunikat', '', 'kasuję historię poleceń', '', 'kasuja_3', 'kasuja_3', ''),
 (127, 'wszystko kasuj', 'kasuja_3', '50', 'wykonaj', '', 'kasuj', 'polecenia', 'kasuja_4', 'kasuja_4', ''),
 (129, 'wszystko kasuj', 'kasuja_4', '50', 'komunikat', '', 'kasuję historię komunikatów', '', 'kasuja_5', 'kasuja_5', ''),
@@ -255,7 +255,12 @@ INSERT INTO `dzialania` (`id`, `polecenia`, `nazwa`, `czas`, `dzialanie`, `prefi
 (225, 'test', 'test_9', '50', 'informacja', '', 'tekst', '', 'end', 'end', ''),
 (226, 'test', 'test_8', '50', 'testy', '', 'test', '', 'test_9', 'test_9', 'wyświetla listę zespołów'),
 (227, 'test', 'test_7', '50', 'informacja', 'problem z dostępem do: ', 'tekstAlert', '', 'end', 'end', 'informacja z error'),
-(228, 'test', 'test_6', '50', 'getset', '', 'wczytaj', 'zespol', 'test_8', 'test_7', 'wczytuje test');
+(228, 'test', 'test_6', '50', 'getset', '', 'wczytaj', 'zespol', 'test_8', 'test_7', 'wczytuje test'),
+(229, 'informacje kasuj', 'kasuji_0', '50', 'komunikat', '', 'wykonuję: [ informacje kasuj ]', '', 'kasuji_1', 'kasuji_1', 'alternatywa'),
+(230, 'informacje kasuj', 'kasuji_1', '50', 'komunikat', '', 'kasuję historię informacji', '', 'kasuji_2', 'kasuji_2', ''),
+(231, 'informacje kasuj', 'kasuji_2', '50', 'wykonaj', '', 'kasuj', 'informacje', 'kasuji_3', 'kasuji_3', ''),
+(232, 'informacje kasuj', 'kasuji_3', '50', 'komunikat', '', 'skasowano historię informacji', '', 'kasuji_4', 'kasuji_4', ''),
+(233, 'informacje kasuj', 'kasuji_4', '50', 'komunikat', '', 'Gotowy', '', 'end', 'end', '');
 
 -- --------------------------------------------------------
 
@@ -589,7 +594,17 @@ INSERT INTO `komputery` (`id`, `nazwa`, `nrip`, `hostid`, `czasrejestracja`, `cz
 (310, 'Komputer-Tomka', '127.0.0.1', 'LE711649246542GJ7141231163550PO', '2022-04-06 14:02:22', '2022-04-06 14:02:22'),
 (311, 'Komputer-Tomka', '127.0.0.1', 'GW841649246685OH2129686440330ZC', '2022-04-06 14:04:45', '2022-04-06 14:04:45'),
 (312, 'Komputer-Tomka', '127.0.0.1', 'RL441649246737VY5218141714107PF', '2022-04-06 14:05:37', '2022-04-06 14:05:37'),
-(313, 'Komputer-Tomka', '127.0.0.1', 'IM461649248253SQ37143484598011VA', '2022-04-06 14:30:53', '2022-04-06 14:30:53');
+(313, 'Komputer-Tomka', '127.0.0.1', 'IM461649248253SQ37143484598011VA', '2022-04-06 14:30:53', '2022-04-06 14:30:53'),
+(314, 'Komputer-Tomka', '127.0.0.1', 'CT951649313160KV99107205355400PJ', '2022-04-07 08:32:40', '2022-04-07 08:32:40'),
+(315, 'Komputer-Tomka', '127.0.0.1', 'AH911649313170KD899895879020DF', '2022-04-07 08:32:50', '2022-04-07 08:32:50'),
+(316, 'Komputer-Tomka', '127.0.0.1', 'LK511649313959JC1079167070032XE', '2022-04-07 08:45:59', '2022-04-07 08:45:59'),
+(317, 'Komputer-Tomka', '127.0.0.1', 'MZ61649316537SE99128646689886TV', '2022-04-07 09:28:57', '2022-04-07 09:28:57'),
+(318, 'Komputer-Tomka', '127.0.0.1', 'PU621649316590CR51143490543330CL', '2022-04-07 09:29:50', '2022-04-07 09:29:50'),
+(319, 'Komputer-Tomka', '127.0.0.1', 'XK331649334034SQ100143492060958BR', '2022-04-07 14:20:34', '2022-04-07 14:20:34'),
+(320, 'Komputer-Tomka', '127.0.0.1', 'HY591649334040SV88136894725320MI', '2022-04-07 14:20:40', '2022-04-07 14:20:40'),
+(321, 'Dedal', '127.0.0.1', 'LG511649334065RP2177518701055QI', '2022-04-07 14:21:05', '2022-04-07 14:21:05'),
+(322, 'Dedal', '127.0.0.1', 'LA801649334122AK1256077360148SC', '2022-04-07 14:22:02', '2022-04-07 14:22:02'),
+(323, 'Komputer-Tomka', '127.0.0.1', 'EY31649334140TI76112154721520KT', '2022-04-07 14:22:20', '2022-04-07 14:22:20');
 
 -- --------------------------------------------------------
 
@@ -1001,7 +1016,9 @@ INSERT INTO `polecenia` (`id`, `nazwa`, `zalogowany`, `wylogowany`, `autoryzacja
 (51, 'zespól', 1, 0, 0, 49, '1000', 'zespol_0', 'Stan wybranego zespołu'),
 (52, 'zespoł', 1, 0, 0, 49, '1000', 'zespol_0', 'Stan wybranego zespołu'),
 (53, 'test', 1, 0, 0, 53, '1000', 'test_1', 'wykonanie testu na zespole'),
-(54, 'test', 1, 0, 0, 53, '1000', 'test_0', 'Wykonanie testu na zespole');
+(54, 'test', 1, 0, 0, 53, '1000', 'test_0', 'Wykonanie testu na zespole'),
+(55, 'informacje kasuj', 1, 1, 0, 55, '500', 'kasuji_1', 'Kasuje historię informacji'),
+(56, 'kasuji', 1, 1, 0, 55, '500', 'kasuji_0', 'Kasuje historię informacji');
 
 -- --------------------------------------------------------
 
@@ -1248,7 +1265,17 @@ INSERT INTO `polecenia_osoby` (`id`, `polecenia`, `osoby`, `czas`, `dos`) VALUES
 (290, 53, 8, '2022-04-05 17:32:14', 1),
 (291, 53, 9, '2022-04-05 17:32:14', 1),
 (292, 53, 10, '2022-04-05 17:32:14', 1),
-(293, 53, 11, '2022-04-05 17:32:14', 1);
+(293, 53, 11, '2022-04-05 17:32:14', 1),
+(294, 55, 2, '2022-04-07 14:22:14', 1),
+(295, 55, 3, '2022-04-07 14:22:14', 1),
+(296, 55, 4, '2022-04-07 14:22:14', 1),
+(297, 55, 5, '2022-04-07 14:22:14', 1),
+(298, 55, 6, '2022-04-07 14:22:14', 1),
+(299, 55, 7, '2022-04-07 14:22:14', 1),
+(300, 55, 8, '2022-04-07 14:22:14', 1),
+(301, 55, 9, '2022-04-07 14:22:14', 1),
+(302, 55, 10, '2022-04-07 14:22:14', 1),
+(303, 55, 11, '2022-04-07 14:22:14', 1);
 
 -- --------------------------------------------------------
 
@@ -1284,7 +1311,7 @@ CREATE TABLE `testylog` (
   `id` int(11) NOT NULL,
   `moduly` int(11) NOT NULL,
   `zespoly` int(11) NOT NULL,
-  `stan` int(11) NOT NULL,
+  `uszkodzenia` int(11) NOT NULL,
   `czasstart` text COLLATE utf8_polish_ci NOT NULL,
   `czasend` text COLLATE utf8_polish_ci NOT NULL,
   `osoba` int(11) NOT NULL
@@ -1294,32 +1321,14 @@ CREATE TABLE `testylog` (
 -- Zrzut danych tabeli `testylog`
 --
 
-INSERT INTO `testylog` (`id`, `moduly`, `zespoly`, `stan`, `czasstart`, `czasend`, `osoba`) VALUES
-(1, 3, 1, 1, '2022-04-03 16:57:38', '2022-04-03 16:59:38', 1),
-(2, 3, 2, 1, '2045-01-03 16:57:38', '2045-01-03 17:01:28', 1),
-(3, 3, 2, 1, '2045-06-03 16:27:38', '2045-06-03 16:29:38', 8),
-(4, 3, 1, 2, '2042-04-03 13:37:38', '2042-04-03 13:39:18', 8),
-(5, 3, 4, 0, '2045-06-06 16:27:38', '2045-06-06 16:29:38', 9),
-(6, 3, 3, 3, '2045-05-30 16:27:38', '2045-05-30 16:29:08', 15),
-(7, 3, 3, 1, '2045-06-08 15:22:50', '2045-06-08 15:22:55', 2),
-(8, 3, 6, 2, '2045-06-23 18:02:12', '2045-06-23 18:02:17', 2),
-(9, 3, 6, 2, '2045-06-23 19:55:50', '2045-06-23 19:56:16', 2),
-(10, 3, 6, 2, '2045-06-23 19:59:20', '2045-06-23 19:59:43', 2),
-(11, 3, 6, 2, '2045-06-23 19:59:52', '2045-06-23 20:00:11', 2),
-(12, 3, 6, 2, '2045-06-23 19:59:59', '2045-06-23 20:00:28', 2),
-(13, 3, 6, 2, '2045-06-23 20:01:12', '2045-06-23 20:01:34', 2),
-(14, 3, 6, 2, '2045-06-23 20:01:19', '2045-06-23 20:01:48', 2),
-(15, 3, 6, 2, '2045-06-23 20:11:04', '2045-06-23 20:11:56', 2),
-(16, 3, 6, 2, '2045-06-23 20:10:57', '2045-06-23 20:12:10', 2),
-(17, 3, 6, 2, '2045-06-23 20:13:28', '2045-06-23 20:14:42', 2),
-(18, 3, 6, 2, '2045-06-23 20:14:53', '2045-06-23 20:16:07', 2),
-(19, 3, 6, 2, '2045-06-23 20:23:11', '2045-06-23 20:23:51', 2),
-(20, 3, 6, 2, '2045-06-23 20:25:34', '2045-06-23 20:25:47', 2),
-(21, 3, 6, 2, '2045-06-23 20:27:37', '2045-06-23 20:27:49', 2),
-(22, 3, 6, 2, '2045-06-23 20:30:30', '2045-06-23 20:30:43', 2),
-(23, 3, 6, 2, '2045-06-23 20:32:36', '2045-06-23 20:32:57', 2),
-(24, 3, 6, 2, '2045-06-23 20:34:57', '2045-06-23 20:35:22', 2),
-(25, 3, 6, 2, '2045-06-23 20:57:28', '2045-06-23 20:57:55', 2);
+INSERT INTO `testylog` (`id`, `moduly`, `zespoly`, `uszkodzenia`, `czasstart`, `czasend`, `osoba`) VALUES
+(0, 0, 0, 0, '2043-03-10 00:00:00', '2043-03-11 00:00:00', 1),
+(1, 3, 1, 1, '2045-06-24 15:16:26', '2045-06-24 15:16:40', 2),
+(2, 3, 6, 3, '2045-06-24 16:11:17', '2045-06-24 16:11:43', 2),
+(3, 3, 3, 1, '2045-06-24 16:53:16', '2045-06-24 16:53:36', 2),
+(4, 3, 6, 1, '2045-06-22 23:11:17', '2045-06-22 23:11:43', 2),
+(5, 3, 3, 1, '2045-06-24 19:33:24', '2045-06-24 19:33:45', 2),
+(6, 3, 6, 3, '2045-06-24 19:42:37', '2045-06-24 19:43:05', 2);
 
 -- --------------------------------------------------------
 
@@ -1345,6 +1354,30 @@ INSERT INTO `ustawienia` (`id`, `zmiana`, `nazwa`, `wartosc`) VALUES
 (4, '2022-03-31 17:24:11', 'Obecna data akcji na Dedalu', '2045-06-17 23:54:13'),
 (5, '2022-03-31 17:24:11', 'Stan larpa', 'START'),
 (6, '2022-03-31 17:24:11', 'Data startu larpa ', '2022-03-31 17:24:11');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `uszkodzenia`
+--
+
+CREATE TABLE `uszkodzenia` (
+  `id` int(11) NOT NULL,
+  `nazwa` text CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
+  `stan` int(11) NOT NULL,
+  `opis` text CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `uszkodzenia`
+--
+
+INSERT INTO `uszkodzenia` (`id`, `nazwa`, `stan`, `opis`) VALUES
+(0, 'błąd wykonania', 2, 'błąd wykonania'),
+(1, 'brak problemów', 1, 'wszystkie testy ok.'),
+(2, 'brak szczelności pomieszczenia - ścianki wewnętrzne', 2, 'uszkodzenie ścianek'),
+(3, 'brak szczelności pomieszczenia - ścianki wzewnętrzne', 2, 'uszkodzenie ścianek'),
+(4, 'brak szczelności pomieszczenia', 2, 'uszkodzenie ścianek');
 
 -- --------------------------------------------------------
 
@@ -1462,7 +1495,9 @@ CREATE TABLE `zespoly` (
   `nazwa` text COLLATE utf8_polish_ci NOT NULL,
   `symbol` varchar(25) COLLATE utf8_polish_ci NOT NULL,
   `moduly` int(11) NOT NULL,
-  `stan` int(11) NOT NULL,
+  `uszkodzenia` int(11) NOT NULL,
+  `uszkodzeniapotest` int(11) NOT NULL,
+  `ostatni` int(11) NOT NULL,
   `przedawnienie` int(11) NOT NULL,
   `opis` text COLLATE utf8_polish_ci NOT NULL,
   `czaswykonania` int(11) NOT NULL
@@ -1472,13 +1507,13 @@ CREATE TABLE `zespoly` (
 -- Zrzut danych tabeli `zespoly`
 --
 
-INSERT INTO `zespoly` (`id`, `nazwa`, `symbol`, `moduly`, `stan`, `przedawnienie`, `opis`, `czaswykonania`) VALUES
-(1, 'Pomieszczenie laboratorium', 'PL', 3, 1, 7, '', 3),
-(2, 'Pomieszczenie oranżerii', 'PO', 3, 1, 7, '', 6),
-(3, 'Pomieszczenie medyczne', 'PM', 3, 1, 7, '', 5),
-(4, 'Urządzenia medyczne', 'UM', 3, 2, 7, '', 2),
-(5, 'Magazyn leków', 'ML', 3, 0, 7, '', 6),
-(6, 'Zespół upraw', 'ZU', 3, 3, 7, '', 7);
+INSERT INTO `zespoly` (`id`, `nazwa`, `symbol`, `moduly`, `uszkodzenia`, `uszkodzeniapotest`, `ostatni`, `przedawnienie`, `opis`, `czaswykonania`) VALUES
+(1, 'Pomieszczenie laboratorium', 'PL', 3, 1, 1, 0, 7, '', 3),
+(2, 'Pomieszczenie oranżerii', 'PO', 3, 1, 1, 0, 7, '', 6),
+(3, 'Pomieszczenie medyczne', 'PM', 3, 1, 1, 5, 7, '', 5),
+(4, 'Urządzenia medyczne', 'UM', 3, 2, 2, 0, 7, '', 2),
+(5, 'Magazyn leków', 'ML', 3, 0, 0, 0, 7, '', 6),
+(6, 'Zespół upraw', 'ZU', 3, 3, 1, 6, 7, '', 7);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -1565,6 +1600,12 @@ ALTER TABLE `ustawienia`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `uszkodzenia`
+--
+ALTER TABLE `uszkodzenia`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `wiadomosci`
 --
 ALTER TABLE `wiadomosci`
@@ -1585,13 +1626,13 @@ ALTER TABLE `zespoly`
 -- AUTO_INCREMENT dla tabeli `dzialania`
 --
 ALTER TABLE `dzialania`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=234;
 
 --
 -- AUTO_INCREMENT dla tabeli `komputery`
 --
 ALTER TABLE `komputery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=314;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=324;
 
 --
 -- AUTO_INCREMENT dla tabeli `logowania`
@@ -1633,13 +1674,13 @@ ALTER TABLE `osoby`
 -- AUTO_INCREMENT dla tabeli `polecenia`
 --
 ALTER TABLE `polecenia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT dla tabeli `polecenia_osoby`
 --
 ALTER TABLE `polecenia_osoby`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=294;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=304;
 
 --
 -- AUTO_INCREMENT dla tabeli `stan`
@@ -1651,13 +1692,19 @@ ALTER TABLE `stan`
 -- AUTO_INCREMENT dla tabeli `testylog`
 --
 ALTER TABLE `testylog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT dla tabeli `ustawienia`
 --
 ALTER TABLE `ustawienia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT dla tabeli `uszkodzenia`
+--
+ALTER TABLE `uszkodzenia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT dla tabeli `wiadomosci`
