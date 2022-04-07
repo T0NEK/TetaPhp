@@ -11,14 +11,14 @@ try
     else
     {
         //$body = (object) array ('stan' => 2, "modul" => 'all', "czas" => "2045-06-08 15:22:50");
-        //$body = (object) array ('stan' => 2, "modul" => 'GRACE', "czas" => "2045-06-08 15:22:50");
+        //$body = (object) array ('stan' => 2, "modul" => 'LAB', "czas" => "2045-06-08 15:22:50");
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {
             if ($body->modul == 'all')
-            { $warunek = ' '; $orderby = ''; }
+            { $warunek = ' ';  }
             else
-            { $warunek = " AND moduly.symbol = '".strtoupper($body->modul)."' "; $orderby = '';}
+            { $warunek = " AND moduly.symbol = '".strtoupper($body->modul)."' ";}
          //get
                 $sql = 
                 "SELECT
@@ -28,26 +28,30 @@ try
                     zespoly.moduly,
                     zespoly.opis,
                     zespoly.czaswykonania,
+                    uszkodzenia.nazwa as nazwaU,
                     stan.nazwa as stanText,
                     stan.stan as stanNr,
                     osoby.imie,
                     osoby.nazwisko,
-                    zespoly.czasbadania,
+                    testylog.czasend as czasbadania,
                     zespoly.przedawnienie,
                     moduly.nazwa as nazwaM,
                     moduly.symbol as symbolM
                 FROM
                     zespoly,
                     moduly,
+                    testylog,
+                    uszkodzenia,
                     stan,
                     osoby
                 WHERE
                     moduly.id =  zespoly.moduly
-                    AND stan.id = zespoly.stan
-                    AND osoby.id = zespoly.osobabadania
+                    AND testylog.id = zespoly.ostatni
+                    AND uszkodzenia.id = testylog.uszkodzenia 
+                    AND stan.id = uszkodzenia.stan
+                    AND osoby.id = testylog.osoba
                     ".$warunek."
                 ORDER BY
-                    ".$orderby."
                     zespoly.nazwa  
                 ";
                 $wynik = $conn->query($sql); 
@@ -65,7 +69,7 @@ try
                 else
                 {$stanText = $row['stanText'].' - badany '.$dni.' dni temu'; $stanNr = $row['stanNr'];}
 
-                $zespol = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "stanText"=>$stanText, "stanNr"=>$stanNr, "czaswykonania"=>$row['czaswykonania'], "czasbadania"=>$row['czasbadania'], "modulSymbol"=>$row['symbolM'], "modulNazwa"=>$row['nazwaM'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
+                $zespol = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "stanText"=>$stanText, "stanNr"=>$stanNr, "uszkodzenia"=>$row['nazwaU'], "czaswykonania"=>$row['czaswykonania'], "czasbadania"=>$row['czasbadania'], "modulSymbol"=>$row['symbolM'], "modulNazwa"=>$row['nazwaM'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
                 array_push($zespoly,$zespol);
                 }
                 $result = array ("wynik"=>true, "stan"=>true, "zespoly"=>$zespoly, "error"=>"wczytano: ".$wynik->num_rows);
@@ -89,7 +93,7 @@ try
 catch(Exception $e)    
 {
     $result = array("wynik"=>false, "stan"=>false, "error"=>"problem z odczytem");
-    //echo ($e);
+    echo ($e);
 }
 echo json_encode($result);    
 ?>

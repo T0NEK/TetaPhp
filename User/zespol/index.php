@@ -10,53 +10,46 @@ try
     { throw new Exception( $conn->connect_error); } 
     else
     {
-        //$body = (object) array ('stan' => 2, "modul" => 'LAB', "zespol" => 'PL', "czas" => "2045-06-08 15:22:50");
+        //$body = (object) array ('stan' => 2, "modul" => 'LAB', "zespol" => 'ZU', "czas" => "2045-06-08 15:22:50");
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {//get
                 $sql = 
                 "
                 SELECT
-                    zespoly.id,
-                    zespoly.nazwa,
-                    zespoly.symbol,
-                    zespoly.moduly,
-                    zespoly.czaswykonania,
-                    zespoly.opis,
-                    stan.nazwa as stanText,
-                    stan.stan as stanNr,
-                    osoby.imie,
-                    osoby.nazwisko,
-                    test.czasstart as czasbadania,
-                    test.czasend as czaszakonczenia,
-                    zespoly.przedawnienie,
-                    moduly.nazwa as nazwaM,
-                    moduly.symbol as symbolM
-                FROM
-                    zespoly,
-                    moduly,
-                    stan,
-                    osoby,
-                    (
-                        SELECT 
-                            ifnull(MAX(id),0) as id,
-                            ifnull(stan,1) as stan,
-                            ifnull(czasstart,'2043-03-10 00:00:00') as czasstart,
-                            ifnull(czasend,'2043-03-11 00:00:00') as czasend,
-                            ifnull(osoba,1) as osoba
-                        FROM 
-                            testylog
-                        WHERE
-                                testylog.moduly = '".$body->modul."'
-                            AND testylog.zespoly = '".$body->zespol."'    
-                    )test
-                WHERE
-                    moduly.id =  zespoly.moduly
-                    AND stan.id = test.stan
-                    AND osoby.id = test.osoba
-                    AND moduly.symbol = '".$body->modul."'
-                    AND zespoly.symbol = '".$body->zespol."'    
-                ";
+                zespoly.id,
+                zespoly.nazwa,
+                zespoly.symbol,
+                zespoly.moduly,
+                zespoly.opis,
+                zespoly.czaswykonania,
+                uszkodzenia.nazwa as nazwaU,
+                stan.nazwa as stanText,
+                stan.stan as stanNr,
+                osoby.imie,
+                osoby.nazwisko,
+                testylog.czasstart as czasbadania,
+                testylog.czasend as czaszakonczenia,
+                zespoly.przedawnienie,
+                moduly.nazwa as nazwaM,
+                moduly.symbol as symbolM
+            FROM
+                zespoly,
+                moduly,
+                testylog,
+                uszkodzenia,
+                stan,
+                osoby
+            WHERE
+                moduly.id =  zespoly.moduly
+                AND testylog.id = zespoly.ostatni
+                AND uszkodzenia.id = testylog.uszkodzenia 
+                AND stan.id = uszkodzenia.stan
+                AND osoby.id = testylog.osoba
+                AND moduly.symbol = '".$body->modul."'
+                AND zespoly.symbol = '".$body->zespol."'    
+            ";
+
                 $wynik = $conn->query($sql); 
                 if ($wynik->num_rows > 0) 
                 {    
@@ -64,7 +57,7 @@ try
                 $date2 = date_create($body->czas);
                 while ($row = $wynik->fetch_assoc())
                 {
-                $date1 = date_create($row['czasbadania']);    
+                $date1 = date_create($row['czaszakonczenia']);    
                 $diff = date_diff($date1,$date2);
                 $dni = $diff->days;
                 if ( $dni > $row['przedawnienie'])
@@ -72,7 +65,7 @@ try
                 else
                 {$stanText = $row['stanText'].' - badany '.$dni.' dni temu'; $stanNr = $row['stanNr'];}
 
-                $zespol = array ("id"=>$row['id'],"idmodul"=>$row['moduly'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "stanText"=>$stanText, "stanNr"=>$stanNr, "czasbadania"=>$row['czasbadania'], "czaszakonczenia"=>$row['czaszakonczenia'], "czaswykonania"=>$row['czaswykonania'], "modulSymbol"=>$row['symbolM'], "modulNazwa"=>$row['nazwaM'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
+                $zespol = array ("id"=>$row['id'],"idmodul"=>$row['moduly'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "stanText"=>$stanText, "uszkodzenia"=>$row['nazwaU'], "stanNr"=>$stanNr, "czasbadania"=>$row['czasbadania'], "czaszakonczenia"=>$row['czaszakonczenia'], "czaswykonania"=>$row['czaswykonania'], "modulSymbol"=>$row['symbolM'], "modulNazwa"=>$row['nazwaM'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
                 array_push($zespoly,$zespol);
                 }
                 $result = array ("wynik"=>true, "stan"=>true, "zespol"=>$zespoly, "error"=>"wczytano: ".$wynik->num_rows);
@@ -93,7 +86,7 @@ try
 catch(Exception $e)    
 {
     $result = array("wynik"=>false, "stan"=>false, "error"=>"problem z odczytem");
-    echo ($e);
+    //echo ($e);
 }
 echo json_encode($result);    
 ?>
