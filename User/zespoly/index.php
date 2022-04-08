@@ -11,7 +11,7 @@ try
     else
     {
         //$body = (object) array ('stan' => 2, "modul" => 'all', "czas" => "2045-06-08 15:22:50");
-        //$body = (object) array ('stan' => 2, "modul" => 'LAB', "czas" => "2045-06-08 15:22:50");
+        //$body = (object) array ('stan' => 2, "modul" => 'LAB', "czas" => "2045-06-28 15:22:50");
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {
@@ -28,12 +28,10 @@ try
                     zespoly.moduly,
                     zespoly.opis,
                     zespoly.czaswykonania,
-                    uszkodzenia.nazwa as nazwaU,
-                    stan.nazwa as stanText,
-                    stan.stan as stanNr,
                     osoby.imie,
                     osoby.nazwisko,
                     testylog.czasend as czasbadania,
+                    testylog.uszkodzenia,
                     zespoly.przedawnienie,
                     moduly.nazwa as nazwaM,
                     moduly.symbol as symbolM
@@ -41,14 +39,10 @@ try
                     zespoly,
                     moduly,
                     testylog,
-                    uszkodzenia,
-                    stan,
                     osoby
                 WHERE
                     moduly.id =  zespoly.moduly
                     AND testylog.id = zespoly.ostatni
-                    AND uszkodzenia.id = testylog.uszkodzenia 
-                    AND stan.id = uszkodzenia.stan
                     AND osoby.id = testylog.osoba
                     ".$warunek."
                 ORDER BY
@@ -65,11 +59,13 @@ try
                 $diff = date_diff($date1,$date2);
                 $dni = $diff->days;
                 if ( $dni > $row['przedawnienie'])
-                { $stanText = $row['stanText'].' - przedawniony '.$dni.' dni'; $stanNr = 2;} //id 5 ze stan
-                else
-                {$stanText = $row['stanText'].' - badany '.$dni.' dni temu'; $stanNr = $row['stanNr'];}
+                { $stanText = 'test przedawniony '.$dni.' dni';} //id 5 ze stan
+                elseif ($dni == 0 )
+                    {$stanText = 'test wykonany w dniu dzisiejszym';}
+                    else
+                    {$stanText = 'test wykonany '.$dni.' dni temu';}    
 
-                $zespol = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "stanText"=>$stanText, "stanNr"=>$stanNr, "uszkodzenia"=>$row['nazwaU'], "czaswykonania"=>$row['czaswykonania'], "czasbadania"=>$row['czasbadania'], "modulSymbol"=>$row['symbolM'], "modulNazwa"=>$row['nazwaM'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
+                $zespol = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "uszkodzeniailosc"=>$row['uszkodzenia'], "stanText"=>$stanText, "czaswykonania"=>$row['czaswykonania'], "czasbadania"=>$row['czasbadania'], "modulSymbol"=>$row['symbolM'], "modulNazwa"=>$row['nazwaM'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
                 array_push($zespoly,$zespol);
                 }
                 $result = array ("wynik"=>true, "stan"=>true, "zespoly"=>$zespoly, "error"=>"wczytano: ".$wynik->num_rows);

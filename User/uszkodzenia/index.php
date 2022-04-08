@@ -10,42 +10,26 @@ try
     { throw new Exception( $conn->connect_error); } 
     else
     {
-        //$body = (object) array ('stan' => 2, "modul" => 'LAB', "zespol" => 'ZU', "rodzaj" => 'zespol', "czas" => "2045-06-08 15:22:50");
-        $body = json_decode(file_get_contents("php://input"));
+        $body = (object) array ("osoba"=>2, "symbol"=>'301649415947622');
+        //$body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {//get
                 $sql = 
                 "
                 SELECT
-                zespoly.id,
-                zespoly.nazwa,
-                zespoly.symbol,
-                zespoly.moduly,
-                zespoly.opis,
-                zespoly.czaswykonania,
-                zespoly.elementy,
-                zespoly.naprawaporeset,
-                zespoly.uszkodzenia,
-                osoby.imie,
-                osoby.nazwisko,
-                testylog.czasstart as czasbadania,
-                testylog.czasend as czaszakonczenia,
-                testylog.uszkodzenia,
-                zespoly.przedawnienie,
-                moduly.nazwa as nazwaM,
-                moduly.symbol as symbolM
-            FROM
-                zespoly,
-                moduly,
-                testylog,
-                osoby
-            WHERE
-                moduly.id =  zespoly.moduly
-                AND testylog.id = zespoly.ostatni
-                AND osoby.id = testylog.osoba
-                AND moduly.symbol = '".$body->modul."'
-                AND zespoly.symbol = '".$body->zespol."'    
-            ";
+                    testylog.id,
+                    testylog.moduly,
+                    testylog.zespoly,
+                    uszkodzenia,
+                    czasstart,
+                    czasend,
+                    osoba
+                FROM
+                    testylog,
+                    uszkodzenia
+                WHERE
+                    testylog.symbol = ".$body->symbol."
+                ";
                 $wynik = $conn->query($sql); 
                 if ($wynik->num_rows > 0) 
                 {    

@@ -18,40 +18,40 @@ try
             $sql = 
             "
             SELECT
-                uszkodzenia.id as idU,
-                stan.nazwa as stanText,
-                stan.stan as stanNr,
-                zespoly.uszkodzenia,
-                zespoly.uszkodzeniapotest,
-                uszkodzenia.nazwa as element
+                count(stan.id) as ilosc,
+                stan.nazwa as stanText
             FROM
-                zespoly,
                 uszkodzenia,
                 stan
             WHERE
-                    zespoly.id = '".$body->zespol."'    
-                AND uszkodzenia.id = zespoly.uszkodzenia    
+                    uszkodzenia.zespoly = '".$body->zespol."'    
+                AND uszkodzenia.moduly = '".$body->modul."'        
                 AND stan.id = uszkodzenia.stan
-                
+            GROUP BY
+                stan.nazwa
             ";
             $wynik = $conn->query($sql); 
             if ($wynik->num_rows > 0) 
             {    
-                $row = $wynik->fetch_assoc();    
-                $stanText = $row['stanText'];
-                $stanNr = $row['stanNr'];
-                $uszkodzenia = $row['idU'];
-                $element = $row['element'];
-                if ($row['uszkodzeniapotest'] == 1)
-                { $uszkodzeniapotest = $row['uszkodzenia']; }
-                else
-                { $uszkodzeniapotest = $row['uszkodzeniapotest'];}
+                $stanText = 'wykryto: ';
+                $ilosc = 0;
+                while ($row = $wynik->fetch_assoc())
+                {
+                    $stanText = $stanText.$row['ilosc'].' - '.$row['stanText'].", ";
+                    $ilosc = $ilosc + $row['ilosc'];
+                }
+                $stanText = substr($stanText,0,-2);
+
+                $time = time();
+                $symbol = $time.$body->zespol.$body->osoba.$ilosc.$body->modul;
+                
                 $conn->autocommit(false);
                 $sql =
                 "
                 INSERT INTO
                   testylog
                 (
+                  symbol,  
                   moduly,
                   zespoly,
                   uszkodzenia,
@@ -61,12 +61,13 @@ try
                 )
                 VALUES
                 (
-                  ".$body->modul.",
-                  ".$body->zespol.",
-                  ".$uszkodzenia.",
-                  '".$body->czasstart."',
-                  '".$body->czasend."',
-                  ".$body->osoba."
+                    '".$symbol."',
+                    ".$body->modul.",
+                    ".$body->zespol.",
+                    ".$ilosc.",
+                    '".$body->czasstart."',
+                    '".$body->czasend."',
+                    ".$body->osoba."
                 )
                 ";
                 if ($conn->query($sql) === TRUE) 
@@ -77,15 +78,14 @@ try
                     UPDATE
                         zespoly
                     SET    
-                        ostatni = ".$id.",
-                        uszkodzenia = ".$uszkodzeniapotest."
+                        ostatni = ".$id."
                     WHERE
                         id = ".$body->zespol."
                     ";
                     $conn->query($sql);
                     if ($conn->commit() === TRUE) 
                     {
-                        $result = array ("wynik"=>true, "stan"=>true, "stanText"=>$stanText, "stanNr"=>$stanNr, "uszkodzenia"=>$element , "czasend"=>$body->czasend);  
+                        $result = array ("wynik"=>true, "stan"=>true, "stanText"=>$stanText, "czasend"=>$body->czasend, "symbol" => $symbol);  
                     }
                     else    
                     {
@@ -114,7 +114,7 @@ try
 catch(Exception $e)    
 {
     $result = array("wynik"=>false, "stan"=>false, "error"=>"problem z odczytem");
-    //echo ($e);
+    echo ($e);
 }
 echo json_encode($result);    
 ?>
