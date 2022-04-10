@@ -23,9 +23,9 @@ try
                 zespoly.moduly,
                 zespoly.opis,
                 zespoly.czaswykonania,
+                zespoly.czasreset,
+                zespoly.czasnaprawa,
                 zespoly.elementy,
-                zespoly.naprawaporeset,
-                zespoly.uszkodzenia,
                 osoby.imie,
                 osoby.nazwisko,
                 testylog.czasstart as czasbadania,
@@ -55,36 +55,23 @@ try
                 $date1 = date_create($row['czaszakonczenia']);    
                 $diff = date_diff($date1,$date2);
                 $dni = $diff->days;
+                switch ($row['uszkodzenia']) 
+                {
+                    case 1: $problem = $row['uszkodzenia'].' problem'; break;
+                    case 2: $problem = $row['uszkodzenia'].' problemy'; break;
+                    case 3: $problem = $row['uszkodzenia'].' problemy'; break;
+                    case 4: $problem = $row['uszkodzenia'].' problemy'; break;
+                    default: $problem = $row['uszkodzenia'].' problemów'; break;
+                }
                 if ( $dni > $row['przedawnienie'])
-                { $stanText = 'test przedawniony '.$dni.' dni, wykryto: '.$row['uszkodzenia'].' problemów'; $przedawniony = true;} //id 5 ze stan
+                { $stanText = 'test przedawniony '.$dni.' dni, wykryto: '.$problem;} 
                 elseif ($dni == 0 )
-                    {$stanText = 'test wykonany w dniu dzisiejszym, wykryto: '.$row['uszkodzenia'].' problemów'; $przedawniony = true;}
+                    {$stanText = 'test wykonany w dniu dzisiejszym, wykryto: '.$problem;}
                     else
-                    {$stanText = 'test wykonany '.$dni.' dni temu, wykryto: '.$row['uszkodzenia'].' problemów'; $przedawniony = true;}   
-                if ($row['naprawaporeset'] == 1)    
-                { $naprawa = 1;}
-                else
-                { $naprawa = $row['uszkodzenia'];}
-
-                $zespol = array ("id"=>$row['id'],"idmodul"=>$row['moduly'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "stanText"=>$stanText,  "naprawaporeset"=>$naprawa, "czasbadania"=>$row['czasbadania'], "czaszakonczenia"=>$row['czaszakonczenia'], "czaswykonania"=>$row['czaswykonania'], "elementy"=>$row['elementy'], "modulSymbol"=>$row['symbolM'], "modulNazwa"=>$row['nazwaM'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
+                    {$stanText = 'test wykonany '.$dni.' dni temu, wykryto: '.$problem;}   
+                $zespol = array ("id"=>$row['id'],"idmodul"=>$row['moduly'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "stanText"=>$stanText, "czasbadania"=>$row['czasbadania'], "czaszakonczenia"=>$row['czaszakonczenia'], "czaswykonania"=>$row['czaswykonania'], "czasreset"=>$row['czasreset'], "czasnaprawa"=>$row['czasnaprawa'], "uszkodzeniailosc"=>$row['uszkodzenia'],"elementy"=>$row['elementy'], "modulSymbol"=>$row['symbolM'], "modulNazwa"=>$row['nazwaM'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
                 array_push($zespoly,$zespol);
                 $result = array ("wynik"=>true, "stan"=>true, "zespol"=>$zespoly, "error"=>"wczytano: ".$wynik->num_rows);
-                if ($body->rodzaj == 'reset')
-                {
-                $sql = 
-                "
-                UPDATE
-                    zespoly
-                SET
-                    uszkodzenia = 5
-                WHERE
-                    id = ".$row['id']."        
-                ";
-                if ($conn->query($sql) === TRUE) 
-                { $result = $result;}
-                else
-                { $result = array("wynik"=>false, "stan"=>false, "error"=>"brak połączenia z zespołem: ".$body->zespol." w module: ".$body->modul); }
-                }
                 }
                 else
                 {

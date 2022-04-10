@@ -124,7 +124,7 @@ try
 catch(Exception $e)    
 {
     $result = array("wynik"=>false, "stan"=>"error", "error"=>$e);
-    echo ($e);
+    //echo ($e);
 }
 echo json_encode($result);     
 ?>

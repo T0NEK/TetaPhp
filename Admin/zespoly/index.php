@@ -10,15 +10,10 @@ try
     { throw new Exception( $conn->connect_error); } 
     else
     {
-        //$body = (object) array ('stan' => 2, "modul" => 'all', "czas" => "2045-06-08 15:22:50");
-        //$body = (object) array ('stan' => 2, "modul" => 'LAB', "czas" => "2045-06-28 15:22:50");
+        //$body = (object) array ('stan' => 2, "modul" => 3, "czas" => "2045-06-08 15:22:50" );
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {
-            if ($body->modul == 'all')
-            { $warunek = ' ';  }
-            else
-            { $warunek = " AND moduly.symbol = '".strtoupper($body->modul)."' ";}
          //get
                 $sql = 
                 "SELECT
@@ -32,19 +27,15 @@ try
                     osoby.nazwisko,
                     testylog.czasend as czasbadania,
                     testylog.uszkodzenia,
-                    zespoly.przedawnienie,
-                    moduly.nazwa as nazwaM,
-                    moduly.symbol as symbolM
+                    zespoly.przedawnienie
                 FROM
                     zespoly,
-                    moduly,
                     testylog,
                     osoby
                 WHERE
-                    moduly.id =  zespoly.moduly
+                        zespoly.moduly = ".$body->modul."
                     AND testylog.id = zespoly.ostatni
                     AND osoby.id = testylog.osoba
-                    ".$warunek."
                 ORDER BY
                     zespoly.nazwa  
                 ";
@@ -65,18 +56,15 @@ try
                     else
                     {$stanText = 'test wykonany '.$dni.' dni temu';}    
 
-                $zespol = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "uszkodzeniailosc"=>$row['uszkodzenia'], "stanText"=>$stanText, "czaswykonania"=>$row['czaswykonania'], "czasbadania"=>$row['czasbadania'], "modulSymbol"=>$row['symbolM'], "modulNazwa"=>$row['nazwaM'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
+                $zespol = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "uszkodzeniailosc"=>$row['uszkodzenia'], "stanText"=>$stanText, "czaswykonania"=>$row['czaswykonania'], "czasbadania"=>$row['czasbadania'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
                 array_push($zespoly,$zespol);
                 }
                 $result = array ("wynik"=>true, "stan"=>true, "zespoly"=>$zespoly, "error"=>"wczytano: ".$wynik->num_rows);
                 }
-                else
-                {
-                    if ($body->modul == 'all')
-                    {$result = array ("wynik"=>false, "stan"=>false, "error"=>"brak dostępnych zespołów");}
-                    else
-                    {$result = array ("wynik"=>false, "stan"=>false, "error"=>"brak dostępnych zespołów w module: ".strtoupper($body->modul));}
-                }
+            else
+            {
+            $result = array ("wynik"=>true, "stan"=>false, "error"=>"brak dostępnych zespołów w module: ".$body->modul);
+            }
         $conn->close();       
         }
         else

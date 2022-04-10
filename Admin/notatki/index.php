@@ -339,7 +339,7 @@ elseif ($body->kierunek == 'setudo')
                     ";
                     if ($conn->query($sql) === TRUE) 
                     {
-                    $result = array ("wynik"=>true,"idnotatki"=>$body->idnotatki,"idtablica"=>$body->idtablica, "stan"=>($stan==1), "error"=>'zmieniono możliwość udostępnienia notatki: "'.$row['tytul'].'" na: '.($stan==1 ? 'Tak' : 'Nie'), "stanText"=>"", "kierunek"=>$body->kierunek);
+                    $result = array ("wynik"=>true,"idnotatki"=>$body->idnotatki,"idtablica"=>$body->idtablica, "stan"=>($stan==1), "error"=>'zmieniono blokadę udostępnienia notatki: "'.$row['tytul'].'" na: '.($stan==1 ? 'Tak' : 'Nie'), "stanText"=>"", "kierunek"=>$body->kierunek);
                     }
                     else
                     {
@@ -353,18 +353,128 @@ elseif ($body->kierunek == 'setudo')
             
             $conn->close();     
             }   
+elseif($body->kierunek =='udonot')
+        {
+        $sql = "
+        SELECT
+            notatki_udo.id,
+            notatki_udo.del,
+            osoby.imie,
+            osoby.nazwisko
+        FROM    
+            notatki_udo,
+            osoby
+        WHERE  
+                notatki_udo.notatki_ng = ".$body->idnotatki."
+            AND notatki_udo.osoby = ".$body->stan."
+            AND osoby.id = notatki_udo.osoby
+        ";
+        $wynik = $conn->query($sql); 
+        if ($wynik->num_rows > 0) 
+        { 
+        $row = $wynik->fetch_assoc();
+        $del = ($row['del'] == 0 ? 1 : 0 );
+        $imie = $row['imie'];
+        $nazwisko = $row['nazwisko'];
+        $sql = "
+            UPDATE
+            notatki_udo
+            SET
+            del = ".$del."
+            WHERE
+            id = ".$row['id']."
+        ";
         }
         else
         {
-            $result = array ("wynik"=>false, "stan"=>false, "error"=>"brak danych");      
+        $del = 0;
+        $sql = "
+            INSERT INTO notatki_udo
+            (
+                notatki_ng,
+                osoby,
+                del
+            )
+            VALUES
+            (
+                ".$body->idnotatki.",
+                ".$body->stan.",
+                ".$del."
+            )
+        ";
         }
-    }    
-    
+        if ($conn->query($sql) === TRUE) 
+        {
+            if ($del == 0)
+            {
+            $error = "notatka została udostepniona dla ".$imie.' '.$nazwisko;
+            }
+            else
+            {
+            $error = $imie.' '.$nazwisko." cofnięto dostęp do notatki ";
+            }
+            $sql = "
+            SELECT
+            notatki_ng.wlasciciel,
+            os.id as idosoby,
+            os.kolejnosc,
+            IFNULL(udo.id,0) as idudo,
+            udo.czas,
+            CASE IFNULL(udo.id,0) WHEN 0 THEN 'niewidoczna'
+                                  ELSE 'widoczna'
+                    END as stanudo                    
+            FROM
+            notatki_ng,
+            (   SELECT id, kolejnosc
+                FROM osoby
+                WHERE user > 0
+            )os
+            LEFT JOIN
+            (   SELECT id, czas, osoby
+                FROM notatki_udo
+                WHERE notatki_ng = ".$body->idnotatki." AND del = 0   
+            )udo
+            ON os.id = udo.osoby
+            WHERE
+            notatki_ng.id = ".$body->idnotatki."
+            ORDER BY
+            os.kolejnosc
+            ";
+            $wynik = $conn->query($sql); 
+            if ($wynik->num_rows > 0) 
+                {
+                $notatki = array ();    
+                while ($row = $wynik->fetch_assoc())
+                {
+                $notatka = array ("idosoby"=>$row['idosoby'], "idudo"=>$row['idudo'], "czas"=>$row['czas'], "stanudo"=>$row['stanudo'], "autor"=>$row['wlasciciel']);
+                array_push($notatki,$notatka);
+                }
+                $result = array ("wynik"=>true, "stan"=>true, "notatki"=>$notatki, "error"=>$error);
+                }
+                else
+                {
+                    $result = array ("wynik"=>false, "stan"=>false, "error"=>"problem ze sprawdzeniem udostępnień");   
+                }
+        $conn->close();     
+        }
+        
+        else
+        {
+            $result = array ("wynik"=>false, "stan"=>false,  "error"=>'błąd zapisu stanu notatki');                
+        }
+        //$conn->close();
+        }
+}
+else
+{
+    $result = array ("wynik"=>false, "stan"=>false, "error"=>"brak danych");      
+}
+}
 }
 catch(Exception $e)    
 {
     $result = array("wynik"=>false, "stan"=>false, "error"=>"problem z połączeniem");
-    //echo ($e);
+    echo ($e);
 }
 echo json_encode($result);     
 ?>

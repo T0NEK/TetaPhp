@@ -18,74 +18,82 @@ try
             $sql = 
             "
             SELECT
-                count(stan.id) as ilosc,
+                uszkodzenianazwa.nazwa as nazwa,
+                stan.stan as stan,
                 stan.nazwa as stanText
             FROM
+                uszkodzenianazwa,
+                stan
+            WHERE
+                    stan.id = 5
+                AND uszkodzenianazwa.id = 5
+            ";
+            $wynik = $conn->query($sql); 
+            $row = $wynik->fetch_assoc();
+            $nazwareset = $row['nazwa'];
+            $stanreset = $row['stan'];
+            $stanTextreset = $row['stanText'];
+            $sql = 
+            "
+            SELECT
+                uszkodzenianazwa.nazwa as nazwa,
+                stan.stan as stan,
+                stan.nazwa as stanText,
+                uszkodzenia.reset
+            FROM
                 uszkodzenia,
+                uszkodzenianazwa,
                 stan
             WHERE
                     uszkodzenia.zespoly = '".$body->zespol."'    
                 AND uszkodzenia.moduly = '".$body->modul."'        
                 AND stan.id = uszkodzenia.stan
-            GROUP BY
-                stan.nazwa
+                AND uszkodzenianazwa.id = uszkodzenia.nazwa
+                AND ((stan.stan <> 1) OR (uszkodzenia.reset = 1)) 
+            ORDER BY
+            stan.nazwa    
             ";
             $wynik = $conn->query($sql); 
             if ($wynik->num_rows > 0) 
-            {    
-                $stanText = 'wykryto: ';
-                $ilosc = 0;
+                {    
+                $ilosc = $wynik->num_rows;
+                $uszkodzenia = array();
                 while ($row = $wynik->fetch_assoc())
                 {
-                    $stanText = $stanText.$row['ilosc'].' - '.$row['stanText'].", ";
-                    $ilosc = $ilosc + $row['ilosc'];
+                    if ($row['reset'] == 0)
+                    {
+                    $uszkodzenie = array ("nazwa"=>$row['nazwa'], "stan"=>$row['stan'], "stanText"=>$row['stanText']);
+                    array_push($uszkodzenia,$uszkodzenie);
+                    }
+                    else
+                    {
+                    $uszkodzenie = array ("nazwa"=>$nazwareset, "stan"=>$stanreset, "stanText"=>$stanTextreset);
+                    array_push($uszkodzenia,$uszkodzenie);
+                    }
                 }
-                $stanText = substr($stanText,0,-2);
-
-                $time = time();
-                $symbol = $time.$body->zespol.$body->osoba.$ilosc.$body->modul;
-                
+                }
+                else
+                {
+                $ilosc = 0;    
+                $uszkodzenia = array();
+                }
                 $conn->autocommit(false);
                 $sql =
                 "
                 INSERT INTO
                   testylog
-                (
-                  symbol,  
-                  moduly,
-                  zespoly,
-                  uszkodzenia,
-                  czasstart,
-                  czasend,
-                  osoba  
-                )
+                ( moduly, zespoly, uszkodzenia, czasstart, czasend, osoba )
                 VALUES
-                (
-                    '".$symbol."',
-                    ".$body->modul.",
-                    ".$body->zespol.",
-                    ".$ilosc.",
-                    '".$body->czasstart."',
-                    '".$body->czasend."',
-                    ".$body->osoba."
-                )
+                ( ".$body->modul.", ".$body->zespol.", ".$ilosc.", '".$body->czasstart."', '".$body->czasend."', ".$body->osoba." )
                 ";
                 if ($conn->query($sql) === TRUE) 
                 {
                     $id = $conn->insert_id;
-                    $sql = 
-                    "
-                    UPDATE
-                        zespoly
-                    SET    
-                        ostatni = ".$id."
-                    WHERE
-                        id = ".$body->zespol."
-                    ";
+                    $sql = "UPDATE zespoly SET ostatni = ".$id." WHERE id = ".$body->zespol."";
                     $conn->query($sql);
                     if ($conn->commit() === TRUE) 
                     {
-                        $result = array ("wynik"=>true, "stan"=>true, "stanText"=>$stanText, "czasend"=>$body->czasend, "symbol" => $symbol);  
+                        $result = array ("wynik"=>true, "stan"=>true, "uszkodzenia"=>$uszkodzenia, "ilosc"=>$ilosc, "czasend"=>$body->czasend);  
                     }
                     else    
                     {
@@ -96,11 +104,6 @@ try
                 {
                     $result = array ("wynik"=>true, "stan"=>false, "error"=>"error - powtórz test");    
                 }
-            }
-            else
-            {
-                $result = array ("wynik"=>true, "stan"=>false, "error"=>"error - powtórz test");  
-            }
         $conn->close();    
         }
         else
@@ -114,7 +117,7 @@ try
 catch(Exception $e)    
 {
     $result = array("wynik"=>false, "stan"=>false, "error"=>"problem z odczytem");
-    echo ($e);
+    //echo ($e);
 }
 echo json_encode($result);    
 ?>
