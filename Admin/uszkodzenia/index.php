@@ -13,15 +13,15 @@ try
         //$body = (object) array ('stan' => 'get', "modul" => 3, "zespol"=>3, "czas" => "2045-06-08 15:22:50" );
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
-        {      
-    if ($body->stan == 'stan')   
+        { 
+    if ($body->stan != 'get')   
             {
             $sql = 
             "
             UPDATE
                 uszkodzenia
             SET
-                stan = ".$body->nowy."
+                ".$body->stan." = ".$body->nowy."
             WHERE 
                 id = ".$body->uszkodzenie."       
             ";    
@@ -54,7 +54,7 @@ try
                     uszkodzenia.naprawa, 
                     uszkodzenia.ponaprawa,
                     uszkodzenia.nazwaponaprawa as idnazwaponaprawa,
-                    uszkodzenianazwa1.nazwa as nazwaponaprawa,
+                    uszkodzenianazwa2.nazwa as nazwaponaprawa,
                     uszkodzenia.stanponaprawa as idstanponaprawa,
                     stan2.nazwa as nazwastanponaprawa,
                     stan2.stan as stanstanponaprawa
@@ -73,8 +73,8 @@ try
                     AND stan.id = uszkodzenia.stan
                     AND uszkodzenianazwa1.id = uszkodzenia.nazwaporeset
                     AND stan1.id = uszkodzenia.stanporeset
-                    AND uszkodzenianazwa2.id = uszkodzenia.nazwaporeset
-                    AND stan2.id = uszkodzenia.stanporeset
+                    AND uszkodzenianazwa2.id = uszkodzenia.nazwaponaprawa
+                    AND stan2.id = uszkodzenia.stanponaprawa
                 ORDER BY
                     uszkodzenia.id  DESC 
                 ";

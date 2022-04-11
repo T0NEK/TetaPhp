@@ -54,7 +54,7 @@ try
                 $row = $wynik->fetch_assoc();
                 $date1 = date_create($row['czaszakonczenia']);    
                 $diff = date_diff($date1,$date2);
-                $dni = $diff->days;
+                $dni = round($diff->y * 365.25 + $diff->m * 30 + $diff->d + $diff->h/24 + $diff->i / 60);
                 switch ($row['uszkodzenia']) 
                 {
                     case 1: $problem = $row['uszkodzenia'].' problem'; break;
@@ -63,12 +63,18 @@ try
                     case 4: $problem = $row['uszkodzenia'].' problemy'; break;
                     default: $problem = $row['uszkodzenia'].' problemów'; break;
                 }
+                if ($dni > 1) 
+                {
                 if ( $dni > $row['przedawnienie'])
-                { $stanText = 'test przedawniony '.$dni.' dni, wykryto: '.$problem;} 
-                elseif ($dni == 0 )
-                    {$stanText = 'test wykonany w dniu dzisiejszym, wykryto: '.$problem;}
+                    { $stanText = 'przedawniony '.$dni.($dni == 1 ? ' dzień' : ' dni').', wykryto: '.$problem;} //id 5 ze stan
                     else
-                    {$stanText = 'test wykonany '.$dni.' dni temu, wykryto: '.$problem;}   
+                    {$stanText = $dni.' dni temu, wykryto: '.$problem;;}    
+                }
+                else
+                {
+                $godzin = round(($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h + $diff->i/60);
+                $stanText = $godzin.' godzin temu, wykryto: '.$problem;;
+                }
                 $zespol = array ("id"=>$row['id'],"idmodul"=>$row['moduly'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "stanText"=>$stanText, "czasbadania"=>$row['czasbadania'], "czaszakonczenia"=>$row['czaszakonczenia'], "czaswykonania"=>$row['czaswykonania'], "czasreset"=>$row['czasreset'], "czasnaprawa"=>$row['czasnaprawa'], "uszkodzeniailosc"=>$row['uszkodzenia'],"elementy"=>$row['elementy'], "modulSymbol"=>$row['symbolM'], "modulNazwa"=>$row['nazwaM'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
                 array_push($zespoly,$zespol);
                 $result = array ("wynik"=>true, "stan"=>true, "zespol"=>$zespoly, "error"=>"wczytano: ".$wynik->num_rows);

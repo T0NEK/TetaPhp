@@ -57,14 +57,20 @@ try
                 {
                 $date1 = date_create($row['czasbadania']);    
                 $diff = date_diff($date1,$date2);
-                $dni = $diff->days;
+                
+                $dni = round($diff->y * 365.25 + $diff->m * 30 + $diff->d + $diff->h/24 + $diff->i / 60);
+                if ($dni > 1) 
+                {
                 if ( $dni > $row['przedawnienie'])
-                { $stanText = 'test przedawniony '.$dni.' dni';} //id 5 ze stan
-                elseif ($dni == 0 )
-                    {$stanText = 'test wykonany w dniu dzisiejszym';}
+                    { $stanText = 'przedawniony '.$dni.($dni == 1 ? 'dzień' : ' dni');} //id 5 ze stan
                     else
-                    {$stanText = 'test wykonany '.$dni.' dni temu';}    
-
+                    {$stanText = $dni.' dni temu';}    
+                }
+                else
+                {
+                $godzin = round(($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h + $diff->i/60);
+                $stanText = $godzin.' godzin temu';
+                }
                 $zespol = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "uszkodzeniailosc"=>$row['uszkodzenia'], "stanText"=>$stanText, "czaswykonania"=>$row['czaswykonania'], "czasbadania"=>$row['czasbadania'], "modulSymbol"=>$row['symbolM'], "modulNazwa"=>$row['nazwaM'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
                 array_push($zespoly,$zespol);
                 }
