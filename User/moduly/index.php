@@ -17,6 +17,16 @@ try
          //get
                 $sql = 
                 "SELECT
+                mody.id,
+                mody.nazwa,
+                mody.symbol,
+                mody.stan,
+                mody.czasbadania,
+                mody.opis,
+                ifnull(zesp.ilosczespoly,0) as ilosczespoly 
+                FROM
+                (
+                SELECT
                     id,
                     nazwa,
                     symbol,
@@ -25,8 +35,20 @@ try
                     opis
                     FROM
                     moduly
-                    ORDER BY
-                    nazwa
+                )mody   
+                LEFT JOIN
+                (
+                SELECT
+                    moduly as id,
+                    count(id) as ilosczespoly
+                FROM
+                    zespoly
+                GROUP BY
+                    moduly
+                )zesp
+                ON mody.id = zesp.id
+                ORDER BY
+                mody.nazwa
                 ";
                 $wynik = $conn->query($sql); 
                 if ($wynik->num_rows > 0) 
@@ -34,7 +56,7 @@ try
                 $moduly = array ();    
                 while ($row = $wynik->fetch_assoc())
                 {
-                $modul = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "stan"=>$row['stan'], "czasbadania"=>$row['czasbadania'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis']);
+                $modul = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "stan"=>$row['stan'], "czasbadania"=>$row['czasbadania'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "ilosczespoly"=>$row['ilosczespoly']);
                 array_push($moduly,$modul);
                 }
                 $result = array ("wynik"=>true, "stan"=>true, "moduly"=>$moduly, "error"=>"wczytano: ".$wynik->num_rows);

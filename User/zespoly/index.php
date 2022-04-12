@@ -28,6 +28,7 @@ try
                     zespoly.moduly,
                     zespoly.opis,
                     zespoly.czaswykonania,
+                    zespoly.elementy,
                     osoby.imie,
                     osoby.nazwisko,
                     testylog.czasend as czasbadania,
@@ -57,12 +58,12 @@ try
                 {
                 $date1 = date_create($row['czasbadania']);    
                 $diff = date_diff($date1,$date2);
-                
                 $dni = round($diff->y * 365.25 + $diff->m * 30 + $diff->d + $diff->h/24 + $diff->i / 60);
+                $przedawnienie = $dni - $row['przedawnienie'];
                 if ($dni > 1) 
                 {
                 if ( $dni > $row['przedawnienie'])
-                    { $stanText = 'przedawniony '.$dni.($dni == 1 ? 'dzień' : ' dni');} //id 5 ze stan
+                    { $stanText = 'przedawniony '.$przedawnienie.($przedawnienie == 1 ? 'dzień' : ' dni');} //id 5 ze stan
                     else
                     {$stanText = $dni.' dni temu';}    
                 }
@@ -71,7 +72,8 @@ try
                 $godzin = round(($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h + $diff->i/60);
                 $stanText = $godzin.' godzin temu';
                 }
-                $zespol = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "uszkodzeniailosc"=>$row['uszkodzenia'], "stanText"=>$stanText, "czaswykonania"=>$row['czaswykonania'], "czasbadania"=>$row['czasbadania'], "modulSymbol"=>$row['symbolM'], "modulNazwa"=>$row['nazwaM'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
+                $stanText = $stanText.' (ważny: '.$row['przedawnienie'].($row['przedawnienie'] == 1 ? ' dzień' : ' dni').')'; 
+                $zespol = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "elementy"=>$row['elementy'], "uszkodzeniailosc"=>$row['uszkodzenia'], "stanText"=>$stanText, "czaswykonania"=>$row['czaswykonania'], "czasbadania"=>$row['czasbadania'], "modulSymbol"=>$row['symbolM'], "modulNazwa"=>$row['nazwaM'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni);
                 array_push($zespoly,$zespol);
                 }
                 $result = array ("wynik"=>true, "stan"=>true, "zespoly"=>$zespoly, "error"=>"wczytano: ".$wynik->num_rows);

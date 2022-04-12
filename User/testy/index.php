@@ -39,7 +39,8 @@ try
                 uszkodzenianazwa.nazwa as nazwa,
                 stan.stan as stan,
                 stan.nazwa as stanText,
-                uszkodzenia.reset
+                uszkodzenia.reset,
+                uszkodzenia.naprawa
             FROM
                 uszkodzenia,
                 uszkodzenianazwa,
@@ -60,7 +61,7 @@ try
                 $uszkodzenia = array();
                 while ($row = $wynik->fetch_assoc())
                 {
-                    if ($row['reset'] == 0)
+                    if (($row['reset'] == '0')&&($row['naprawa'] == '0'))
                     {
                     $uszkodzenie = array ("nazwa"=>$row['nazwa'], "stan"=>$row['stan'], "stanText"=>$row['stanText']);
                     array_push($uszkodzenia,$uszkodzenie);
