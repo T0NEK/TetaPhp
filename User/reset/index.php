@@ -37,9 +37,9 @@ try
                 "
                 INSERT INTO
                   uszkodzenia
-                ( moduly, zespoly, nazwa, stan, reset, poreset, nazwaporeset, stanporeset )
+                ( moduly, zespoly, nazwa, stan, reset, poreset, nazwaporeset, stanporeset, naprawa, ponaprawa, nazwaponaprawa, stanponaprawa )
                 VALUES
-                ( ".$body->modul.", ".$body->zespol.", 5, 5, '".$resetkod."', 1, 1, 1 ) ";
+                ( ".$body->modul.", ".$body->zespol.", 5, 5, '".$resetkod."', 1, 1, 1, '0', 0, 1, 1 ) ";
                 if ($conn->query($sql) === TRUE) 
                 {
                 $result = array ("wynik"=>true, "stan"=>true, "resetkod"=>$resetkod, "error"=>"wysłano polecenie");  
