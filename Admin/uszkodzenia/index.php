@@ -16,12 +16,16 @@ try
         { 
     if ($body->stan != 'get')   
             {
+            if (($body->stan == 'reset')||($body->stan == 'naprawa'))
+            { $linia = " ".$body->stan." = '".$body->nowy."'"; } 
+            else
+            { $linia = " ".$body->stan." = ".$body->nowy." "; }
             $sql = 
             "
             UPDATE
                 uszkodzenia
             SET
-                ".$body->stan." = ".$body->nowy."
+                ".$linia."
             WHERE 
                 id = ".$body->uszkodzenie."       
             ";    
@@ -82,9 +86,31 @@ try
                 if ($wynik->num_rows > 0) 
                 {    
                 $uszkodzenia = array ();    
+                
+
+
+                $time = time();
+                $czasserwera = date("Y-m-d H:i:s",$time);
+                $date2 = date_create($czasserwera);
+                
+                
                 while ($row = $wynik->fetch_assoc())
                 {
-                $uszkodzenie = array ("id"=>$row['id'], "idnazwyuszkodzenia"=>$row['idnazwyuszkodzenia'], "nazwauszkdzenia"=>$row['nazwauszkdzenia'], "idstan"=>$row['idstan'], "nazwastan"=>$row['nazwastan'], "stanstan"=>$row['stanstan'], "reset"=>$row['reset'], "poreset"=>$row['poreset'], "idnazwaporeset"=>$row['idnazwaporeset'], "nazwaporeset"=>$row['nazwaporeset'],"idstanporeset"=>$row['idstanporeset'], "nazwastanporeset"=>$row['nazwastanporeset'], "stanstanporeset"=>$row['stanstanporeset'], "naprawa"=>$row['naprawa'], "ponaprawa"=>$row['ponaprawa'], "idnazwaponaprawa"=>$row['idnazwaponaprawa'], "nazwaponaprawa"=>$row['nazwaponaprawa'],"idstanponaprawa"=>$row['idstanponaprawa'], "nazwastanponaprawa"=>$row['nazwastanponaprawa'], "stanstanponaprawa"=>$row['stanstanponaprawa']);
+                if ($row['reset'] == '0') { $sekreset = 0;}
+                else
+                {
+                $czas1 = substr($row['reset'],0,19); $date1 = date_create($czas1);    
+                $diff = date_diff($date1,$date2);
+                $sekreset = ((($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i)*60 + $diff->s;
+                }
+                if ($row['naprawa'] == '0') { $seknaprawa = 0;}
+                else
+                {
+                $czas1 = substr($row['naprawa'],0,19); $date1 = date_create($czas1);    
+                $diff = date_diff($date1,$date2);
+                $seknaprawa = ((($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i)*60 + $diff->s;
+                }
+                $uszkodzenie = array ("id"=>$row['id'], "idnazwyuszkodzenia"=>$row['idnazwyuszkodzenia'], "nazwauszkdzenia"=>$row['nazwauszkdzenia'], "idstan"=>$row['idstan'], "nazwastan"=>$row['nazwastan'], "stanstan"=>$row['stanstan'], "reset"=>$row['reset'], "poreset"=>$row['poreset'], "idnazwaporeset"=>$row['idnazwaporeset'], "nazwaporeset"=>$row['nazwaporeset'],"idstanporeset"=>$row['idstanporeset'], "nazwastanporeset"=>$row['nazwastanporeset'], "stanstanporeset"=>$row['stanstanporeset'], "naprawa"=>$row['naprawa'], "ponaprawa"=>$row['ponaprawa'], "idnazwaponaprawa"=>$row['idnazwaponaprawa'], "nazwaponaprawa"=>$row['nazwaponaprawa'],"idstanponaprawa"=>$row['idstanponaprawa'], "nazwastanponaprawa"=>$row['nazwastanponaprawa'], "stanstanponaprawa"=>$row['stanstanponaprawa'], "sekreset"=>$sekreset, "seknaprawa"=>$seknaprawa);
                 array_push($uszkodzenia,$uszkodzenie);
                 }
                 $result = array ("wynik"=>true, "stan"=>true, "uszkodzenia"=>$uszkodzenia, "error"=>"wczytano: ".$wynik->num_rows);

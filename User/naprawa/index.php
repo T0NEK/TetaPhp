@@ -18,7 +18,8 @@ try
         if ($body->stan == 'start')   
             {
             $time = time();
-            $naprawakod = $body->zespol.'-'.$time.'-'.$body->modul.'-'.$body->osoba;
+            $czasserwera = date("Y-m-d H:i:s",$time);
+            $naprawakod = $czasserwera.'-'.$body->zespol.'-'.$body->modul.'-'.$body->osoba;
             $sql = 
             "
             SELECT
@@ -42,7 +43,7 @@ try
                   ( ".$body->modul.", ".$body->zespol.", 5, 5, '0', 0, 1, 1, '".$naprawakod."', 1, 1, 1 ) ";
                 if ($conn->query($sql) === TRUE) 
                 {
-                $result = array ("wynik"=>true, "stan"=>true, "naprawakod"=>$naprawatkod, "error"=>"wysłano polecenie");  
+                $result = array ("wynik"=>true, "stan"=>true, "naprawakod"=>$naprawakod, "error"=>"wysłano polecenie");  
                 }
                 else
                 {

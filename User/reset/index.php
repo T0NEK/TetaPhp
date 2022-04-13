@@ -18,7 +18,8 @@ try
         if ($body->stan == 'start')   
             {
             $time = time();
-            $resetkod = $body->zespol.'-'.$time.'-'.$body->modul.'-'.$body->osoba;
+            $czasserwera = date("Y-m-d H:i:s",$time);
+            $resetkod = $czasserwera.'-'.$body->zespol.'-'.$body->modul.'-'.$body->osoba;
             $sql = 
             "
             SELECT
