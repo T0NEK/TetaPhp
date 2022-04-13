@@ -40,11 +40,6 @@ try
                 ( moduly, zespoly, nazwa, stan, reset, poreset, nazwaporeset, stanporeset, naprawa, ponaprawa, nazwaponaprawa, stanponaprawa )
                   VALUES
                   ( ".$body->modul.", ".$body->zespol.", 5, 5, '0', 0, 1, 1, '".$naprawakod."', 1, 1, 1 ) ";
-                  
-
-                ( moduly, zespoly, nazwa, stan, , reset, poreset, nazwaporeset, naprawa, ponaprawa, stanponaprawa )
-                VALUES
-                ( ".$body->modul.", ".$body->zespol.", 5, 5, '".$naprawakod."', 1, 1 ) ";
                 if ($conn->query($sql) === TRUE) 
                 {
                 $result = array ("wynik"=>true, "stan"=>true, "naprawakod"=>$naprawatkod, "error"=>"wysłano polecenie");  
