@@ -11,8 +11,8 @@ try
     else
     {
           
-        //$body = (object) array ("osoba"=>2, "modul"=>3 , "zespol"=>3, "czasstart"=>"2045-06-08 15:22:50", "czasend"=>"2045-06-08 15:22:55");
-        $body = json_decode(file_get_contents("php://input"));
+        $body = (object) array ("osoba"=>2, "modul"=>2 , "zespol"=>14, "czasstart"=>"2045-06-08 15:22:50", "czasend"=>"2045-06-08 15:22:55");
+        //$body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {//get
             $sql = 
@@ -33,6 +33,17 @@ try
             $nazwareset = $row['nazwa'];
             $stanreset = $row['stan'];
             $stanTextreset = $row['stanText'];
+            $sql =
+            "
+            SELECT
+               elementy
+            FROM
+                zespoly
+            WHERE
+                id = ".$body->zespol."
+            ";
+            $wynik = $conn->query($sql); 
+            if ( $wynik->num_rows == 0) { $iloscelementow = 0;} else { $row = $wynik->fetch_assoc(); $iloscelementow = $row['elementy']; }
             $sql = 
             "
             SELECT
@@ -46,38 +57,56 @@ try
                 uszkodzenianazwa,
                 stan
             WHERE
-                    uszkodzenia.zespoly = '".$body->zespol."'    
-                AND uszkodzenia.moduly = '".$body->modul."'        
+                    uszkodzenia.zespoly = ".$body->zespol."
+                AND uszkodzenia.moduly = ".$body->modul."        
                 AND stan.id = uszkodzenia.stan
                 AND uszkodzenianazwa.id = uszkodzenia.nazwa
-                AND ((stan.stan <> 1) OR (uszkodzenia.reset = 1)) 
             ORDER BY
             stan.nazwa    
             ";
             $wynik = $conn->query($sql); 
-            if ($wynik->num_rows > 0) 
-                {    
-                $ilosc = $wynik->num_rows;
+            $resetnaprawa = 0;
+            if ($wynik->num_rows == 0) 
+            {
+                $result = array ("wynik"=>true, "stan"=>false, "error"=>"error - powtórz test");    
+            }
+            else
+            {    
+                $ilosc = 0;
                 $uszkodzenia = array();
+                
                 while ($row = $wynik->fetch_assoc())
                 {
                     if (($row['reset'] == '0')&&($row['naprawa'] == '0'))
                     {
-                    $uszkodzenie = array ("nazwa"=>$row['nazwa'], "stan"=>$row['stan'], "stanText"=>$row['stanText']);
-                    array_push($uszkodzenia,$uszkodzenie);
+                    if ($row['stan'] != 1)
+                        {    
+                        $uszkodzenie = array ("nazwa"=>$row['nazwa'], "stan"=>$row['stan'], "stanText"=>$row['stanText']);
+                        array_push($uszkodzenia,$uszkodzenie);
+                        $ilosc++; 
+                        }
                     }
                     else
                     {
+                    $ilosc++;     
+                    $resetnaprawa++;    
                     $uszkodzenie = array ("nazwa"=>$nazwareset, "stan"=>$stanreset, "stanText"=>$stanTextreset);
                     array_push($uszkodzenia,$uszkodzenie);
                     }
                 }
-                }
-                else
+                if ($resetnaprawa > 0)
                 {
-                $ilosc = 0;    
-                $uszkodzenia = array();
+                    for ($i=0; $i < ($iloscelementow - $resetnaprawa) ; $i++) 
+                    { 
+                        $ilosc++; 
+                        $uszkodzenie = array ("nazwa"=>$nazwareset, "stan"=>$stanreset, "stanText"=>$stanTextreset);
+                        array_push($uszkodzenia,$uszkodzenie);
+                    }
                 }
+                elseif ($resetnaprawa < 0)
+                    {
+
+                    }
                 $conn->autocommit(false);
                 $sql =
                 "
@@ -105,7 +134,9 @@ try
                 {
                     $result = array ("wynik"=>true, "stan"=>false, "error"=>"error - powtórz test");    
                 }
+            }
         $conn->close();    
+
         }
         else
         {
