@@ -53,7 +53,7 @@ try
                 $polecenia = array ();    
                 while ($row = $wynik->fetch_assoc())
                 {
-                $polecenie = array ("nazwa"=>$row['nazwa'], "czas"=>$row['czas'], "dzialanie"=>$row['dzialania'], "polecenie"=>($row['polecenie']==$row['id']), "prefix"=>"", "komunikat"=>$row['komunikat'], "sufix"=>"", "nastepnyTrue"=>"brak", "nastepnyFalse"=>"brak");
+                $polecenie = array ("id"=>$row['id'], "nazwa"=>$row['nazwa'], "czas"=>$row['czas'], "dzialanie"=>$row['dzialania'], "polecenie"=>($row['polecenie']==$row['id']), "prefix"=>"", "komunikat"=>$row['komunikat'], "sufix"=>"", "nastepnyTrue"=>"brak", "nastepnyFalse"=>"brak");
                 array_push($polecenia,$polecenie);
                 }
                 $result = array ("wynik"=>true, "stan"=>"ok", "polecenia"=>$polecenia);
