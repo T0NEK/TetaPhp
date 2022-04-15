@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 14 Kwi 2022, 00:11
+-- Czas generowania: 15 Kwi 2022, 00:06
 -- Wersja serwera: 10.1.21-MariaDB
 -- Wersja PHP: 5.6.30
 
@@ -288,6 +288,34 @@ INSERT INTO `dzialania` (`id`, `polecenia`, `nazwa`, `czas`, `dzialanie`, `prefi
 (268, 'hasło', 'haslo_6', '50', 'dodajdane', '', 'hasło new', '', 'haslo_7', 'haslo_7', ''),
 (269, 'hasło', 'haslo_7', '50', 'dane', '', 'powtórz nowe hasło ?', '', 'haslo_8', 'haslo_8', ''),
 (270, 'hasło', 'haslo_8', '50', 'dodajdane', '', 'hasło new 2', '', 'haslo_9', 'haslo_9', '');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `innelog`
+--
+
+CREATE TABLE `innelog` (
+  `id` int(11) NOT NULL,
+  `moduly` int(11) NOT NULL,
+  `zespoly` int(11) NOT NULL,
+  `polecenieid` int(11) NOT NULL,
+  `czaswykonania` text COLLATE utf8_polish_ci NOT NULL,
+  `osoba` int(11) NOT NULL,
+  `terminal` text COLLATE utf8_polish_ci NOT NULL,
+  `del` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci ROW_FORMAT=COMPACT;
+
+--
+-- Zrzut danych tabeli `innelog`
+--
+
+INSERT INTO `innelog` (`id`, `moduly`, `zespoly`, `polecenieid`, `czaswykonania`, `osoba`, `terminal`, `del`) VALUES
+(1, 0, 0, 3, '2045-07-02 05:26:15', 2, 'DESKTOP-2KPJSHU', 0),
+(2, 0, 0, 3, '2045-07-02 05:28:43', 2, 'DESKTOP-2KPJSHU', 0),
+(3, 0, 0, 2, '2045-07-02 05:28:52', 0, 'DESKTOP-2KPJSHU', 0),
+(4, 0, 0, 2, '2045-07-02 05:29:40', 0, 'DESKTOP-2KPJSHU', 0),
+(5, 0, 0, 12, '2045-07-02 05:30:22', 2, 'DESKTOP-2KPJSHU', 0);
 
 -- --------------------------------------------------------
 
@@ -1059,7 +1087,29 @@ INSERT INTO `komputery` (`id`, `nazwa`, `nrip`, `hostid`, `czasrejestracja`, `cz
 (746, 'Dedal', '127.0.0.1', 'UX891649886971KO40146839940419OI', '2022-04-13 23:56:10', '2022-04-13 23:56:10'),
 (747, 'Dedal', '127.0.0.1', 'KS361649887530RJ4154446288490MK', '2022-04-14 00:05:30', '2022-04-14 00:05:30'),
 (748, 'Dedal', '127.0.0.1', 'IH811649887724RJ5079194610752RH', '2022-04-14 00:08:44', '2022-04-14 00:08:44'),
-(749, 'Dedal', '127.0.0.1', 'DO291649887801IT8429697980418UT', '2022-04-14 00:10:01', '2022-04-14 00:10:01');
+(749, 'Dedal', '127.0.0.1', 'DO291649887801IT8429697980418UT', '2022-04-14 00:10:01', '2022-04-14 00:10:01'),
+(750, 'Dedal', '127.0.0.1', 'XF781649947422QY23105596635008BB', '2022-04-14 16:43:41', '2022-04-14 16:43:41'),
+(751, 'DESKTOP-2KPJSHU', '127.0.0.1', 'HD51649947537FM37123746065275PE', '2022-04-14 16:45:37', '2022-04-14 16:45:37'),
+(752, 'DESKTOP-2KPJSHU', '127.0.0.1', 'MX911649950158FB37103946859954DS', '2022-04-14 17:29:18', '2022-04-14 17:29:18'),
+(753, 'Dedal', '127.0.0.1', 'VW641649950335NC1885797417420FY', '2022-04-14 17:32:15', '2022-04-14 17:32:15'),
+(754, 'Dedal', '127.0.0.1', 'FL451649950476PH10064348068564JX', '2022-04-14 17:34:36', '2022-04-14 17:34:36'),
+(755, 'Dedal', '127.0.0.1', 'MY621649950816LE38158395278336FF', '2022-04-14 17:40:16', '2022-04-14 17:40:16'),
+(756, 'Dedal', '127.0.0.1', 'YL461649950867NS6097347101153RN', '2022-04-14 17:41:07', '2022-04-14 17:41:07'),
+(757, 'Dedal', '127.0.0.1', 'NW371649951203GE919799414436UU', '2022-04-14 17:46:43', '2022-04-14 17:46:43'),
+(758, 'Dedal', '127.0.0.1', 'GV921649951229UV1797347122511EE', '2022-04-14 17:47:09', '2022-04-14 17:47:09'),
+(759, 'Dedal', '127.0.0.1', 'MB981649951254GN9158395320384SE', '2022-04-14 17:47:34', '2022-04-14 17:47:34'),
+(760, 'Dedal', '127.0.0.1', 'OR141649951314ML719799415768MR', '2022-04-14 17:48:34', '2022-04-14 17:48:34'),
+(761, 'Dedal', '127.0.0.1', 'TI341649951367SK99146845671663TV', '2022-04-14 17:49:27', '2022-04-14 17:49:27'),
+(762, 'DESKTOP-2KPJSHU', '127.0.0.1', 'ZB441649951897ZB25143545815039TT', '2022-04-14 17:58:17', '2022-04-14 17:58:17'),
+(763, 'Dedal', '127.0.0.1', 'CD591649952298MI91102297042476BW', '2022-04-14 18:04:58', '2022-04-14 18:04:58'),
+(764, 'DESKTOP-2KPJSHU', '127.0.0.1', 'IO251649952299SU38136946040817DM', '2022-04-14 18:04:59', '2022-04-14 18:04:59'),
+(765, 'Dedal', '127.0.0.1', 'DT261649967333ZK20131997386640JS', '2022-04-14 22:15:33', '2022-04-14 22:15:33'),
+(766, 'Dedal', '127.0.0.1', 'QO521649967356QY3129699412408YT', '2022-04-14 22:15:56', '2022-04-14 22:15:56'),
+(767, 'DESKTOP-2KPJSHU', '127.0.0.1', 'VC761649969438UJ241249235950UA', '2022-04-14 22:50:38', '2022-04-14 22:50:38'),
+(768, 'DESKTOP-2KPJSHU', '127.0.0.1', 'KV341649969763WK381649969763AZ', '2022-04-14 22:56:03', '2022-04-14 22:56:03'),
+(769, 'DESKTOP-2KPJSHU', '127.0.0.1', 'MA471649969910HC94161697051180VS', '2022-04-14 22:58:30', '2022-04-14 22:58:30'),
+(770, 'DESKTOP-2KPJSHU', '127.0.0.1', 'KF821649969916OH1542899217816VX', '2022-04-14 22:58:36', '2022-04-14 22:58:36'),
+(771, 'DESKTOP-2KPJSHU', '127.0.0.1', 'QE821649973966MT2395698490028PZ', '2022-04-15 00:06:06', '2022-04-15 00:06:06');
 
 -- --------------------------------------------------------
 
@@ -1123,7 +1173,7 @@ INSERT INTO `logowania` (`id`, `komputery`, `czaslogowania`, `czaswylogowania`, 
 (38, 32, '2045-06-19 19:34:56', '', '2045-06-19 19:34:56', 2, 1, 0),
 (39, 42, '2045-06-19 21:07:14', '2045-06-19 21:10:06', '2045-06-19 21:10:06', 2, 1, 0),
 (40, 43, '2045-06-19 21:12:19', '', '2045-06-19 21:12:19', 2, 1, 0),
-(41, 44, '2045-06-19 21:14:20', '2045-07-01 04:44:05', '2045-07-01 04:44:05', 2, 1, 1),
+(41, 44, '2045-06-19 21:14:20', '2045-07-02 05:28:44', '2045-07-02 05:28:44', 2, 1, 1),
 (42, 45, '2045-06-19 21:18:34', '', '2045-06-19 21:18:34', 2, 1, 0),
 (43, 46, '2045-06-19 21:20:18', '', '2045-06-19 21:20:18', 2, 1, 0),
 (44, 46, '2045-06-19 22:18:35', '', '2045-06-19 22:18:35', 2, 1, 0),
@@ -1138,7 +1188,8 @@ INSERT INTO `logowania` (`id`, `komputery`, `czaslogowania`, `czaswylogowania`, 
 (53, 84, '2045-06-20 00:41:34', '', '2045-06-20 00:41:34', 2, 1, 0),
 (54, 85, '2045-06-20 00:44:53', '', '2045-06-20 00:44:53', 10, 0, 0),
 (55, 86, '2045-06-20 16:35:27', '', '2045-06-20 16:35:27', 8, 0, 0),
-(56, 735, '2045-07-01 04:28:12', '', '2045-07-01 04:28:12', 2, 0, 0);
+(56, 735, '2045-07-01 04:28:12', '', '2045-07-01 04:28:12', 2, 1, 0),
+(57, 770, '2045-07-02 05:29:58', '', '2045-07-02 05:29:58', 2, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2015,7 +2066,15 @@ INSERT INTO `testylog` (`id`, `moduly`, `zespoly`, `uszkodzenia`, `czasstart`, `
 (198, 18, 29, 1, '2045-07-01 02:51:41', '2045-07-01 02:52:01', 2),
 (199, 18, 29, 1, '2045-07-01 02:52:59', '2045-07-01 02:53:19', 2),
 (200, 18, 29, 0, '2045-07-01 02:54:19', '2045-07-01 02:54:41', 2),
-(201, 18, 29, 1, '2045-07-01 02:55:57', '2045-07-01 02:56:18', 2);
+(201, 18, 29, 1, '2045-07-01 02:55:57', '2045-07-01 02:56:18', 2),
+(202, 2, 14, 1, '2045-06-08 15:22:50', '2045-06-08 15:22:55', 2),
+(203, 2, 14, 1, '2045-06-08 15:22:50', '2045-06-08 15:22:55', 2),
+(204, 2, 14, 10, '2045-06-08 15:22:50', '2045-06-08 15:22:55', 2),
+(205, 2, 14, 10, '2045-06-08 15:22:50', '2045-06-08 15:22:55', 2),
+(206, 2, 14, 10, '2045-06-08 15:22:50', '2045-06-08 15:22:55', 2),
+(207, 2, 14, 10, '2045-06-08 15:22:50', '2045-06-08 15:22:55', 2),
+(208, 2, 14, 0, '2045-06-08 15:22:50', '2045-06-08 15:22:55', 2),
+(209, 2, 14, 0, '2045-06-08 15:22:50', '2045-06-08 15:22:55', 2);
 
 -- --------------------------------------------------------
 
@@ -2082,7 +2141,8 @@ INSERT INTO `uszkodzenia` (`id`, `moduly`, `zespoly`, `nazwa`, `stan`, `reset`, 
 (10, 18, 34, 1, 1, '0', 1, 1, 1, '0', 1, 1, 1),
 (11, 18, 29, 5, 0, '0', 0, 1, 1, '0', 1, 2, 6),
 (12, 18, 30, 1, 1, '0', 0, 1, 1, '0', 1, 1, 1),
-(13, 19, 36, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1);
+(13, 19, 36, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
+(14, 2, 14, 1, 1, '0', 1, 1, 2, '0', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -2253,7 +2313,7 @@ INSERT INTO `zespoly` (`id`, `nazwa`, `symbol`, `moduly`, `ostatni`, `przedawnie
 (11, 'Przyrządy Nawigacyjne', 'PN', 2, 0, 7, 'Główny mostek', 11, 5, 2, 10),
 (12, 'Urządzenia Wykonawcze Sterowania', 'UWS', 2, 0, 7, 'Główny mostek', 11, 5, 2, 10),
 (13, 'Przyrządy Sterowania', 'PS', 2, 0, 7, 'Główny mostek', 11, 5, 2, 10),
-(14, 'Autopilot', 'AP', 2, 0, 7, 'Główny mostek', 11, 5, 2, 10),
+(14, 'Autopilot', 'AP', 2, 209, 7, 'Główny mostek', 5, 437, 77, 10),
 (15, 'Przyrządy Nawigacyjne - awaryjne', 'PNa', 2, 0, 7, 'Główny mostek', 11, 5, 2, 10),
 (16, 'Urządzenia Wykonawcze Sterowania - awaryjne', 'UWSa', 2, 0, 7, 'Główny mostek', 11, 5, 2, 10),
 (17, 'Przyrządy Sterowania - awaryjne', 'PSa', 2, 0, 7, 'Główny mostek', 11, 5, 2, 10),
@@ -2283,6 +2343,12 @@ INSERT INTO `zespoly` (`id`, `nazwa`, `symbol`, `moduly`, `ostatni`, `przedawnie
 -- Indexes for table `dzialania`
 --
 ALTER TABLE `dzialania`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `innelog`
+--
+ALTER TABLE `innelog`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2394,15 +2460,20 @@ ALTER TABLE `zespoly`
 ALTER TABLE `dzialania`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=271;
 --
+-- AUTO_INCREMENT dla tabeli `innelog`
+--
+ALTER TABLE `innelog`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT dla tabeli `komputery`
 --
 ALTER TABLE `komputery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=750;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=772;
 --
 -- AUTO_INCREMENT dla tabeli `logowania`
 --
 ALTER TABLE `logowania`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 --
 -- AUTO_INCREMENT dla tabeli `moduly`
 --
@@ -2447,7 +2518,7 @@ ALTER TABLE `stan`
 -- AUTO_INCREMENT dla tabeli `testylog`
 --
 ALTER TABLE `testylog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
 --
 -- AUTO_INCREMENT dla tabeli `ustawienia`
 --
@@ -2457,7 +2528,7 @@ ALTER TABLE `ustawienia`
 -- AUTO_INCREMENT dla tabeli `uszkodzenia`
 --
 ALTER TABLE `uszkodzenia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT dla tabeli `uszkodzenianazwa`
 --

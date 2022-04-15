@@ -28,9 +28,9 @@ try
                     )
                     VALUES
                     (
+                    1,
                     0,
-                    ".$body->modul.",
-                     ".$body->zespol.",
+                    0,
                      ".$body->polecenie.",
                      '".$body->polecenieText."',
                      '".$body->czaswykonania."',
