@@ -16,28 +16,22 @@ try
                     INTO innelog
                     (
                     dedal,
-                    moduly,
-                    zespoly,
                     polecenieid,
                     polecenieText,
                     czaswykonania,
                     osoba,
                     osobaText,
-                    terminal,
-                    del
+                    terminal
                     )
                     VALUES
                     (
                     0,
-                    ".$body->modul.",
-                     ".$body->zespol.",
-                     ".$body->polecenie.",
+                     ".$body->polecenieid.",
                      '".$body->polecenieText."',
                      '".$body->czaswykonania."',
                      ".$body->osoba.",
                      '".$body->osobaText."',
-                     '".$body->terminal."',
-                     0
+                     '".$body->terminal."'
                      )
                     ";
             if ($conn->query($sql) === TRUE) 
@@ -58,6 +52,7 @@ try
 catch(Exception $e)    
 {
     $result = array("wynik"=>false, "error"=>'błąd danych');
+    //echo $e;
 }
 echo json_encode($result);
 ?>

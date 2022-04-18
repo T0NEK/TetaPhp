@@ -65,6 +65,7 @@ try
 catch(Exception $e)    
 {
     $result = array("wynik"=>false, "stan"=>"error", "error"=>$e, "czasserwera"=>$czasserwera);
+    
 }
 echo json_encode($result);
 ?>

@@ -40,7 +40,7 @@ try
                     polecenia,
                     polecenia poleceniaorg
                     ".$wiersz0."
-                    where
+                    WHERE
                     ".$wiersz1."
                     AND poleceniaorg.id = polecenia.polecenie
                     ".$wiersz2."

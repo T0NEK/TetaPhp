@@ -39,6 +39,7 @@ try
                     where
                     ".$wiersz."
                     AND polecenia.nazwa = dzialania.polecenia
+                    OR dzialania.polecenia = 'dedal'
                     order by
                     dzialania.nazwa
                 ";
