@@ -76,7 +76,7 @@ try
                     testylog,
                     osoby
                 WHERE
-                        zespoly.moduly = ".$body->modul."
+                        upper(zespoly.moduly) = upper(".$body->modul.")
                     AND testylog.id = zespoly.ostatni
                     AND osoby.id = testylog.osoba
                 ORDER BY
@@ -90,7 +90,7 @@ try
                 FROM 
                 uszkodzenia
                 WHERE 
-                    moduly = ".$body->modul."
+                    upper(moduly) = (".$body->modul.")
                 AND stan <> 1
                 GROUP BY
                 zespoly

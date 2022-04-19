@@ -11,8 +11,8 @@ try
     else
     {
           
-        $body = (object) array ("osoba"=>2, "modul"=>2 , "zespol"=>14, "czasstart"=>"2045-06-08 15:22:50", "czasend"=>"2045-06-08 15:22:55");
-        //$body = json_decode(file_get_contents("php://input"));
+        //$body = (object) array ("osoba"=>2, "modul"=>2 , "zespol"=>14, "czasstart"=>"2045-06-08 15:22:50", "czasend"=>"2045-06-08 15:22:55");
+        $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {//get
             $sql = 

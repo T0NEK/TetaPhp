@@ -98,6 +98,85 @@ try
             }  
 elseif ($body->get == 'odp')              
             {
+                $id = $body->polecenieid;
+                $sql = 
+                "
+                SELECT
+                    odpowiedz
+                FROM
+                    innelog
+                WHERE    
+                    odpowiedz = 0
+                    AND id = ".$id."
+                ";
+                $wynik = $conn->query($sql); 
+                if ($wynik->num_rows == 0) 
+                {//2 odp
+                $sql = 
+                "
+                SELECT
+                    id,
+                    dedal,
+                    poleceniepierwsze,
+                    czaspierwsze,
+                    polecenieid,
+                    polecenieText,
+                    czaswykonania,
+                    osoba,
+                    osobaText,
+                    odczytana,
+                    terminal,
+                    odpowiedz
+                FROM
+                    innelog
+                WHERE
+                    id = ".$id."  
+                ";   
+                $wynik = $conn->query($sql); 
+                if ($wynik->num_rows > 0) 
+                    {
+                    $row = $wynik->fetch_assoc();
+                    $sql = "INSERT 
+                        INTO innelog
+                        (
+                        dedal,
+                        poleceniepierwsze,
+                        czaspierwsze,
+                        polecenieid,
+                        polecenieText,
+                        czaswykonania,
+                        osoba,
+                        osobaText,
+                        odczytana,
+                        terminal,
+                        odpowiedz
+                        )
+                        VALUES
+                        (
+                        ".$row['dedal'].", 
+                        '".$row['poleceniepierwsze']."',
+                        '".$row['czaspierwsze']."',
+                        ".$row['polecenieid'].",
+                        '".$row['polecenieText']."',
+                        '".$row['czaswykonania']."',
+                        ".$row['osoba'].",
+                        '".$row['osobaText']."',
+                        ".$row['odczytana'].",
+                        '".$row['terminal']."',
+                        ".$row['odpowiedz']."
+                        )
+                        ";
+                        if ($conn->query($sql) === TRUE) 
+                        { $id  = $conn->insert_id; }
+                        else
+                        { $id = 0; }
+                    }
+
+
+
+                }
+                if ( $id != 0 )
+                {
                 $conn->autocommit(false);
                 $sql = "INSERT 
                 INTO innelog
@@ -141,9 +220,10 @@ elseif ($body->get == 'odp')
                     odpowiedzText = '".$body->polecenieText."',
                     odpowiedzTresc = '".$body->odpowiedzText."'
                 WHERE
-                    id = ".$body->polecenieid."    
+                    id = ".$id."    
                 ";
-                $conn->query($sql);                
+                }
+            $conn->query($sql);                
         if ($conn->commit() === TRUE) 
         { 
         $id  = $conn->insert_id;   
@@ -152,12 +232,12 @@ elseif ($body->get == 'odp')
         else 
         { $result = array ("wynik"=>false, "error"=>'nie zapisano odpowiedzi'); }
         $conn->close();       
-            }
         }
-        else
-        {
-            $result = array ("wynik"=>false, "error"=>"brak danych");
-        }          
+    }
+    else
+    {
+        $result = array ("wynik"=>false, "error"=>"brak danych");
+    }          
     }
 }
 catch(Exception $e)    

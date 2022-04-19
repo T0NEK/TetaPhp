@@ -57,6 +57,10 @@ if ($body->get == 'set')
             }
     elseif ($body->get == 'get') 
             {
+             if ($body->osoba == 0)   
+             { $linia = "AND osoba = 0 AND terminal = '".$body->terminal."' "; }
+             else
+             { $linia = "AND osoba = ".$body->osoba." "; }
              $sql = 
              "
              SELECT
@@ -75,7 +79,7 @@ if ($body->get == 'set')
              WHERE
                     dedal = 2
                 AND odczytana = 0
-                AND osoba = ".$body->osoba."
+                ".$linia."
              ";   
              $wynik = $conn->query($sql); 
              if ($wynik->num_rows > 0) 

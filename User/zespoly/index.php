@@ -10,6 +10,7 @@ try
     { throw new Exception( $conn->connect_error); } 
     else
     {
+        // Musi być zerowy Dedala w testylog
         //$body = (object) array ('stan' => 2, "modul" => 'all', "czas" => "2045-06-08 15:22:50");
         //$body = (object) array ('stan' => 2, "modul" => 'LAB', "czas" => "2045-06-28 15:22:50");
         $body = json_decode(file_get_contents("php://input"));
@@ -18,7 +19,7 @@ try
             if ($body->modul == 'all')
             { $warunek = ' ';  }
             else
-            { $warunek = " AND moduly.symbol = '".strtoupper($body->modul)."' ";}
+            { $warunek = " AND upper(moduly.symbol) = '".strtoupper($body->modul)."' ";}
          //get
                 $sql = 
                 "SELECT
