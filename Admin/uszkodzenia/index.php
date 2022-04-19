@@ -117,7 +117,26 @@ try
                 }
             else
             {
-            $result = array ("wynik"=>true, "stan"=>false, "error"=>"brak uszkodzeń");
+                $conn->autocommit(false);
+                for ($i=0; $i < 3; $i++) 
+                { 
+                    $sql =
+                    "
+                    INSERT INTO
+                      uszkodzenia
+                    ( moduly, zespoly, nazwa, stan, reset, poreset, nazwaporeset, stanporeset, naprawa, ponaprawa, nazwaponaprawa, stanponaprawa )
+                    VALUES
+                    ( ".$body->modul.", ".$body->zespol.", 1, 1, '0', 0, 1, 1, '0', 0, 1, 1 ) ";
+                    $conn->query($sql);    
+                }
+                if ($conn->commit() === TRUE) 
+                {
+                    $result = array ("wynik"=>true, "stan"=>false, "error"=>"wygenerowano 3 poprawne uszkodzenia w ".$body->zespol);  
+                }
+                else
+                {
+                    $result = array ("wynik"=>true, "stan"=>false, "error"=>"brak uszkodzeń");
+                }
             }
         $conn->close();       
         }

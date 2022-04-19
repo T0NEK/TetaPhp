@@ -14,6 +14,23 @@ try
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {//get
+            $sql = 
+            "SELECT
+                moduly_osoby.id
+            FROM
+                moduly_osoby
+            WHERE
+                    moduly_osoby.moduly = (SELECT moduly.id FROM moduly WHERE moduly.symbol = '".strtoupper($body->modul)."' )
+                AND moduly_osoby.osoby = ".$body->stan."
+                AND moduly_osoby.dos = 1
+            ";
+            $wynik = $conn->query($sql); 
+            if ($wynik->num_rows == 0) 
+            {    
+                {$result = array ("wynik"=>false, "stan"=>false, "error"=>"nie masz uprawnień do modułu: ".strtoupper($body->modul));}
+            }
+            else
+            {
                 $sql = 
                 "
                 SELECT
@@ -85,7 +102,8 @@ try
                 {
                 $result = array ("wynik"=>false, "stan"=>false, "error"=>"brak dostępnego zespołu: ".$body->zespol." w module: ".$body->modul);
                 }
-        $conn->close();       
+        $conn->close();  
+            }    
         }
         else
         {

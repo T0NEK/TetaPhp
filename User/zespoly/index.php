@@ -10,17 +10,45 @@ try
     { throw new Exception( $conn->connect_error); } 
     else
     {
+        $body = json_decode(file_get_contents("php://input"));
         // Musi być zerowy Dedala w testylog
         //$body = (object) array ('stan' => 2, "modul" => 'all', "czas" => "2045-06-08 15:22:50");
-        //$body = (object) array ('stan' => 2, "modul" => 'LAB', "czas" => "2045-06-28 15:22:50");
-        $body = json_decode(file_get_contents("php://input"));
+        //$body = (object) array ('stan' => 4, "modul" => 'Lab', "czas" => "2045-06-28 15:22:50");
         if (isset($body))
         {
             if ($body->modul == 'all')
-            { $warunek = ' ';  }
+            { 
+                $warunek = ' ';  
+            }
             else
-            { $warunek = " AND upper(moduly.symbol) = '".strtoupper($body->modul)."' ";}
+            { 
+            $sql = 
+            "SELECT
+                moduly_osoby.id
+            FROM
+                moduly_osoby
+            WHERE
+                    moduly_osoby.moduly = (SELECT moduly.id FROM moduly WHERE moduly.symbol = '".strtoupper($body->modul)."' )
+                AND moduly_osoby.osoby = ".$body->stan."
+                AND moduly_osoby.dos = 1
+            ";
+            $wynik = $conn->query($sql); 
+            if ($wynik->num_rows > 0) 
+            {    
+            $warunek = " AND moduly.symbol = '".strtoupper($body->modul)."' ";
+            }
+            else
+            {
+            $warunek = 0;
+            }
+            }
          //get
+            if ($warunek === 0)
+            {
+                {$result = array ("wynik"=>false, "stan"=>false, "error"=>"nie masz uprawnień do modułu: ".strtoupper($body->modul));}
+            }
+            else
+            {
                 $sql = 
                 "SELECT
                     zespoly.id,
@@ -86,7 +114,8 @@ try
                     else
                     {$result = array ("wynik"=>false, "stan"=>false, "error"=>"brak dostępnych zespołów w module: ".strtoupper($body->modul));}
                 }
-        $conn->close();       
+        $conn->close();   
+        }    
         }
         else
         {
@@ -98,7 +127,7 @@ try
 catch(Exception $e)    
 {
     $result = array("wynik"=>false, "stan"=>false, "error"=>"problem z odczytem");
-    //echo ($e);
+    echo ($e);
 }
 echo json_encode($result);    
 ?>

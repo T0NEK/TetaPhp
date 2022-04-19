@@ -196,6 +196,26 @@ try
             }
             else
             {//set osoba
+                $nazwa = '';
+                $imie = '';
+                $nazwisko = '';    
+                $sql = "
+                SELECT imie, nazwisko FROM osoby WHERE id = ".$body->idosoba." ";
+                $wynik = $conn->query($sql); 
+                if ($wynik->num_rows > 0) 
+                { 
+                $row = $wynik->fetch_assoc();
+                $imie = $row['imie'];
+                $nazwisko = $row['nazwisko'];
+                }
+                $sql = "
+                SELECT nazwa FROM polecenia WHERE id = ".$body->idpolecenia." ";
+                $wynik = $conn->query($sql); 
+                if ($wynik->num_rows > 0) 
+                { 
+                $row = $wynik->fetch_assoc();
+                $nazwa = $row['nazwa'];
+                }    
             $sql = "
             SELECT
                 polecenia_osoby.id,
@@ -251,16 +271,16 @@ try
             {
                 if ($body->dos)
                 {
-                    $result = array ("get"=>$body->get,"wynik"=>true, "stan"=>true, "error"=>"polecenie: {".$row['nazwa']."} zostało udostepniona dla: ".$row['imie']." ".$row['nazwisko'], "idosoba"=>$body->idosoba, "idpolecenia"=>$body->idpolecenia, "dos"=>$body->dos);
+                    $result = array ("get"=>$body->get,"wynik"=>true, "stan"=>true, "error"=>"polecenie: {".$nazwa."} zostało udostepniona dla: ".$imie." ".$nazwisko, "idosoba"=>$body->idosoba, "idpolecenia"=>$body->idpolecenia, "dos"=>$body->dos);
                 }
                 else
                 {
-                    $result = array ("get"=>$body->get,"wynik"=>true, "stan"=>true, "error"=>"cofnięto: ".$row['imie']." ".$row['nazwisko']." dostęp do polecenia: {".$row['nazwa']."}", "idosoba"=>$body->idosoba, "idpolecenia"=>$body->idpolecenia, "dos"=>$body->dos);   
+                    $result = array ("get"=>$body->get,"wynik"=>true, "stan"=>true, "error"=>"cofnięto: ".$imie." ".$nazwisko." dostęp do polecenia: {".$nazwa."}", "idosoba"=>$body->idosoba, "idpolecenia"=>$body->idpolecenia, "dos"=>$body->dos);   
                 }
             }
             else
             {
-                { $result = array ("wynik"=>false, "stan"=>false,  "error"=>"błąd zapisu dostępu do polecenia: {".$row['nazwa']."} dla: ".$row['imie']." ".$row['nazwisko']); }                
+                { $result = array ("wynik"=>false, "stan"=>false,  "error"=>"błąd zapisu dostępu do polecenia: {".$nazwa."} dla: ".$imie." ".$nazwisko); }                
             }   
         $conn->close();               
         $conn2->close();                      

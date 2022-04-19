@@ -10,8 +10,8 @@ try
     { throw new Exception( $conn->connect_error); } 
     else
     {
-        //$body = (object) array ('stan' => 2);
         $body = json_decode(file_get_contents("php://input"));
+        //$body = (object) array ('idosoba' => 0);
         if (isset($body))
         {
          //get
