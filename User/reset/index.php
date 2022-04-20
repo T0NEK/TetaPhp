@@ -96,6 +96,22 @@ try
             }
     elseif ($body->stan == 'end')
         {
+            $elementy = "wystąpił jakiś problem";
+            $sql =
+            "
+            SELECT
+                elementy
+            FROM    
+                zespoly
+            WHERE
+                id = ".$body->zespol."
+            ";
+            $wynik = $conn->query($sql); 
+            if ($wynik->num_rows > 0) 
+            {
+            $row = $wynik->fetch_assoc();
+            $elementy = "wykonano reset dla ".$row['elementy']." elementów zespołu" ;
+            }
             $conn->autocommit(false);
             $sql = 
             "
@@ -123,6 +139,15 @@ try
                 AND uszkodzenia.moduly = '".$body->modul."'               
                 AND uszkodzenia.reset = '".$body->resetkod."'
                 AND uszkodzenia.poreset = 0
+                ";
+            $conn->query($sql);
+            $sql =
+                "
+                INSERT INTO
+                  testylog
+                ( moduly, zespoly, uszkodzenia, uszkodzeniaText, czasstart, czasend, osoba, rodzaj )
+                VALUES
+                ( ".$body->modul.", ".$body->zespol.", 0, '".$elementy."', '', '".$body->czasend."', ".$body->osoba.", 'reset' )
                 ";
             $conn->query($sql);
             if ($conn->commit() === TRUE) 

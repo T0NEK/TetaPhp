@@ -10,9 +10,8 @@ try
     { throw new Exception( $conn->connect_error); } 
     else
     {
-          
-        //$body = (object) array ("osoba"=>2, "modul"=>2 , "zespol"=>14, "czasstart"=>"2045-06-08 15:22:50", "czasend"=>"2045-06-08 15:22:55");
         $body = json_decode(file_get_contents("php://input"));
+        //$body = (object) array ("osoba"=>2, "modul"=>3 , "zespol"=>5, "czasstart"=>"2045-06-08 15:22:50", "czasend"=>"2045-06-08 15:22:55");
         if (isset($body))
         {//get
             $sql = 
@@ -74,7 +73,7 @@ try
             {    
                 $ilosc = 0;
                 $uszkodzenia = array();
-                
+                $uszkodzeniaText = '';
                 while ($row = $wynik->fetch_assoc())
                 {
                     if (($row['reset'] == '0')&&($row['naprawa'] == '0'))
@@ -83,6 +82,7 @@ try
                         {    
                         $uszkodzenie = array ("nazwa"=>$row['nazwa'], "stan"=>$row['stan'], "stanText"=>$row['stanText']);
                         array_push($uszkodzenia,$uszkodzenie);
+                        $uszkodzeniaText = $uszkodzeniaText.$row['nazwa']." - ".$row['stanText'].", ";
                         $ilosc++; 
                         }
                     }
@@ -92,8 +92,10 @@ try
                     $resetnaprawa++;    
                     $uszkodzenie = array ("nazwa"=>$nazwareset, "stan"=>$stanreset, "stanText"=>$stanTextreset);
                     array_push($uszkodzenia,$uszkodzenie);
+                    $uszkodzeniaText = $uszkodzeniaText.$nazwareset." - ".$stanTextreset.", ";
                     }
                 }
+                $uszkodzeniaText = substr($uszkodzeniaText,0,-2);
                 if ($resetnaprawa > 0)
                 {
                     for ($i=0; $i < ($iloscelementow - $resetnaprawa) ; $i++) 
@@ -102,6 +104,7 @@ try
                         $uszkodzenie = array ("nazwa"=>$nazwareset, "stan"=>$stanreset, "stanText"=>$stanTextreset);
                         array_push($uszkodzenia,$uszkodzenie);
                     }
+                    $uszkodzeniaText = $uszkodzeniaText." i ".$resetnaprawa." innych" ;    
                 }
                 elseif ($resetnaprawa < 0)
                     {
@@ -112,9 +115,9 @@ try
                 "
                 INSERT INTO
                   testylog
-                ( moduly, zespoly, uszkodzenia, czasstart, czasend, osoba )
+                ( moduly, zespoly, uszkodzenia, uszkodzeniaText, czasstart, czasend, osoba, rodzaj )
                 VALUES
-                ( ".$body->modul.", ".$body->zespol.", ".$ilosc.", '".$body->czasstart."', '".$body->czasend."', ".$body->osoba." )
+                ( ".$body->modul.", ".$body->zespol.", ".$ilosc.", '".$uszkodzeniaText."', '".$body->czasstart."', '".$body->czasend."', ".$body->osoba.", 'test' )
                 ";
                 if ($conn->query($sql) === TRUE) 
                 {
@@ -149,7 +152,7 @@ try
 catch(Exception $e)    
 {
     $result = array("wynik"=>false, "stan"=>false, "error"=>"problem z odczytem");
-    //echo ($e);
+    echo ($e);
 }
 echo json_encode($result);    
 ?>

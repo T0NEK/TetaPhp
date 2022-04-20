@@ -25,7 +25,7 @@ try
                 AND moduly_osoby.dos = 1
             ";
             $wynik = $conn->query($sql); 
-            if ($wynik->num_rows == 0) 
+            if (($wynik->num_rows == 0)&&($body->dostep == 'nie')) 
             {    
                 {$result = array ("wynik"=>false, "stan"=>false, "error"=>"nie masz uprawnień do modułu: ".strtoupper($body->modul));}
             }
