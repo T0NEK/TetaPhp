@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 19 Kwi 2022, 22:41
+-- Czas generowania: 20 Kwi 2022, 18:42
 -- Wersja serwera: 10.1.21-MariaDB
 -- Wersja PHP: 5.6.30
 
@@ -321,7 +321,56 @@ INSERT INTO `dzialania` (`id`, `polecenia`, `nazwa`, `czas`, `dzialanie`, `prefi
 (303, 'moduły wszystkie', 'modulyW_2', '50', 'getset', '', 'wczytaj', 'modulyall', 'modulyW_4', 'modulyW_3', 'wczytuje moduły'),
 (304, 'moduły wszystkie', 'modulyW_4', '50', 'linie', '', 'moduly', '', 'modulyW_5', 'modulyW_5', 'wyswietla listę modułów'),
 (305, 'moduły wszystkie', 'modulyW_0', '50', 'komunikat', '', 'wykonuję: [ moduły wszystkie ]', '', 'modulyW_1', 'modulyW_1', 'alternatywa'),
-(306, 'moduły wszystkie', 'modulyW_5', '50', 'informacja', '', 'tekst', '', 'end', 'end', '');
+(306, 'moduły wszystkie', 'modulyW_5', '50', 'informacja', '', 'tekst', '', 'end', 'end', ''),
+(307, 'test historia', 'testH_1', '50', 'komunikat', '', 'wczytuję plik historii testów', '', 'testH_2', 'testH_2', ''),
+(308, 'test historia', 'testH_2', '50', 'dane', '', 'podaj symbol modułu ?', '', 'testH_3', 'testH_3', ''),
+(309, 'test historia', 'testH_3', '50', 'zapiszdane', '', 'nr modułu', '', 'testH_4', 'testH_4', ''),
+(310, 'test historia', 'testH_4', '50', 'getset', '', 'wczytaj', 'testyH', 'testH_6', 'testH_5', 'wczytuje historia test'),
+(311, 'test historia', 'testH_5', '50', 'informacja', 'problem z dostępem: ', 'tekstAlert', '', 'end', 'end', 'informacja z error'),
+(312, 'test historia', 'testH_6', '50', 'testy', '', 'testH', '', 'testH_7', 'testH_7', 'wyświetla historię'),
+(313, 'test historia', 'testH_7', '50', 'informacja', '', 'tekst', '', 'end', 'end', ''),
+(314, 'reset historia', 'resetH_1', '50', 'komunikat', '', 'wczytuję plik historii resetów', '', 'resetH_2', 'resetH_2', ''),
+(315, 'reset historia', 'resetH_2', '50', 'dane', '', 'podaj symbol modułu ?', '', 'resetH_3', 'resetH_3', ''),
+(316, 'reset historia', 'resetH_3', '50', 'zapiszdane', '', 'nr modułu', '', 'resetH_4', 'resetH_4', ''),
+(317, 'reset historia', 'resetH_4', '50', 'getset', '', 'wczytaj', 'resetH', 'resetH_6', 'resetH_5', 'wczytuje historia reset'),
+(318, 'reset historia', 'resetH_5', '50', 'informacja', 'problem z dostępem: ', 'tekstAlert', '', 'end', 'end', 'informacja z error'),
+(319, 'reset historia', 'resetH_6', '50', 'testy', '', 'resetH', '', 'resetH_7', 'resetH_7', 'wyświetla historię'),
+(320, 'reset historia', 'resetH_7', '50', 'informacja', '', 'tekst', '', 'end', 'end', ''),
+(321, 'naprawa historia', 'naprawaH_1', '50', 'komunikat', '', 'wczytuję plik historii napraw', '', 'naprawaH_2', 'naprawaH_2', ''),
+(322, 'naprawa historia', 'naprawaH_2', '50', 'dane', '', 'podaj symbol modułu ?', '', 'naprawaH_3', 'naprawaH_3', ''),
+(323, 'naprawa historia', 'naprawaH_3', '50', 'zapiszdane', '', 'nr modułu', '', 'naprawaH_4', 'naprawaH_4', ''),
+(324, 'naprawa historia', 'naprawaH_4', '50', 'getset', '', 'wczytaj', 'naprawaH', 'naprawaH_6', 'naprawaH_5', 'wczytuje historia naprawa'),
+(325, 'naprawa historia', 'naprawaH_5', '50', 'informacja', 'problem z dostępem: ', 'tekstAlert', '', 'end', 'end', 'informacja z error'),
+(326, 'naprawa historia', 'naprawaH_6', '50', 'testy', '', 'naprawaH', '', 'naprawaH_7', 'naprawaH_7', 'wyświetla historię'),
+(327, 'naprawa historia', 'naprawaH_7', '50', 'informacja', '', 'tekst', '', 'end', 'end', ''),
+(328, 'hibernacja on', 'hibernacjaon_1', '50', 'dane', '', 'podaj symbol modułu ?', '', 'hibernacjaon_2', 'hibernacjaon_2', ''),
+(329, 'hibernacja on', 'hibernacjaon_2', '50', 'zapiszdane', '', 'nr modułu', '', 'hibernacjaon_3', 'hibernacjaon_3', ''),
+(330, 'hibernacja on', 'hibernacjaon_3', '50', 'dane', '', 'podaj symbol zespołu ?', '', 'hibernacjaon_4', 'hibernacjaon_4', ''),
+(331, 'hibernacja on', 'hibernacjaon_4', '50', 'dodajdane', '', 'nr zespołu', '', 'hibernacjaon_5', 'hibernacjaon_5', ''),
+(332, 'hibernacja on', 'hibernacjaon_8', '50', 'komunikat', '', 'procedury nie można przerwać przez następne 5 dni bez szkody dla zdrowia', '', 'end', 'end', ''),
+(333, 'hibernacja on', 'hibernacjaon_5', '50', 'getset', '', 'wczytaj', 'hibernacjaon', 'hibernacjaon_9', 'hibernacjaon_6', 'wczytuje zespół ustawia nieokreślony'),
+(334, 'hibernacja on', 'hibernacjaon_6', '50', 'informacja', 'problem z dostępem: ', 'tekstAlert', '', 'end', 'end', 'informacja z error'),
+(335, 'hibernacja on', 'hibernacjaon_7', '50', 'informacja', 'rozpoczynam procedurę hibernacji dla: ', 'tekst', '', 'hibernacjaon_8', 'hibernacjaon_8', 'wyświetla listę zespołów'),
+(337, 'hibernacja on', 'hibernacjaon_9', '50', 'warunek', '', 'sprawdz', 'hibernacja', 'hibernacjaon_7', 'hibernacjaon_10', ''),
+(338, 'hibernacja on', 'hibernacjaon_10', '50', 'komunikat', '', 'nieprawidłowy zespół', '', 'end', 'end', ''),
+(349, 'hibernacja off', 'hibernacjaoff_1', '50', 'dane', '', 'podaj symbol modułu ?', '', 'hibernacjaoff_2', 'hibernacjaoff_2', ''),
+(350, 'hibernacja off', 'hibernacjaoff_10', '50', 'komunikat', '', 'nieprawidłowy zespół', '', 'end', 'end', ''),
+(351, 'hibernacja off', 'hibernacjaoff_2', '50', 'zapiszdane', '', 'nr modułu', '', 'hibernacjaoff_3', 'hibernacjaoff_3', ''),
+(352, 'hibernacja off', 'hibernacjaoff_3', '50', 'dane', '', 'podaj symbol zespołu ?', '', 'hibernacjaoff_4', 'hibernacjaoff_4', ''),
+(353, 'hibernacja off', 'hibernacjaoff_4', '50', 'dodajdane', '', 'nr zespołu', '', 'hibernacjaoff_5', 'hibernacjaoff_5', ''),
+(354, 'hibernacja off', 'hibernacjaoff_5', '50', 'getset', '', 'wczytaj', 'hibernacjaoff', 'hibernacjaoff_9', 'hibernacjaoff_6', 'wczytuje zespół ustawia nieokreślony'),
+(355, 'hibernacja off', 'hibernacjaoff_6', '50', 'informacja', 'problem z dostępem: ', 'tekstAlert', '', 'end', 'end', 'informacja z error'),
+(356, 'hibernacja off', 'hibernacjaoff_7', '50', 'informacja', 'rozpoczynam procedurę wybudzenia dla: ', 'tekst', '', 'hibernacjaoff_8', 'hibernacjaoff_8', 'wyświetla listę zespołów'),
+(357, 'hibernacja off', 'hibernacjaoff_8', '50', 'komunikat', '', 'procedura zostanie zakończona w ciągu 7 dni', '', 'end', 'end', ''),
+(358, 'hibernacja off', 'hibernacjaoff_9', '50', 'warunek', '', 'sprawdz', 'hibernacja', 'hibernacjaoff_7', 'hibernacjaoff_10', ''),
+(359, 'moduł historia', 'modulH_1', '50', 'komunikat', '', 'wczytuję plik historii modułu', '', 'modulH_2', 'modulH_2', ''),
+(360, 'moduł historia', 'modulH_2', '50', 'dane', '', 'podaj symbol modułu ?', '', 'modulH_3', 'modulH_3', ''),
+(361, 'moduł historia', 'modulH_3', '50', 'zapiszdane', '', 'nr modułu', '', 'modulH_4', 'modulH_4', ''),
+(362, 'moduł historia', 'modulH_4', '50', 'getset', '', 'wczytaj', 'modulH', 'modulH_6', 'modulH_5', 'wczytuje historia moduł'),
+(363, 'moduł historia', 'modulH_5', '50', 'informacja', 'problem z dostępem: ', 'tekstAlert', '', 'end', 'end', 'informacja z error'),
+(364, 'moduł historia', 'modulH_6', '50', 'testy', '', 'modulH', '', 'modulH_7', 'modulH_7', 'wyświetla historię'),
+(365, 'moduł historia', 'modulH_7', '50', 'informacja', '', 'tekst', '', 'end', 'end', ''),
+(366, 'moduł historia', 'modulH_0', '50', 'komunikat', '', 'wykonuję [ moduł historia ]', '', 'modulH_1', 'modulH_1', '');
 
 -- --------------------------------------------------------
 
@@ -635,7 +684,211 @@ INSERT INTO `innelog` (`id`, `dedal`, `poleceniepierwsze`, `czaspierwsze`, `pole
 (281, 0, '', '', '', 2, 'zaloguj', '2045-07-07 03:47:44', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
 (282, 0, '', '', '', 54, 'reset', '2045-07-07 03:48:23', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
 (283, 0, '', '', '', 53, 'test', '2045-07-07 05:00:11', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
-(284, 0, '', '', '', 53, 'test', '2045-07-07 05:06:26', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', '');
+(284, 0, '', '', '', 53, 'test', '2045-07-07 05:06:26', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(285, 0, '', '', '', 0, 'testy historia', '2045-07-07 15:12:57', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(286, 0, '', '', '', 2, 'zaloguj', '2045-07-07 15:13:33', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(287, 0, '', '', '', 66, 'testy historia', '2045-07-07 15:13:43', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(288, 0, '', '', '', 3, 'wyloguj', '2045-07-07 15:15:03', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(289, 0, '', '', '', 2, 'zaloguj', '2045-07-07 15:15:06', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(290, 0, '', '', '', 66, 'testy historia', '2045-07-07 15:15:15', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(291, 0, '', '', '', 66, 'testy historia', '2045-07-07 15:15:55', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(292, 0, '', '', '', 3, 'wyloguj', '2045-07-07 15:16:04', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(293, 0, '', '', '', 2, 'zaloguj', '2045-07-07 15:16:08', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(294, 0, '', '', '', 66, 'testy historia', '2045-07-07 15:16:19', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(295, 0, '', '', '', 2, 'zaloguj', '2045-07-07 15:27:03', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(296, 0, '', '', '', 66, 'testy historia', '2045-07-07 15:27:16', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(297, 0, '', '', '', 66, 'testy historia', '2045-07-07 15:47:11', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(298, 0, '', '', '', 2, 'zaloguj', '2045-07-07 15:52:10', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(299, 0, '', '', '', 66, 'testy historia', '2045-07-07 15:54:45', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(300, 0, '', '', '', 2, 'zaloguj', '2045-07-07 16:14:42', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(301, 0, '', '', '', 0, 'testy historia', '2045-07-07 16:15:07', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(302, 0, '', '', '', 2, 'zaloguj', '2045-07-07 16:15:15', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(303, 0, '', '', '', 66, 'testy historia', '2045-07-07 16:15:23', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(304, 0, '', '', '', 2, 'zaloguj', '2045-07-07 16:17:16', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(305, 0, '', '', '', 66, 'testy historia', '2045-07-07 16:17:31', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(306, 0, '', '', '', 2, 'zaloguj', '2045-07-07 16:18:54', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(307, 0, '', '', '', 66, 'testy historia', '2045-07-07 16:19:11', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(308, 0, '', '', '', 2, 'zaloguj', '2045-07-07 16:19:53', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(309, 0, '', '', '', 0, 'testy wszystkie', '2045-07-07 16:20:06', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(310, 0, '', '', '', 66, 'testy historia', '2045-07-07 16:20:19', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(311, 0, '', '', '', 66, 'testy historia', '2045-07-07 16:21:30', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(312, 0, '', '', '', 3, 'wyloguj', '2045-07-07 16:24:19', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(313, 0, '', '', '', 2, 'zaloguj', '2045-07-07 16:24:31', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(314, 0, '', '', '', 66, 'testy historia', '2045-07-07 16:24:48', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(315, 0, '', '', '', 53, 'test', '2045-07-07 16:25:05', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(316, 0, '', '', '', 66, 'testy historia', '2045-07-07 16:25:47', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(317, 0, '', '', '', 53, 'test', '2045-07-07 16:29:40', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(318, 0, '', '', '', 66, 'testy historia', '2045-07-07 16:30:42', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(319, 0, '', '', '', 2, 'zaloguj', '2045-07-07 17:26:57', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(320, 0, '', '', '', 49, 'zespół', '2045-07-07 17:27:12', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(321, 0, '', '', '', 66, 'testy historia', '2045-07-07 17:27:52', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(322, 0, '', '', '', 66, 'testy historia', '2045-07-07 17:28:57', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(323, 0, '', '', '', 53, 'test', '2045-07-07 17:29:46', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(324, 0, '', '', '', 66, 'testy historia', '2045-07-07 17:30:06', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(325, 0, '', '', '', 54, 'reset', '2045-07-07 17:30:30', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(326, 0, '', '', '', 53, 'test', '2045-07-07 17:30:54', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(327, 0, '', '', '', 66, 'testy historia', '2045-07-07 17:31:12', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(328, 0, '', '', '', 66, 'testy historia', '2045-07-07 17:36:43', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(329, 0, '', '', '', 66, 'testy historia', '2045-07-07 17:37:23', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(330, 0, '', '', '', 66, 'testy historia', '2045-07-07 17:39:31', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(331, 0, '', '', '', 66, 'testy historia', '2045-07-07 17:41:55', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(332, 0, '', '', '', 66, 'testy historia', '2045-07-07 17:45:56', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(333, 0, '', '', '', 66, 'testy historia', '2045-07-07 17:48:57', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(334, 0, '', '', '', 66, 'testy historia', '2045-07-07 17:50:26', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(335, 0, '', '', '', 2, 'zaloguj', '2045-07-07 17:53:03', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(336, 0, '', '', '', 66, 'testy historia', '2045-07-07 17:53:19', 4, 'William Weir', 0, 'Komputer-Tomka', 0, '', ''),
+(337, 0, '', '', '', 66, 'testy historia', '2045-07-07 17:57:49', 4, 'William Weir', 0, 'Komputer-Tomka', 0, '', ''),
+(338, 0, '', '', '', 2, 'zaloguj', '2045-07-07 18:02:12', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(339, 0, '', '', '', 66, 'testy historia', '2045-07-07 18:02:26', 4, 'William Weir', 0, 'Komputer-Tomka', 0, '', ''),
+(340, 0, '', '', '', 2, 'zaloguj', '2045-07-07 18:06:10', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(341, 0, '', '', '', 66, 'testy historia', '2045-07-07 18:06:23', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(342, 0, '', '', '', 3, 'wyloguj', '2045-07-07 18:07:20', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(343, 0, '', '', '', 0, 'zmarzi', '2045-07-07 18:07:34', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(344, 0, '', '', '', 2, 'zaloguj', '2045-07-07 18:07:51', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(345, 0, '', '', '', 66, 'testy historia', '2045-07-07 18:09:39', 4, 'William Weir', 0, 'Komputer-Tomka', 0, '', ''),
+(346, 0, '', '', '', 0, 'john', '2045-07-07 18:11:43', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(347, 0, '', '', '', 2, 'zaloguj', '2045-07-07 18:11:49', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(348, 0, '', '', '', 66, 'testy historia', '2045-07-07 18:12:09', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(349, 0, '', '', '', 3, 'wyloguj', '2045-07-07 18:12:37', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(350, 0, '', '', '', 56, 'kasuji', '2045-07-07 18:13:36', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(351, 0, '', '', '', 2, 'zaloguj', '2045-07-07 18:13:42', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(352, 0, '', '', '', 2, 'zaloguj', '2045-07-07 18:14:05', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(353, 0, '', '', '', 66, 'testy historia', '2045-07-07 18:14:13', 4, 'William Weir', 0, 'Komputer-Tomka', 0, '', ''),
+(354, 0, '', '', '', 2, 'zaloguj', '2045-07-07 18:16:45', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(355, 0, '', '', '', 66, 'testy historia', '2045-07-07 18:17:25', 4, 'William Weir', 0, 'Komputer-Tomka', 0, '', ''),
+(356, 0, '', '', '', 2, 'zaloguj', '2045-07-07 18:22:22', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(357, 0, '', '', '', 0, 'reset historia', '2045-07-07 18:22:34', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(358, 0, '', '', '', 3, 'wyloguj', '2045-07-07 18:23:31', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(359, 0, '', '', '', 2, 'zaloguj', '2045-07-07 18:23:35', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(360, 0, '', '', '', 67, 'reset historia', '2045-07-07 18:23:44', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(361, 0, '', '', '', 2, 'zaloguj', '2045-07-07 18:32:14', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(362, 0, '', '', '', 0, 'naprawa historia', '2045-07-07 18:32:33', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(363, 0, '', '', '', 3, 'wyloguj', '2045-07-07 19:28:23', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(364, 0, '', '', '', 0, 'naprawa historia', '2045-07-07 19:28:27', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(365, 0, '', '', '', 0, 'naprawa historia', '2045-07-07 19:28:43', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(366, 0, '', '', '', 2, 'zaloguj', '2045-07-07 19:28:55', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(367, 0, '', '', '', 68, 'naprawa historia', '2045-07-07 19:29:10', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(368, 0, '', '', '', 0, 'test historia', '2045-07-07 19:30:41', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(369, 0, '', '', '', 66, 'testy historia', '2045-07-07 19:30:49', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(370, 0, '', '', '', 66, 'testy historia', '2045-07-07 19:31:09', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(371, 0, '', '', '', 68, 'naprawa historia', '2045-07-07 19:31:20', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(372, 0, '', '', '', 66, 'testy historia', '2045-07-07 19:31:32', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(373, 0, '', '', '', 68, 'naprawa historia', '2045-07-07 19:31:37', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(374, 0, '', '', '', 67, 'reset historia', '2045-07-07 19:33:07', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(375, 0, '', '', '', 58, 'naprawa', '2045-07-07 19:59:43', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(376, 0, '', '', '', 68, 'naprawa historia', '2045-07-07 20:00:07', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(377, 0, '', '', '', 3, 'wyloguj', '2045-07-07 20:03:22', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(378, 0, '', '', '', 2, 'zaloguj', '2045-07-07 20:05:53', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(379, 0, '', '', '', 68, 'naprawa historia', '2045-07-07 20:06:09', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(380, 0, '', '', '', 67, 'reset historia', '2045-07-07 20:06:31', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(381, 0, '', '', '', 66, 'testy historia', '2045-07-07 20:06:53', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(382, 0, '', '', '', 54, 'reset', '2045-07-07 20:08:05', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(383, 0, '', '', '', 67, 'reset historia', '2045-07-07 20:08:27', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(384, 0, '', '', '', 3, 'wyloguj', '2045-07-07 20:11:00', 2, 'John Spow', 0, 'Komputer-Tomka', 0, '', ''),
+(385, 0, '', '', '', 2, 'zaloguj', '2045-07-07 20:11:06', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(386, 0, '', '', '', 67, 'reset historia', '2045-07-07 20:11:20', 4, 'William Weir', 0, 'Komputer-Tomka', 0, '', ''),
+(387, 0, '', '', '', 54, 'reset', '2045-07-07 20:11:30', 4, 'William Weir', 0, 'Komputer-Tomka', 0, '', ''),
+(388, 0, '', '', '', 53, 'test', '2045-07-07 20:11:51', 4, 'William Weir', 0, 'Komputer-Tomka', 0, '', ''),
+(389, 0, '', '', '', 58, 'naprawa', '2045-07-07 20:12:03', 4, 'William Weir', 0, 'Komputer-Tomka', 0, '', ''),
+(390, 0, '', '', '', 58, 'naprawa', '2045-07-07 20:34:18', 4, 'William Weir', 0, 'Komputer-Tomka', 0, '', ''),
+(391, 0, '', '', '', 3, 'wyloguj', '2045-07-07 20:37:36', 4, 'William Weir', 0, 'Komputer-Tomka', 0, '', ''),
+(392, 0, '', '', '', 2, 'zaloguj', '2045-07-07 20:37:43', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(393, 0, '', '', '', 69, 'hibernacja on', '2045-07-07 20:38:01', 4, 'William Weir', 0, 'Komputer-Tomka', 0, '', ''),
+(394, 0, '', '', '', 2, 'zaloguj', '2045-07-07 20:44:01', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(395, 0, '', '', '', 69, 'hibernacja on', '2045-07-07 20:44:14', 4, 'William Weir', 0, 'Komputer-Tomka', 0, '', ''),
+(396, 0, '', '', '', 69, 'hibernacja on', '2045-07-07 20:44:47', 4, 'William Weir', 0, 'Komputer-Tomka', 0, '', ''),
+(397, 0, '', '', '', 69, 'hibernacja on', '2045-07-07 20:45:28', 4, 'William Weir', 0, 'Komputer-Tomka', 0, '', ''),
+(398, 0, '', '', '', 2, 'zaloguj', '2045-07-07 20:54:31', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(399, 0, '', '', '', 0, 'hibernacja on', '2045-07-07 20:54:54', 0, ' ', 0, 'Komputer-Tomka', 0, '', '');
+INSERT INTO `innelog` (`id`, `dedal`, `poleceniepierwsze`, `czaspierwsze`, `polecenieodpowiedz`, `polecenieid`, `polecenieText`, `czaswykonania`, `osoba`, `osobaText`, `odczytana`, `terminal`, `odpowiedz`, `odpowiedzText`, `odpowiedzTresc`) VALUES
+(400, 0, '', '', '', 2, 'zaloguj', '2045-07-07 20:55:00', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(401, 0, '', '', '', 69, 'hibernacja on', '2045-07-07 20:55:06', 4, 'William Weir', 0, 'Komputer-Tomka', 0, '', ''),
+(402, 0, '', '', '', 0, 'hibernacja on', '2045-07-07 20:55:17', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(403, 0, '', '', '', 2, 'zaloguj', '2045-07-07 20:55:32', 0, ' ', 0, 'Komputer-Tomka', 0, '', ''),
+(404, 0, '', '', '', 69, 'hibernacja on', '2045-07-07 20:55:42', 4, 'William Weir', 0, 'Komputer-Tomka', 0, '', ''),
+(405, 0, '', '', '', 2, 'zaloguj', '2045-07-07 23:07:11', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(406, 0, '', '', '', 2, 'zaloguj', '2045-07-07 23:07:33', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(407, 0, '', '', '', 69, 'hibernacja on', '2045-07-07 23:07:47', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(408, 0, '', '', '', 69, 'hibernacja on', '2045-07-07 23:10:42', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(409, 0, '', '', '', 2, 'zaloguj', '2045-07-07 23:12:50', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(410, 0, '', '', '', 69, 'hibernacja on', '2045-07-07 23:13:06', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(411, 0, '', '', '', 69, 'hibernacja on', '2045-07-07 23:13:28', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(412, 0, '', '', '', 0, 'zs01', '2045-07-07 23:15:17', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(413, 0, '', '', '', 69, 'hibernacja on', '2045-07-07 23:15:31', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(414, 0, '', '', '', 69, 'hibernacja on', '2045-07-07 23:15:49', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(415, 0, '', '', '', 2, 'zaloguj', '2045-07-07 23:17:24', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(416, 0, '', '', '', 69, 'hibernacja on', '2045-07-07 23:17:41', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(417, 0, '', '', '', 69, 'hibernacja on', '2045-07-07 23:22:38', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(418, 0, '', '', '', 69, 'hibernacja on', '2045-07-07 23:24:16', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(419, 0, '', '', '', 3, 'wyloguj', '2045-07-07 23:24:34', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(420, 0, '', '', '', 2, 'zaloguj', '2045-07-07 23:24:47', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(421, 0, '', '', '', 69, 'hibernacja on', '2045-07-07 23:25:12', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(422, 0, '', '', '', 2, 'zaloguj', '2045-07-07 23:31:44', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(423, 0, '', '', '', 70, 'hibernacja off', '2045-07-07 23:32:00', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(424, 0, '', '', '', 61, 'polecenie', '2045-07-07 23:32:33', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(425, 0, '', '', '', 70, 'hibernacja off', '2045-07-07 23:32:41', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(426, 0, '', '', '', 59, 'hasło', '2045-07-07 23:38:50', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(427, 0, '', '', '', 2, 'zaloguj', '2045-07-07 23:39:28', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(428, 0, '', '', '', 59, 'hasło', '2045-07-07 23:39:50', 3, 'Peng Yaping', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(429, 0, '', '', '', 3, 'wyloguj', '2045-07-07 23:40:05', 3, 'Peng Yaping', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(430, 0, '', '', '', 12, '?', '2045-07-07 23:40:10', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(431, 0, '', '', '', 61, 'polecenie', '2045-07-07 23:40:26', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(432, 1, 'hibernacja on', '2045-07-07 23:40:37', '', 0, 'hibernacja on', '2045-07-07 23:40:37', 0, ' ', 0, 'DESKTOP-2KPJSHU', 1, 'info', 'nie masz uprawnień'),
+(433, 2, 'hibernacja on', '2045-07-07 23:40:37', '', 432, 'info', '2045-07-07 23:40:52', 0, ' ', 1, 'DESKTOP-2KPJSHU', 0, 'nie masz uprawnień', ''),
+(434, 1, 'hibernacja on', '2045-07-07 23:40:37', '', 0, 'hibernacja on', '2045-07-07 23:40:37', 0, ' ', 0, 'DESKTOP-2KPJSHU', 1, 'info', 'zaloguj sie'),
+(435, 2, 'hibernacja on', '2045-07-07 23:40:37', '', 432, 'info', '2045-07-07 23:41:04', 0, ' ', 1, 'DESKTOP-2KPJSHU', 0, 'zaloguj sie', ''),
+(436, 0, '', '', '', 66, 'testy historia', '2045-07-07 23:51:01', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(437, 0, '', '', '', 61, 'polecenie', '2045-07-07 23:51:37', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(438, 1, 'testy historia', '2045-07-07 23:51:47', '', 0, 'testy historia', '2045-07-07 23:51:47', 0, ' ', 0, 'DESKTOP-2KPJSHU', 1, 'info', 'nieznane polecenie'),
+(439, 0, '', '', '', 2, 'zaloguj', '2045-07-07 23:52:01', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(440, 0, '', '', '', 66, 'testy historia', '2045-07-07 23:52:21', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(441, 2, 'testy historia', '2045-07-07 23:51:47', '', 438, 'info', '2045-07-07 23:55:18', 0, ' ', 1, 'DESKTOP-2KPJSHU', 0, 'nieznane polecenie', ''),
+(442, 0, '', '', '', 2, 'zaloguj', '2045-07-07 23:55:36', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(443, 0, '', '', '', 2, 'zaloguj', '2045-07-07 23:56:03', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(444, 0, '', '', '', 71, 'moduł historia', '2045-07-07 23:56:22', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(445, 0, '', '', '', 3, 'wyloguj', '2045-07-07 23:59:11', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(446, 0, '', '', '', 2, 'zaloguj', '2045-07-07 23:59:20', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(447, 0, '', '', '', 71, 'moduł historia', '2045-07-07 23:59:54', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(448, 0, '', '', '', 3, 'wyloguj', '2045-07-08 00:00:56', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(449, 0, '', '', '', 2, 'zaloguj', '2045-07-08 00:01:07', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(450, 0, '', '', '', 71, 'moduł historia', '2045-07-08 00:01:41', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(451, 0, '', '', '', 2, 'zaloguj', '2045-07-08 00:06:52', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(452, 0, '', '', '', 0, 'testy historia', '2045-07-08 00:07:14', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(453, 0, '', '', '', 2, 'zaloguj', '2045-07-08 00:07:20', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(454, 0, '', '', '', 66, 'testy historia', '2045-07-08 00:07:32', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(455, 0, '', '', '', 2, 'zaloguj', '2045-07-08 00:19:41', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(456, 0, '', '', '', 71, 'moduł historia', '2045-07-08 00:20:08', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(457, 0, '', '', '', 2, 'zaloguj', '2045-07-08 00:22:15', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(458, 0, '', '', '', 71, 'moduł historia', '2045-07-08 00:22:36', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(459, 0, '', '', '', 71, 'moduł historia', '2045-07-08 00:23:15', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(460, 0, '', '', '', 2, 'zaloguj', '2045-07-08 00:25:59', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(461, 0, '', '', '', 71, 'moduł historia', '2045-07-08 00:26:15', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(462, 0, '', '', '', 0, 'testy', '2045-07-08 00:26:46', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(463, 0, '', '', '', 53, 'test', '2045-07-08 00:26:55', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(464, 0, '', '', '', 3, 'wyloguj', '2045-07-08 00:30:09', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(465, 0, '', '', '', 2, 'zaloguj', '2045-07-08 00:31:04', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(466, 0, '', '', '', 1, 'pomoc', '2045-07-08 00:31:17', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(467, 0, '', '', '', 66, 'test historia', '2045-07-08 00:34:18', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(468, 0, '', '', '', 53, 'test', '2045-07-08 00:35:28', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(469, 0, '', '', '', 66, 'test historia', '2045-07-08 00:39:10', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(470, 0, '', '', '', 72, 'modul historia', '2045-07-08 00:39:47', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(471, 0, '', '', '', 66, 'test historia', '2045-07-08 00:40:04', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(472, 0, '', '', '', 54, 'reset', '2045-07-08 00:41:22', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(473, 0, '', '', '', 67, 'reset historia', '2045-07-08 00:42:34', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(474, 0, '', '', '', 53, 'test', '2045-07-08 00:43:03', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(475, 0, '', '', '', 49, 'zespół', '2045-07-08 00:43:28', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(476, 0, '', '', '', 58, 'naprawa', '2045-07-08 00:44:21', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(477, 0, '', '', '', 2, 'zaloguj', '2045-07-08 00:44:43', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(478, 0, '', '', '', 49, 'zespół', '2045-07-08 00:44:59', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(479, 0, '', '', '', 49, 'zespół', '2045-07-08 00:45:24', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(480, 0, '', '', '', 53, 'test', '2045-07-08 00:46:17', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(481, 0, '', '', '', 53, 'test', '2045-07-08 00:47:02', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(482, 0, '', '', '', 0, 'moduł historia', '2045-07-08 00:47:46', 4, 'William Weir', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(483, 0, '', '', '', 71, 'moduł historia', '2045-07-08 00:48:24', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(484, 0, '', '', '', 2, 'zaloguj', '2045-07-08 00:57:58', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(485, 0, '', '', '', 71, 'moduł historia', '2045-07-08 00:58:15', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(486, 0, '', '', '', 2, 'zaloguj', '2045-07-08 01:06:29', 0, ' ', 0, 'DESKTOP-2KPJSHU', 0, '', ''),
+(487, 0, '', '', '', 71, 'moduł historia', '2045-07-08 01:06:49', 2, 'John Spow', 0, 'DESKTOP-2KPJSHU', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -717,7 +970,70 @@ INSERT INTO `komputery` (`id`, `nazwa`, `nrip`, `hostid`, `czasrejestracja`, `cz
 (58, 'Dedal', '127.0.0.1', 'HY971650400128XM59158438412288YS', '2022-04-19 22:28:48', '2022-04-19 22:28:48'),
 (59, 'Dedal', '127.0.0.1', 'XQ381650400464SW3163389645936LI', '2022-04-19 22:34:24', '2022-04-19 22:34:24'),
 (60, 'Dedal', '127.0.0.1', 'GB351650400523FY8270967222489YL', '2022-04-19 22:35:23', '2022-04-19 22:35:23'),
-(61, 'Dedal', '127.0.0.1', 'HG711650400771ZC45141934466306XO', '2022-04-19 22:39:31', '2022-04-19 22:39:31');
+(61, 'Dedal', '127.0.0.1', 'HG711650400771ZC45141934466306XO', '2022-04-19 22:39:31', '2022-04-19 22:39:31'),
+(62, 'Komputer-Tomka', '127.0.0.1', 'LR421650433782TF7936309543204IQ', '2022-04-20 07:49:42', '2022-04-20 07:49:42'),
+(63, 'Dedal', '127.0.0.1', 'JS981650433795IO677570388365SZ', '2022-04-20 07:49:55', '2022-04-20 07:49:55'),
+(64, 'Dedal', '127.0.0.1', 'ZX141650434294MZ1751163463114YG', '2022-04-20 07:58:14', '2022-04-20 07:58:14'),
+(65, 'Komputer-Tomka', '127.0.0.1', 'MU1001650436967ES3433008739340GV', '2022-04-20 08:42:47', '2022-04-20 08:42:47'),
+(66, 'Dedal', '127.0.0.1', 'CP51650436986BI91146888891754SE', '2022-04-20 08:43:06', '2022-04-20 08:43:06'),
+(67, 'Komputer-Tomka', '127.0.0.1', 'NL561650437817MU5994074955569MZ', '2022-04-20 08:56:57', '2022-04-20 08:56:57'),
+(68, 'Komputer-Tomka', '127.0.0.1', 'DQ821650439323XM5259415815628KB', '2022-04-20 09:22:03', '2022-04-20 09:22:03'),
+(69, 'Komputer-Tomka', '127.0.0.1', 'KL291650439775OU413300879550BC', '2022-04-20 09:29:35', '2022-04-20 09:29:35'),
+(70, 'Komputer-Tomka', '127.0.0.1', 'QA281650440650MY823300881300BY', '2022-04-20 09:44:10', '2022-04-20 09:44:10'),
+(71, 'Komputer-Tomka', '127.0.0.1', 'YH341650440830OV6826407053280TN', '2022-04-20 09:47:10', '2022-04-20 09:47:10'),
+(72, 'Komputer-Tomka', '127.0.0.1', 'XQ471650440918MQ7539610582032BQ', '2022-04-20 09:48:38', '2022-04-20 09:48:38'),
+(73, 'Komputer-Tomka', '127.0.0.1', 'PC671650440988FP83110579546196EB', '2022-04-20 09:49:48', '2022-04-20 09:49:48'),
+(74, 'Komputer-Tomka', '127.0.0.1', 'VE91650441265TI76158442361440EF', '2022-04-20 09:54:25', '2022-04-20 09:54:25'),
+(75, 'Komputer-Tomka', '127.0.0.1', 'WT251650441799VN5113880484131CB', '2022-04-20 10:03:19', '2022-04-20 10:03:19'),
+(76, 'Komputer-Tomka', '127.0.0.1', 'BS841650444868UP2542911566568IC', '2022-04-20 10:54:28', '2022-04-20 10:54:28'),
+(77, 'Komputer-Tomka', '127.0.0.1', 'WB81650445002SQ2041261125050IN', '2022-04-20 10:56:42', '2022-04-20 10:56:42'),
+(78, 'Dedal', '127.0.0.1', 'EN331650446008CB1194075422456ZJ', '2022-04-20 11:13:28', '2022-04-20 11:13:28'),
+(79, 'Komputer-Tomka', '127.0.0.1', 'ZL711650446569VB7989124114726CF', '2022-04-20 11:22:49', '2022-04-20 11:22:49'),
+(80, 'Komputer-Tomka', '127.0.0.1', 'OZ671650447124IX5367668332084PH', '2022-04-20 11:32:04', '2022-04-20 11:32:04'),
+(81, 'Komputer-Tomka', '127.0.0.1', 'FO221650447362UR93156792499390WR', '2022-04-20 11:36:02', '2022-04-20 11:36:02'),
+(82, 'Komputer-Tomka', '127.0.0.1', 'QC521650447604YP6846212532912JW', '2022-04-20 11:40:04', '2022-04-20 11:40:04'),
+(83, 'Komputer-Tomka', '127.0.0.1', 'LV151650447993HI763300895986RL', '2022-04-20 11:46:33', '2022-04-20 11:46:33'),
+(84, 'Komputer-Tomka', '127.0.0.1', 'PD421650448332HM857765691620LT', '2022-04-20 11:52:12', '2022-04-20 11:52:12'),
+(85, 'Dedal', '127.0.0.1', 'TX871650448364MU7039610760736HT', '2022-04-20 11:52:44', '2022-04-20 11:52:44'),
+(86, 'Komputer-Tomka', '127.0.0.1', 'WV181650448919TY656601795676HD', '2022-04-20 12:01:59', '2022-04-20 12:01:59'),
+(87, 'Komputer-Tomka', '127.0.0.1', 'OG791650448929ST38105628731456FQ', '2022-04-20 12:02:09', '2022-04-20 12:02:09'),
+(88, 'Dedal', '127.0.0.1', 'AC41650452259FV61141938894274KD', '2022-04-20 12:57:39', '2022-04-20 12:57:39'),
+(89, 'Komputer-Tomka', '127.0.0.1', 'NN921650454506MN81105629088384JI', '2022-04-20 13:35:06', '2022-04-20 13:35:06'),
+(90, 'Dedal', '127.0.0.1', 'ME511650455241GJ68132036419280KF', '2022-04-20 13:47:21', '2022-04-20 13:47:21'),
+(91, 'Komputer-Tomka', '127.0.0.1', 'QK561650456801NC6939610963224HK', '2022-04-20 14:13:21', '2022-04-20 14:13:21'),
+(92, 'Komputer-Tomka', '127.0.0.1', 'DT781650457362SM60120483387426IF', '2022-04-20 14:22:42', '2022-04-20 14:22:42'),
+(93, 'Komputer-Tomka', '127.0.0.1', 'GD901650457465BW1824756861975EU', '2022-04-20 14:24:25', '2022-04-20 14:24:25'),
+(94, 'Komputer-Tomka', '127.0.0.1', 'VV301650457750VC1846212817000KW', '2022-04-20 14:29:10', '2022-04-20 14:29:10'),
+(95, 'DESKTOP-2KPJSHU', '127.0.0.1', 'TH621650465413FO8385824201476BL', '2022-04-20 16:36:53', '2022-04-20 16:36:53'),
+(96, 'DESKTOP-2KPJSHU', '127.0.0.1', 'KG931650465424ME65146891422736ZL', '2022-04-20 16:37:04', '2022-04-20 16:37:04'),
+(97, 'DESKTOP-2KPJSHU', '127.0.0.1', 'LL501650465761CH3626407452176VM', '2022-04-20 16:42:41', '2022-04-20 16:42:41'),
+(98, 'DESKTOP-2KPJSHU', '127.0.0.1', 'PA801650466038JP95120484020774HX', '2022-04-20 16:47:18', '2022-04-20 16:47:18'),
+(99, 'DESKTOP-2KPJSHU', '127.0.0.1', 'BH181650466872PW6182523343600FJ', '2022-04-20 17:01:12', '2022-04-20 17:01:12'),
+(100, 'DESKTOP-2KPJSHU', '127.0.0.1', 'WW421650466889UZ3494076612673TL', '2022-04-20 17:01:29', '2022-04-20 17:01:29'),
+(101, 'DESKTOP-2KPJSHU', '127.0.0.1', 'AL111650467324IJ65156794395780AV', '2022-04-20 17:08:44', '2022-04-20 17:08:44'),
+(102, 'Dedal', '127.0.0.1', 'RP211650467533JY796601870132OL', '2022-04-20 17:12:13', '2022-04-20 17:12:13'),
+(103, 'Dedal', '127.0.0.1', 'LA901650467610QR7952814963520CD', '2022-04-20 17:13:30', '2022-04-20 17:13:30'),
+(104, 'Dedal', '127.0.0.1', 'RM961650467640NR6641261691000TX', '2022-04-20 17:14:00', '2022-04-20 17:14:00'),
+(105, 'DESKTOP-2KPJSHU', '127.0.0.1', 'ZH251650468320XJ941650468320GH', '2022-04-20 17:25:20', '2022-04-20 17:25:20'),
+(106, 'DESKTOP-2KPJSHU', '127.0.0.1', 'UW671650468324XH989125289496ZN', '2022-04-20 17:25:24', '2022-04-20 17:25:24'),
+(107, 'DESKTOP-2KPJSHU', '127.0.0.1', 'UM381650468804IS8034659844884NS', '2022-04-20 17:33:24', '2022-04-20 17:33:24'),
+(108, 'DESKTOP-2KPJSHU', '127.0.0.1', 'DQ401650468811WY5752815001952QF', '2022-04-20 17:33:31', '2022-04-20 17:33:31'),
+(109, 'DESKTOP-2KPJSHU', '127.0.0.1', 'IA361650469745JK55110581472915DC', '2022-04-20 17:49:05', '2022-04-20 17:49:05'),
+(110, 'DESKTOP-2KPJSHU', '127.0.0.1', 'JB561650469751LN95165046975100YJ', '2022-04-20 17:49:11', '2022-04-20 17:49:11'),
+(111, 'DESKTOP-2KPJSHU', '127.0.0.1', 'HF411650469928QD3142912218128UA', '2022-04-20 17:52:08', '2022-04-20 17:52:08'),
+(112, 'DESKTOP-2KPJSHU', '127.0.0.1', 'XZ941650469930HM6379222556640UY', '2022-04-20 17:52:10', '2022-04-20 17:52:10'),
+(113, 'DESKTOP-2KPJSHU', '127.0.0.1', 'XF651650470147OL9072620686468EZ', '2022-04-20 17:55:47', '2022-04-20 17:55:47'),
+(114, 'DESKTOP-2KPJSHU', '127.0.0.1', 'CR271650470159WN96148542314310ZG', '2022-04-20 17:55:59', '2022-04-20 17:55:59'),
+(115, 'Dedal', '127.0.0.1', 'QY201650470304YI10135338564928NP', '2022-04-20 17:58:24', '2022-04-20 17:58:24'),
+(116, 'DESKTOP-2KPJSHU', '127.0.0.1', 'PS831650470450PD3277572111150KL', '2022-04-20 18:00:50', '2022-04-20 18:00:50'),
+(117, 'DESKTOP-2KPJSHU', '127.0.0.1', 'VW851650470458MG9766018818320IZ', '2022-04-20 18:00:58', '2022-04-20 18:00:58'),
+(118, 'DESKTOP-2KPJSHU', '127.0.0.1', 'HW431650472017ZU394951416051DQ', '2022-04-20 18:26:57', '2022-04-20 18:26:57'),
+(119, 'DESKTOP-2KPJSHU', '127.0.0.1', 'DQ121650472034SO88120484458482YL', '2022-04-20 18:27:14', '2022-04-20 18:27:14'),
+(120, 'DESKTOP-2KPJSHU', '127.0.0.1', 'UN201650472582VR54130387333978XM', '2022-04-20 18:36:22', '2022-04-20 18:36:22'),
+(121, 'DESKTOP-2KPJSHU', '127.0.0.1', 'RX881650472592MY2141261814800GJ', '2022-04-20 18:36:32', '2022-04-20 18:36:32'),
+(122, 'DESKTOP-2KPJSHU', '127.0.0.1', 'IA51650472827VW9611553309789QU', '2022-04-20 18:40:27', '2022-04-20 18:40:27'),
+(123, 'Dedal', '127.0.0.1', 'UL971650472909TC1153493980537QT', '2022-04-20 18:41:49', '2022-04-20 18:41:49'),
+(124, 'DESKTOP-2KPJSHU', '127.0.0.1', 'WG321650472918GC3616504729180UC', '2022-04-20 18:41:58', '2022-04-20 18:41:58');
 
 -- --------------------------------------------------------
 
@@ -750,8 +1066,56 @@ INSERT INTO `logowania` (`id`, `komputery`, `czaslogowania`, `czaswylogowania`, 
 (7, 45, '2045-07-07 02:05:19', '2045-07-07 02:38:34', '2045-07-07 02:38:34', 2, 1, 0),
 (8, 45, '2045-07-07 02:38:51', '2045-07-07 02:41:53', '2045-07-07 02:41:53', 4, 1, 0),
 (9, 45, '2045-07-07 02:42:17', '2045-07-07 03:47:18', '2045-07-07 03:47:18', 2, 1, 0),
-(10, 48, '2045-07-07 02:49:24', '', '2045-07-07 02:49:24', 4, 0, 0),
-(11, 49, '2045-07-07 03:47:50', '', '2045-07-07 03:47:50', 2, 0, 0);
+(10, 48, '2045-07-07 02:49:24', '', '2045-07-07 02:49:24', 4, 1, 0),
+(11, 49, '2045-07-07 03:47:50', '', '2045-07-07 03:47:50', 2, 1, 0),
+(12, 65, '2045-07-07 15:13:39', '2045-07-07 15:15:04', '2045-07-07 15:15:04', 2, 1, 0),
+(13, 65, '2045-07-07 15:15:11', '2045-07-07 15:16:05', '2045-07-07 15:16:05', 2, 1, 0),
+(14, 65, '2045-07-07 15:16:14', '', '2045-07-07 15:16:14', 2, 1, 0),
+(15, 67, '2045-07-07 15:27:09', '', '2045-07-07 15:27:09', 2, 1, 0),
+(16, 68, '2045-07-07 15:52:16', '', '2045-07-07 15:52:16', 2, 1, 0),
+(17, 70, '2045-07-07 16:14:53', '2045-07-07 16:14:57', '2045-07-07 16:14:57', 2, 1, 0),
+(18, 70, '2045-07-07 16:15:19', '', '2045-07-07 16:15:19', 2, 1, 0),
+(19, 71, '2045-07-07 16:17:22', '', '2045-07-07 16:17:22', 2, 1, 0),
+(20, 72, '2045-07-07 16:19:03', '', '2045-07-07 16:19:03', 2, 1, 0),
+(21, 73, '2045-07-07 16:20:00', '2045-07-07 16:24:19', '2045-07-07 16:24:19', 2, 1, 0),
+(22, 74, '2045-07-07 16:24:36', '', '2045-07-07 16:24:36', 2, 1, 0),
+(23, 77, '2045-07-07 17:27:01', '', '2045-07-07 17:27:01', 2, 1, 0),
+(24, 79, '2045-07-07 17:53:10', '', '2045-07-07 17:53:10', 4, 1, 0),
+(25, 80, '2045-07-07 18:02:18', '', '2045-07-07 18:02:18', 4, 1, 0),
+(26, 81, '2045-07-07 18:06:16', '2045-07-07 18:07:21', '2045-07-07 18:07:21', 2, 1, 0),
+(27, 81, '2045-07-07 18:08:00', '', '2045-07-07 18:08:00', 4, 1, 0),
+(28, 82, '2045-07-07 18:11:56', '2045-07-07 18:12:37', '2045-07-07 18:12:37', 2, 1, 0),
+(29, 82, '2045-07-07 18:14:08', '', '2045-07-07 18:14:08', 4, 1, 0),
+(30, 83, '2045-07-07 18:17:07', '', '2045-07-07 18:17:07', 4, 1, 0),
+(31, 84, '2045-07-07 18:22:27', '2045-07-07 18:23:31', '2045-07-07 18:23:31', 2, 1, 0),
+(32, 84, '2045-07-07 18:23:40', '', '2045-07-07 18:23:40', 2, 1, 0),
+(33, 87, '2045-07-07 18:32:21', '2045-07-07 19:28:24', '2045-07-07 19:28:24', 2, 1, 0),
+(34, 87, '2045-07-07 19:29:00', '2045-07-07 20:03:23', '2045-07-07 20:03:23', 2, 1, 0),
+(35, 89, '2045-07-07 20:06:00', '2045-07-07 20:11:00', '2045-07-07 20:11:00', 2, 1, 0),
+(36, 89, '2045-07-07 20:11:14', '2045-07-07 20:37:37', '2045-07-07 20:37:37', 4, 1, 0),
+(37, 89, '2045-07-07 20:37:53', '', '2045-07-07 20:37:53', 4, 1, 0),
+(38, 91, '2045-07-07 20:44:07', '', '2045-07-07 20:44:07', 4, 1, 0),
+(39, 93, '2045-07-07 20:55:04', '2045-07-07 20:55:11', '2045-07-07 20:55:11', 4, 1, 0),
+(40, 93, '2045-07-07 20:55:38', '', '2045-07-07 20:55:38', 4, 1, 0),
+(41, 96, '2045-07-07 23:07:37', '', '2045-07-07 23:07:37', 4, 1, 0),
+(42, 97, '2045-07-07 23:12:57', '2045-07-07 23:24:36', '2045-07-07 23:24:36', 4, 1, 0),
+(43, 98, '2045-07-07 23:17:30', '', '2045-07-07 23:17:30', 2, 1, 0),
+(44, 97, '2045-07-07 23:25:00', '2045-07-07 23:31:09', '2045-07-07 23:31:09', 4, 1, 1),
+(45, 62, '2045-07-07 23:31:20', '', '2045-07-07 23:31:20', 7, 1, 0),
+(46, 99, '2045-07-07 23:31:52', '', '2045-07-07 23:31:52', 4, 1, 0),
+(47, 101, '2045-07-07 23:39:44', '2045-07-07 23:40:06', '2045-07-07 23:40:06', 3, 1, 0),
+(48, 101, '2045-07-07 23:52:11', '', '2045-07-07 23:52:11', 2, 1, 0),
+(49, 105, '2045-07-07 23:56:11', '2045-07-07 23:59:12', '2045-07-07 23:59:12', 2, 1, 0),
+(50, 105, '2045-07-07 23:59:39', '2045-07-08 00:00:59', '2045-07-08 00:00:59', 2, 1, 0),
+(51, 105, '2045-07-08 00:01:21', '', '2045-07-08 00:01:21', 2, 1, 0),
+(52, 107, '2045-07-08 00:07:25', '', '2045-07-08 00:07:25', 2, 1, 0),
+(53, 110, '2045-07-08 00:19:59', '', '2045-07-08 00:19:59', 2, 1, 0),
+(54, 112, '2045-07-08 00:22:24', '', '2045-07-08 00:22:24', 2, 1, 0),
+(55, 113, '2045-07-08 00:26:06', '2045-07-08 00:30:11', '2045-07-08 00:30:11', 2, 1, 0),
+(56, 116, '2045-07-08 00:31:10', '', '2045-07-08 00:31:10', 2, 1, 0),
+(57, 117, '2045-07-08 00:44:52', '', '2045-07-08 00:44:52', 4, 1, 0),
+(58, 118, '2045-07-08 00:58:04', '', '2045-07-08 00:58:04', 2, 1, 0),
+(59, 120, '2045-07-08 01:06:38', '2045-07-08 01:09:26', '2045-07-08 01:09:26', 2, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -773,6 +1137,7 @@ CREATE TABLE `moduly` (
 --
 
 INSERT INTO `moduly` (`id`, `nazwa`, `symbol`, `stan`, `czasbadania`, `opis`) VALUES
+(0, 'brak', '', 0, '', ''),
 (1, 'SERWEROWNIA GRACE', 'SERGRA', 0, '', 'Serwerownia zespołu AI'),
 (2, 'MOSTEK DOWODZENIA', 'MOSDOW', 0, '', 'Mostek kapitański - dowodzenia'),
 (3, 'LABORATORIUM', 'LAB', 0, '', 'Moduł badawczy laboratorium i oranżeria'),
@@ -814,7 +1179,7 @@ CREATE TABLE `moduly_osoby` (
 INSERT INTO `moduly_osoby` (`id`, `moduly`, `osoby`, `czas`, `dos`) VALUES
 (1, 3, 2, '2022-04-19 21:52:15', 1),
 (2, 3, 3, '2022-04-19 21:52:15', 1),
-(3, 3, 4, '2022-04-19 21:52:42', 0),
+(3, 3, 4, '2022-04-20 18:15:17', 1),
 (4, 3, 5, '2022-04-19 21:52:39', 0),
 (5, 3, 6, '2022-04-19 21:52:45', 0),
 (6, 3, 7, '2022-04-19 21:52:48', 0),
@@ -880,7 +1245,8 @@ INSERT INTO `moduly_osoby` (`id`, `moduly`, `osoby`, `czas`, `dos`) VALUES
 (66, 19, 15, '2022-04-19 21:53:23', 1),
 (67, 19, 1, '2022-04-19 21:53:24', 1),
 (68, 19, 12, '2022-04-19 21:53:25', 1),
-(69, 19, 13, '2022-04-19 21:53:30', 1);
+(69, 19, 13, '2022-04-19 21:53:30', 1),
+(70, 17, 2, '2022-04-20 17:53:08', 1);
 
 -- --------------------------------------------------------
 
@@ -1106,7 +1472,7 @@ CREATE TABLE `osoby` (
 --
 
 INSERT INTO `osoby` (`id`, `czaszmiana`, `kolejnosc`, `imie`, `nazwisko`, `funkcja`, `specjalnosc`, `narodowosc`, `userlogin`, `rodzaj`, `user`, `hasloorg`, `haslonew`, `autoryzacja`, `zalogowanyorg`, `blokadaorg`, `hannahorg`, `fionaorg`, `rajehorg`, `naroslorg`, `uzytkownik`, `czaslogowania`, `czaswylogowania`, `odpowiedz`, `reakcja`, `zalogowanynew`, `blokadanew`, `hannahnew`, `fionanew`, `rajehnew`, `naroslnew`, `hannahid`, `fionaid`, `rajehid`, `naroslid`) VALUES
-(0, '', '0', '', '', '', '', '', '', '', 0, '', '', 0, 0, 0, 0, 0, 0, 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 0, 9, 7, 11, 13),
+(0, '', '0', '@#', 'd4$%%', '', '', '', '', '', 0, '', '', 0, 0, 0, 0, 0, 0, 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 0, 9, 7, 11, 13),
 (1, '', '110', 'Dedal', '', 'statek', '', '', '', 'S', 2, '!@#', '!@#', 0, 1, 0, 1, 1, 1, 0, '', '2022-03-31 17:24:08', '', 'Dedal jest tylko jeden', 0, 0, 0, 1, 1, 1, 0, 9, 7, 11, 13),
 (2, '2045-06-17 23:54:56', '10', 'John', 'Spow', 'Kapitan', 'nawigator, pilot', 'USA', 'john', 'M', 1, '123', '123', 1, 1, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '2045-06-17 23:54:30', '2045-06-17 23:54:56', 'Witaj John Spow', 200, 1, 1, 1, 0, 0, 0, 9, 7, 11, 13),
 (3, '2022-03-16 21:59:32', '20', 'Peng', 'Yaping', 'I oficer', 'astrofizyk, dyplomata', 'Chiny', 'peng', 'M', 1, '123', '123', 0, 1, 1, 0, 0, 0, 0, 'DESKTOP-2KPJSHU', '', '', 'Witaj Louise Banks', 400, 1, 1, 1, 0, 0, 0, 9, 7, 11, 13),
@@ -1201,14 +1567,21 @@ INSERT INTO `polecenia` (`id`, `nazwa`, `zalogowany`, `wylogowany`, `autoryzacja
 (54, 'reset', 1, 0, 0, 54, '1000', 'reset_1', 'wykonanie resetu na zespole'),
 (55, 'informacje kasuj', 1, 1, 0, 55, '500', 'kasuji_1', 'Kasuje historię informacji'),
 (56, 'kasuji', 1, 1, 0, 55, '500', 'kasuji_0', 'Kasuje historię informacji'),
-(58, 'naprawa', 1, 0, 0, 58, '1000', 'naprawa_1', 'wykonanie naprawa na zespole'),
-(59, 'hasło', 0, 0, 0, 59, '1000', 'haslo_1', 'zmiana hasła'),
+(58, 'naprawa', 1, 0, 0, 58, '1000', 'naprawa_1', 'wykonanie naprawa na zespołach'),
+(59, 'hasło', 1, 0, 0, 59, '1000', 'haslo_1', 'zmiana hasła'),
 (60, 'hasło', 1, 0, 0, 59, '1000', 'haslo_0', 'zmiana hasła'),
 (61, 'polecenie', 1, 1, 0, 61, '1000', 'polecenie_1', 'polecenia dla dedala'),
 (62, 'wykonaj', 0, 0, 0, 61, '1000', 'polecenie_0', 'polecenia dla dedala'),
 (63, 'dedal', 0, 0, 0, 61, '1000', 'polecenie_0', 'polecenia dla dedala'),
 (64, 'moduly wszystkie', 1, 0, 0, 65, '1000', 'modulyW_0', 'Lista modułów Dedala'),
-(65, 'moduły wszystkie', 1, 0, 0, 65, '1000', 'modulyW_1', 'Lista modułów Dedala');
+(65, 'moduły wszystkie', 1, 0, 0, 65, '1000', 'modulyW_1', 'Lista modułów Dedala'),
+(66, 'test historia', 1, 0, 0, 66, '1000', 'testH_1', 'Historia testów'),
+(67, 'reset historia', 1, 0, 0, 67, '1000', 'resetH_1', 'Historia resetów'),
+(68, 'naprawa historia', 1, 0, 0, 68, '1000', 'naprawaH_1', 'Historia napraw'),
+(69, 'hibernacja on', 1, 0, 0, 69, '1000', 'hibernacjaon_1', 'hibernacja on'),
+(70, 'hibernacja off', 1, 0, 0, 70, '1000', 'hibernacjaoff_1', 'hibernacja off'),
+(71, 'moduł historia', 1, 0, 0, 71, '1000', 'modulH_1', 'Historia modułu'),
+(72, 'modul historia', 1, 0, 0, 71, '1000', 'modulH_0', 'Historia modułu');
 
 -- --------------------------------------------------------
 
@@ -1500,16 +1873,16 @@ INSERT INTO `polecenia_osoby` (`id`, `polecenia`, `osoby`, `czas`, `dos`) VALUES
 (335, 61, 9, '2022-04-15 07:29:43', 1),
 (336, 61, 10, '2022-04-15 07:29:43', 1),
 (337, 61, 11, '2022-04-15 07:29:43', 1),
-(338, 59, 2, '2022-04-19 14:14:40', 0),
-(339, 59, 3, '2022-04-19 14:14:40', 0),
-(340, 59, 4, '2022-04-19 14:14:40', 0),
-(341, 59, 5, '2022-04-19 14:14:40', 0),
-(342, 59, 6, '2022-04-19 14:14:40', 0),
-(343, 59, 7, '2022-04-19 14:14:40', 0),
-(344, 59, 8, '2022-04-19 14:14:40', 0),
-(345, 59, 9, '2022-04-19 14:14:40', 0),
-(346, 59, 10, '2022-04-19 14:14:40', 0),
-(347, 59, 11, '2022-04-19 14:14:40', 0),
+(338, 59, 2, '2022-04-20 17:09:20', 1),
+(339, 59, 3, '2022-04-20 17:09:20', 1),
+(340, 59, 4, '2022-04-20 17:09:20', 1),
+(341, 59, 5, '2022-04-20 17:09:20', 1),
+(342, 59, 6, '2022-04-20 17:09:20', 1),
+(343, 59, 7, '2022-04-20 17:09:20', 1),
+(344, 59, 8, '2022-04-20 17:09:20', 1),
+(345, 59, 9, '2022-04-20 17:09:20', 1),
+(346, 59, 10, '2022-04-20 17:09:20', 1),
+(347, 59, 11, '2022-04-20 17:09:20', 1),
 (348, 13, 1, '2022-04-19 17:19:49', 1),
 (349, 1, 15, '2022-04-19 18:56:54', 0),
 (350, 65, 2, '2022-04-19 19:34:35', 1),
@@ -1517,7 +1890,64 @@ INSERT INTO `polecenia_osoby` (`id`, `polecenia`, `osoby`, `czas`, `dos`) VALUES
 (352, 65, 9, '2022-04-19 20:11:00', 1),
 (353, 65, 7, '2022-04-19 20:11:06', 1),
 (354, 65, 1, '2022-04-19 20:11:13', 1),
-(355, 65, 12, '2022-04-19 20:11:13', 1);
+(355, 65, 12, '2022-04-19 20:11:13', 1),
+(356, 66, 2, '2022-04-20 07:58:28', 1),
+(357, 66, 3, '2022-04-20 07:58:29', 1),
+(358, 66, 4, '2022-04-20 07:58:30', 1),
+(359, 66, 9, '2022-04-20 07:58:33', 1),
+(360, 66, 7, '2022-04-20 07:58:34', 1),
+(361, 66, 12, '2022-04-20 07:58:37', 1),
+(362, 66, 13, '2022-04-20 07:58:38', 1),
+(363, 66, 15, '2022-04-20 07:58:39', 1),
+(364, 67, 2, '2022-04-20 11:52:56', 1),
+(365, 67, 3, '2022-04-20 11:52:56', 1),
+(366, 67, 4, '2022-04-20 11:52:56', 1),
+(367, 67, 5, '2022-04-20 11:53:04', 0),
+(368, 67, 6, '2022-04-20 11:53:05', 0),
+(369, 67, 7, '2022-04-20 11:52:56', 1),
+(370, 67, 8, '2022-04-20 11:53:07', 0),
+(371, 67, 9, '2022-04-20 11:52:56', 1),
+(372, 67, 10, '2022-04-20 11:53:12', 0),
+(373, 67, 11, '2022-04-20 11:53:15', 0),
+(374, 67, 1, '2022-04-20 11:53:16', 1),
+(375, 67, 12, '2022-04-20 11:53:17', 1),
+(376, 67, 15, '2022-04-20 11:53:18', 1),
+(377, 68, 2, '2022-04-20 12:57:45', 1),
+(378, 68, 3, '2022-04-20 12:57:46', 1),
+(379, 68, 4, '2022-04-20 12:57:47', 1),
+(380, 68, 9, '2022-04-20 12:57:50', 1),
+(381, 68, 1, '2022-04-20 12:57:53', 1),
+(382, 68, 12, '2022-04-20 12:57:54', 1),
+(383, 68, 15, '2022-04-20 12:57:56', 1),
+(384, 68, 7, '2022-04-20 12:57:59', 1),
+(385, 69, 2, '2022-04-20 13:47:30', 1),
+(386, 69, 3, '2022-04-20 13:47:30', 1),
+(387, 69, 4, '2022-04-20 13:47:30', 1),
+(388, 69, 5, '2022-04-20 13:47:30', 1),
+(389, 69, 6, '2022-04-20 13:47:30', 1),
+(390, 69, 7, '2022-04-20 13:47:30', 1),
+(391, 69, 8, '2022-04-20 13:47:30', 1),
+(392, 69, 9, '2022-04-20 13:47:30', 1),
+(393, 69, 10, '2022-04-20 13:47:30', 1),
+(394, 69, 11, '2022-04-20 13:47:30', 1),
+(395, 69, 1, '2022-04-20 13:47:34', 1),
+(396, 70, 2, '2022-04-20 13:47:39', 1),
+(397, 70, 3, '2022-04-20 13:47:39', 1),
+(398, 70, 4, '2022-04-20 13:47:39', 1),
+(399, 70, 5, '2022-04-20 13:47:39', 1),
+(400, 70, 6, '2022-04-20 13:47:39', 1),
+(401, 70, 7, '2022-04-20 13:47:39', 1),
+(402, 70, 8, '2022-04-20 13:47:39', 1),
+(403, 70, 9, '2022-04-20 13:47:39', 1),
+(404, 70, 10, '2022-04-20 13:47:39', 1),
+(405, 70, 11, '2022-04-20 13:47:39', 1),
+(406, 70, 1, '2022-04-20 13:47:39', 1),
+(407, 71, 2, '2022-04-20 17:12:26', 1),
+(408, 71, 3, '2022-04-20 17:12:27', 1),
+(409, 71, 7, '2022-04-20 17:12:29', 1),
+(410, 71, 9, '2022-04-20 17:12:31', 1),
+(411, 71, 1, '2022-04-20 17:12:33', 1),
+(412, 71, 12, '2022-04-20 17:12:34', 1);
 
 -- --------------------------------------------------------
 
@@ -1567,22 +1997,40 @@ CREATE TABLE `testylog` (
   `moduly` int(11) NOT NULL,
   `zespoly` int(11) NOT NULL,
   `uszkodzenia` int(11) NOT NULL,
+  `uszkodzeniaText` text COLLATE utf8_polish_ci NOT NULL,
   `czasstart` text COLLATE utf8_polish_ci NOT NULL,
   `czasend` text COLLATE utf8_polish_ci NOT NULL,
-  `osoba` int(11) NOT NULL
+  `osoba` int(11) NOT NULL,
+  `rodzaj` text COLLATE utf8_polish_ci NOT NULL,
+  `del` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci ROW_FORMAT=COMPACT;
 
 --
 -- Zrzut danych tabeli `testylog`
 --
 
-INSERT INTO `testylog` (`id`, `moduly`, `zespoly`, `uszkodzenia`, `czasstart`, `czasend`, `osoba`) VALUES
-(0, 0, 0, 0, '1900-01-01 12:00:00', '1900-01-01 13:00:00', 1),
-(1, 3, 6, 2, '2045-07-06 20:17:46', '2045-07-06 20:18:19', 2),
-(2, 3, 5, 1, '2045-07-06 20:17:06', '2045-07-06 20:18:43', 2),
-(3, 3, 6, 2, '2045-07-06 20:26:16', '2045-07-06 20:26:25', 2),
-(4, 19, 26, 0, '2045-07-07 05:00:42', '2045-07-07 05:04:58', 2),
-(5, 19, 26, 0, '2045-07-07 05:06:42', '2045-07-07 05:09:11', 2);
+INSERT INTO `testylog` (`id`, `moduly`, `zespoly`, `uszkodzenia`, `uszkodzeniaText`, `czasstart`, `czasend`, `osoba`, `rodzaj`, `del`) VALUES
+(0, 0, 0, 0, 'brak', '1900-01-01 12:00:00', '1900-01-01 13:00:00', 1, 'test', 0),
+(1, 3, 6, 2, 'do sprawdzenia', '2045-07-06 20:17:46', '2045-07-06 20:18:19', 2, 'test', 0),
+(2, 3, 5, 1, 'jakieś', '2045-07-06 20:17:06', '2045-07-06 20:18:43', 2, 'test', 0),
+(3, 3, 6, 2, 'są', '2045-07-06 20:26:16', '2045-07-06 20:26:25', 2, 'test', 0),
+(4, 3, 5, 0, '', '2045-07-07 05:00:42', '2045-07-07 05:04:58', 2, 'test', 0),
+(5, 19, 26, 0, '', '2045-07-07 05:06:42', '2045-07-07 05:09:11', 2, 'test', 0),
+(6, 3, 5, 0, '', '2045-06-08 15:22:50', '2045-06-08 15:22:55', 2, 'test', 0),
+(7, 3, 5, 1, 'test - niekompletny', '2045-07-07 16:29:51', '2045-07-07 16:30:34', 2, 'test', 0),
+(8, 3, 6, 0, '', '2045-07-07 17:29:53', '2045-07-07 17:30:02', 2, 'test', 0),
+(9, 3, 6, 0, '', '', '2045-07-07 17:30:44', 2, 'reset', 0),
+(10, 3, 6, 0, '', '2045-07-07 17:30:58', '2045-07-07 17:31:09', 2, 'test', 0),
+(11, 0, 0, -5, '$#.d%...  plik uszkodzony', '', '2045-05-06 20:18:19', 0, 'inne', 0),
+(12, 3, 6, 0, 'wykonano naprawa dla 10 elementów zespołu', '', '2045-07-07 20:00:08', 2, 'naprawa', 0),
+(13, 3, 6, 0, 'wykonano reset dla 10 elementów zespołu', '', '2045-07-07 20:08:21', 2, 'reset', 0),
+(14, 3, 5, 0, 'logon', '2045-06-08 15:22:50', '2045-06-08 15:22:55', 3, 'polecenie', 0),
+(15, 3, 6, 1, 'test - brak', '2045-07-08 00:35:47', '2045-07-08 00:38:47', 2, 'test', 0),
+(16, 3, 6, 0, 'wykonano reset dla 10 elementów zespołu', '', '2045-07-08 00:42:02', 2, 'reset', 0),
+(17, 3, 6, 10, 'test elementu - niewykonany, test elementu - niewykonany, test elementu - niewykonany i 3 innych', '2045-07-08 00:46:23', '2045-07-08 00:46:37', 4, 'test', 0),
+(18, 3, 6, 0, 'wykonano naprawa dla 10 elementów zespołu', '', '2045-07-08 00:46:46', 2, 'naprawa', 0),
+(19, 3, 6, 0, '', '2045-07-08 00:47:07', '2045-07-08 00:47:29', 4, 'test', 0),
+(20, 3, 6, 0, '', '2045-07-08 00:43:22', '2045-07-08 00:48:40', 2, 'test', 0);
 
 -- --------------------------------------------------------
 
@@ -1638,7 +2086,7 @@ CREATE TABLE `uszkodzenia` (
 INSERT INTO `uszkodzenia` (`id`, `moduly`, `zespoly`, `nazwa`, `stan`, `reset`, `poreset`, `nazwaporeset`, `stanporeset`, `naprawa`, `ponaprawa`, `nazwaponaprawa`, `stanponaprawa`) VALUES
 (1, 3, 5, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
 (2, 3, 5, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
-(3, 3, 5, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
+(3, 3, 5, 1, 13, '0', 0, 1, 1, '0', 0, 1, 1),
 (4, 3, 1, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
 (5, 3, 1, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
 (6, 3, 1, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
@@ -1653,7 +2101,7 @@ INSERT INTO `uszkodzenia` (`id`, `moduly`, `zespoly`, `nazwa`, `stan`, `reset`, 
 (15, 3, 4, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
 (16, 3, 6, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
 (17, 3, 6, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
-(18, 3, 6, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
+(18, 3, 6, 1, 1, '0', 1, 2, 6, '0', 1, 1, 1),
 (19, 2, 14, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
 (20, 2, 14, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
 (21, 2, 14, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
@@ -1719,7 +2167,13 @@ INSERT INTO `uszkodzenia` (`id`, `moduly`, `zespoly`, `nazwa`, `stan`, `reset`, 
 (81, 19, 33, 8, 6, '0', 1, 8, 12, '0', 0, 1, 1),
 (82, 19, 34, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
 (83, 19, 34, 1, 1, '0', 1, 8, 6, '0', 0, 1, 1),
-(84, 19, 34, 6, 9, '0', 1, 6, 10, '0', 0, 1, 1);
+(84, 19, 34, 6, 9, '0', 1, 6, 10, '0', 0, 1, 1),
+(85, 0, 0, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
+(86, 0, 0, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
+(87, 0, 0, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
+(88, 17, 36, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
+(89, 17, 36, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1),
+(90, 17, 36, 1, 1, '0', 0, 1, 1, '0', 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1885,12 +2339,13 @@ CREATE TABLE `zespoly` (
 --
 
 INSERT INTO `zespoly` (`id`, `nazwa`, `symbol`, `moduly`, `ostatni`, `przedawnienie`, `opis`, `czaswykonania`, `czasreset`, `czasnaprawa`, `elementy`) VALUES
+(0, 'brak', '', 0, 0, 30, '', 17, 10, 18, 8),
 (1, 'Pomieszczenie laboratorium', 'PL', 3, 0, 7, '', 37, 2, 272, 20),
 (2, 'Pomieszczenie oranżerii', 'PO', 3, 0, 7, '', 6, 2, 2, 10),
 (3, 'Pomieszczenie medyczne', 'PM', 3, 0, 7, '', 4, 2, 2, 7),
 (4, 'Urządzenia medyczne', 'UM', 3, 0, 7, '', 2, 2, 2, 15),
-(5, 'Magazyn leków', 'ML', 3, 2, 30, '', 17, 10, 18, 8),
-(6, 'Zespół upraw', 'ZU', 3, 3, 7, '', 6, 5, 16, 10),
+(5, 'Magazyn leków', 'ML', 3, 7, 30, '', 17, 10, 18, 8),
+(6, 'Zespół upraw', 'ZU', 3, 20, 7, '', 6, 10, 40, 10),
 (7, 'Śluza Główna', 'SD', 2, 0, 7, 'Główna śluza.', 11, 5, 2, 10),
 (8, 'Śluza Dziobowa', 'ST', 2, 0, 7, 'Główna techniczna', 11, 5, 2, 10),
 (9, 'Pomieszczenie Dowodzenia', 'PD', 2, 0, 7, 'Główny mostek', 11, 5, 2, 10),
@@ -1919,7 +2374,8 @@ INSERT INTO `zespoly` (`id`, `nazwa`, `symbol`, `moduly`, `ostatni`, `przedawnie
 (32, 'Skafander 7', 'SK7', 19, 0, 3, '', 64, 105, 750, 60),
 (33, 'Skafander 8', 'SK8', 19, 0, 3, '', 75, 120, 737, 60),
 (34, 'Skafander 9', 'SK9', 19, 0, 3, '', 74, 94, 591, 60),
-(35, 'Skafander 10', 'SK10', 19, 0, 3, '', 84, 143, 748, 60);
+(35, 'Skafander 10', 'SK10', 19, 0, 3, '', 84, 143, 748, 60),
+(36, 'Kokon hibernacyjny John Spow', 'ZS01', 17, 0, 7, '', 10, 5, 30, 10);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -2050,22 +2506,22 @@ ALTER TABLE `zespoly`
 -- AUTO_INCREMENT dla tabeli `dzialania`
 --
 ALTER TABLE `dzialania`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=307;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=367;
 --
 -- AUTO_INCREMENT dla tabeli `innelog`
 --
 ALTER TABLE `innelog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=285;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=488;
 --
 -- AUTO_INCREMENT dla tabeli `komputery`
 --
 ALTER TABLE `komputery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 --
 -- AUTO_INCREMENT dla tabeli `logowania`
 --
 ALTER TABLE `logowania`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 --
 -- AUTO_INCREMENT dla tabeli `moduly`
 --
@@ -2075,7 +2531,7 @@ ALTER TABLE `moduly`
 -- AUTO_INCREMENT dla tabeli `moduly_osoby`
 --
 ALTER TABLE `moduly_osoby`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 --
 -- AUTO_INCREMENT dla tabeli `notatki_ng`
 --
@@ -2100,12 +2556,12 @@ ALTER TABLE `osoby`
 -- AUTO_INCREMENT dla tabeli `polecenia`
 --
 ALTER TABLE `polecenia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 --
 -- AUTO_INCREMENT dla tabeli `polecenia_osoby`
 --
 ALTER TABLE `polecenia_osoby`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=356;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=413;
 --
 -- AUTO_INCREMENT dla tabeli `stan`
 --
@@ -2115,7 +2571,7 @@ ALTER TABLE `stan`
 -- AUTO_INCREMENT dla tabeli `testylog`
 --
 ALTER TABLE `testylog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT dla tabeli `ustawienia`
 --
@@ -2125,7 +2581,7 @@ ALTER TABLE `ustawienia`
 -- AUTO_INCREMENT dla tabeli `uszkodzenia`
 --
 ALTER TABLE `uszkodzenia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 --
 -- AUTO_INCREMENT dla tabeli `uszkodzenianazwa`
 --
@@ -2140,7 +2596,7 @@ ALTER TABLE `wiadomosci`
 -- AUTO_INCREMENT dla tabeli `zespoly`
 --
 ALTER TABLE `zespoly`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
