@@ -96,7 +96,8 @@ try
                 $wazny = $row['przedawnienie'].($row['przedawnienie'] == 1 ? ' dzień' : ' dni'); 
                 $zespol = array ("id"=>$row['id'],"idmodul"=>$row['moduly'], "nazwa"=>$row['nazwa'], "symbol"=>$row['symbol'], "stanText"=>$stanText, "czasbadania"=>$row['czasbadania'], "czaszakonczenia"=>$row['czaszakonczenia'], "czaswykonania"=>$row['czaswykonania'], "czasreset"=>$row['czasreset'], "czasnaprawa"=>$row['czasnaprawa'], "uszkodzeniailosc"=>$row['uszkodzenia'],"elementy"=>$row['elementy'], "modulSymbol"=>$row['symbolM'], "modulNazwa"=>$row['nazwaM'], "autoryzacja"=>false, "polecenie"=>true, "opis"=>$row['opis'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "przedawnienie"=>$row['przedawnienie'], "dni"=>$dni, "wazny"=>$wazny );
                 array_push($zespoly,$zespol);
-                $result = array ("wynik"=>true, "stan"=>true, "zespol"=>$zespoly, "error"=>"wczytano: ".$wynik->num_rows);
+                $sen = ($body->dostep == 'nie' ? ("wczytano: ".$wynik->num_rows):($row['nazwa']));
+                $result = array ("wynik"=>true, "stan"=>true, "zespol"=>$zespoly, "error"=>$sen);
                 }
                 else
                 {

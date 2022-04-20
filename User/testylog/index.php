@@ -11,7 +11,7 @@ try
     else
     {
         $body = json_decode(file_get_contents("php://input"));
-        //$body = (object) array ("osoba"=>4, "modul"=>'lab', "rodzaj"=>'test');
+        //$body = (object) array ("osoba"=>2, "modul"=>'lab', "rodzaj"=>'"test","reset"');
         if (isset($body))
         {//get
             $sql = 
@@ -46,7 +46,8 @@ try
                 testylog.osoba,
                 osoby.imie as imie,
                 osoby.nazwisko as nazwisko,
-                testylog.uszkodzeniaText
+                testylog.uszkodzeniaText,
+                testylog.rodzaj
             FROM
                 testylog,
                 moduly,
@@ -57,7 +58,7 @@ try
                 AND moduly.id = testylog.moduly
                 AND zespoly.id = testylog.zespoly
                 AND osoby.id = testylog.osoba
-                AND testylog.rodzaj = '".$body->rodzaj."'
+                AND testylog.rodzaj in (".$body->rodzaj.")
                 AND testylog.del = 0
                 )
                 or
@@ -66,7 +67,7 @@ try
                 AND moduly.id = 0
                 AND zespoly.id = 0
                 AND osoby.id = 0
-                AND testylog.rodzaj = '".$body->rodzaj."'
+                AND testylog.rodzaj in (".$body->rodzaj.")
                 AND testylog.id > 0
                 )    
             ORDER BY
@@ -83,7 +84,7 @@ try
             $historia = array();
             while ($row = $wynik->fetch_assoc())
             {
-            $log = array ("id"=>$id, "nazwamoduly"=>$row['nazwamoduly'], "nazwazespoly"=>$row['nazwazespoly'], "iloscuszkodzen"=>$row['iloscuszkodzen'], "uszkodzeniaText"=>$row['uszkodzeniaText'], "czasend"=>$row['czasend'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "osoba"=>$row['osoba']);
+            $log = array ("id"=>$id, "nazwamoduly"=>$row['nazwamoduly'], "nazwazespoly"=>$row['nazwazespoly'], "iloscuszkodzen"=>$row['iloscuszkodzen'], "uszkodzeniaText"=>$row['uszkodzeniaText'], "czasend"=>$row['czasend'], "imie"=>$row['imie'], "nazwisko"=>$row['nazwisko'], "osoba"=>$row['osoba'], "rodzaj"=>$row['rodzaj']);
             array_push($historia,$log);
             }
             $result = array ("wynik"=>true, "stan"=>true, "historia"=>$historia, "error"=>"wczytano ".$ilosc." pozycji", "komunikat"=>"wczytano ".$ilosc." pozycji");    

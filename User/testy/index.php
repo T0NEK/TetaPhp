@@ -104,7 +104,7 @@ try
                         $uszkodzenie = array ("nazwa"=>$nazwareset, "stan"=>$stanreset, "stanText"=>$stanTextreset);
                         array_push($uszkodzenia,$uszkodzenie);
                     }
-                    $uszkodzeniaText = $uszkodzeniaText." i ".$resetnaprawa." innych" ;    
+                    $uszkodzeniaText = $uszkodzeniaText." i ".($iloscelementow - $resetnaprawa)." innych" ;    
                 }
                 elseif ($resetnaprawa < 0)
                     {
