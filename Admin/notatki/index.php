@@ -19,6 +19,7 @@ try
         //$body = (object) array ( 'kierunek'=>'setdel', 'stan' => 0, 'idnotatki' => 33 );
         //$body = (object) array ( 'kierunek'=>'setstan', 'stan' => 0, 'idnotatki' => 37, 'idtablica'=>0 );
         //$body = (object) array ( 'kierunek'=>'setudo', 'stan' => 0, 'idnotatki' => 37, 'idtablica'=>0 );
+        //$body = (object) array ( 'kierunek'=>'udonot', 'stan' => 6, 'idnotatki' => 1, 'idtablica'=>0 );
         $body = json_decode(file_get_contents("php://input"));
         if (isset($body))
         {
@@ -407,11 +408,11 @@ elseif($body->kierunek =='udonot')
         {
             if ($del == 0)
             {
-            $error = "notatka została udostepniona dla ".$imie.' '.$nazwisko;
+            $error = "notatka została udostepniona dla ";
             }
             else
             {
-            $error = $imie.' '.$nazwisko." cofnięto dostęp do notatki ";
+            $error = " cofnięto dostęp do notatki ";
             }
             $sql = "
             SELECT
