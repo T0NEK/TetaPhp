@@ -160,8 +160,7 @@ elseif ($body->kierunek == 'getudo')
                     UPDATE
                     notatki_ng
                     SET
-                    stan = ".$stan.",
-                    czas = '".$czasserwera."'
+                    stan = ".$stan."
                     WHERE
                     id = ".$body->idnotatki."
                     ";
@@ -290,8 +289,7 @@ elseif ($body->kierunek == 'setstan')
                         UPDATE
                         notatki_ng
                         SET
-                        blokadastan = ".$stan.",
-                        czas = '".$czasserwera."'
+                        blokadastan = ".$stan."
                         WHERE
                         id = ".$body->idnotatki."
                         ";
@@ -333,8 +331,7 @@ elseif ($body->kierunek == 'setudo')
                     UPDATE
                     notatki_ng
                     SET
-                    blokadaudo = ".$stan.",
-                    czas = '".$czasserwera."'
+                    blokadaudo = ".$stan."
                     WHERE
                     id = ".$body->idnotatki."
                     ";
